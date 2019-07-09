@@ -1,7 +1,7 @@
 <?php
 
 require_once 'modelo.conexion.php';
-require_once 'funciones.php';
+
 
 class ModeloCategorias{
 
