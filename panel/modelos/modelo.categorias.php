@@ -38,7 +38,7 @@ class ModeloCategorias{
     $total = array();
     $link = Conexion::ConectarMysql();
 
-    $query = "select  * from `autos` where id_categoria = $id";
+    $query = "select  * from `autos` where id_categoria = $id and estado = 1";
     $total = mysqli_num_rows(mysqli_query($link,$query));
     return $total;
     // Cerrar la conexión.

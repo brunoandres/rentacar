@@ -1,5 +1,4 @@
 <?php
-//require_once '../funciones.php';
 
 class ControladorReservas
 {
@@ -8,8 +7,8 @@ class ControladorReservas
     if (isset($_POST['formFechas'])) {
 
       //Verificar si hay disponibilidad, devolver true
-      $fecha_desde = convertirFecha($_POST['fecha_desde']);
-      $fecha_hasta = convertirFecha($_POST['fecha_hasta']);
+      $fecha_desde = $_POST['fecha_desde'];
+      $fecha_hasta = $_POST['fecha_hasta'];
       $hora_desde  = $_POST['hora_desde'];
       $hora_hasta  = $_POST['hora_hasta'];
 			$categoria   = $_POST['categoria'];
