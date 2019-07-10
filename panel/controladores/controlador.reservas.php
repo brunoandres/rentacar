@@ -2,13 +2,21 @@
 
 class ControladorReservas
 {
+	static function convertirFecha($fecha){
+
+	  $date = str_replace('/', '-', $fecha);
+	  $newDate = date("Y-m-d", strtotime($date));
+	  return $newDate;
+
+	}
+
 	static function ingresarReserva(){
 
     if (isset($_POST['formFechas'])) {
 
       //Verificar si hay disponibilidad, devolver true
-      $fecha_desde = $_POST['fecha_desde'];
-      $fecha_hasta = $_POST['fecha_hasta'];
+      $fecha_desde = self::convertirFecha($_POST['fecha_desde']);
+      $fecha_hasta = self::convertirFecha($_POST['fecha_hasta']);
       $hora_desde  = $_POST['hora_desde'];
       $hora_hasta  = $_POST['hora_hasta'];
 			$categoria   = $_POST['categoria'];

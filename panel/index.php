@@ -10,7 +10,6 @@ require_once "modelos/modelo.reservas.php";
 require_once "modelos/modelo.usuarios.php";
 require_once "modelos/modelo.configuraciones.php";
 require_once "modelos/modelo.categorias.php";
-require_once "controladores/funciones.php";
 
 
 $plantilla = new ControladorPlantilla();
