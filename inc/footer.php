@@ -2,15 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
-        &copy; Gp Theme. All Rights Reserved.
+        &copy; AUSTRAL RENT A CAR.</a>Todos los derechos reservados. Tel/Whatsapp: +54 9 2944242615  <i class="fa fa-envelope" aria-hidden="true"></i>  patagoniaaustralrentacar@gmail.com
         <div class="credits">
-          <!--
-            All the links in the footer should remain intact.
-            You can delete the links only if you purchased the pro version.
-            Licensing information: https://bootstrapmade.com/license/
-            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Gp
-          -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          <br>
         </div>
       </div>
       <div class="col-sm-6">
@@ -24,4 +18,3 @@
     </div>
   </div>
 </footer>
-<!--/#footer-->
