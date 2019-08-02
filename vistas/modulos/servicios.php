@@ -2,9 +2,9 @@
 <section id="services" class="service-item">
   <div class="container">
     <div class="center wow fadeInDown">
-      <h2>Nuestros servicios</h2>
+      <h2 style="color:black;">Nuestros servicios</h2>
 
-      <p class="lead">Austral Rent a car ofrece un servicio único en San Carlos de Bariloche, con una flota de más de 30 autos, equipados con todo lo necesario para hacer de su viaje, un recorrido tranquilo y sobre todo seguro a través de la Patagonia.</p>
+      <p class="lead" style="color:black;">Austral Rent a car ofrece un servicio único en San Carlos de Bariloche, con una flota de más de 30 autos, equipados con todo lo necesario para hacer de su viaje, un recorrido tranquilo y sobre todo seguro a través de la Patagonia.</p>
 
     </div>
 

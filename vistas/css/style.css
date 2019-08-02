@@ -1333,6 +1333,10 @@ ul.social_icons li  a i{
 ********* Portfolio CSS ******
 **************************/
 #portfolio {
+  margin-top: 100px;
+}
+
+#contact-page {
   margin-top: 70px;
 }
 

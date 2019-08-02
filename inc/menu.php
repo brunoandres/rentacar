@@ -13,19 +13,18 @@
 
       <div class="collapse navbar-collapse navbar-right">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="inicio">Inicio</a></li>
-          <li><a href="quienes-somos">Quienes somos</a></li>
-          <li><a href="servicios">Servicios</a></li>
-          <li><a href="tarifas">Tarifas</a></li>
-          <li><a href="flota">Flota</a></li>
-          <li><a href="contacto">Contacto</a></li>
-          <li><a href="reservar">Reservar</a></li>
+          <li class="<?php if($_GET['ruta']=='inicio'){ echo 'active'; } ?>"><a href="inicio">Inicio</a></li>
+          <li class="<?php if($_GET['ruta']=='quienes-somos'){ echo 'active'; } ?>"><a href="quienes-somos">Quienes Somos</a></li>
+          <li class="<?php if($_GET['ruta']=='servicios'){ echo 'active'; } ?>"><a href="servicios">Servicios</a></li>
+          <li class="<?php if($_GET['ruta']=='tarifas'){ echo 'active'; } ?>"><a href="tarifas">Tarifas</a></li>
+          <li class="<?php if($_GET['ruta']=='flota'){ echo 'active'; } ?>"><a href="flota">Flota</a></li>
+          <li class="<?php if($_GET['ruta']=='contacto'){ echo 'active'; } ?>"><a href="contacto">Contacto</a></li>
+          <li class="<?php if($_GET['ruta']=='reservar'){ echo 'active'; } ?>"><a href="reservar">Reservar</a></li>
         </ul>
       </div>
     </div>
     <!--/.container-->
   </nav>
   <!--/nav-->
-
 </header>
 <!--/header-->
