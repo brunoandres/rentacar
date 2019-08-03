@@ -14,16 +14,12 @@ class ControladorReservas
 
 	    if (isset($_POST['formFechas'])) {
 
-
-	    	if(!preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["fecha_desde"]) &&
-			   !preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["fecha_hasta"])){
-
 		      //Verificar si hay disponibilidad, devolver true
 		      $fecha_desde = self::convertirFecha($_POST['fecha_desde']);
 		      $fecha_hasta = self::convertirFecha($_POST['fecha_hasta']);
 		      $hora_desde  = $_POST['hora_desde'];
 		      $hora_hasta  = $_POST['hora_hasta'];
-			  $categoria   = $_POST['categoria'];
+			  	$categoria   = $_POST['categoria'];
 
 			  echo "<script>alert('post');</script>";
 
@@ -51,11 +47,8 @@ class ControladorReservas
 					alert('No hay disponibilidad!');
 				</script>";
 			}*/
-			}else{
-			  echo "<script>alert('Está ingresando caracteres invalidos!!!');</script>";			
-			}
 	    }
-  	}	
+  	}
 
 	static function rangoFecha(){
 

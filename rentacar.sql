@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 09-07-2019 a las 16:45:36
+-- Tiempo de generación: 03-08-2019 a las 15:40:53
 -- Versión del servidor: 5.7.26
--- Versión de PHP: 5.6.40
+-- Versión de PHP: 7.1.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `adicionales` (
   `tarifa` decimal(10,0) DEFAULT NULL,
   `habilitado` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `adicionales`
@@ -45,7 +45,8 @@ INSERT INTO `adicionales` (`id`, `nombre`, `tarifa`, `habilitado`) VALUES
 (1, 'GPS', '650', 1),
 (2, 'Silla Bebé', '600', 1),
 (3, 'Cadenas para nieve', '1000', 1),
-(4, 'Buster', '950', 1);
+(4, 'Buster', '950', 1),
+(5, 'Permiso Aduana', '800', 1);
 
 -- --------------------------------------------------------
 

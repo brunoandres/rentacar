@@ -1,7 +1,10 @@
 <?php
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
-$tarifas = $new->tarifas();
+$tarifas = $new->listarTarifas();
+$new2 = new ControladorCategorias();
+$categorias=$new2->listarCategorias();
+$temporadas=$new->listarTemporadas();
 
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -36,7 +39,6 @@ $tarifas = $new->tarifas();
 
               <thead>
               <tr>
-                <th>id</th>
                 <th>Categoria</th>
                 <th>Por dia</th>
                 <th>Semanal</th>
@@ -52,14 +54,12 @@ $tarifas = $new->tarifas();
 
               ?>
               <tr>
-                <td><?php echo $value['id']; ?></td>
                 <td><?php echo $value['nombre']; ?></td>
                 <td><?php echo '$ '.$value['por_dia']; ?></td>
                 <td><?php echo '$ '.$value['por_semana']; ?></td>
                 <td><?php echo mostrarFecha($value['fecha_desde'])." - ".mostrarFecha($value['fecha_hasta']); ?></td>
-
-                  <td>
-
+                <td>
+                  <button class="btn btn-warning btnEditarTarifa" idCategoria="<?php echo $value['id_categoria']; ?>" idTarifa="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarTarifa"><i class="fa fa-pencil"></i></button>
                 </td>
               </tr>
 
@@ -68,12 +68,11 @@ $tarifas = $new->tarifas();
               </tbody>
               <tfoot>
               <tr>
-                <th>id</th>
                 <th>Categoria</th>
                 <th>Por dia</th>
                 <th>Semanal</th>
                 <th>Temporada</th>
-                <th>Opciones</th>
+                <th align="center">Opciones <i class="fa fa-gears"></i></th>
               </tr>
               </tfoot>
             </table>
@@ -88,133 +87,97 @@ $tarifas = $new->tarifas();
   </section>
   <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
-<div id="dataModal" class="modal fade">
-      <div class="modal-dialog">
-           <div class="modal-content">
-                <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title">Employee Details</h4>
-                </div>
-                <div class="modal-body" id="employee_detail">
-                </div>
-                <div class="modal-footer">
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-           </div>
-      </div>
- </div>
- <div id="add_data_Modal" class="modal fade">
-      <div class="modal-dialog">
-           <div class="modal-content">
-                <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title">PHP Ajax Update MySQL Data Through Bootstrap Modal</h4>
-                </div>
-                <div class="modal-body">
-                     <form method="post" id="insert_form">
-                          <label>Enter Employee Name</label>
-                          <input type="text" name="name" id="name" class="form-control" />
-                          <br />
-                          <label>Enter Employee Address</label>
-                          <textarea name="address" id="address" class="form-control"></textarea>
-                          <br />
-                          <label>Select Gender</label>
-                          <select name="gender" id="gender" class="form-control">
-                               <option value="Male">Male</option>
-                               <option value="Female">Female</option>
-                          </select>
-                          <br />
-                          <label>Enter Designation</label>
-                          <input type="text" name="designation" id="designation" class="form-control" />
-                          <br />
-                          <label>Enter Age</label>
-                          <input type="text" name="age" id="age" class="form-control" />
-                          <br />
-                          <input type="hidden" name="employee_id" id="employee_id" />
-                          <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
-                     </form>
-                </div>
-                <div class="modal-footer">
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-           </div>
-      </div>
- </div>
- <script>
- $(document).ready(function(){
-      $('#add').click(function(){
-           $('#insert').val("Insert");
-           $('#insert_form')[0].reset();
-      });
-      $(document).on('click', '.edit_data', function(){
-           var employee_id = $(this).attr("id");
-           $.ajax({
-                url:"fetch.php",
-                method:"POST",
-                data:{employee_id:employee_id},
-                dataType:"json",
-                success:function(data){
-                     $('#name').val(data.name);
-                     $('#address').val(data.address);
-                     $('#gender').val(data.gender);
-                     $('#designation').val(data.designation);
-                     $('#age').val(data.age);
-                     $('#employee_id').val(data.id);
-                     $('#insert').val("Update");
-                     $('#add_data_Modal').modal('show');
-                }
-           });
-      });
-      $('#insert_form').on("submit", function(event){
-           event.preventDefault();
-           if($('#name').val() == "")
-           {
-                alert("Name is required");
-           }
-           else if($('#address').val() == '')
-           {
-                alert("Address is required");
-           }
-           else if($('#designation').val() == '')
-           {
-                alert("Designation is required");
-           }
-           else if($('#age').val() == '')
-           {
-                alert("Age is required");
-           }
-           else
-           {
-                $.ajax({
-                     url:"insert.php",
-                     method:"POST",
-                     data:$('#insert_form').serialize(),
-                     beforeSend:function(){
-                          $('#insert').val("Inserting");
-                     },
-                     success:function(data){
-                          $('#insert_form')[0].reset();
-                          $('#add_data_Modal').modal('hide');
-                          $('#employee_table').html(data);
-                     }
-                });
-           }
-      });
-      $(document).on('click', '.view_data', function(){
-           var employee_id = $(this).attr("id");
-           if(employee_id != '')
-           {
-                $.ajax({
-                     url:"select.php",
-                     method:"POST",
-                     data:{employee_id:employee_id},
-                     success:function(data){
-                          $('#employee_detail').html(data);
-                          $('#dataModal').modal('show');
-                     }
-                });
-           }
-      });
- });
- </script>
+<!--=====================================
+MODAL EDITAR TARIFA
+======================================-->
+
+<div id="modalEditarTarifa" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <form role="form" method="post">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+
+         <a href="tarifas"><button type="button" class="close" data-dismiss="">&times;</button></a>
+
+          <h4 class="modal-title">Editar tarifa</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+
+          <div class="box-body">
+
+            <div class="form-group">
+              <label>Categoria</label>
+              <select class="form-control" id="select_categoria" name="select_categoria" data-placeholder="Seleccione una categoria..."
+                      style="width: 100%;">
+                      <?php foreach ($categorias as $categoria) {?>
+                        <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
+                      <?php } ?>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Temporada</label>
+              <select class="form-control" id="select_temporada" style="width: 100%;" name="select_temporada" data-placeholder="Selecione una temporada...">
+                      style="width: 100%;">
+                      <?php foreach ($temporadas as $temporada) {?>
+                        <option value="<?php echo $temporada['id']; ?>"><?php echo $temporada['fecha_desde'].' - '.$temporada['fecha_hasta']; ?></option>
+                      <?php } ?>
+              </select>
+              <input type="hidden"  name="idTarifa" id="idTarifa" required>
+            </div>
+
+            <div class="form-group">
+              <label for="categoria">Precio por dia</label>
+              <input type="number" step="0.1" class="form-control" id="valor_diario" name="valor_diario" placeholder="0.00" autocomplete="off" required>
+            </div>
+
+            <div class="form-group">
+              <label for="categoria">Precio por semana</label>
+              <input type="number" step="0.1" class="form-control" id="valor_semanal" name="valor_semanal" placeholder="0.00" autocomplete="off" required>
+            </div>
+
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="1" name="checkTarifa" id="activaTarifaActual">
+                ¿Tarifa actual?
+              </label>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+
+          <a href="tarifas"><button type="button" class="btn btn-default pull-left" data-dismiss="">Salir</button></a>
+          <button type="submit" class="btn btn-primary" name="editarTarifa">Guardar cambios</button>
+
+        </div>
+
+
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

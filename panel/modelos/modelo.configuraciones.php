@@ -34,6 +34,89 @@ class ModeloConfiguraciones{
 
   }
 
+  static public function listarTemporadas($id=null){
+
+      $link = Conexion::ConectarMysql();
+      $temporadas = array();
+      if ($id == null) {
+        $query = "select * from temporadas";
+        $sql = mysqli_query($link,$query);
+        while ($filas = mysqli_fetch_array($sql)) {
+          $temporadas[]=$filas;
+        }
+        return $temporadas;
+      }else{
+        $query = "select * from temporadas where id = $id";
+        $sql = mysqli_query($link,$query);
+
+        while ($filas = mysqli_fetch_array($sql)) {
+          $temporadas[]=$filas;
+        }
+        return $temporadas;
+      }
+
+	    // Cerrar la conexión.
+	    mysqli_close( $link );
+	}
+
+  static public function listarAdicionales($id){
+
+    $link = Conexion::ConectarMysql();
+    $adicionales = array();
+
+    //el id puede venir vacio, asi retorno todas las categorias
+    if ($id == null) {
+      $query = "select * from adicionales order by nombre asc";
+      $sql = mysqli_query($link,$query);
+      while ($filas = mysqli_fetch_array($sql)) {
+        $adicionales[]=$filas;
+      }
+      return $adicionales;
+    }else{
+      $query = "select * from adicionales where id = $id";
+      $sql = mysqli_query($link,$query);
+
+      while ($filas = mysqli_fetch_array($sql)) {
+        $adicionales[]=$filas;
+      }
+      return $adicionales;
+    }
+
+    // Cerrar la conexión.
+    mysqli_close( $link );
+	}
+
+  static public function listarTarifas($id=null){
+
+    $link = Conexion::ConectarMysql();
+    $tarifas = array();
+    if ($id == null) {
+      $query = "SELECT a.id,a.por_dia,a.por_semana,a.activa,b.fecha_desde,b.fecha_hasta,c.id as id_categoria,c.nombre from tarifas a, temporadas b,categorias c where a.id_temporada=b.id and a.id_categoria=c.id order by c.nombre asc";
+	    $sql = mysqli_query($link,$query);
+	    while ($filas = mysqli_fetch_assoc($sql)) {
+	       $tarifas[] = $filas;
+	    }
+	    return $tarifas;
+
+    }else{
+      $query = "SELECT a.id,a.por_dia,a.por_semana,a.activa,b.fecha_desde,b.fecha_hasta,c.id as id_categoria,c.nombre from tarifas a, temporadas b,categorias c where a.id_temporada=b.id and a.id_categoria=c.id and a.id=$id order by c.nombre asc";
+	    $sql = mysqli_query($link,$query);
+	    while ($filas = mysqli_fetch_assoc($sql)) {
+	       $tarifas[] = $filas;
+	    }
+	    return $tarifas;
+    }
+	    // Cerrar la conexión.
+	    mysqli_close( $link );
+	}
+
+
+
+  ////////////////////////////////////////
+  //// Metodos para guardar///////////////
+  ////////////////////////////////////////
+
+
   static public function guardarConfiguracion($nombre,$valor,$activa){
 
     $link = Conexion::ConectarMysql();
@@ -62,6 +145,20 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
 	}
 
+  static public function guardarTarifa($categoria,$temporada,$valor_diario,$valor_semanal,$tarifa_actual){
+
+    $link = Conexion::ConectarMysql();
+    $query = "INSERT INTO `tarifas`(`por_dia`, `por_semana`, `id_temporada`, `id_categoria`, `activa`) VALUES ('$valor_diario','$valor_semanal',$categoria,$temporada,$tarifa_actual)";
+    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+    if ($sql) {
+      return "ok";
+    }else{
+      return $sql;
+    }
+    // Cerrar la conexión.
+    mysqli_close( $link );
+	}
+
   static public function guardarTempo($fecha_desde,$fecha_hasta,$activa,$detalle){
 
     $link = Conexion::ConectarMysql();
@@ -80,46 +177,9 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
 	}
 
-  static public function mostrarTemporadas(){
-
-      $link = Conexion::ConectarMysql();
-      $temporadas = array();
-      $query = "select * from temporadas";
-	    $sql = mysqli_query($link,$query);
-	    while ($filas = mysqli_fetch_assoc($sql)) {
-	       $temporadas[] = $filas;
-	    }
-	    return $temporadas;
-	    // Cerrar la conexión.
-	    mysqli_close( $link );
-	}
-
-  static public function listarAdicionales($id){
-
-    $adicionales = array();
-    $link = Conexion::ConectarMysql();
-
-    //el id puede venir vacio, asi retorno todas las categorias
-    if ($id == null) {
-      $query = "select * from adicionales order by nombre asc";
-      $sql = mysqli_query($link,$query);
-      while ($filas = mysqli_fetch_array($sql)) {
-        $adicionales[]=$filas;
-      }
-      return $adicionales;
-    }else{
-      $query = "select * from adicionales where id = $id";
-      $sql = mysqli_query($link,$query);
-
-      while ($filas = mysqli_fetch_array($sql)) {
-        $adicionales[]=$filas;
-      }
-      return $adicionales;
-    }
-
-    // Cerrar la conexión.
-    mysqli_close( $link );
-	}
+  ////////////////////////////////////////
+  //// Metodos para editar///////////////
+  ////////////////////////////////////////
 
   static function editarAdicional($nombre,$tarifa,$activo,$id){
 
@@ -134,19 +194,7 @@ class ModeloConfiguraciones{
 		mysqli_close($link);
 	}
 
-  static public function mostrarTarifas(){
 
-      $link = Conexion::ConectarMysql();
-      $tarifas = array();
-      $query = "SELECT a.*, b.*,c.* from tarifas a, temporadas b,categorias c where a.id_temporada=b.id and a.id_categoria=c.id";
-	    $sql = mysqli_query($link,$query);
-	    while ($filas = mysqli_fetch_assoc($sql)) {
-	       $tarifas[] = $filas;
-	    }
-	    return $tarifas;
-	    // Cerrar la conexión.
-	    mysqli_close( $link );
-	}
 }
 
 

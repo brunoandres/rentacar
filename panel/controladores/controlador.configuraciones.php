@@ -2,6 +2,7 @@
 
 class ControladorConfiguraciones{
 
+  //Metodo para listar las configuraciones del sistema
   static public function listarConfiguraciones($id=null){
 
 		$configuraciones = ModeloConfiguraciones::listarConfiguraciones($id);
@@ -9,12 +10,79 @@ class ControladorConfiguraciones{
 
 	}
 
+  //Metodo para listar los adicionales
   static public function listarAdicionales($id=null){
 
 		$adicionales = ModeloConfiguraciones::listarAdicionales($id);
 		return $adicionales;
 
 	}
+
+  //Metodo para listar las temporadas
+  static public function listarTemporadas($id=null){
+
+		$temporadas = ModeloConfiguraciones::listarTemporadas($id);
+		return $temporadas;
+
+	}
+
+  //Metodo para listar las tarifas definidas por temporadas
+  static public function listarTarifas($id=null){
+
+      $respuesta = ModeloConfiguraciones::listarTarifas($id);
+      return $respuesta;
+  }
+
+  //Metodo para guardar una nueva tarifa
+  static public function nuevaTarifa(){
+
+    if (isset($_POST['nuevaTarifa'])) {
+
+      $categoria = $_POST['select_categoria'];
+      $temporada = $_POST['select_temporada'];
+      if (empty($_POST['checkTarifa'])) {
+        $tarifa_actual = 0;
+      }else{
+        $tarifa_actual = 1;
+      }
+      $valor_diario = $_POST['valor_diario'];
+      $valor_semanal = $_POST['valor_semanal'];
+
+      $respuesta = ModeloConfiguraciones::guardarTarifa($categoria,$temporada,$valor_diario,$valor_semanal,$tarifa_actual);
+
+      if ($respuesta=="ok") {
+        echo'<script>
+
+				swal({
+						type: "success",
+						title: "Tarifa guardada correctamente",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){
+								if (result.value) {
+
+								window.location = "tarifas";
+
+								}
+							})
+
+				</script>';
+      } else {
+        echo'<script>
+
+				swal({
+						type: "danger",
+						title: "Error al guardar tarifa.",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){})
+
+				</script>';
+      }
+
+    }
+
+  }
 
   static public function nuevaConfiguracion(){
 
@@ -244,23 +312,9 @@ class ControladorConfiguraciones{
 
 	}
 
-  static public function adicionales(){
 
-      $respuesta = ModeloConfiguraciones::mostrarAdicionales();
-      return $respuesta;
-  }
 
-  static public function temporadas(){
 
-      $respuesta = ModeloConfiguraciones::mostrarTemporadas();
-      return $respuesta;
-  }
-
-  static public function tarifas(){
-
-      $respuesta = ModeloConfiguraciones::mostrarTarifas();
-      return $respuesta;
-  }
 }
 
 ?>

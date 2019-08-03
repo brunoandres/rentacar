@@ -217,6 +217,7 @@ CUERPO DOCUMENTO
   <script type="text/javascript" src="vistas/bower_components/moment/datetime-moment.js"></script>
   <script src="vistas/js/categorias.js"></script>
   <script src="vistas/js/adicionales.js"></script>
+  <script src="vistas/js/tarifas.js"></script>
   <script src="vistas/tablas/tablas.js"></script>
   <script src="vistas/js/script.js"></script>
   <script src="vistas/js/validator.js"></script>

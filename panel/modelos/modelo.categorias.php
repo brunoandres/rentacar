@@ -12,14 +12,14 @@ class ModeloCategorias{
 
 			//el id puede venir vacio, asi retorno todas las categorias
 			if ($id == null) {
-				$query = "select * from categorias";
+				$query = "select * from categorias order by nombre asc";
 				$sql = mysqli_query($link,$query);
 		    while ($filas = mysqli_fetch_array($sql)) {
 		      $categorias[]=$filas;
 		    }
 				return $categorias;
 			}else{
-				$query = "select * from categorias where id = $id";
+				$query = "select * from categorias where id = $id order by nombre asc";
 				$sql = mysqli_query($link,$query);
 
 		    while ($filas = mysqli_fetch_array($sql)) {

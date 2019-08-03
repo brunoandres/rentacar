@@ -79,12 +79,14 @@ $text = null;
               </span>
             </a>
             <ul class="treeview-menu">
-              <li class="<?php if ($_GET['ruta']=='tarifas') {
-                echo "active";
-              } ?>"><a href="tarifas"><i class="fa fa-circle-o"></i> Ver Tarifas</a></li>
+
               <li class="<?php if ($_GET['ruta']=='nueva-tarifa') {
                 echo "active";
               } ?>"><a href="nueva-tarifa"><i class="fa fa-circle-o"></i> Nueva Tarifa</a></li>
+
+              <li class="<?php if ($_GET['ruta']=='tarifas') {
+                echo "active";
+              } ?>"><a href="tarifas"><i class="fa fa-circle-o"></i> Ver Tarifas</a></li>
             </ul>
           </li>
 
@@ -97,12 +99,14 @@ $text = null;
               </span>
             </a>
             <ul class="treeview-menu">
-              <li class="<?php if ($_GET['ruta']=='categorias') {
-                echo "active";
-              } ?>"><a href="categorias"><i class="fa fa-circle-o"></i> Ver Categorias</a></li>
+
               <li class="<?php if ($_GET['ruta']=='nueva-categoria') {
                 echo "active";
               } ?>"><a href="nueva-categoria"><i class="fa fa-circle-o"></i> Nueva Categoria</a></li>
+
+              <li class="<?php if ($_GET['ruta']=='categorias') {
+                echo "active";
+              } ?>"><a href="categorias"><i class="fa fa-circle-o"></i> Ver Categorias</a></li>
             </ul>
           </li>
 
@@ -115,12 +119,14 @@ $text = null;
               </span>
             </a>
             <ul class="treeview-menu">
-              <li class="<?php if ($_GET['ruta']=='temporadas') {
-                echo "active";
-              } ?>"><a href="temporadas"><i class="fa fa-circle-o"></i> Ver Temporadas</a></li>
+
               <li class="<?php if ($_GET['ruta']=='nueva-temporada') {
                 echo "active";
               } ?>"><a href="nueva-temporada"><i class="fa fa-circle-o"></i> Nueva Temporada</a></li>
+
+              <li class="<?php if ($_GET['ruta']=='temporadas') {
+                echo "active";
+              } ?>"><a href="temporadas"><i class="fa fa-circle-o"></i> Ver Temporadas</a></li>
             </ul>
           </li>
 
@@ -133,12 +139,14 @@ $text = null;
               </span>
             </a>
             <ul class="treeview-menu">
-              <li class="<?php if ($_GET['ruta']=='configuraciones') {
-                echo "active";
-              } ?>"><a href="configuraciones"><i class="fa fa-circle-o"></i> Ver Configuraciones</a></li>
+
               <li class="<?php if ($_GET['ruta']=='nueva-temporada') {
                 echo "active";
               } ?>"><a href="nueva-configuracion"><i class="fa fa-circle-o"></i> Nueva configuración</a></li>
+
+              <li class="<?php if ($_GET['ruta']=='configuraciones') {
+                echo "active";
+              } ?>"><a href="configuraciones"><i class="fa fa-circle-o"></i> Ver Configuraciones</a></li>
             </ul>
           </li>
 
@@ -151,12 +159,15 @@ $text = null;
               </span>
             </a>
             <ul class="treeview-menu">
-              <li class="<?php if ($_GET['ruta']=='adicionales') {
-                echo "active";
-              } ?>"><a href="adicionales"><i class="fa fa-circle-o"></i> Ver Adicionales</a></li>
+
               <li class="<?php if ($_GET['ruta']=='nuevo-adicional') {
                 echo "active";
               } ?>"><a href="nuevo-adicional"><i class="fa fa-circle-o"></i> Nuevo adicional</a></li>
+
+
+              <li class="<?php if ($_GET['ruta']=='adicionales') {
+                echo "active";
+              } ?>"><a href="adicionales"><i class="fa fa-circle-o"></i> Ver Adicionales</a></li>
             </ul>
           </li>
 

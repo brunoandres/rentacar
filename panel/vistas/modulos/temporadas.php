@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
-$temporadas = $new->temporadas();
+$temporadas = $new->listarTemporadas();
 $date = date('d/m/Y H:i:s');
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -36,7 +36,6 @@ $date = date('d/m/Y H:i:s');
 
               <thead>
               <tr>
-                <th align="center">id</th>
                 <th align="center">Fecha desde</th>
                 <th align="center">Fecha hasta</th>
                 <th align="center">Estado</th>
@@ -53,7 +52,6 @@ $date = date('d/m/Y H:i:s');
               ?>
 
               <tr>
-                <td><?php echo $temp['id'];?></td>
                 <td><?php echo fechaCastellano($temp['fecha_desde']);?></td>
                 <td><?php echo fechaCastellano($temp['fecha_hasta']);?></td>
                 <td><?php if ($temp['activa']==1) {
@@ -77,7 +75,6 @@ $date = date('d/m/Y H:i:s');
               </tbody>
               <tfoot>
                 <tr>
-                  <th align="center">id</th>
                   <th align="center">Fecha desde</th>
                   <th align="center">Fecha hasta</th>
                   <th align="center">Estado</th>
