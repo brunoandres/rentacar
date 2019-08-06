@@ -22,14 +22,9 @@ $(".tablas").on("click", ".btnEditarTarifa", function(){
 				if (respuesta['activa']==1) {
 					$("#activaTarifaActual").prop("checked",true);
 				}
-
-				/*if (!$respuesta['id_categoria']==idCategoria) {
-					$("#select_categoria").prop("select",true);
-				}*/
-				$("#select_categoria").prop("select",true);
-				$("#valor_diario").val(respuesta["por_dia"]);
-				$("#valor_semanal").val(respuesta["por_semana"]);
+				$("#select_categoria").val(respuesta["id_categoria"]);
 				$("#select_temporada").val(respuesta["id_temporada"]);
+				$("#valor_diario").val(respuesta["por_dia"]);
 				$("#valor_semanal").val(respuesta["por_semana"]);
      		$("#idTarifa").val(respuesta["id"]);
 

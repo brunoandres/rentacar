@@ -121,8 +121,7 @@ MODAL EDITAR TARIFA
 
             <div class="form-group">
               <label>Categoria</label>
-              <select class="form-control" id="select_categoria" name="select_categoria" data-placeholder="Seleccione una categoria..."
-                      style="width: 100%;">
+              <select class="form-control" id="select_categoria" name="select_categoria" data-placeholder="Seleccione una categoria..." style="width: 100%;">
                       <?php foreach ($categorias as $categoria) {?>
                         <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
                       <?php } ?>
@@ -131,7 +130,7 @@ MODAL EDITAR TARIFA
 
             <div class="form-group">
               <label>Temporada</label>
-              <select class="form-control" id="select_temporada" style="width: 100%;" name="select_temporada" data-placeholder="Selecione una temporada...">
+              <select class="form-control" id="select_temporada" name="select_temporada" data-placeholder="Selecione una temporada..." style="width: 100%;">
                       style="width: 100%;">
                       <?php foreach ($temporadas as $temporada) {?>
                         <option value="<?php echo $temporada['id']; ?>"><?php echo $temporada['fecha_desde'].' - '.$temporada['fecha_hasta']; ?></option>
