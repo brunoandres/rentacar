@@ -14,10 +14,10 @@ $data = $new->ingresarReserva();
       <p class="lead">Seleccione una categoria e ingrese las fechas para buscar disponibilidad.</p>
     </div>
     <div class="row">
-      <div class="col-sm-8 col-sm-offset-2">
+      <div class="col-sm-6 col-sm-offset-3">
         <div id="sendmessage">Your message has been sent. Thank you!</div>
         <div id="errormessage"></div>
-        <form method="post">
+        <form method="post" action="formulario?alert=3">
           <div class="form-group">
             <label for="exampleInputPassword1">Categoria</label>
             <select class="form-control" name="categoria">
@@ -28,21 +28,21 @@ $data = $new->ingresarReserva();
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Fecha desde</label>
-            <input type="text" id="datepicker" class="form-control" name="fecha_desde" autocomplete="off" required>
+            <input type="text" id="datepicker" class="form-control" name="fecha_desde" placeholder="Seleccione una fecha" autocomplete="off" value="<?php echo date('Y-m-d'); ?>" readonly>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Fecha hasta</label>
-            <input type="text" id="datepicker2" class="form-control" name="fecha_hasta" autocomplete="off" required>
+            <input type="text" id="datepicker2" class="form-control" name="fecha_hasta" placeholder="Seleccione una fecha" autocomplete="off" value="<?php echo date('Y-m-d'); ?>" readonly>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Hora desde</label>
-            <input type="text" id="timepicker" name="hora_desde" class="form-control timepicker" autocomplete="off">
+            <input type="text" id="single-input" name="hora_desde" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php echo "15:00"; ?>" readonly>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Hora hasta</label>
-            <input type="text" id="timepicker" name="hora_hasta" class="form-control timepicker" autocomplete="off">
+            <input type="text" id="single-input2" name="hora_hasta" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php echo "15:00"; ?>" readonly>
           </div>
-          <input type="submit" name="formFechas" value="Buscar disponibilidad..." class="btn btn-primary">
+          <input type="submit" name="formFechas" value="Buscar disponibilidad" class="btn btn-success">
         </form>
       </div>
     </div>

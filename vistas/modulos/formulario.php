@@ -1,76 +1,41 @@
-<h1>Complete el siguiente formulario para continuar : code # <?php echo $_SESSION['code']; ?></h1>
-<?php
-if (!empty($_SESSION['code'])) { ?>
-<p>Fecha desde : <?php echo convertirFecha($_SESSION['fecha_desde']); ?></p>
-<div class="container-fluid">
-  <form action="cotizador" method="post">
-    <div class="form-row">
-      <div class="col-md-4 mb-3">
-        <label for="validationCustom01">Nombre y Apellido</label>
-        <input type="text" class="form-control" id="validationCustom01" placeholder="Nombre y apellido" required>
-      </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationCustom02">Last name</label>
-        <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationCustomUsername">Username</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupPrepend">@</span>
+<section id="portfolio">
+  <div class="container">
+    <div class="center">
+      <h2>Hay disponibilidad!</h2>
+      <p class="lead">Complete el siguiente formulario para continuar con su reserva desde el <?php echo $_POST['fecha_desde']; ?> hasta el <?php echo $_POST['fecha_hasta']; ?></p>
+    </div>
+    <div class="row contact-wrap">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div id="sendmessage">Your message has been sent. Thank you!</div>
+        <div id="errormessage"></div>
+        <form action="" method="post" role="form" class="contactForm">
+          <div class="form-group">
+            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4"
+              data-msg="Please enter at least 4 chars" />
+            <div class="validation"></div>
           </div>
-          <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required>
-          <div class="invalid-feedback">
-            Please choose a username.
+          <div class="form-group">
+            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email"
+              data-msg="Please enter a valid email" />
+            <div class="validation"></div>
           </div>
-        </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4"
+              data-msg="Please enter at least 8 chars of subject" />
+            <div class="validation"></div>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us"
+              placeholder="Message"></textarea>
+            <div class="validation"></div>
+          </div>
+
+          <div class="text-center"><button type="submit" class="btn btn-primary btn-lg">Enviar mensaje</button></div>
+        </form>
       </div>
     </div>
-    <div class="form-row">
-      <div class="col-md-6 mb-3">
-        <label for="validationCustom03">City</label>
-        <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
-        <div class="invalid-feedback">
-          Please provide a valid city.
-        </div>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="validationCustom04">State</label>
-        <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
-        <div class="invalid-feedback">
-          Please provide a valid state.
-        </div>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="validationCustom05">Zip</label>
-        <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
-        <div class="invalid-feedback">
-          Please provide a valid zip.
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-        <label class="form-check-label" for="invalidCheck">
-          Agree to terms and conditions
-        </label>
-        <div class="invalid-feedback">
-          You must agree before submitting.
-        </div>
-      </div>
-    </div>
-    <button class="btn btn-primary" name="formData" type="submit">Continuar...</button>
-  </form>
-</div>
-<?php  }
-  else{
-  header('Location: inicio');
-}
-
-
-
-?>
+    <!--/.row-->
+  </div>
+  <!--/.container-->
+</section>
+<!--/#contact-page-->
