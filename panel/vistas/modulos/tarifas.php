@@ -5,6 +5,7 @@ $tarifas = $new->listarTarifas();
 $new2 = new ControladorCategorias();
 $categorias=$new2->listarCategorias();
 $temporadas=$new->listarTemporadas();
+$editar = $new->editarTarifa();
 
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -136,7 +137,7 @@ MODAL EDITAR TARIFA
                         <option value="<?php echo $temporada['id']; ?>"><?php echo $temporada['fecha_desde'].' - '.$temporada['fecha_hasta']; ?></option>
                       <?php } ?>
               </select>
-              <input type="hidden"  name="idTarifa" id="idTarifa" required>
+              <input type="hidden"  name="id_tarifa" id="idTarifa" required>
             </div>
 
             <div class="form-group">

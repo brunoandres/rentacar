@@ -84,6 +84,58 @@ class ControladorConfiguraciones{
 
   }
 
+  //Metodo para editar una tarifa
+  static public function editarTarifa(){
+
+    if (isset($_POST['editarTarifa'])) {
+
+      $categoria = $_POST['select_categoria'];
+      $temporada = $_POST['select_temporada'];
+      if (empty($_POST['checkTarifa'])) {
+        $tarifa_actual = 0;
+      }else{
+        $tarifa_actual = 1;
+      }
+      $valor_diario = $_POST['valor_diario'];
+      $valor_semanal = $_POST['valor_semanal'];
+      $id_tarifa = $_POST['id_tarifa'];
+
+      $respuesta = ModeloConfiguraciones::editarTarifa($categoria,$temporada,$valor_diario,$valor_semanal,$tarifa_actual,$id_tarifa);
+
+      if ($respuesta=="ok") {
+        echo'<script>
+
+				swal({
+						type: "success",
+						title: "Tarifa editada correctamente",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){
+								if (result.value) {
+
+								window.location = "tarifas";
+
+								}
+							})
+
+				</script>';
+      } else {
+        echo'<script>
+
+				swal({
+						type: "danger",
+						title: "Error al editar tarifa.",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){})
+
+				</script>';
+      }
+
+    }
+
+  }
+
   static public function nuevaConfiguracion(){
 
     if (isset($_POST['nuevaConfiguracion'])) {

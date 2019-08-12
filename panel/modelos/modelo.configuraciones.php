@@ -159,6 +159,20 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
 	}
 
+  static public function editarTarifa($categoria,$temporada,$valor_diario,$valor_semanal,$tarifa_actual,$id_tarifa){
+
+    $link = Conexion::ConectarMysql();
+    $query = "UPDATE `tarifas` SET `por_dia`='$valor_diario',`por_semana`='$valor_semanal',`id_temporada`=$temporada,`id_categoria`=$categoria,`activa`=$tarifa_actual WHERE id = $id_tarifa";
+    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+    if ($sql) {
+      return "ok";
+    }else{
+      return $sql;
+    }
+    // Cerrar la conexión.
+    mysqli_close( $link );
+  }
+
   static public function guardarTempo($fecha_desde,$fecha_hasta,$activa,$detalle){
 
     $link = Conexion::ConectarMysql();
