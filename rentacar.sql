@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 03-08-2019 a las 15:40:53
+-- Tiempo de generación: 12-08-2019 a las 09:57:04
 -- Versión del servidor: 5.7.26
--- Versión de PHP: 7.1.29
+-- Versión de PHP: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -185,6 +185,13 @@ CREATE TABLE IF NOT EXISTS `reservas_detalle` (
   KEY `fk_Reservas_detalle_Reservas` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `reservas_detalle`
+--
+
+INSERT INTO `reservas_detalle` (`id`, `telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `detalles`) VALUES
+(1, '2944636416', 'brunoandres2013@gmail.com', 'aeropuerto', 'aeropuerto', '910', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -198,10 +205,21 @@ CREATE TABLE IF NOT EXISTS `tarifas` (
   `por_semana` decimal(10,0) DEFAULT NULL,
   `id_temporada` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
+  `activa` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  KEY `fk_tarifas_categorias1` (`id_categoria`),
-  KEY `fk_tarifas_temporadas1` (`id_temporada`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `id_temporada` (`id_temporada`),
+  KEY `id_categoria` (`id_categoria`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tarifas`
+--
+
+INSERT INTO `tarifas` (`id`, `por_dia`, `por_semana`, `id_temporada`, `id_categoria`, `activa`) VALUES
+(1, '2000', '12000', 1, 1, 1),
+(2, '2400', '13000', 1, 2, 1),
+(3, '3000', '13000', 1, 3, 1),
+(4, '3500', '14000', 1, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -217,7 +235,14 @@ CREATE TABLE IF NOT EXISTS `temporadas` (
   `activa` tinyint(1) NOT NULL,
   `detalle` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `temporadas`
+--
+
+INSERT INTO `temporadas` (`id`, `fecha_desde`, `fecha_hasta`, `activa`, `detalle`) VALUES
+(1, '2019-08-01', '2019-12-31', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -277,8 +302,8 @@ ALTER TABLE `reservas_detalle`
 -- Filtros para la tabla `tarifas`
 --
 ALTER TABLE `tarifas`
-  ADD CONSTRAINT `fk_tarifas_categorias1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tarifas_temporadas1` FOREIGN KEY (`id_temporada`) REFERENCES `temporadas` (`id`);
+  ADD CONSTRAINT `tarifas_ibfk_1` FOREIGN KEY (`id_temporada`) REFERENCES `temporadas` (`id`),
+  ADD CONSTRAINT `tarifas_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
