@@ -58,9 +58,12 @@ $text = null;
       || $_GET['ruta']=='configuraciones'
       || $_GET['ruta']=='temporadas'
       || $_GET['ruta']=='nueva-temporada'
+      || $_GET['ruta']=='editar-temporada'
       || $_GET['ruta']=='nueva-configuracion'
       || $_GET['ruta']=='nuevo-adicional'
-      || $_GET['ruta']=='adicionales') {
+      || $_GET['ruta']=='adicionales'
+      || $_GET['ruta']=='autos'
+      || $_GET['ruta']=='nuevo-auto') {
         echo "active";
       } ?>">
         <a href="#">
@@ -70,6 +73,25 @@ $text = null;
           </span>
         </a>
         <ul class="treeview-menu">
+          <li class="treeview <?php if ($_GET['ruta']=='autos' || $_GET['ruta']=='nuevo-auto') {
+            echo "active";
+          } ?>">
+            <a href="#"><i class="fa fa-circle-o"></i> Autos
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+
+              <li class="<?php if ($_GET['ruta']=='nuevo-auto') {
+                echo "active";
+              } ?>"><a href="nuevo-auto"><i class="fa fa-circle-o"></i> Nuevo Auto</a></li>
+
+              <li class="<?php if ($_GET['ruta']=='autos') {
+                echo "active";
+              } ?>"><a href="autos"><i class="fa fa-circle-o"></i> Ver Autos</a></li>
+            </ul>
+          </li>
           <li class="treeview <?php if ($_GET['ruta']=='tarifas' || $_GET['ruta']=='nueva-tarifa') {
             echo "active";
           } ?>">
@@ -110,7 +132,7 @@ $text = null;
             </ul>
           </li>
 
-          <li class="treeview <?php if ($_GET['ruta']=='temporadas' || $_GET['ruta']=='nueva-temporada') {
+          <li class="treeview <?php if ($_GET['ruta']=='temporadas' || $_GET['ruta']=='nueva-temporada' || $_GET['ruta']=='editar-temporada') {
             echo "active";
           } ?>">
             <a href="#"><i class="fa fa-circle-o"></i> Temporadas
@@ -140,7 +162,7 @@ $text = null;
             </a>
             <ul class="treeview-menu">
 
-              <li class="<?php if ($_GET['ruta']=='nueva-temporada') {
+              <li class="<?php if ($_GET['ruta']=='nueva-configuracion') {
                 echo "active";
               } ?>"><a href="nueva-configuracion"><i class="fa fa-circle-o"></i> Nueva configuración</a></li>
 

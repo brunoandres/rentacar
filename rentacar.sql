@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 12-08-2019 a las 09:57:04
+-- Tiempo de generación: 13-08-2019 a las 18:04:13
 -- Versión del servidor: 5.7.26
--- Versión de PHP: 5.6.40
+-- Versión de PHP: 7.1.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,6 +34,8 @@ CREATE TABLE IF NOT EXISTS `adicionales` (
   `nombre` varchar(100) DEFAULT NULL,
   `tarifa` decimal(10,0) DEFAULT NULL,
   `habilitado` tinyint(1) DEFAULT '1',
+  `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
@@ -41,12 +43,12 @@ CREATE TABLE IF NOT EXISTS `adicionales` (
 -- Volcado de datos para la tabla `adicionales`
 --
 
-INSERT INTO `adicionales` (`id`, `nombre`, `tarifa`, `habilitado`) VALUES
-(1, 'GPS', '650', 1),
-(2, 'Silla Bebé', '600', 1),
-(3, 'Cadenas para nieve', '1000', 1),
-(4, 'Buster', '950', 1),
-(5, 'Permiso Aduana', '800', 1);
+INSERT INTO `adicionales` (`id`, `nombre`, `tarifa`, `habilitado`, `create`, `update`) VALUES
+(1, 'GPS', '705', 1, '2019-08-13 12:39:42', '2019-08-13 14:03:58'),
+(2, 'Silla Bebé', '600', 1, '2019-08-13 12:39:42', '2019-08-13 12:39:43'),
+(3, 'Cadenas para nieve', '1000', 1, '2019-08-13 12:39:42', '2019-08-13 12:39:43'),
+(4, 'Buster', '950', 1, '2019-08-13 12:39:42', '2019-08-13 12:39:43'),
+(5, 'Permiso Aduana', '800', 1, '2019-08-13 12:39:42', '2019-08-13 12:39:43');
 
 -- --------------------------------------------------------
 
@@ -63,18 +65,20 @@ CREATE TABLE IF NOT EXISTS `autos` (
   `patente` varchar(45) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT '1',
   `viaja_chile` tinyint(1) DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
+  `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_autos_categorias1` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `autos`
 --
 
-INSERT INTO `autos` (`id`, `id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`, `date`) VALUES
-(1, 1, 'Renault', 'Clio', NULL, 1, NULL, NULL),
-(2, 1, 'VW', 'Suran', NULL, 1, NULL, NULL);
+INSERT INTO `autos` (`id`, `id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`, `create`, `update`) VALUES
+(1, 1, 'Renault', 'Clio', 's', 1, 1, '2019-08-13 12:39:58', '2019-08-13 16:15:52'),
+(2, 1, 'VW', 'Suran', '', 1, 1, '2019-08-13 12:39:58', '2019-08-13 16:16:16'),
+(3, 1, 'Ford', 'Focus', 'JEM442', 1, 1, '2019-08-13 15:46:27', '2019-08-13 17:59:03');
 
 -- --------------------------------------------------------
 
@@ -88,6 +92,8 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `nombre` varchar(100) DEFAULT NULL,
   `activa` tinyint(1) NOT NULL,
   `promo` tinyint(1) NOT NULL,
+  `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
@@ -95,12 +101,12 @@ CREATE TABLE IF NOT EXISTS `categorias` (
 -- Volcado de datos para la tabla `categorias`
 --
 
-INSERT INTO `categorias` (`id`, `nombre`, `activa`, `promo`) VALUES
-(1, 'Categoria A', 1, 0),
-(2, 'Categoria B', 1, 0),
-(3, 'Categoria C', 1, 0),
-(4, 'Categoria D', 1, 0),
-(5, 'Categoria E', 1, 0);
+INSERT INTO `categorias` (`id`, `nombre`, `activa`, `promo`, `create`, `update`) VALUES
+(1, 'Categoria A', 1, 1, '2019-08-13 12:36:48', '2019-08-13 12:38:01'),
+(2, 'Categoria B', 1, 0, '2019-08-13 12:36:48', '2019-08-13 12:37:06'),
+(3, 'Categoria C', 1, 0, '2019-08-13 12:36:48', '2019-08-13 12:37:06'),
+(4, 'Categoria D', 1, 0, '2019-08-13 12:36:48', '2019-08-13 12:37:06'),
+(5, 'Categoria E', 1, 0, '2019-08-13 12:36:48', '2019-08-13 12:37:06');
 
 -- --------------------------------------------------------
 
@@ -114,6 +120,8 @@ CREATE TABLE IF NOT EXISTS `configuraciones` (
   `nombre` varchar(250) COLLATE utf8_spanish2_ci NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `activa` tinyint(1) NOT NULL,
+  `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -121,8 +129,8 @@ CREATE TABLE IF NOT EXISTS `configuraciones` (
 -- Volcado de datos para la tabla `configuraciones`
 --
 
-INSERT INTO `configuraciones` (`id`, `nombre`, `valor`, `activa`) VALUES
-(1, 'Dolar', '43.50', 1);
+INSERT INTO `configuraciones` (`id`, `nombre`, `valor`, `activa`, `create`, `update`) VALUES
+(1, 'Dolar', '43.50', 1, '2019-08-13 12:38:54', '2019-08-13 12:38:54');
 
 -- --------------------------------------------------------
 
@@ -133,15 +141,18 @@ INSERT INTO `configuraciones` (`id`, `nombre`, `valor`, `activa`) VALUES
 DROP TABLE IF EXISTS `reservas`;
 CREATE TABLE IF NOT EXISTS `reservas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_categoria` int(11) NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   `fecha_desde` date DEFAULT NULL,
   `fecha_hasta` date DEFAULT NULL,
-  `tarifa` decimal(10,0) DEFAULT NULL,
-  `cant_dias` int(11) DEFAULT NULL,
-  `id_categoria` int(11) NOT NULL,
+  `hora_desde` time DEFAULT NULL,
+  `hora_hasta` time DEFAULT NULL,
+  `tarifa` decimal(10,2) DEFAULT NULL,
+  `total_dias` int(11) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
   `origen` tinyint(1) DEFAULT NULL,
-  `fecha_registro` datetime DEFAULT NULL,
+  `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_Reservas_categorias1` (`id_categoria`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -150,8 +161,8 @@ CREATE TABLE IF NOT EXISTS `reservas` (
 -- Volcado de datos para la tabla `reservas`
 --
 
-INSERT INTO `reservas` (`id`, `nombre`, `fecha_desde`, `fecha_hasta`, `tarifa`, `cant_dias`, `id_categoria`, `estado`, `origen`, `fecha_registro`) VALUES
-(1, 'Bruno Andres ', '2019-07-01', '2019-07-08', '600', 7, 1, 1, 1, NULL);
+INSERT INTO `reservas` (`id`, `id_categoria`, `nombre`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `create`, `update`) VALUES
+(1, 1, 'Bruno Andres ', '2019-07-01', '2019-07-08', NULL, NULL, '600.00', 7, 1, 1, '2019-08-13 12:39:23', '2019-08-13 12:39:23');
 
 -- --------------------------------------------------------
 
@@ -175,21 +186,21 @@ CREATE TABLE IF NOT EXISTS `reservas_adicionales` (
 
 DROP TABLE IF EXISTS `reservas_detalle`;
 CREATE TABLE IF NOT EXISTS `reservas_detalle` (
-  `id` int(11) NOT NULL,
+  `id_reserva` int(11) NOT NULL,
   `telefono` varchar(45) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `retiro` varchar(100) DEFAULT NULL,
   `entrega` varchar(100) DEFAULT NULL,
   `nro_vuelo` varchar(100) DEFAULT NULL,
-  `detalles` text,
-  KEY `fk_Reservas_detalle_Reservas` (`id`)
+  `observaciones` text,
+  KEY `fk_Reservas_detalle_Reservas` (`id_reserva`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `reservas_detalle`
 --
 
-INSERT INTO `reservas_detalle` (`id`, `telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `detalles`) VALUES
+INSERT INTO `reservas_detalle` (`id_reserva`, `telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`) VALUES
 (1, '2944636416', 'brunoandres2013@gmail.com', 'aeropuerto', 'aeropuerto', '910', NULL);
 
 -- --------------------------------------------------------
@@ -206,6 +217,8 @@ CREATE TABLE IF NOT EXISTS `tarifas` (
   `id_temporada` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
   `activa` tinyint(1) NOT NULL DEFAULT '1',
+  `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `id_temporada` (`id_temporada`),
   KEY `id_categoria` (`id_categoria`)
@@ -215,11 +228,11 @@ CREATE TABLE IF NOT EXISTS `tarifas` (
 -- Volcado de datos para la tabla `tarifas`
 --
 
-INSERT INTO `tarifas` (`id`, `por_dia`, `por_semana`, `id_temporada`, `id_categoria`, `activa`) VALUES
-(1, '2000', '12000', 1, 1, 1),
-(2, '2400', '13000', 1, 2, 1),
-(3, '3000', '13000', 1, 3, 1),
-(4, '3500', '14000', 1, 4, 1);
+INSERT INTO `tarifas` (`id`, `por_dia`, `por_semana`, `id_temporada`, `id_categoria`, `activa`, `create`, `update`) VALUES
+(1, '1999', '11999', 1, 1, 1, '2019-08-13 12:40:12', '2019-08-13 12:40:13'),
+(2, '2400', '13000', 1, 2, 1, '2019-08-13 12:40:12', '2019-08-13 12:40:13'),
+(3, '3000', '13000', 1, 3, 1, '2019-08-13 12:40:12', '2019-08-13 12:40:13'),
+(4, '3190', '14008', 1, 4, 1, '2019-08-13 12:40:12', '2019-08-13 12:40:13');
 
 -- --------------------------------------------------------
 
@@ -230,19 +243,22 @@ INSERT INTO `tarifas` (`id`, `por_dia`, `por_semana`, `id_temporada`, `id_catego
 DROP TABLE IF EXISTS `temporadas`;
 CREATE TABLE IF NOT EXISTS `temporadas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(250) NOT NULL,
   `fecha_desde` date DEFAULT NULL,
   `fecha_hasta` date DEFAULT NULL,
   `activa` tinyint(1) NOT NULL,
-  `detalle` text,
+  `observaciones` text,
+  `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `temporadas`
 --
 
-INSERT INTO `temporadas` (`id`, `fecha_desde`, `fecha_hasta`, `activa`, `detalle`) VALUES
-(1, '2019-08-01', '2019-12-31', 1, NULL);
+INSERT INTO `temporadas` (`id`, `nombre`, `fecha_desde`, `fecha_hasta`, `activa`, `observaciones`, `create`, `update`) VALUES
+(1, 'Hasta fin de año', '2019-08-01', '2019-12-31', 1, 'Esta temporada incluye desde el 01/08/2019 hasta fin de año 2019', '2019-08-13 12:40:25', '2019-08-13 17:58:30');
 
 -- --------------------------------------------------------
 
@@ -256,7 +272,8 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `nombre` varchar(50) NOT NULL,
   `usuario` varchar(50) NOT NULL,
   `pass` varchar(50) NOT NULL,
-  `fecha_carga` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
@@ -264,10 +281,10 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `usuario`, `pass`, `fecha_carga`) VALUES
-(2, 'administrador', 'admin', '21232f297a57a5a743894a0e4a801fc3', '2019-06-20 20:14:35'),
-(3, 'Jimena', 'jimena', 'c6b5942a869015c357bff85b5407eb4b', '2017-09-28 21:40:03'),
-(4, 'Daniel Gonzalez', 'dgonzalez', '18171f36b7205bc7901cd68e4c56f22c', '2017-07-25 21:20:02');
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `usuario`, `pass`, `create`, `update`) VALUES
+(2, 'administrador', 'admin', '21232f297a57a5a743894a0e4a801fc3', '2019-08-13 12:40:41', '2019-08-13 12:41:54'),
+(3, 'Jimena', 'jimena', 'c6b5942a869015c357bff85b5407eb4b', '2019-08-13 12:40:41', '2019-08-13 12:40:41'),
+(4, 'Daniel Gonzalez', 'dgonzalez', '18171f36b7205bc7901cd68e4c56f22c', '2019-08-13 12:40:41', '2019-08-13 12:40:41');
 
 --
 -- Restricciones para tablas volcadas
@@ -296,7 +313,7 @@ ALTER TABLE `reservas_adicionales`
 -- Filtros para la tabla `reservas_detalle`
 --
 ALTER TABLE `reservas_detalle`
-  ADD CONSTRAINT `fk_Reservas_detalle_Reservas` FOREIGN KEY (`id`) REFERENCES `reservas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Reservas_detalle_Reservas` FOREIGN KEY (`id_reserva`) REFERENCES `reservas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tarifas`

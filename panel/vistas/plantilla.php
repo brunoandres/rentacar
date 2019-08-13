@@ -176,9 +176,12 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "confirmadas" ||
          $_GET["ruta"] == "nueva-reserva" ||
          $_GET["ruta"] == "nueva-temporada" ||
+         $_GET["ruta"] == "editar-temporada" ||
          $_GET["ruta"] == "temporadas" ||
          $_GET["ruta"] == "adicionales" ||
          $_GET["ruta"] == "nuevo-adicional" ||
+         $_GET["ruta"] == "autos" ||
+         $_GET["ruta"] == "nuevo-auto" ||
          $_GET["ruta"] == "configuraciones" ||
          $_GET["ruta"] == "editar-venta" ||
          $_GET["ruta"] == "rango" ||
@@ -218,6 +221,8 @@ CUERPO DOCUMENTO
   <script src="vistas/js/categorias.js"></script>
   <script src="vistas/js/adicionales.js"></script>
   <script src="vistas/js/tarifas.js"></script>
+  <script src="vistas/js/configuraciones.js"></script>
+  <script src="vistas/js/autos.js"></script>
   <script src="vistas/tablas/tablas.js"></script>
   <script src="vistas/js/script.js"></script>
   <script src="vistas/js/validator.js"></script>

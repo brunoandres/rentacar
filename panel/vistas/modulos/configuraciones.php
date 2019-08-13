@@ -2,7 +2,7 @@
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
 $configuraciones = $new->listarConfiguraciones();
-
+$editar = $new->editarConfiguracion();
 /*$editarConfiguracion = new ControladorConfiguraciones();
 $editarConfiguracion -> editarConfiguracion();
 
@@ -33,7 +33,6 @@ $editarConfiguracion -> editarConfiguracion();
 
               <thead>
               <tr>
-                <th align="center">Id</th>
                 <th align="center">Nombre</th>
                 <th align="center">Valor</i></th>
                 <th align="center">Opciones <i class="fa fa-gears"></i></th>
@@ -48,12 +47,11 @@ $editarConfiguracion -> editarConfiguracion();
               ?>
 
               <tr>
-                <td><?php echo $value['id'];?></td>
                 <td width="50%"><?php echo $value['nombre'];?></td>
-                <td width="50%"><?php echo $value['valor'];?></td>
-                <td width="50%" align="center">
+                <td width="20%"><?php echo $value['valor'];?></td>
+                <td width="50%" align="left">
 
-                  <button class="btn btn-warning btnEditarConfig" idConfig="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarConfig"><i class="fa fa-pencil"></i></button>
+                  <button class="btn btn-warning btnEditarConfiguracion" idConfig="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarConfig"><i class="fa fa-pencil"></i></button>
 
 
                 </td>
@@ -66,7 +64,6 @@ $editarConfiguracion -> editarConfiguracion();
               </tbody>
               <tfoot>
                 <tr>
-                <th align="center">Id</th>
                 <th align="center">Nombre</th>
                 <th align="center">Valor</i></th>
                 <th align="center">Opciones <i class="fa fa-gears"></i></th>
@@ -89,7 +86,7 @@ $editarConfiguracion -> editarConfiguracion();
 MODAL EDITAR CATEGORÍA
 ======================================-->
 
-<div id="modalEditarCategoria" class="modal fade" role="dialog">
+<div id="modalEditarConfig" class="modal fade" role="dialog">
 
   <div class="modal-dialog">
 
@@ -105,7 +102,7 @@ MODAL EDITAR CATEGORÍA
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Editar categoría</h4>
+          <h4 class="modal-title">Editar configuración</h4>
 
         </div>
 
@@ -118,6 +115,18 @@ MODAL EDITAR CATEGORÍA
           <div class="box-body">
 
             <!-- ENTRADA PARA EL NOMBRE -->
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                <input type="text" class="form-control input-lg" name="nombreConfig" id="nombreConfig" required autocomplete="off" placeholder="Nombre de configuración">
+
+                 <input type="hidden"  name="id_configuracion" id="idConfiguracion" required>
+
+              </div>
+            </div>
 
             <div class="form-group">
 
@@ -125,12 +134,18 @@ MODAL EDITAR CATEGORÍA
 
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nombreCategoria" id="editarCategoria" required autocomplete="off">
-
-                 <input type="hidden"  name="idCategoria" id="idCategoria" required>
+                <input type="text" class="form-control input-lg" name="valorConfig" id="valorConfig" required autocomplete="off" placeholder="Valor de configuración">
 
               </div>
+            </div>
 
+            <div class="input-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="1" name="activaEditar" id="activaEditar">
+                  ¿Configuración activa?
+                </label>
+              </div>
             </div>
 
           </div>
@@ -145,7 +160,7 @@ MODAL EDITAR CATEGORÍA
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary" name="editarCategoria">Guardar cambios</button>
+          <button type="submit" class="btn btn-primary" name="editarConfiguracion">Guardar cambios</button>
 
         </div>
 

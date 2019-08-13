@@ -38,7 +38,6 @@ $editarAdicional = $new->editarAdicional();
 
               <thead>
               <tr>
-                <th align="center">id</th>
                 <th align="center">Nombre</th>
                 <th align="center">Tarifa</th>
                 <th align="center">Habilitado</th>
@@ -54,7 +53,6 @@ $editarAdicional = $new->editarAdicional();
               ?>
 
               <tr>
-                <td><?php echo $adicional['id'];?></td>
                 <td><?php echo $adicional['nombre'];?></td>
                 <td><?php echo '$ '.$adicional['tarifa'];?></td>
                 <td><?php if ($adicional['habilitado']==1) {
@@ -77,7 +75,6 @@ $editarAdicional = $new->editarAdicional();
               </tbody>
               <tfoot>
                 <tr>
-                  <th align="center">id</th>
                   <th align="center">Nombre</th>
                   <th align="center">Tarifa</th>
                   <th align="center">Habilitado</th>
@@ -137,7 +134,7 @@ MODAL EDITAR ADICIONAL
 
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nombreAdicional" id="nombreAdicional" required autocomplete="off" placeholder="Ingrese el nombre...">
+                <input type="text" class="form-control input-lg" name="nombreAdicional" id="nombreAdicional" required autocomplete="off" placeholder="Nombre de adicional">
 
                  <input type="hidden"  name="idAdicional" id="idAdicional" required>
 
@@ -146,7 +143,7 @@ MODAL EDITAR ADICIONAL
 
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                <input type="number" class="form-control" id="tarifaAdicional" name="tarifaAdicional" step="0.01" autocomplete="off" placeholder="Ingrese la tarifa..." required>
+                <input type="number" class="form-control" id="tarifaAdicional" name="tarifaAdicional" step="0.01" autocomplete="off" placeholder="Tarifa de adicional" required>
 
               </div>
 

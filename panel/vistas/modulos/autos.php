@@ -1,11 +1,10 @@
 <?php
 date_default_timezone_set('America/Argentina/Buenos_Aires');
-$new = new ControladorReservas();
-$categorias = $new->listarCategorias();
-
-$editarCategoria = new ControladorReservas();
-$editarCategoria -> editarCategoria();
-
+$new = new ControladorConfiguraciones();
+$new2 = new ControladorCategorias();
+$autos = $new->listarAutos();
+$categorias = $new2->listarCategorias();
+$editar = $new->editarAuto();
 
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -33,8 +32,12 @@ $editarCategoria -> editarCategoria();
 
               <thead>
               <tr>
-                <th align="center">Id</th>
+                <th align="center">Marca</th>
+                <th align="center">Modelo</th>
                 <th align="center">Categoria</th>
+                <th align="center">Patente</th>
+                <th align="center">Estado</th>
+                <th align="center">Habilitado Chile</th>
                 <th align="center">Opciones <i class="fa fa-gears"></i></th>
               </tr>
               </thead>
@@ -42,16 +45,30 @@ $editarCategoria -> editarCategoria();
 
               <?php
 
-              foreach ($categorias as $value) {
+              foreach ($autos as $auto) {
 
               ?>
 
               <tr>
-                <td><?php echo $value['id_categoria'];?></td>
-                <td width="50%"><?php echo $value['categoria'];?></td>
-                <td width="50%" align="center">
+                <td><?php echo $auto['marca'];?></td>
+                <td><?php echo $auto['modelo'];?></td>
+                <td><?php echo $auto['nombre'];?></td>
+                <td><?php echo $auto['patente'];?></td>
+                <td><?php if ($auto['estado']==1) {
+                  echo "<span class='label label-success'>Activo</span>";
+                }else{
+                  echo "<span class='label label-danger'>Inactivo</span>";
+                };?></td>
+                <td><?php if ($auto['viaja_chile']==1) {
+                  echo "<span class='label label-success'>Si</span>";
+                }else{
+                  echo "<span class='label label-danger'>No</span>";
+                };?></td>
+                
+              
+                <td align="left">
 
-                  <button class="btn btn-warning btnEditarCategoria" idCategoria="<?php echo $value['id_categoria']; ?>" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>
+                  <button class="btn btn-warning btnEditarAuto" idAuto="<?php echo $auto['id']; ?>" data-toggle="modal" data-target="#modalEditarAuto"><i class="fa fa-pencil"></i></button>
 
 
                 </td>
@@ -64,10 +81,14 @@ $editarCategoria -> editarCategoria();
               </tbody>
               <tfoot>
                 <tr>
-                  <th align="center">Id</th>
+                  <th align="center">Marca</th>
+                  <th align="center">Modelo</th>
                   <th align="center">Categoria</th>
+                  <th align="center">Patente</th>
+                  <th align="center">Estado</th>
+                  <th align="center">Habilitado Chile</th>
                   <th align="center">Opciones <i class="fa fa-gears"></i></th>
-              </tr>
+                </tr>
               </tfoot>
             </table>
           </div>
@@ -83,10 +104,10 @@ $editarCategoria -> editarCategoria();
 </div>
 
 <!--=====================================
-MODAL EDITAR CATEGORÍA
+MODAL EDITAR AUTO
 ======================================-->
 
-<div id="modalEditarCategoria" class="modal fade" role="dialog">
+<div id="modalEditarAuto" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
 
   <div class="modal-dialog">
 
@@ -100,9 +121,9 @@ MODAL EDITAR CATEGORÍA
 
         <div class="modal-header" style="background:#3c8dbc; color:white">
 
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <a href="categorias"><button type="button" class="close" data-dismiss="">&times;</button></a>
 
-          <h4 class="modal-title">Editar categoría</h4>
+          <h4 class="modal-title">Editar Auto</h4>
 
         </div>
 
@@ -117,17 +138,65 @@ MODAL EDITAR CATEGORÍA
             <!-- ENTRADA PARA EL NOMBRE -->
 
             <div class="form-group">
-
+              <label for="categoria">Marca</label>
               <div class="input-group">
 
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nombreCategoria" id="editarCategoria" required autocomplete="off">
+                <input type="text" class="form-control input-lg" name="marca" id="marcaAuto" required autocomplete="off" placeholder="Nombre de marca">
 
-                 <input type="hidden"  name="idCategoria" id="idCategoria" required>
+                 <input type="hidden"  name="id_auto" id="idAuto" required>
+
+              </div>  
+
+            </div>
+
+            <div class="form-group">
+              <label for="categoria">Modelo</label>
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                <input type="text" class="form-control input-lg" name="modelo" id="modeloAuto" required autocomplete="off" placeholder="Nombre de modelo">
 
               </div>
 
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <select class="form-control" id="select_categoria" name="categoria" style="width: 100%;">
+                  <?php foreach ($categorias as $categoria) {?>
+                    <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+
+            <div class="form-group">
+              <label for="categoria">Patente</label>
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                <input type="text" class="form-control input-lg" name="patente" id="patente" autocomplete="off" placeholder="Ingrese la patente">
+
+              </div>
+
+            </div>
+
+            <div class="input-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="1" name="habilitado" id="habilitado">
+                  ¿Auto habilitado?
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="1" name="habilitado_chile" id="habilitadoChile">
+                  ¿Habilitado Chile?
+                </label>
+              </div>
             </div>
 
           </div>
@@ -140,9 +209,8 @@ MODAL EDITAR CATEGORÍA
 
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
-
-          <button type="submit" class="btn btn-primary" name="editarCategoria">Guardar cambios</button>
+          <a href="autos"><button type="button" class="btn btn-default pull-left" data-dismiss="">Salir</button></a>
+          <button type="submit" class="btn btn-primary" name="editarAuto">Guardar cambios</button>
 
         </div>
 

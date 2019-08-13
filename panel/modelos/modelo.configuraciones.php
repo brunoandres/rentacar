@@ -59,12 +59,35 @@ class ModeloConfiguraciones{
 	    mysqli_close( $link );
 	}
 
+  static public function listarTemporadasDetalle($id){
+
+      $temporada = array();
+      $link = Conexion::ConectarMysql();
+      
+      $query = "select * from temporadas where id = $id";
+      $sql = mysqli_query($link,$query);
+      
+     
+      while ($filas = mysqli_fetch_array($sql)) {
+          $temporada['nombre']=$filas['nombre'];
+          $temporada['fecha_desde']=$filas['fecha_desde'];
+          $temporada['fecha_hasta']=$filas['fecha_hasta'];
+          $temporada['activa']=$filas['activa'];
+          $temporada['observaciones']=$filas['observaciones'];
+        
+      }
+
+      return $temporada;
+      // Cerrar la conexión.
+      mysqli_close( $link );
+  }
+
   static public function listarAdicionales($id){
 
     $link = Conexion::ConectarMysql();
     $adicionales = array();
 
-    //el id puede venir vacio, asi retorno todas las categorias
+    //el id puede venir vacio, asi retorno todas los adicionales
     if ($id == null) {
       $query = "select * from adicionales order by nombre asc";
       $sql = mysqli_query($link,$query);
@@ -85,6 +108,33 @@ class ModeloConfiguraciones{
     // Cerrar la conexión.
     mysqli_close( $link );
 	}
+
+  static public function listarAutos($id){
+
+    $link = Conexion::ConectarMysql();
+    $autos = array();
+
+    //el id puede venir vacio, asi retorno todas los adicionales
+    if ($id == null) {
+      $query = "select a.*,b.nombre from autos a,categorias b where a.id_categoria=b.id order by a.marca asc";
+      $sql = mysqli_query($link,$query);
+      while ($filas = mysqli_fetch_array($sql)) {
+        $autos[]=$filas;
+      }
+      return $autos;
+    }else{
+      $query = "select * from autos where id = $id";
+      $sql = mysqli_query($link,$query);
+
+      while ($filas = mysqli_fetch_array($sql)) {
+        $autos[]=$filas;
+      }
+      return $autos;
+    }
+
+    // Cerrar la conexión.
+    mysqli_close( $link );
+  }
 
   static public function listarTarifas($id=null){
 
@@ -116,6 +166,19 @@ class ModeloConfiguraciones{
   //// Metodos para guardar///////////////
   ////////////////////////////////////////
 
+  static public function guardarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile){
+
+    $link = Conexion::ConectarMysql();
+    $query = "INSERT INTO `autos`(`id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`) VALUES ($categoria,'$marca','$modelo','$patente',$habilitado,$habilitado_chile)";
+    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+    if ($sql) {
+      return "ok";
+    }else{
+      return $sql;
+    }
+    // Cerrar la conexión.
+    mysqli_close( $link );
+  }
 
   static public function guardarConfiguracion($nombre,$valor,$activa){
 
@@ -130,6 +193,34 @@ class ModeloConfiguraciones{
     // Cerrar la conexión.
     mysqli_close( $link );
 	}
+
+  static public function editarConfiguracion($nombre,$valor,$activa,$id_configuracion){
+
+    $link = Conexion::ConectarMysql();
+    $query = "INSERT INTO `UPDATE `configuraciones` SET `nombre`='$nombre',`valor`='$valor',`activa`=$activa WHERE id = $id_configuracion";
+    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+    if ($sql) {
+      return "ok";
+    }else{
+      return $sql;
+    }
+    // Cerrar la conexión.
+    mysqli_close( $link );
+  }
+
+  static public function editarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$id_auto){
+
+    $link = Conexion::ConectarMysql();
+    $query = "UPDATE `autos` SET `id_categoria`=$categoria,`marca`='$marca',`modelo`='$modelo',`patente`='$patente',`estado`=$habilitado,`viaja_chile`=$habilitado_chile WHERE id = $id_auto";
+    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+    if ($sql) {
+      return "ok";
+    }else{
+      return $sql;
+    }
+    // Cerrar la conexión.
+    mysqli_close( $link );
+  }
 
   static public function guardarAdicional($nombre,$tarifa,$activo){
 
@@ -173,14 +264,14 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
   }
 
-  static public function guardarTempo($fecha_desde,$fecha_hasta,$activa,$detalle){
+  static public function guardarTempo($nombre,$fecha_desde,$fecha_hasta,$activa,$detalle){
 
     $link = Conexion::ConectarMysql();
 
     //convierto fechas
     $fecha_desde_db = convertirFecha($fecha_desde);
     $fecha_hasta_db = convertirFecha($fecha_hasta);
-    $query = "INSERT INTO `temporadas`(`fecha_desde`, `fecha_hasta`, `activa`, `detalle`) VALUES ('$fecha_desde_db','$fecha_hasta_db',$activa,'$detalle')";
+    $query = "INSERT INTO `temporadas`(`nombre`,`fecha_desde`, `fecha_hasta`, `activa`, `detalle`) VALUES ('$nombre','$fecha_desde_db','$fecha_hasta_db',$activa,'$detalle')";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
     if ($sql) {
       return "ok";

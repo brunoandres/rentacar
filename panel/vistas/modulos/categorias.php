@@ -31,7 +31,7 @@ $editarCategoria = $new-> editarCategoria();
               <tr>
                 <th align="center">Categoria</th>
                 <th align="center">Estado</th>
-                <th align="center">Permite promociones</th>
+                <th align="center">Promociones</th>
                 <th align="center">Opciones <i class="fa fa-gears"></i></th>
               </tr>
               </thead>
@@ -129,7 +129,7 @@ MODAL EDITAR CATEGORÍA
 
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nombreEditar" id="nombreEditar" required autocomplete="off">
+                <input type="text" class="form-control input-lg" name="nombreEditar" id="nombreEditar" required autocomplete="off" placeholder="Nombre de categoria">
 
                  <input type="hidden"  name="idCategoria" id="idCategoria" required>
 

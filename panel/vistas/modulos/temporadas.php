@@ -36,6 +36,7 @@ $date = date('d/m/Y H:i:s');
 
               <thead>
               <tr>
+                <th align="center">Nombre</th>
                 <th align="center">Fecha desde</th>
                 <th align="center">Fecha hasta</th>
                 <th align="center">Estado</th>
@@ -52,6 +53,7 @@ $date = date('d/m/Y H:i:s');
               ?>
 
               <tr>
+                <td><?php echo $temp['nombre'];?></td>
                 <td><?php echo fechaCastellano($temp['fecha_desde']);?></td>
                 <td><?php echo fechaCastellano($temp['fecha_hasta']);?></td>
                 <td><?php if ($temp['activa']==1) {
@@ -59,11 +61,10 @@ $date = date('d/m/Y H:i:s');
                 }else{
                   echo "<span class='label label-danger'>Inactiva</span>";
                 };?></td>
-                <td><?php echo $temp['detalle'];?></td>
+                <td><?php echo $temp['observaciones'];?></td>
                 <td align="center">
 
-                  <button class="btn btn-warning btnEditarCategoria" idCategoria="<?php echo $temp['id']; ?>" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>
-
+                  <a href="index.php?ruta=editar-temporada&id=<?php echo $temp['id']; ?>"> <button type="button" class="btn btn-warning">Editar</button> </a>
 
                 </td>
 
@@ -75,10 +76,11 @@ $date = date('d/m/Y H:i:s');
               </tbody>
               <tfoot>
                 <tr>
+                  <th align="center" width="20%">Nombre</th>
                   <th align="center">Fecha desde</th>
                   <th align="center">Fecha hasta</th>
                   <th align="center">Estado</th>
-                  <th align="center">Detalle</th>
+                  <th align="center" width="40%">Detalle</th>
                   <th align="center"><i class="fa fa-gears"></i></th>
               </tr>
               </tfoot>
@@ -93,78 +95,4 @@ $date = date('d/m/Y H:i:s');
     <!-- /.row -->
   </section>
   <!-- /.content -->
-</div>
-
-<!--=====================================
-MODAL EDITAR CATEGORÍA
-======================================-->
-
-<div id="modalEditarCategoria" class="modal fade" role="dialog">
-
-  <div class="modal-dialog">
-
-    <div class="modal-content">
-
-      <form role="form" method="post">
-
-        <!--=====================================
-        CABEZA DEL MODAL
-        ======================================-->
-
-        <div class="modal-header" style="background:#3c8dbc; color:white">
-
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-          <h4 class="modal-title">Editar categoría</h4>
-
-        </div>
-
-        <!--=====================================
-        CUERPO DEL MODAL
-        ======================================-->
-
-        <div class="modal-body">
-
-          <div class="box-body">
-
-            <!-- ENTRADA PARA EL NOMBRE -->
-
-            <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-th"></i></span>
-
-                <input type="text" class="form-control input-lg" name="nombreCategoria" id="editarCategoria" required autocomplete="off">
-
-                 <input type="hidden"  name="idCategoria" id="idCategoria" required>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <!--=====================================
-        PIE DEL MODAL
-        ======================================-->
-
-        <div class="modal-footer">
-
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
-
-          <button type="submit" class="btn btn-primary" name="editarCategoria">Guardar cambios</button>
-
-        </div>
-
-
-
-      </form>
-
-    </div>
-
-  </div>
-
 </div>
