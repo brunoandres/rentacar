@@ -176,6 +176,7 @@ class ModeloConfiguraciones{
     $link = Conexion::ConectarMysql();
     $query = "INSERT INTO `autos`(`id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`) VALUES ($categoria,'$marca','$modelo','$patente',$habilitado,$habilitado_chile)";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+    auditar($_SESSION["id_user"],$query);
     if ($sql) {
       return "ok";
     }else{
