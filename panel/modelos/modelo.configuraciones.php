@@ -34,12 +34,17 @@ class ModeloConfiguraciones{
 
   }
 
-  static public function listarTemporadas($id=null){
+  static public function listarTemporadas($id=null,$estado=null){
 
       $link = Conexion::ConectarMysql();
       $temporadas = array();
       if ($id == null) {
-        $query = "select * from temporadas";
+
+        if ($estado == null) {
+          $query = "select * from temporadas";
+        }else{
+          $query = "select * from temporadas where activa = 1";
+        }    
         $sql = mysqli_query($link,$query);
         while ($filas = mysqli_fetch_array($sql)) {
           $temporadas[]=$filas;
@@ -141,7 +146,7 @@ class ModeloConfiguraciones{
     $link = Conexion::ConectarMysql();
     $tarifas = array();
     if ($id == null) {
-      $query = "SELECT a.id,a.por_dia,a.por_semana,a.activa,b.id as id_temporada,b.fecha_desde,b.fecha_hasta,c.id as id_categoria,c.nombre from tarifas a, temporadas b,categorias c where a.id_temporada=b.id and a.id_categoria=c.id order by c.nombre asc";
+      $query = "SELECT a.id,a.por_dia,a.por_semana,a.activa,b.nombre as temporada,b.id as id_temporada,b.fecha_desde,b.fecha_hasta,c.id as id_categoria,c.nombre from tarifas a, temporadas b,categorias c where a.id_temporada=b.id and a.id_categoria=c.id order by c.nombre asc";
 	    $sql = mysqli_query($link,$query);
 	    while ($filas = mysqli_fetch_assoc($sql)) {
 	       $tarifas[] = $filas;
@@ -197,7 +202,21 @@ class ModeloConfiguraciones{
   static public function editarConfiguracion($nombre,$valor,$activa,$id_configuracion){
 
     $link = Conexion::ConectarMysql();
-    $query = "INSERT INTO `UPDATE `configuraciones` SET `nombre`='$nombre',`valor`='$valor',`activa`=$activa WHERE id = $id_configuracion";
+    $query = "UPDATE `configuraciones` SET `nombre`='$nombre',`valor`='$valor',`activa`=$activa WHERE id = $id_configuracion";
+    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+    if ($sql) {
+      return "ok";
+    }else{
+      return $sql;
+    }
+    // Cerrar la conexión.
+    mysqli_close( $link );
+  }
+
+  static public function editarTemporada($nombre,$fecha_desde,$fecha_hasta,$observaciones,$temporada_activa,$id_temporada){
+
+    $link = Conexion::ConectarMysql();
+    $query = "UPDATE `temporadas` SET `nombre`='$nombre',`fecha_desde`='$fecha_desde',`fecha_hasta`='$fecha_hasta',`activa`=$temporada_activa,`observaciones`='$observaciones' WHERE id = $id_temporada";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
     if ($sql) {
       return "ok";
@@ -264,14 +283,14 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
   }
 
-  static public function guardarTempo($nombre,$fecha_desde,$fecha_hasta,$activa,$detalle){
+  static public function guardarTempo($nombre,$fecha_desde,$fecha_hasta,$activa,$observaciones){
 
     $link = Conexion::ConectarMysql();
 
     //convierto fechas
     $fecha_desde_db = convertirFecha($fecha_desde);
     $fecha_hasta_db = convertirFecha($fecha_hasta);
-    $query = "INSERT INTO `temporadas`(`nombre`,`fecha_desde`, `fecha_hasta`, `activa`, `detalle`) VALUES ('$nombre','$fecha_desde_db','$fecha_hasta_db',$activa,'$detalle')";
+    $query = "INSERT INTO `temporadas`(`nombre`,`fecha_desde`, `fecha_hasta`, `activa`, `observaciones`) VALUES ('$nombre','$fecha_desde_db','$fecha_hasta_db',$activa,'$observaciones')";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
     if ($sql) {
       return "ok";

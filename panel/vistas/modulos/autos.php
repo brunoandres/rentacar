@@ -20,7 +20,6 @@ $editar = $new->editarAuto();
       <li class="active">Data tables</li>
     </ol>
   </section>
-
   <!-- Main content -->
   <section class="content">
     <div class="row">
@@ -29,14 +28,13 @@ $editar = $new->editarAuto();
           <!-- /.box-header -->
           <div class="box-body">
             <table id="categorias" class="table table-bordered table-striped tablas" style="width:100%">
-
               <thead>
               <tr>
                 <th align="center">Marca</th>
                 <th align="center">Modelo</th>
                 <th align="center">Categoria</th>
                 <th align="center">Patente</th>
-                <th align="center">Estado</th>
+                <th align="center">Habilitado</th>
                 <th align="center">Habilitado Chile</th>
                 <th align="center">Opciones <i class="fa fa-gears"></i></th>
               </tr>
@@ -85,7 +83,7 @@ $editar = $new->editarAuto();
                   <th align="center">Modelo</th>
                   <th align="center">Categoria</th>
                   <th align="center">Patente</th>
-                  <th align="center">Estado</th>
+                  <th align="center">Habilitado</th>
                   <th align="center">Habilitado Chile</th>
                   <th align="center">Opciones <i class="fa fa-gears"></i></th>
                 </tr>
@@ -178,7 +176,7 @@ MODAL EDITAR AUTO
 
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                <input type="text" class="form-control input-lg" name="patente" id="patente" autocomplete="off" placeholder="Ingrese la patente">
+                <input type="text" class="form-control input-lg" name="patente" id="patente" autocomplete="off" placeholder="Nº de patente: ABC123 - AD123AB">
 
               </div>
 

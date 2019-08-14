@@ -1,8 +1,19 @@
 <?php  
 
-$id_temporada = $_GET['id'];
-$new = new ControladorConfiguraciones();
-$temporada = $new->listarTemporadasDetalle($id_temporada);
+  $id_temporada = $_GET['id'];
+  $hash = $_GET['hash'];
+  $new = new ControladorConfiguraciones();
+
+  $temporada = $new->listarTemporadasDetalle($id_temporada);
+  $hashmd5 = md5($id_temporada);
+  
+  if ($hashmd5 != $hash or empty($temporada)) {
+    echo "<script>
+    window.location='temporadas';
+    </script>";
+  }
+
+  $new->editarTemporada();
 
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -51,6 +62,7 @@ $temporada = $new->listarTemporadasDetalle($id_temporada);
                         <i class="fa fa-calendar"></i>
                       </div>
                       <input type="text" class="form-control pull-right" name="nombre_temporada" required="" placeholder="Nombre de temporada" value="<?php echo $temporada['nombre']; ?>" autocomplete="off">
+                      <input type="hidden" name="id_temporada" value="<?php echo $id_temporada; ?>">
                     </div>
                     <!-- /.input group -->
                   </div>
@@ -84,7 +96,7 @@ $temporada = $new->listarTemporadasDetalle($id_temporada);
               </div>
               <div class="form-group">
                 <label>Observaciones</label>
-                <textarea class="form-control" rows="3" name="detalle" placeholder="Ingrese alguna observación adicional..."> <?php echo $temporada['observaciones']; ?> </textarea>
+                <textarea class="form-control" rows="3" name="observaciones" placeholder="Ingrese alguna observación adicional..."> <?php echo $temporada['observaciones']; ?> </textarea>
               </div>
               <div class="checkbox">
                 <label>
@@ -96,7 +108,8 @@ $temporada = $new->listarTemporadasDetalle($id_temporada);
             <!-- /.box-body -->
 
             <div class="box-footer">
-              <button type="submit" name="nuevaTemporada" class="btn btn-primary">Guardar</button>
+              <button type="submit" name="editarTemporada" class="btn btn-primary" OnClick="return confirm('¿Confirma guardar los cambios en la temporada?');">Guardar</button>
+              <a href="temporadas"> <button type="button" class="btn btn-default">Cancelar</button> </a>
             </div>
           </form>
         </div>
@@ -108,9 +121,3 @@ $temporada = $new->listarTemporadasDetalle($id_temporada);
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-<?php
-$new = new ControladorConfiguraciones();
-$new->nuevaTempo();
-
-?>

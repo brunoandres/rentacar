@@ -58,7 +58,7 @@ $editar = $new->editarTarifa();
                 <td><?php echo $value['nombre']; ?></td>
                 <td><?php echo '$ '.$value['por_dia']; ?></td>
                 <td><?php echo '$ '.$value['por_semana']; ?></td>
-                <td><?php echo mostrarFecha($value['fecha_desde'])." - ".mostrarFecha($value['fecha_hasta']); ?></td>
+                <td><?php echo $value['temporada'].' '.mostrarFecha($value['fecha_desde'])." - ".mostrarFecha($value['fecha_hasta']); ?></td>
                 <td>
                   <button class="btn btn-warning btnEditarTarifa" idCategoria="<?php echo $value['id_categoria']; ?>" idTarifa="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarTarifa"><i class="fa fa-pencil"></i></button>
                 </td>
@@ -131,10 +131,9 @@ MODAL EDITAR TARIFA
 
             <div class="form-group">
               <label>Temporada</label>
-              <select class="form-control" id="select_temporada" name="select_temporada" data-placeholder="Selecione una temporada..." style="width: 100%;">
-                      style="width: 100%;">
+              <select class="form-control" id="select_temporada" name="select_temporada" data-placeholder="Selecione una temporada..." style="width: 100%;" style="width: 100%;">
                       <?php foreach ($temporadas as $temporada) {?>
-                        <option value="<?php echo $temporada['id']; ?>"><?php echo $temporada['fecha_desde'].' - '.$temporada['fecha_hasta']; ?></option>
+                        <option value="<?php echo $temporada['id']; ?>"><?php echo $temporada['nombre'].' # '.date('d/m/Y', strtotime($temporada['fecha_desde'])).' - '.date('d/m/Y', strtotime($temporada['fecha_hasta'])); ?></option>
                       <?php } ?>
               </select>
               <input type="hidden"  name="id_tarifa" id="idTarifa" required>

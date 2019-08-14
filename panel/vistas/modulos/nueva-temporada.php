@@ -1,3 +1,7 @@
+<?php  
+$new = new ControladorConfiguraciones();
+$new->nuevaTempo();
+?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -74,8 +78,8 @@
                 </div>
               </div>
               <div class="form-group">
-                <label>Detalles</label>
-                <textarea class="form-control" rows="3" name="detalle" placeholder="Ingrese alguna observación adicional..."></textarea>
+                <label>Observaciones</label>
+                <textarea class="form-control" rows="3" name="observaciones" placeholder="Ingrese alguna observación adicional..."></textarea>
               </div>
               <div class="checkbox">
                 <label>
@@ -88,6 +92,7 @@
 
             <div class="box-footer">
               <button type="submit" name="nuevaTemporada" class="btn btn-primary">Guardar</button>
+              <a href="temporadas"> <button type="button" class="btn btn-default">Cancelar</button> </a>
             </div>
           </form>
         </div>
@@ -99,9 +104,3 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-<?php
-$new = new ControladorConfiguraciones();
-$new->nuevaTempo();
-
-?>

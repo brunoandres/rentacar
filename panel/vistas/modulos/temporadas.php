@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
-$temporadas = $new->listarTemporadas();
+$temporadas = $new->listarTemporadas(null,null);
 $date = date('d/m/Y H:i:s');
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -61,10 +61,11 @@ $date = date('d/m/Y H:i:s');
                 }else{
                   echo "<span class='label label-danger'>Inactiva</span>";
                 };?></td>
-                <td><?php echo $temp['observaciones'];?></td>
+        
+                <td width="30%"><?php echo $temp['observaciones'];?></td>
                 <td align="center">
 
-                  <a href="index.php?ruta=editar-temporada&id=<?php echo $temp['id']; ?>"> <button type="button" class="btn btn-warning">Editar</button> </a>
+                  <a href="index.php?ruta=editar-temporada&id=<?php echo $temp['id']; ?>&hash=<?php echo md5($temp['id']); ?>"> <button type="button" class="btn btn-warning">Editar</button> </a>
 
                 </td>
 
@@ -76,13 +77,13 @@ $date = date('d/m/Y H:i:s');
               </tbody>
               <tfoot>
                 <tr>
-                  <th align="center" width="20%">Nombre</th>
+                  <th align="center">Nombre</th>
                   <th align="center">Fecha desde</th>
                   <th align="center">Fecha hasta</th>
                   <th align="center">Estado</th>
-                  <th align="center" width="40%">Detalle</th>
+                  <th align="center">Detalle</th>
                   <th align="center"><i class="fa fa-gears"></i></th>
-              </tr>
+                </tr>
               </tfoot>
             </table>
           </div>

@@ -27,9 +27,9 @@ class ControladorConfiguraciones{
 	}
 
   //Metodo para listar las temporadas
-  static public function listarTemporadas($id=null){
+  static public function listarTemporadas($id=null,$estado=null){
 
-		$temporadas = ModeloConfiguraciones::listarTemporadas($id);
+		$temporadas = ModeloConfiguraciones::listarTemporadas($id,$estado);
 		return $temporadas;
 
 	}
@@ -57,7 +57,7 @@ class ControladorConfiguraciones{
       $marca = $_POST['marca'];
       $modelo = $_POST['modelo'];
       $categoria = $_POST['categoria'];
-      $patente = $_POST['patente'];
+      $patente = strtoupper($_POST['patente']);
 
       if (empty($_POST['checkHabilitado'])) {
         $habilitado = 0;
@@ -116,7 +116,7 @@ class ControladorConfiguraciones{
       $marca = $_POST['marca'];
       $modelo = $_POST['modelo'];
       $categoria = $_POST['categoria'];
-      $patente = $_POST['patente'];
+      $patente = strtoupper($_POST['patente']);
       $id_auto = $_POST['id_auto'];
       if (empty($_POST['habilitado'])) {
         $habilitado = 0;
@@ -379,9 +379,9 @@ class ControladorConfiguraciones{
 		      }else{
 		        $temporada_activa = 1;
 		      }
-		      $detalle = $_POST['detalle'];
+		      $observaciones = $_POST['observaciones'];
 
-		      $respuesta = ModeloConfiguraciones::guardarTempo($nombre,$fecha_desde,$fecha_hasta,$temporada_activa,$detalle);
+		      $respuesta = ModeloConfiguraciones::guardarTempo($nombre,$fecha_desde,$fecha_hasta,$temporada_activa,$observaciones);
 
 		      if ($respuesta=="ok") {
 		        echo'<script>
@@ -405,7 +405,7 @@ class ControladorConfiguraciones{
 
 						swal({
 								type: "danger",
-								title: "Error al guardar, revise los datos ingresados $respuesta",
+								title: "Error al guardar, revise los datos ingresados ",
 								showConfirmButton: true,
 								confirmButtonText: "Cerrar"
 								}).then(function(result){})
@@ -415,6 +415,58 @@ class ControladorConfiguraciones{
 
 			}
   	}
+
+  	static public function editarTemporada(){
+
+    if (isset($_POST['editarTemporada'])) {
+
+      $nombre = $_POST['nombre_temporada'];
+      $fecha_desde = $_POST['fecha_desde'];
+      $fecha_hasta = $_POST['fecha_hasta'];
+      if (empty($_POST['check'])) {
+        	$temporada_activa = 0;
+      }else{
+        	$temporada_activa = 1;
+      }
+      $observaciones = $_POST['observaciones'];
+
+      $id_temporada = $_POST['id_temporada'];
+
+      $respuesta = ModeloConfiguraciones::editarTemporada($nombre,$fecha_desde,$fecha_hasta,$observaciones,$temporada_activa,$id_temporada);
+
+      if ($respuesta=="ok") {
+        echo'<script>
+
+				swal({
+						type: "success",
+						title: "Temporada editada correctamente",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){
+								if (result.value) {
+
+								window.location = "temporadas";
+
+								}
+							})
+
+				</script>';
+      } else {
+        echo'<script>
+
+				swal({
+						type: "danger",
+						title: "Error al editar temporada.",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){})
+
+				</script>';
+      }
+
+    }
+
+  }
 
   static public function nuevoAdicional(){
 

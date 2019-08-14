@@ -18,6 +18,13 @@ $nuevo = $new2->nuevoAuto();
     </ol>
   </section>
 
+  <div class="pad margin no-print">
+    <div class="callout callout-info" style="margin-bottom: 0!important;">
+      <h4><i class="fa fa-info"></i> A tener en cuenta:</h4>
+      Formulario de carga de autos, seleccionando la categoria correspondiente, importante ingresar la patente, si está habilitado para circular por Argentina y si está habilitado a salir al exterior.
+    </div>
+  </div>
+
   <!-- Main content -->
   <section class="content">
     <div class="row">
@@ -35,11 +42,11 @@ $nuevo = $new2->nuevoAuto();
             <div class="box-body">
               <div class="form-group">
                 <label for="categoria">Marca</label>
-                <input type="text" class="form-control" id="marca" name="marca" placeholder="Ingrese la marca..." autocomplete="off" required>
+                <input type="text" class="form-control" id="marca" name="marca" placeholder="Nombre de marca" autocomplete="off" required>
               </div>
               <div class="form-group">
                 <label for="categoria">Modelo</label>
-                <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Ingrese el modelo..." autocomplete="off" required>
+                <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Nombre del modelo" autocomplete="off" required>
               </div>
               <div class="form-group">
                 <label for="categoria">Categoria</label>
@@ -51,7 +58,7 @@ $nuevo = $new2->nuevoAuto();
               </div>
               <div class="form-group">
                 <label for="categoria">Patente</label>
-                <input type="text" class="form-control" id="patente" name="patente" autocomplete="off" placeholder="Ingrese la patente..." required>
+                <input type="text" class="form-control" id="patente" name="patente" autocomplete="off" placeholder="Nº de patente: ABC123 - AD123AB" required>
               </div>
               <div class="checkbox">
                 <label>

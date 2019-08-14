@@ -2,7 +2,7 @@
 $new = new ControladorCategorias();
 $new2 = new ControladorConfiguraciones();
 $categorias=$new->listarCategorias();
-$temporadas=$new2->listarTemporadas();
+$temporadas=$new2->listarTemporadas(null,1);
 $new2->nuevaTarifa();
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -22,7 +22,7 @@ $new2->nuevaTarifa();
   <div class="pad margin no-print">
     <div class="callout callout-info" style="margin-bottom: 0!important;">
       <h4><i class="fa fa-info"></i> Tarifas:</h4>
-      <p class="h4">En el siguiente formulario se podran cargar nuevas tarifas, seleccionando una categoria y definiendo a que temporada (cargada previamente) corresponden los nuevos valores.</p>
+      <p class="h4">En el siguiente formulario se podran cargar nuevas tarifas, seleccionando una categoria y definiendo a que temporada (cargada previamente y que esté en estado activa) corresponden los nuevos valores.</p>
     </div>
   </div>
 
@@ -38,20 +38,24 @@ $new2->nuevaTarifa();
             <div class="box-body">
               <div class="form-group">
                 <label>Categoria</label>
-                <select class="form-control" id="select" name="select_categoria" data-placeholder="Seleccione una categoria..."
-                        style="width: 100%;">
-                        <?php foreach ($categorias as $categoria) {?>
-                          <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
-                        <?php } ?>
+                <select class="form-control" id="select" name="select_categoria" data-placeholder="Seleccione una categoria..." style="width: 100%;">
+                  <?php foreach ($categorias as $categoria) {?>
+                    <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
+                  <?php } ?>
                 </select>
               </div>
               <div class="form-group">
-                <label>Temporada</label>
-                <select class="form-control" style="width: 100%;" name="select_temporada" data-placeholder="Selecione una temporada...">
-                        style="width: 100%;">
-                        <?php foreach ($temporadas as $temporada) {?>
-                          <option value="<?php echo $temporada['id']; ?>"><?php echo $temporada['fecha_desde'].' - '.$temporada['fecha_hasta']; ?></option>
-                        <?php } ?>
+                
+                <label>Temporadas activas</label>
+                <?php if (empty($temporadas)) {
+                  echo '<div class="alert alert-danger" role="alert">
+                    No tiene temporadas activas! ir a <a href="temporadas">Temporadas.</a>
+                  </div>';
+                } ?>
+                <select class="form-control" style="width: 100%;" name="select_temporada" data-placeholder="Selecione una temporada..." required="">
+                    <?php foreach ($temporadas as $temporada) {?>
+                      <option value="<?php echo $temporada['id']; ?>"><?php echo $temporada['nombre'].' # '.date('d/m/Y', strtotime($temporada['fecha_desde'])).' al '.date('d/m/Y', strtotime($temporada['fecha_hasta'])); ?></option>
+                    <?php } ?>
                 </select>
 
 
