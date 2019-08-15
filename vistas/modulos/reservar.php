@@ -3,7 +3,7 @@
 $new = new ControladorReservas();
 $newCat = new ControladorCategorias();
 $categorias = $newCat->listarCategorias();
-$data = $new->ingresarReserva();
+$data = $new->nuevaReserva();
 
 ?>
 
@@ -17,7 +17,7 @@ $data = $new->ingresarReserva();
       <div class="col-sm-6 col-sm-offset-3">
         <div id="sendmessage">Your message has been sent. Thank you!</div>
         <div id="errormessage"></div>
-        <form method="post" action="formulario?alert=3">
+        <form method="post">
           <div class="form-group">
             <label for="exampleInputPassword1">Categoria</label>
             <select class="form-control" name="categoria">
@@ -42,7 +42,7 @@ $data = $new->ingresarReserva();
             <label for="exampleInputPassword1">Hora hasta</label>
             <input type="text" id="single-input2" name="hora_hasta" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php echo "15:00"; ?>" readonly>
           </div>
-          <input type="submit" name="formFechas" value="Buscar disponibilidad" class="btn btn-success">
+          <input type="submit" name="buscarDisponibilidad" value="Buscar disponibilidad" class="btn btn-success">
         </form>
       </div>
     </div>

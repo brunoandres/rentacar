@@ -9,10 +9,10 @@ class ControladorCategorias{
 
 	}
 
-  static public function totalPorCategoria($id){
+  static public function totalPorCategoria($id=null,$habilitado=null,$habilitado_chile=null){
 
-		$totalAuto = ModeloCategorias::totalAutos($id);
-		return $totalAuto;
+		$total = ModeloCategorias::autosPorCategoria($id,$habilitado,$habilitado_chile);
+		return $total;
 
 	}
 

@@ -1,3 +1,10 @@
+<?php  
+if (empty($_GET['ruta'])) {
+  $_GET['ruta'] = null;
+  header("location: inicio");
+}
+?>
+
 <header id="header">
   <nav class="navbar navbar-fixed-top" role="banner">
     <div class="container">

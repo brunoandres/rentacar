@@ -1,6 +1,7 @@
 <?php
 
 require_once 'modelo.conexion.php';
+require_once 'modelo.funciones.php';
 require_once 'funciones.php';
 
 
@@ -176,8 +177,9 @@ class ModeloConfiguraciones{
     $link = Conexion::ConectarMysql();
     $query = "INSERT INTO `autos`(`id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`) VALUES ($categoria,'$marca','$modelo','$patente',$habilitado,$habilitado_chile)";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
-    auditar($_SESSION["id_user"],$query);
+    
     if ($sql) {
+      auditar($_SESSION["id_user"],$query);
       return "ok";
     }else{
       return $sql;
@@ -192,6 +194,7 @@ class ModeloConfiguraciones{
     $query = "INSERT INTO `configuraciones`(`nombre`, `valor`,`activa`) VALUES ('$nombre','$valor',$activa)";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
     if ($sql) {
+      auditar($_SESSION["id_user"],$query);
       return "ok";
     }else{
       return $sql;
@@ -200,54 +203,13 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
 	}
 
-  static public function editarConfiguracion($nombre,$valor,$activa,$id_configuracion){
-
-    $link = Conexion::ConectarMysql();
-    $query = "UPDATE `configuraciones` SET `nombre`='$nombre',`valor`='$valor',`activa`=$activa WHERE id = $id_configuracion";
-    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
-    if ($sql) {
-      return "ok";
-    }else{
-      return $sql;
-    }
-    // Cerrar la conexión.
-    mysqli_close( $link );
-  }
-
-  static public function editarTemporada($nombre,$fecha_desde,$fecha_hasta,$observaciones,$temporada_activa,$id_temporada){
-
-    $link = Conexion::ConectarMysql();
-    $query = "UPDATE `temporadas` SET `nombre`='$nombre',`fecha_desde`='$fecha_desde',`fecha_hasta`='$fecha_hasta',`activa`=$temporada_activa,`observaciones`='$observaciones' WHERE id = $id_temporada";
-    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
-    if ($sql) {
-      return "ok";
-    }else{
-      return $sql;
-    }
-    // Cerrar la conexión.
-    mysqli_close( $link );
-  }
-
-  static public function editarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$id_auto){
-
-    $link = Conexion::ConectarMysql();
-    $query = "UPDATE `autos` SET `id_categoria`=$categoria,`marca`='$marca',`modelo`='$modelo',`patente`='$patente',`estado`=$habilitado,`viaja_chile`=$habilitado_chile WHERE id = $id_auto";
-    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
-    if ($sql) {
-      return "ok";
-    }else{
-      return $sql;
-    }
-    // Cerrar la conexión.
-    mysqli_close( $link );
-  }
-
   static public function guardarAdicional($nombre,$tarifa,$activo){
 
     $link = Conexion::ConectarMysql();
     $query = "INSERT INTO `adicionales`(`nombre`, `tarifa`, `habilitado`) VALUES ('$nombre','$tarifa',$activo)";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
     if ($sql) {
+      auditar($_SESSION["id_user"],$query);
       return "ok";
     }else{
       return $sql;
@@ -262,6 +224,7 @@ class ModeloConfiguraciones{
     $query = "INSERT INTO `tarifas`(`por_dia`, `por_semana`, `id_temporada`, `id_categoria`, `activa`) VALUES ('$valor_diario','$valor_semanal',$temporada,$categoria,$tarifa_actual)";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
     if ($sql) {
+      auditar($_SESSION["id_user"],$query);
       return "ok";
     }else{
       return $sql;
@@ -270,19 +233,7 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
 	}
 
-  static public function editarTarifa($categoria,$temporada,$valor_diario,$valor_semanal,$tarifa_actual,$id_tarifa){
-
-    $link = Conexion::ConectarMysql();
-    $query = "UPDATE `tarifas` SET `por_dia`='$valor_diario',`por_semana`='$valor_semanal',`id_temporada`=$temporada,`id_categoria`=$categoria,`activa`=$tarifa_actual WHERE id = $id_tarifa";
-    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
-    if ($sql) {
-      return "ok";
-    }else{
-      return $sql;
-    }
-    // Cerrar la conexión.
-    mysqli_close( $link );
-  }
+  
 
   static public function guardarTempo($nombre,$fecha_desde,$fecha_hasta,$activa,$observaciones){
 
@@ -294,6 +245,7 @@ class ModeloConfiguraciones{
     $query = "INSERT INTO `temporadas`(`nombre`,`fecha_desde`, `fecha_hasta`, `activa`, `observaciones`) VALUES ('$nombre','$fecha_desde_db','$fecha_hasta_db',$activa,'$observaciones')";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
     if ($sql) {
+      auditar($_SESSION["id_user"],$query);
       return "ok";
     }else{
       return $sql;
@@ -312,12 +264,74 @@ class ModeloConfiguraciones{
 		$query = "UPDATE `adicionales` SET `nombre`='$nombre',`tarifa`='$tarifa',`habilitado`=$activo WHERE id = $id";
 		$sql = mysqli_query($link,$query);
 		if ($sql) {
+      auditar($_SESSION["id_user"],$query);
 			return "ok";
 		}else{
 			return "error";
 		}
 		mysqli_close($link);
 	}
+
+  static public function editarTarifa($categoria,$temporada,$valor_diario,$valor_semanal,$tarifa_actual,$id_tarifa){
+
+    $link = Conexion::ConectarMysql();
+    $query = "UPDATE `tarifas` SET `por_dia`='$valor_diario',`por_semana`='$valor_semanal',`id_temporada`=$temporada,`id_categoria`=$categoria,`activa`=$tarifa_actual WHERE id = $id_tarifa";
+    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+    if ($sql) {
+      auditar($_SESSION["id_user"],$query);
+      return "ok";
+    }else{
+      return $sql;
+    }
+    // Cerrar la conexión.
+    mysqli_close( $link );
+  }
+
+  static public function editarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$id_auto){
+
+    $link = Conexion::ConectarMysql();
+    $query = "UPDATE `autos` SET `id_categoria`=$categoria,`marca`='$marca',`modelo`='$modelo',`patente`='$patente',`estado`=$habilitado,`viaja_chile`=$habilitado_chile WHERE id = $id_auto";
+    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+    auditar($_SESSION["id_user"],$query);
+    if ($sql) {
+      return "ok";
+    }else{
+      return $sql;
+    }
+    // Cerrar la conexión.
+    mysqli_close( $link );
+  }
+
+  static public function editarTemporada($nombre,$fecha_desde,$fecha_hasta,$observaciones,$temporada_activa,$id_temporada){
+
+    $link = Conexion::ConectarMysql();
+    $query = "UPDATE `temporadas` SET `nombre`='$nombre',`fecha_desde`='$fecha_desde',`fecha_hasta`='$fecha_hasta',`activa`=$temporada_activa,`observaciones`='$observaciones' WHERE id = $id_temporada";
+    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+    if ($sql) {
+      auditar($_SESSION["id_user"],$query);
+      return "ok";
+    }else{
+      return $sql;
+    }
+    // Cerrar la conexión.
+    mysqli_close( $link );
+  }
+
+  static public function editarConfiguracion($nombre,$valor,$activa,$id_configuracion){
+
+    $link = Conexion::ConectarMysql();
+    $query = "UPDATE `configuraciones` SET `nombre`='$nombre',`valor`='$valor',`activa`=$activa WHERE id = $id_configuracion";
+    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+
+    if ($sql) {
+      auditar($_SESSION["id_user"],$query);
+      return "ok";
+    }else{
+      return $sql;
+    }
+    // Cerrar la conexión.
+    mysqli_close( $link );
+  }
 
 
 }

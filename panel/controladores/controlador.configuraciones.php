@@ -10,6 +10,14 @@ class ControladorConfiguraciones{
 
 	}
 
+	//Metodo para listar los autos
+  static public function totalAutos($id=null){
+
+		$total = ModeloConfiguraciones::totalAutos($id);
+		return $total;
+
+	}
+
   //Metodo para listar las configuraciones del sistema
   static public function listarConfiguraciones($id=null){
 

@@ -19,6 +19,7 @@ class ModeloUsuarios{
         $users['pass']=$filas['pass'];
         $users['id_user']=$filas['id_usuario'];
         $users['iniciarSesion']='ok';
+        $_SESSION['id_user']  = $filas['id_usuario'];
 	    }
 	    return $users;
 	    // Cerrar la conexión.

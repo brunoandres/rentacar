@@ -46,6 +46,16 @@ class ModeloReservas
 
 	}
 
+	static function codigoReserva($longitud){
+
+		$key = '';
+	    $caracteres="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	    $max = strlen($caracteres)-1;
+	    for($i=0;$i < $longitud;$i++) $key .= $caracteres{mt_rand(0,$max)};
+	    return $key;
+
+	}
+
 	static function check_in_range($start_date, $end_date, $date_from_user){
 	  // COnvierto a timestamp
 	  $start_ts = strtotime($start_date);
@@ -56,13 +66,15 @@ class ModeloReservas
 	  return (($user_ts >= $start_ts) && ($user_ts <= $end_ts));
 	}
 
+
+	//Funcion principal para buscar disponibilidad entre fechas
 	static function buscarDisponibilidad($categoria,$fechaDesdeReserva,$fechaHastaReserva,$hora_desde,$hora_hasta){
 
 		//Instancio mi clase categorias para traer total de autos para cada una.
 		$new = new ModeloCategorias();
 
-		$link 			= Conexion::ConectarMysql();
-		$query 			= "select * from reservas where id_categoria = $categoria and estado = 1";
+		$link 		= Conexion::ConectarMysql();
+		$query 		= "select * from reservas where id_categoria = $categoria and estado = 1";
 		$resultado 	= mysqli_query($link,$query);
 
 		//retorno valor de buscarDisponibilidad (flag)
@@ -74,19 +86,19 @@ class ModeloReservas
 		//busco total de autos por categorias
 		switch ($categoria) {
 			case 1:
-				$contador = $new::totalAutos(1);
+				$contador = $new::autosPorCategoria(1);
 				break;
 			case 2:
-				$contador = $new::totalAutos(2);
+				$contador = $new::autosPorCategoria(2);
 				break;
 			case 3:
-				$contador = $new::totalAutos(3);
+				$contador = $new::autosPorCategoria(3);
 				break;
 			case 4:
-				$contador = $new::totalAutos(4);
+				$contador = $new::autosPorCategoria(4);
 				break;
 			case 5:
-				$contador = $new::totalAutos(5);
+				$contador = $new::autosPorCategoria(5);
 				break;
 		}
 		$sumaDeChoques = 0;
@@ -101,7 +113,7 @@ class ModeloReservas
 			$fechaHastaConfirmada=$filas['fecha_hasta'];
 			$nroReserva=$filas['id'];
 
-       ///Primero evaluo contra las fechas de reservas confirmadas
+       		///Primero evaluo contra las fechas de reservas confirmadas
 			//Evaluo que NO este en el rango la fecha
 			if (!self::check_in_range($fechaDesdeReserva, $fechaHastaReserva, $fechaDesdeConfirmada)) {
 				if (!self::check_in_range($fechaDesdeReserva, $fechaHastaReserva, $fechaHastaConfirmada))

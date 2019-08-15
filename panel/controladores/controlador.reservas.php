@@ -10,21 +10,36 @@ class ControladorReservas
 
 	}
 
-	static function ingresarReserva(){
+	static function nuevaReserva(){
 
-	    if (isset($_POST['formFechas'])) {
+	    if (isset($_POST['buscarDisponibilidad'])) {
 
+	    	$codigo = 'null';
 		      //Verificar si hay disponibilidad, devolver true
-		      $fecha_desde = self::convertirFecha($_POST['fecha_desde']);
-		      $fecha_hasta = self::convertirFecha($_POST['fecha_hasta']);
+		      $fecha_desde = $_POST['fecha_desde'];
+		      $fecha_hasta = $_POST['fecha_hasta'];
 		      $hora_desde  = $_POST['hora_desde'];
 		      $hora_hasta  = $_POST['hora_hasta'];
-			  	$categoria   = $_POST['categoria'];
-
-			  echo "<script>alert('post');</script>";
+		  	  $categoria   = $_POST['categoria'];
 
 		      $respuesta = ModeloReservas:: buscarDisponibilidad($categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
-				echo $respuesta;
+				$codigo = ModeloReservas::codigoReserva(5);
+
+				if (!empty($respuesta)) {
+					foreach ($respuesta as $value) {
+					echo '<br><h3>Autos disponibles : '.$value.'</h3>';
+					}
+
+					$_SESSION['codigo'] = $codigo;
+
+					$_SESSION['fecha_desde'] = $fecha_desde;
+					$_SESSION['fecha_hasta'] = $fecha_hasta;
+					header("location:formulario");
+
+				}else{
+					echo '<br><h3>Autos disponibles : 0</h3>';
+				}
+
 				/*if ($respuesta>0) {
 					$alpha = "123qwertyuiopa456sdfghjklzxcvbnm789";
 		      $code = "";

@@ -2,7 +2,9 @@
   <div class="container">
     <div class="center">
       <h2>Hay disponibilidad!</h2>
-      <p class="lead">Complete el siguiente formulario para continuar con su reserva desde el <?php echo $_POST['fecha_desde']; ?> hasta el <?php echo $_POST['fecha_hasta']; ?></p>
+      <p class="lead">Complete el siguiente formulario para continuar con su reserva desde el <?php echo $_SESSION['fecha_desde']; ?> hasta el <?php echo $_SESSION['fecha_hasta']; ?></p>
+      <br>
+      <p># Código reserva : <?php echo $_SESSION['codigo']; ?></p>
     </div>
     <div class="row contact-wrap">
       <div class="col-sm-8 col-sm-offset-2">
