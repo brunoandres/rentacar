@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 16-08-2019 a las 09:57:26
+-- Tiempo de generación: 16-08-2019 a las 17:11:05
 -- Versión del servidor: 5.7.26
--- Versión de PHP: 5.6.40
+-- Versión de PHP: 7.1.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `auditorias` (
   `query` text COLLATE utf8_spanish2_ci NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=72 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `auditorias`
@@ -97,7 +97,52 @@ INSERT INTO `auditorias` (`id`, `id_usuario`, `query`, `date`) VALUES
 (23, 2, 'UPDATE `adicionales` SET `nombre`=\'Permiso Aduana\',`tarifa`=\'800\',`habilitado`=1, `observaciones`=\'formulario necesario para pasar a chile\' WHERE id = 5', '2019-08-15 21:23:40'),
 (24, 2, 'UPDATE `adicionales` SET `nombre`=\'Silla Bebé\',`tarifa`=\'600\',`habilitado`=1, `observaciones`=\'silla para bebes\' WHERE id = 2', '2019-08-15 21:23:46'),
 (25, 2, 'UPDATE `adicionales` SET `nombre`=\'Buster\',`tarifa`=\'950\',`habilitado`=1, `observaciones`=\'nada de nada! buster buster\' WHERE id = 4', '2019-08-15 21:27:37'),
-(26, 2, 'UPDATE `adicionales` SET `nombre`=\'GPS\',`tarifa`=\'705\',`habilitado`=1, `observaciones`=\'gps gps gps gps gps gps gps gps\' WHERE id = 1', '2019-08-15 21:27:55');
+(26, 2, 'UPDATE `adicionales` SET `nombre`=\'GPS\',`tarifa`=\'705\',`habilitado`=1, `observaciones`=\'gps gps gps gps gps gps gps gps\' WHERE id = 1', '2019-08-15 21:27:55'),
+(27, 2, 'UPDATE `tarifas` SET `por_dia`=\'2400\',`por_semana`=\'12999\',`id_temporada`=1,`id_categoria`=2,`activa`=1 WHERE id = 2', '2019-08-16 15:56:41'),
+(28, 2, 'UPDATE `tarifas` SET `por_dia`=\'2000\',`por_semana`=\'12000\',`id_temporada`=1,`id_categoria`=1,`activa`=1 WHERE id = 1', '2019-08-16 15:58:03'),
+(29, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria B\',`activa`=1,`promo`=1 WHERE id = 2', '2019-08-16 15:58:29'),
+(30, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria C\',`activa`=1,`promo`=1 WHERE id = 3', '2019-08-16 15:58:32'),
+(31, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria D\',`activa`=1,`promo`=1 WHERE id = 4', '2019-08-16 15:58:36'),
+(32, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria E\',`activa`=1,`promo`=1 WHERE id = 5', '2019-08-16 15:58:39'),
+(33, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'60\',`activa`=0 WHERE id = 1', '2019-08-16 16:00:49'),
+(34, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'62\',`activa`=0 WHERE id = 1', '2019-08-16 16:01:48'),
+(35, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'62,5\',`activa`=0 WHERE id = 1', '2019-08-16 16:01:54'),
+(36, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'62.5\',`activa`=0 WHERE id = 1', '2019-08-16 16:01:59'),
+(37, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'60\',`activa`=0 WHERE id = 1', '2019-08-16 16:02:14'),
+(38, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'60\',`activa`=0 WHERE id = 1', '2019-08-16 16:03:54'),
+(39, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'60\',`activa`=0 WHERE id = 1', '2019-08-16 16:04:05'),
+(40, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'asd\',`activa`=0 WHERE id = 1', '2019-08-16 16:04:11'),
+(41, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'8\',`activa`=0 WHERE id = 1', '2019-08-16 16:04:24'),
+(42, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'1\',`activa`=0 WHERE id = 1', '2019-08-16 16:05:22'),
+(43, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'1\',`activa`=0 WHERE id = 1', '2019-08-16 16:05:28'),
+(44, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'1\',`activa`=0 WHERE id = 1', '2019-08-16 16:05:31'),
+(45, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'1\',`activa`=0 WHERE id = 1', '2019-08-16 16:05:36'),
+(46, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'1\',`activa`=0 WHERE id = 1', '2019-08-16 16:05:51'),
+(47, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'1\',`activa`=1 WHERE id = 1', '2019-08-16 16:07:03'),
+(48, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'1\',`activa`=0 WHERE id = 1', '2019-08-16 16:07:06'),
+(49, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'1\',`activa`=1 WHERE id = 1', '2019-08-16 16:07:09'),
+(50, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'1\',`activa`=1 WHERE id = 1', '2019-08-16 16:08:01'),
+(51, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'13\',`activa`=1 WHERE id = 1', '2019-08-16 16:08:05'),
+(52, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'13\',`activa`=1 WHERE id = 1', '2019-08-16 16:08:11'),
+(53, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'13\',`activa`=1 WHERE id = 1', '2019-08-16 16:14:23'),
+(54, 2, 'INSERT INTO `configuraciones`(`nombre`, `valor`,`activa`) VALUES (\'\',\'5\',1)', '2019-08-16 16:15:42'),
+(55, 2, 'INSERT INTO `configuraciones`(`nombre`, `valor`,`activa`) VALUES (\'Porcentaje Adicional\',\'5\',1)', '2019-08-16 16:16:00'),
+(56, 2, 'UPDATE `configuraciones` SET `nombre`=\'Porcentaje Adicional\',`valor`=\'0\',`activa`=1 WHERE id = 3', '2019-08-16 16:16:38'),
+(57, 2, 'UPDATE `configuraciones` SET `nombre`=\'Porcentaje Adicional\',`valor`=\'0\',`activa`=1 WHERE id = 3', '2019-08-16 16:16:42'),
+(58, 2, 'UPDATE `configuraciones` SET `nombre`=\'Porcentaje Adicional\',`valor`=\'0.05\',`activa`=1 WHERE id = 3', '2019-08-16 16:17:05'),
+(59, 2, 'UPDATE `configuraciones` SET `nombre`=\'Porcentaje Adicional\',`valor`=\'0.06\',`activa`=1 WHERE id = 3', '2019-08-16 16:17:19'),
+(60, 2, 'UPDATE `configuraciones` SET `nombre`=\'Porcentaje Adicional\',`valor`=\'89\',`activa`=1 WHERE id = 3', '2019-08-16 16:17:27'),
+(61, 2, 'UPDATE `configuraciones` SET `nombre`=\'Porcentaje Adicional\',`valor`=\'15\',`activa`=1 WHERE id = 3', '2019-08-16 16:17:52'),
+(62, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'60\',`activa`=1 WHERE id = 1', '2019-08-16 16:18:17'),
+(63, 2, 'UPDATE `configuraciones` SET `nombre`=\'Porcentaje Adicional\',`valor`=\'80\',`activa`=1 WHERE id = 3', '2019-08-16 16:18:26'),
+(64, 2, 'INSERT INTO `configuraciones`(`nombre`, `valor`,`activa`) VALUES (\'Porcentaje Descuento\',\'12\',1)', '2019-08-16 16:18:37'),
+(65, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'60.00\',`activa`=0 WHERE id = 1', '2019-08-16 16:19:46'),
+(66, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'60.00\',`activa`=1 WHERE id = 1', '2019-08-16 16:19:51'),
+(67, 2, 'INSERT INTO `categorias`(`nombre`, `activa`, `promo`) VALUES (\'23\',1,1)', '2019-08-16 16:26:12'),
+(68, 2, 'UPDATE `categorias` SET `nombre`=\'23\',`activa`=0,`promo`=0 WHERE id = 6', '2019-08-16 16:26:36'),
+(69, 2, 'UPDATE `temporadas` SET `nombre`=\'Hasta fin de año\',`fecha_desde`=\'2019-08-01\',`fecha_hasta`=\'2019-12-31\',`activa`=1,`observaciones`=\'  Esta temporada incluye desde el 01/08/2019 hasta fin de año 2019  \' WHERE id = 1', '2019-08-16 16:28:01'),
+(70, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'60.00\',`activa`=0 WHERE id = 1', '2019-08-16 16:29:14'),
+(71, 2, 'INSERT INTO `lugares`(`lugar`, `activo`, `observaciones`) VALUES (\'Aeropuerto\',1,\'\')', '2019-08-16 17:08:13');
 
 -- --------------------------------------------------------
 
@@ -146,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `categorias`
@@ -154,10 +199,10 @@ CREATE TABLE IF NOT EXISTS `categorias` (
 
 INSERT INTO `categorias` (`id`, `nombre`, `activa`, `promo`, `create`, `update`) VALUES
 (1, 'Categoria A', 1, 1, '2019-08-13 12:36:48', '2019-08-13 12:38:01'),
-(2, 'Categoria B', 1, 0, '2019-08-13 12:36:48', '2019-08-13 12:37:06'),
-(3, 'Categoria C', 1, 0, '2019-08-13 12:36:48', '2019-08-13 12:37:06'),
-(4, 'Categoria D', 1, 0, '2019-08-13 12:36:48', '2019-08-13 12:37:06'),
-(5, 'Categoria E', 1, 0, '2019-08-13 12:36:48', '2019-08-13 12:37:06');
+(2, 'Categoria B', 1, 1, '2019-08-13 12:36:48', '2019-08-16 15:58:29'),
+(3, 'Categoria C', 1, 1, '2019-08-13 12:36:48', '2019-08-16 15:58:32'),
+(4, 'Categoria D', 1, 1, '2019-08-13 12:36:48', '2019-08-16 15:58:36'),
+(5, 'Categoria E', 1, 1, '2019-08-13 12:36:48', '2019-08-16 15:58:39');
 
 -- --------------------------------------------------------
 
@@ -174,14 +219,40 @@ CREATE TABLE IF NOT EXISTS `configuraciones` (
   `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `configuraciones`
 --
 
 INSERT INTO `configuraciones` (`id`, `nombre`, `valor`, `activa`, `create`, `update`) VALUES
-(1, 'Dolar', '43.50', 1, '2019-08-13 12:38:54', '2019-08-13 12:38:54');
+(1, 'Dolar', '60.00', 0, '2019-08-13 12:38:54', '2019-08-16 16:29:14'),
+(3, 'Porcentaje Adicional', '80.00', 1, '2019-08-16 16:16:00', '2019-08-16 16:18:26'),
+(4, 'Porcentaje Descuento', '12.00', 1, '2019-08-16 16:18:37', '2019-08-16 16:18:37');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `lugares`
+--
+
+DROP TABLE IF EXISTS `lugares`;
+CREATE TABLE IF NOT EXISTS `lugares` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lugar` varchar(200) COLLATE utf32_spanish2_ci NOT NULL,
+  `activo` tinyint(1) NOT NULL DEFAULT '1',
+  `observaciones` text COLLATE utf32_spanish2_ci NOT NULL,
+  `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf32 COLLATE=utf32_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `lugares`
+--
+
+INSERT INTO `lugares` (`id`, `lugar`, `activo`, `observaciones`, `create`, `update`) VALUES
+(1, 'Aeropuerto', 1, '', '2019-08-16 17:08:13', '2019-08-16 17:08:13');
 
 -- --------------------------------------------------------
 
@@ -280,8 +351,8 @@ CREATE TABLE IF NOT EXISTS `tarifas` (
 --
 
 INSERT INTO `tarifas` (`id`, `por_dia`, `por_semana`, `id_temporada`, `id_categoria`, `activa`, `create`, `update`) VALUES
-(1, '1999', '11999', 1, 1, 1, '2019-08-13 12:40:12', '2019-08-13 12:40:13'),
-(2, '2400', '13000', 1, 2, 1, '2019-08-13 12:40:12', '2019-08-13 12:40:13'),
+(1, '2000', '12000', 1, 1, 1, '2019-08-13 12:40:12', '2019-08-16 15:58:03'),
+(2, '2400', '12999', 1, 2, 1, '2019-08-13 12:40:12', '2019-08-16 15:56:41'),
 (3, '3000', '13000', 1, 3, 1, '2019-08-13 12:40:12', '2019-08-13 12:40:13'),
 (4, '3190', '14008', 1, 4, 1, '2019-08-13 12:40:12', '2019-08-13 12:40:13');
 
@@ -309,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `temporadas` (
 --
 
 INSERT INTO `temporadas` (`id`, `nombre`, `fecha_desde`, `fecha_hasta`, `activa`, `observaciones`, `create`, `update`) VALUES
-(1, 'Hasta fin de año', '2019-08-01', '2019-12-31', 0, ' Esta temporada incluye desde el 01/08/2019 hasta fin de año 2019 ', '2019-08-13 12:40:25', '2019-08-15 20:54:09');
+(1, 'Hasta fin de año', '2019-08-01', '2019-12-31', 1, '  Esta temporada incluye desde el 01/08/2019 hasta fin de año 2019  ', '2019-08-13 12:40:25', '2019-08-16 16:28:01');
 
 -- --------------------------------------------------------
 
