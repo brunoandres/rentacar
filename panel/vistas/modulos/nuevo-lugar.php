@@ -1,13 +1,13 @@
 <?php
-$new = new ControladorCategorias();
-$new->nuevaCategoria();
+$new = new ControladorConfiguraciones();
+$new->nuevoLugar();
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Nueva Categoria
+      Nuevo Lugar
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -24,7 +24,7 @@ $new->nuevaCategoria();
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title">Carga de Categorias</h3>
+            <h3 class="box-title">Para retiro o entrega</h3>
           </div>
           <!-- /.box-header -->
           <!-- form start -->
@@ -32,26 +32,24 @@ $new->nuevaCategoria();
           <form role="form" method="post">
             <div class="box-body">
               <div class="form-group">
-                <label for="categoria">Categoria</label>
-                <input type="text" class="form-control" id="categoria" name="nombre_categoria" placeholder="Ingrese el nombre de la categoria" autocomplete="off" value="<?php if(isset($_POST['nombre_categoria'])){ echo $_POST['nombre_categoria'];} ?>" required> 
+                <label for="categoria">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre_lugar" placeholder="Ingrese el nombre..." autocomplete="off" required>
+              </div>
+              <div class="form-group">
+                <label>Observaciones</label>
+                <textarea class="form-control" rows="3" name="observaciones" placeholder="Ingrese alguna observación adicional..."></textarea>
               </div>
               <div class="checkbox">
                 <label>
                   <input type="checkbox" value="1" name="checkActiva" class="flat-red" checked>
-                  ¿Categoria activa?
-                </label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" value="1" name="checkPromo" class="flat-red" checked>
-                  ¿Permite promoción?
+                  ¿Lugar activo?
                 </label>
               </div>
             </div>
             <!-- /.box-body -->
 
             <div class="box-footer">
-              <button type="submit" name="nuevaCategoria" class="btn btn-primary">Guardar</button>
+              <button type="submit" name="nuevoLugar" class="btn btn-primary">Guardar</button>
               <a href="inicio"> <button type="button" class="btn btn-default">Cancelar</button> </a>
             </div>
           </form>

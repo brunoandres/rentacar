@@ -1,8 +1,8 @@
 <?php
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
-$configuraciones = $new->listarConfiguraciones();
-$editar = $new->editarConfiguracion();
+//$lugares = $new->listarLugares();
+//$editar = $new->editarLugar();
 /*$editarConfiguracion = new ControladorConfiguraciones();
 $editarConfiguracion -> editarConfiguracion();
 
@@ -13,7 +13,7 @@ $editarConfiguracion -> editarConfiguracion();
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Configuraciones del Sistema
+      Lugares de retiro y entrega
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -33,9 +33,9 @@ $editarConfiguracion -> editarConfiguracion();
 
               <thead>
               <tr>
-                <th align="center">Nombre</th>
-                <th align="center">Valor</i></th>
+                <th align="center">Nombre</th>          
                 <th align="center">Activo</i></th>
+                <th align="center">Observaciones</i></th>
                 <th align="center">Opciones <i class="fa fa-gears"></i></th>
               </tr>
               </thead>
@@ -49,12 +49,13 @@ $editarConfiguracion -> editarConfiguracion();
 
               <tr>
                 <td width="50%"><?php echo $value['nombre'];?></td>
-                <td width="20%"><?php echo $value['valor'];?></td>
+                
                 <td><?php if ($value['activa']==1) {
                   echo "<span class='label label-success'>Si</span>";
                 }else{
                   echo "<span class='label label-danger'>No</span>";
                 };?></td>
+                <td width="20%"><?php echo $value['observaciones'];?></td>
                 <td width="50%" align="left">
 
                   <button class="btn btn-warning btnEditarConfiguracion" idConfig="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarConfig"><i class="fa fa-pencil"></i></button>
@@ -70,11 +71,10 @@ $editarConfiguracion -> editarConfiguracion();
               </tbody>
               <tfoot>
                 <tr>
-                <th align="center">Nombre</th>
-                <th align="center">Valor</i></th>
+                <th align="center">Nombre</th>          
                 <th align="center">Activo</i></th>
+                <th align="center">Observaciones</i></th>
                 <th align="center">Opciones <i class="fa fa-gears"></i></th>
-              </tr>
               </tfoot>
             </table>
           </div>
@@ -93,7 +93,7 @@ $editarConfiguracion -> editarConfiguracion();
 MODAL EDITAR CATEGORÍA
 ======================================-->
 
-<div id="modalEditarConfig" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+<div id="modalEditarLugar" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
 
   <div class="modal-dialog">
 
@@ -109,7 +109,7 @@ MODAL EDITAR CATEGORÍA
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Editar configuración</h4>
+          <h4 class="modal-title">Editar lugar</h4>
 
         </div>
 
@@ -136,23 +136,15 @@ MODAL EDITAR CATEGORÍA
             </div>
 
             <div class="form-group">
-              <label>Valor</label>
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-th"></i></span>
-
-                <input type="text" class="form-control input-lg" name="valorConfig" id="valorConfig" required autocomplete="off" placeholder="Valor de configuración">
-
-              </div>
+              <label>Observaciones</label>
+              <textarea class="form-control" rows="3" name="observaciones" placeholder="Ingrese alguna observación adicional..."></textarea>
             </div>
 
-            <div class="input-group">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" value="1" name="activaEditar" id="activaEditar">
-                  ¿Configuración activa?
-                </label>
-              </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="1" name="checkActiva" class="flat-red" checked>
+                ¿Lugar activo?
+              </label>
             </div>
 
           </div>

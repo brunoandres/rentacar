@@ -167,7 +167,7 @@ MODAL EDITAR TARIFA
         <div class="modal-footer">
 
           <a href="tarifas"><button type="button" class="btn btn-default pull-left" data-dismiss="">Salir</button></a>
-          <button type="submit" class="btn btn-primary" name="editarTarifa">Guardar cambios</button>
+          <button type="submit" class="btn btn-primary" name="editarTarifa" onclick="return confirm('Confirma modificar las tarifas?')">Guardar cambios</button>
 
         </div>
 

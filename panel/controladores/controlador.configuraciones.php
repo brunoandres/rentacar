@@ -280,12 +280,81 @@ class ControladorConfiguraciones{
 
   }
 
+  static public function nuevoLugar(){
+
+    if (isset($_POST['nuevoLugar'])) {
+
+      $nombre = $_POST['nombre_lugar'];
+
+      if (empty($_POST['checkActiva'])) {
+        $lugar_activo = 0;
+      }else{
+        $lugar_activo = 1;
+      }
+      $observaciones = $_POST['observaciones'];
+
+      $respuesta = ModeloConfiguraciones::guardarLugar($nombre,$lugar_activo,$observaciones);
+
+      if ($respuesta=="ok") {
+        echo'<script>
+
+				swal({
+						type: "success",
+						title: "Lugar guardado correctamente",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){
+								if (result.value) {
+
+								window.location = "lugares";
+
+								}
+							})
+
+				</script>';
+      } else {
+        echo'<script>
+
+				swal({
+						type: "danger",
+						title: "Error al guardar lugar.",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){})
+
+				</script>';
+      }
+
+    }
+
+  }
+
   static public function nuevaConfiguracion(){
 
     if (isset($_POST['nuevaConfiguracion'])) {
 
-      $nombre = $_POST['nombre'];
+      $nombre = $_POST['nombre_configuracion'];
       $valor = $_POST['valor'];
+
+      if (is_int($valor)) {
+      	echo'<script>
+
+				swal({
+						type: "success",
+						title: "Estoy ingresando un entero",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){
+								if (result.value) {
+
+								window.location = "configuraciones";
+
+								}
+							})
+
+				</script>';
+      }
+
       if (empty($_POST['checkActiva'])) {
         $config_activa = 0;
       }else{
@@ -332,9 +401,10 @@ class ControladorConfiguraciones{
 
     if (isset($_POST['editarConfiguracion'])) {
 
-      $nombre = $_POST['nombre'];
-      $valor = $_POST['valor'];
-      if (empty($_POST['checkActiva'])) {
+      $nombre = $_POST['nombreConfig'];
+      $valor = $_POST['valorConfig'];
+
+      if (empty($_POST['activaEditar'])) {
         $config_activa = 0;
       }else{
         $config_activa = 1;

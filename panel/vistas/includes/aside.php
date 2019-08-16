@@ -62,6 +62,8 @@ $text = null;
       || $_GET['ruta']=='nueva-configuracion'
       || $_GET['ruta']=='nuevo-adicional'
       || $_GET['ruta']=='adicionales'
+      || $_GET['ruta']=='lugares'
+      || $_GET['ruta']=='nuevo-lugar'
       || $_GET['ruta']=='autos'
       || $_GET['ruta']=='nuevo-auto') {
         echo "active";
@@ -109,6 +111,26 @@ $text = null;
               <li class="<?php if ($_GET['ruta']=='tarifas') {
                 echo "active";
               } ?>"><a href="tarifas"><i class="fa fa-circle-o"></i> Ver Tarifas</a></li>
+            </ul>
+          </li>
+
+          <li class="treeview <?php if ($_GET['ruta']=='lugares' || $_GET['ruta']=='nuevo-lugar') {
+            echo "active";
+          } ?>">
+            <a href="#"><i class="fa fa-circle-o"></i> Lugares
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+
+              <li class="<?php if ($_GET['ruta']=='nueva-tarifa') {
+                echo "active";
+              } ?>"><a href="nuevo-lugar"><i class="fa fa-circle-o"></i> Nuevo Lugar</a></li>
+
+              <li class="<?php if ($_GET['ruta']=='lugares') {
+                echo "active";
+              } ?>"><a href="lugares"><i class="fa fa-circle-o"></i> Ver Lugares</a></li>
             </ul>
           </li>
 

@@ -183,6 +183,8 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "autos" ||
          $_GET["ruta"] == "nuevo-auto" ||
          $_GET["ruta"] == "configuraciones" ||
+         $_GET["ruta"] == "lugares" ||
+         $_GET["ruta"] == "nuevo-lugar" ||
          $_GET["ruta"] == "editar-venta" ||
          $_GET["ruta"] == "rango" ||
          $_GET["ruta"] == "salir"){

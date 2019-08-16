@@ -33,11 +33,11 @@ $new->nuevaConfiguracion();
             <div class="box-body">
               <div class="form-group">
                 <label for="categoria">Nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre..." autocomplete="off" required>
+                <input type="text" class="form-control" id="nombre" name="nombre_configuracion" placeholder="Ingrese el nombre..." autocomplete="off" required>
               </div>
               <div class="form-group">
                 <label for="categoria">Valor</label>
-                <input type="text" class="form-control" id="valor" name="valor" step="0.01" autocomplete="off" placeholder="Ingrese el valor..."> 
+                <input type="text" class="form-control" id="valor" name="valor" step="0.01" autocomplete="off" placeholder="Ingrese el valor..." required=""> 
               </div>
               <div class="checkbox">
                 <label>
@@ -50,6 +50,7 @@ $new->nuevaConfiguracion();
 
             <div class="box-footer">
               <button type="submit" name="nuevaConfiguracion" class="btn btn-primary">Guardar</button>
+              <a href="inicio"> <button type="button" class="btn btn-default">Cancelar</button> </a>
             </div>
           </form>
         </div>

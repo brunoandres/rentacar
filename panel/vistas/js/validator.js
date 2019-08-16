@@ -40,6 +40,37 @@ $(document).ready(function() {
                     }
                 }
             },
+            nombre_configuracion: {
+                validators: {
+                        stringLength: {
+                        min: 2,
+                    },
+                        notEmpty: {
+                        message: 'Ingrese nombre de la configuración'
+                    }
+                }
+            },
+            nombre_categoria: {
+                validators: {
+                        stringLength: {
+                        min: 2,
+                    },
+                        notEmpty: {
+                        message: 'Ingrese nombre de la categoria'
+                    }
+                }
+            },
+
+            nombre_lugar: {
+                validators: {
+                        stringLength: {
+                        min: 2,
+                    },
+                        notEmpty: {
+                        message: 'Ingrese nombre del lugar'
+                    }
+                }
+            },
 
             last_name: {
                 validators: {

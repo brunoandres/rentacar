@@ -91,9 +91,9 @@ class ControladorCategorias{
 
 		if(isset($_POST["nuevaCategoria"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["categoria"])){
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nombre_categoria"])){
 
-				$nombre = $_POST['categoria'];
+				$nombre = $_POST['nombre_categoria'];
 				if (empty($_POST['checkActiva'])) {
 					$categoria_vigente = 0;
 				}else{

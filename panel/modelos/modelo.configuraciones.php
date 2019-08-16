@@ -172,6 +172,22 @@ class ModeloConfiguraciones{
   //// Metodos para guardar///////////////
   ////////////////////////////////////////
 
+  static public function guardarLugar($nombre,$lugar_activo,$observaciones){
+
+    $link = Conexion::ConectarMysql();
+    $query = "INSERT INTO `lugares`(`lugar`, `activo`, `observaciones`) VALUES ('$nombre',$lugar_activo,'$observaciones')";
+    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+    
+    if ($sql) {
+      auditar($_SESSION["id_user"],$query);
+      return "ok";
+    }else{
+      return $sql;
+    }
+    // Cerrar la conexión.
+    mysqli_close( $link );
+  }
+
   static public function guardarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$observaciones){
 
     $link = Conexion::ConectarMysql();
