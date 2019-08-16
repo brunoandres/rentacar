@@ -1,7 +1,9 @@
 <?php
 $_SESSION['page' ] = 'nueva-reserva';
 $new = new ControladorConfiguraciones();
+$new2 = new ControladorCategorias();
 $adicionales = $new->listarAdicionales();
+$categorias = $new2->listarCategorias();
 ?>
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -19,11 +21,13 @@ $adicionales = $new->listarAdicionales();
 
     <!-- Main content -->
     <section class="content">
+      <div class="row">
+        <div class="col-md-6">
 
       <!-- SELECT2 EXAMPLE -->
       <div class="box box-default">
         <div class="box-header with-border">
-          <h3 class="box-title">Compelete el siguiente formulario</h3>
+          <h3 class="box-title">Ingrese los siguientes datos para buscar disponibilidad</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -34,47 +38,39 @@ $adicionales = $new->listarAdicionales();
         <div class="box-body">
           <form id="form" method="post">
             <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Nombre y Apellido</label>
-                <input type="text" class="form-control" placeholder="Ingrese el nombre y apellido" name="nombre" autocomplete="off">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Categoria</label>
+                  <select class="form-control" id="select_categoria" name="select_categoria" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
+                          <?php foreach ($categorias as $categoria) {?>
+                            <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
+                          <?php } ?>
+                  </select>
+                </div>
               </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" placeholder="Ingrese el email" name="email">
-              </div>
-
-
-            </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Fecha desde:</label>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Fecha desde:</label>
                     <div class="input-group date">
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
                       <input type="text" class="form-control pull-right fechadesde" name="fecha_desde" autocomplete="off" readonly="" placeholder="Seleccione una fecha...">
                     </div>
-                    <!-- /.input group -->
-                  </div>
-
-
-
-            </div>
+                </div>
+              </div>
             <!-- /.col -->
             <div class="col-md-4">
-            <div class="form-group">
-                    <label>Fecha Hasta:</label>
-
-                    <div class="input-group date">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="text" class="form-control pull-right fechahasta" name="fecha_hasta" autocomplete="off" readonly="" placeholder="Seleccione una fecha...">
-                    </div>
-                    <!-- /.input group -->
-                  </div>
               <div class="form-group">
+                <label>Fecha Hasta:</label>
+                  <div class="input-group date">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right fechahasta" name="fecha_hasta" autocomplete="off" readonly="" placeholder="Seleccione una fecha...">
+                  </div>
+              </div>
+              <!--<div class="form-group">
                 <label>Adicionales</label>
                 <select class="form-control select2" multiple="multiple" id="select" name="select" data-placeholder="Seleccionar adicionales..."
                         style="width: 100%;">
@@ -83,17 +79,23 @@ $adicionales = $new->listarAdicionales();
                         <?php } ?>
                 </select>
               </div>
-              <!-- /.form-group -->
+               /.form-group -->
 
               <!-- /.form-group -->
             </div>
-            <!-- /.col -->
+            
+            
 
           </div>
-          <button type="submit" class="btn btn-success">Guardar</button>
+          <button type="submit" class="btn btn-success">Buscar disponibilidad</button>
           <!-- /.row -->
           </form>
         </div>
+
+        </div>
+
+
+
       </div>
       <!-- /.box -->
     </section>

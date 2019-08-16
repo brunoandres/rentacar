@@ -172,10 +172,10 @@ class ModeloConfiguraciones{
   //// Metodos para guardar///////////////
   ////////////////////////////////////////
 
-  static public function guardarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile){
+  static public function guardarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$observaciones){
 
     $link = Conexion::ConectarMysql();
-    $query = "INSERT INTO `autos`(`id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`) VALUES ($categoria,'$marca','$modelo','$patente',$habilitado,$habilitado_chile)";
+    $query = "INSERT INTO `autos`(`id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`, `observaciones`) VALUES ($categoria,'$marca','$modelo','$patente',$habilitado,$habilitado_chile,'$observaciones')";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
     
     if ($sql) {
@@ -203,10 +203,10 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
 	}
 
-  static public function guardarAdicional($nombre,$tarifa,$activo){
+  static public function guardarAdicional($nombre,$tarifa,$activo,$observaciones){
 
     $link = Conexion::ConectarMysql();
-    $query = "INSERT INTO `adicionales`(`nombre`, `tarifa`, `habilitado`) VALUES ('$nombre','$tarifa',$activo)";
+    $query = "INSERT INTO `adicionales`(`nombre`, `tarifa`, `habilitado`, `observaciones`) VALUES ('$nombre','$tarifa',$activo,'$observaciones')";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
     if ($sql) {
       auditar($_SESSION["id_user"],$query);
@@ -258,10 +258,10 @@ class ModeloConfiguraciones{
   //// Metodos para editar///////////////
   ////////////////////////////////////////
 
-  static function editarAdicional($nombre,$tarifa,$activo,$id){
+  static function editarAdicional($nombre,$tarifa,$activo,$observaciones,$id){
 
 		$link = Conexion::ConectarMysql();
-		$query = "UPDATE `adicionales` SET `nombre`='$nombre',`tarifa`='$tarifa',`habilitado`=$activo WHERE id = $id";
+		$query = "UPDATE `adicionales` SET `nombre`='$nombre',`tarifa`='$tarifa',`habilitado`=$activo, `observaciones`='$observaciones' WHERE id = $id";
 		$sql = mysqli_query($link,$query);
 		if ($sql) {
       auditar($_SESSION["id_user"],$query);
@@ -287,10 +287,10 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
   }
 
-  static public function editarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$id_auto){
+  static public function editarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$observaciones,$id_auto){
 
     $link = Conexion::ConectarMysql();
-    $query = "UPDATE `autos` SET `id_categoria`=$categoria,`marca`='$marca',`modelo`='$modelo',`patente`='$patente',`estado`=$habilitado,`viaja_chile`=$habilitado_chile WHERE id = $id_auto";
+    $query = "UPDATE `autos` SET `id_categoria`=$categoria,`marca`='$marca',`modelo`='$modelo',`patente`='$patente',`estado`=$habilitado,`viaja_chile`=$habilitado_chile, `observaciones`='$observaciones' WHERE id = $id_auto";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
     auditar($_SESSION["id_user"],$query);
     if ($sql) {

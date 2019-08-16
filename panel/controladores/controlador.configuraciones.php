@@ -66,6 +66,7 @@ class ControladorConfiguraciones{
       $modelo = $_POST['modelo'];
       $categoria = $_POST['categoria'];
       $patente = strtoupper($_POST['patente']);
+      $observaciones = $_POST['observaciones'];
 
       if (empty($_POST['checkHabilitado'])) {
         $habilitado = 0;
@@ -80,7 +81,7 @@ class ControladorConfiguraciones{
       }
       
 
-      $respuesta = ModeloConfiguraciones::guardarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile);
+      $respuesta = ModeloConfiguraciones::guardarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$observaciones);
 
       if ($respuesta=="ok") {
         echo'<script>
@@ -125,6 +126,7 @@ class ControladorConfiguraciones{
       $modelo = $_POST['modelo'];
       $categoria = $_POST['categoria'];
       $patente = strtoupper($_POST['patente']);
+      $observaciones = $_POST['observaciones'];
       $id_auto = $_POST['id_auto'];
       if (empty($_POST['habilitado'])) {
         $habilitado = 0;
@@ -139,7 +141,7 @@ class ControladorConfiguraciones{
       }
       
 
-      $respuesta = ModeloConfiguraciones::editarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$id_auto);
+      $respuesta = ModeloConfiguraciones::editarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$observaciones,$id_auto);
 
       if ($respuesta=="ok") {
         echo'<script>
@@ -480,15 +482,16 @@ class ControladorConfiguraciones{
 
 		if(isset($_POST["nuevoAdicional"])){
 
-      $nombre = $_POST['nombre'];
+      $nombre = $_POST['nombre_adicional'];
       $tarifa = $_POST['tarifa'];
+      $observaciones = $_POST['observaciones'];
       if (empty($_POST['check'])) {
         $adicional_activo = 0;
       }else{
         $adicional_activo = 1;
       }
 
-      $respuesta = ModeloConfiguraciones::guardarAdicional($nombre,$tarifa,$adicional_activo);
+      $respuesta = ModeloConfiguraciones::guardarAdicional($nombre,$tarifa,$adicional_activo,$observaciones);
 
       if ($respuesta=="ok") {
         echo'<script>
@@ -532,7 +535,8 @@ class ControladorConfiguraciones{
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nombreAdicional"])){
 
 				$nombre = $_POST['nombreAdicional'];
-        $tarifa = $_POST['tarifaAdicional'];
+        		$tarifa = $_POST['tarifaAdicional'];
+        		$observaciones = $_POST['observaciones'];
 				if (empty($_POST['activaAdicional'])) {
 					$adicional_activo = 0;
 				}else{
@@ -541,7 +545,7 @@ class ControladorConfiguraciones{
 
 				$id     = $_POST['idAdicional'];
 
-				$respuesta = ModeloConfiguraciones::editarAdicional($nombre,$tarifa,$adicional_activo,$id);
+				$respuesta = ModeloConfiguraciones::editarAdicional($nombre,$tarifa,$adicional_activo,$observaciones,$id);
 
 				if($respuesta == "ok"){
 

@@ -19,7 +19,9 @@ $editar = $new->editarAuto();
       <li><a href="#">Tables</a></li>
       <li class="active">Data tables</li>
     </ol>
+    <a href="nuevo-auto" align="right"> <button type="button" class="btn btn-info">Nuevo</button> </a>
   </section>
+ 
   <!-- Main content -->
   <section class="content">
     <div class="row">
@@ -176,10 +178,15 @@ MODAL EDITAR AUTO
 
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                <input type="text" class="form-control input-lg" name="patente" id="patente" autocomplete="off" placeholder="Nº de patente: ABC123 - AD123AB">
+                <input type="text" class="form-control input-lg" name="patente" id="patente" minlength="6" maxlength="7" autocomplete="off" placeholder="Nº de patente: ABC123 - AD123AB" required="">
 
               </div>
 
+            </div>
+
+            <div class="form-group">
+              <label>Observaciones</label>
+              <textarea class="form-control" rows="3" name="observaciones" id="observaciones" placeholder="Ingrese alguna observación adicional..."></textarea>
             </div>
 
             <div class="input-group">

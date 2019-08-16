@@ -19,11 +19,12 @@ $(".tablas").on("click", ".btnEditarAdicional", function(){
      	success: function(respuesta){
 
         if (respuesta['habilitado']==1) {
-					$("#activaAdicional").prop("checked",true);
-				}
-     		$("#nombreAdicional").val(respuesta["nombre"]);
-				$("#tarifaAdicional").val(respuesta["tarifa"]);
-     		$("#idAdicional").val(respuesta["id"]);
+			$("#activaAdicional").prop("checked",true);
+		}
+ 		$("#nombreAdicional").val(respuesta["nombre"]);
+		$("#tarifaAdicional").val(respuesta["tarifa"]);
+		$("#observaciones").val(respuesta["observaciones"]);
+ 		$("#idAdicional").val(respuesta["id"]);
 
      	}
 

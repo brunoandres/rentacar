@@ -18,6 +18,29 @@ $(document).ready(function() {
                 }
             },
 
+            nombre_adicional: {
+                validators: {
+                        stringLength: {
+                        min: 2,
+                    },
+                        notEmpty: {
+                        message: 'Ingrese el nombre del adicional'
+                    }
+                }
+            },
+
+            patente: {
+                validators: {
+                        stringLength: {
+                        min: 6,
+                        max: 7,
+                    },
+                        notEmpty: {
+                        message: 'Ingrese patente en formato ABC123 ó AB123CD'
+                    }
+                }
+            },
+
             last_name: {
                 validators: {
                      stringLength: {

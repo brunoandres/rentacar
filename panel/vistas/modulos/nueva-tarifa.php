@@ -49,7 +49,7 @@ $new2->nuevaTarifa();
                 <label>Temporadas activas</label>
                 <?php if (empty($temporadas)) {
                   echo '<div class="alert alert-danger" role="alert">
-                    No tiene temporadas activas! ir a <a href="temporadas">Temporadas.</a>
+                    No existen temporadas activas! ir a <a href="temporadas">Temporadas.</a>
                   </div>';
                 } ?>
                 <select class="form-control" style="width: 100%;" name="select_temporada" data-placeholder="Selecione una temporada..." required="">

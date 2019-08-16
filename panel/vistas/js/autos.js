@@ -28,6 +28,7 @@ $(".tablas").on("click", ".btnEditarAuto", function(){
      		$("#marcaAuto").val(respuesta["marca"]);
      		$("#modeloAuto").val(respuesta["modelo"]);
      		$("#patente").val(respuesta["patente"]);
+     		$("#observaciones").val(respuesta["observaciones"]);
      		$("#idAuto").val(respuesta["id"]);
 
      	}

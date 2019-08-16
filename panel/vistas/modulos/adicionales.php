@@ -41,6 +41,7 @@ $editarAdicional = $new->editarAdicional();
                 <th align="center">Nombre</th>
                 <th align="center">Tarifa</th>
                 <th align="center">Habilitado</th>
+                <th align="center">Observaciones</th>
                 <th align="center"><i class="fa fa-gears"></i></th>
               </tr>
               </thead>
@@ -60,6 +61,7 @@ $editarAdicional = $new->editarAdicional();
                 }else{
                   echo "<span class='label label-danger'>No</span>";
                 };?></td>
+                <td><?php echo $adicional['observaciones'];?></td>
                 <td align="center">
 
                   <button class="btn btn-warning btnEditarAdicional" idAdicional="<?php echo $adicional['id']; ?>" data-toggle="modal" data-target="#modalEditarAdicional"><i class="fa fa-pencil"></i></button>
@@ -78,6 +80,7 @@ $editarAdicional = $new->editarAdicional();
                   <th align="center">Nombre</th>
                   <th align="center">Tarifa</th>
                   <th align="center">Habilitado</th>
+                  <th align="center">Observaciones</th>
                   <th align="center"><i class="fa fa-gears"></i></th>
               </tr>
               </tfoot>
@@ -129,7 +132,7 @@ MODAL EDITAR ADICIONAL
             <!-- ENTRADA PARA EL NOMBRE -->
 
             <div class="form-group">
-
+              <label>Nombre</label>
               <div class="input-group">
 
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
@@ -138,25 +141,33 @@ MODAL EDITAR ADICIONAL
 
                  <input type="hidden"  name="idAdicional" id="idAdicional" required>
 
-              </div><br>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Tarifa</label>
               <div class="input-group">
-
+                
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
                 <input type="number" class="form-control" id="tarifaAdicional" name="tarifaAdicional" step="0.01" autocomplete="off" placeholder="Tarifa de adicional" required>
 
               </div>
-
-              <div class="input-group">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" value="1" name="activaAdicional" id="activaAdicional">
-                    ¿Adicional habilitado?
-                  </label>
-                </div>
-              </div>
-
             </div>
+            
+            <div class="form-group">
+              <label>Observaciones</label>
+              <textarea class="form-control" rows="3" name="observaciones" id="observaciones" placeholder="Ingrese alguna observación adicional..."></textarea>
+            </div>
+
+            <div class="input-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="1" name="activaAdicional" id="activaAdicional">
+                  ¿Adicional habilitado?
+                </label>
+              </div>
+            </div>
+
 
           </div>
 

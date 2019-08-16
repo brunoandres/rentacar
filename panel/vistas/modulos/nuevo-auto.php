@@ -58,7 +58,11 @@ $nuevo = $new2->nuevoAuto();
               </div>
               <div class="form-group">
                 <label for="categoria">Patente</label>
-                <input type="text" class="form-control" id="patente" name="patente" autocomplete="off" placeholder="Nº de patente: ABC123 - AD123AB" required>
+                <input type="text" class="form-control" id="patente" name="patente" maxlength="7" autocomplete="off" placeholder="Nº de patente: ABC123 - AD123AB" required>
+              </div>
+              <div class="form-group">
+                <label>Observaciones</label>
+                <textarea class="form-control" rows="3" name="observaciones" placeholder="Ingrese alguna observación adicional..."></textarea>
               </div>
               <div class="checkbox">
                 <label>
@@ -73,6 +77,7 @@ $nuevo = $new2->nuevoAuto();
                 </label>
               </div>
             </div>
+
             <!-- /.box-body -->
 
             <div class="box-footer">
