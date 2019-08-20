@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 16-08-2019 a las 17:11:05
+-- Tiempo de generación: 20-08-2019 a las 03:03:28
 -- Versión del servidor: 5.7.26
--- Versión de PHP: 7.1.29
+-- Versión de PHP: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `auditorias` (
   `query` text COLLATE utf8_spanish2_ci NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=72 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `auditorias`
@@ -142,7 +142,13 @@ INSERT INTO `auditorias` (`id`, `id_usuario`, `query`, `date`) VALUES
 (68, 2, 'UPDATE `categorias` SET `nombre`=\'23\',`activa`=0,`promo`=0 WHERE id = 6', '2019-08-16 16:26:36'),
 (69, 2, 'UPDATE `temporadas` SET `nombre`=\'Hasta fin de año\',`fecha_desde`=\'2019-08-01\',`fecha_hasta`=\'2019-12-31\',`activa`=1,`observaciones`=\'  Esta temporada incluye desde el 01/08/2019 hasta fin de año 2019  \' WHERE id = 1', '2019-08-16 16:28:01'),
 (70, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'60.00\',`activa`=0 WHERE id = 1', '2019-08-16 16:29:14'),
-(71, 2, 'INSERT INTO `lugares`(`lugar`, `activo`, `observaciones`) VALUES (\'Aeropuerto\',1,\'\')', '2019-08-16 17:08:13');
+(71, 2, 'INSERT INTO `lugares`(`lugar`, `activo`, `observaciones`) VALUES (\'Aeropuerto\',1,\'\')', '2019-08-16 17:08:13'),
+(72, 2, 'INSERT INTO `lugares`(`lugar`, `activo`, `observaciones`) VALUES (\'Centro Civico\',1,\'\')', '2019-08-19 14:40:05'),
+(73, 2, 'INSERT INTO `lugares`(`lugar`, `activo`, `observaciones`) VALUES (\'Terminal ómnibus Bariloche\',1,\'\')', '2019-08-19 14:40:47'),
+(74, 2, 'INSERT INTO `lugares`(`lugar`, `activo`, `observaciones`) VALUES (\'Hotel Llao Llao\',0,\'\')', '2019-08-19 14:41:06'),
+(75, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'Renault\',`modelo`=\'Clio\',`patente`=\'ABC123\',`estado`=1,`viaja_chile`=1, `observaciones`=\'pequeño rayon lateral derecho \' WHERE id = 1', '2019-08-19 14:59:01'),
+(76, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'Ford\',`modelo`=\'Focus\',`patente`=\'JEM442\',`estado`=0,`viaja_chile`=0, `observaciones`=\'auto de bruno!\' WHERE id = 3', '2019-08-19 15:01:42'),
+(77, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'Ford\',`modelo`=\'Focus\',`patente`=\'JEM442\',`estado`=1,`viaja_chile`=0, `observaciones`=\'auto de bruno!\' WHERE id = 3', '2019-08-19 15:01:46');
 
 -- --------------------------------------------------------
 
@@ -171,9 +177,9 @@ CREATE TABLE IF NOT EXISTS `autos` (
 --
 
 INSERT INTO `autos` (`id`, `id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`, `observaciones`, `create`, `update`) VALUES
-(1, 1, 'Renault', 'Clio', 'ABC123', 1, 1, 'pequeño rayon lateral detecho ', '2019-08-13 12:39:58', '2019-08-15 21:10:31'),
+(1, 1, 'Renault', 'Clio', 'ABC123', 1, 1, 'pequeño rayon lateral derecho ', '2019-08-13 12:39:58', '2019-08-19 14:59:01'),
 (2, 1, 'VW', 'Suran', 'AB123CD', 1, 1, '', '2019-08-13 12:39:58', '2019-08-15 21:10:09'),
-(3, 1, 'Ford', 'Focus', 'JEM442', 0, 0, 'auto de bruno!', '2019-08-13 15:46:27', '2019-08-15 21:11:29'),
+(3, 1, 'Ford', 'Focus', 'JEM442', 1, 0, 'auto de bruno!', '2019-08-13 15:46:27', '2019-08-19 15:01:46'),
 (8, 2, 'Renault', 'Sandero', 'ABD696', 1, 0, '', '2019-08-15 21:05:08', '2019-08-15 21:10:39');
 
 -- --------------------------------------------------------
@@ -245,14 +251,17 @@ CREATE TABLE IF NOT EXISTS `lugares` (
   `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf32 COLLATE=utf32_spanish2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf32 COLLATE=utf32_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `lugares`
 --
 
 INSERT INTO `lugares` (`id`, `lugar`, `activo`, `observaciones`, `create`, `update`) VALUES
-(1, 'Aeropuerto', 1, '', '2019-08-16 17:08:13', '2019-08-16 17:08:13');
+(1, 'Aeropuerto', 1, '', '2019-08-16 17:08:13', '2019-08-16 17:08:13'),
+(2, 'Centro Civico', 1, '', '2019-08-19 14:40:05', '2019-08-19 14:40:05'),
+(3, 'Terminal ómnibus Bariloche', 1, '', '2019-08-19 14:40:47', '2019-08-19 14:40:47'),
+(4, 'Hotel Llao Llao', 0, '', '2019-08-19 14:41:06', '2019-08-19 14:41:06');
 
 -- --------------------------------------------------------
 
@@ -265,6 +274,7 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_categoria` int(11) NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
+  `apellido` varchar(100) NOT NULL,
   `fecha_desde` date DEFAULT NULL,
   `fecha_hasta` date DEFAULT NULL,
   `hora_desde` time DEFAULT NULL,
@@ -283,8 +293,8 @@ CREATE TABLE IF NOT EXISTS `reservas` (
 -- Volcado de datos para la tabla `reservas`
 --
 
-INSERT INTO `reservas` (`id`, `id_categoria`, `nombre`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `create`, `update`) VALUES
-(1, 1, 'Bruno Andres ', '2019-07-01', '2019-07-08', NULL, NULL, '600.00', 7, 1, 1, '2019-08-13 12:39:23', '2019-08-13 12:39:23');
+INSERT INTO `reservas` (`id`, `id_categoria`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `create`, `update`) VALUES
+(1, 1, 'Bruno Andres ', '', '2019-07-01', '2019-07-08', NULL, NULL, '600.00', 7, 1, 1, '2019-08-13 12:39:23', '2019-08-13 12:39:23');
 
 -- --------------------------------------------------------
 
