@@ -88,6 +88,33 @@ class ModeloConfiguraciones{
       mysqli_close( $link );
   }
 
+  static public function listarLugares($id){
+
+    $link = Conexion::ConectarMysql();
+    $lugares = array();
+
+    //el id puede venir vacio, asi retorno todas los adicionales
+    if ($id == null) {
+      $query = "select * from lugares where activo = 1 order by lugar asc";
+      $sql = mysqli_query($link,$query);
+      while ($filas = mysqli_fetch_array($sql)) {
+        $lugares[]=$filas;
+      }
+      return $lugares;
+    }else{
+      $query = "select * from lugares where id = $id";
+      $sql = mysqli_query($link,$query);
+
+      while ($filas = mysqli_fetch_array($sql)) {
+        $lugares[]=$filas;
+      }
+      return $lugares;
+    }
+
+    // Cerrar la conexión.
+    mysqli_close( $link );
+  }
+
   static public function listarAdicionales($id){
 
     $link = Conexion::ConectarMysql();

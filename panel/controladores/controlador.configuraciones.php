@@ -10,6 +10,14 @@ class ControladorConfiguraciones{
 
 	}
 
+	//Metodo para listar lugares
+  static public function listarLugares($id=null){
+
+		$lugares = ModeloConfiguraciones::listarLugares($id);
+		return $lugares;
+
+	}
+
 	//Metodo para listar los autos
   static public function totalAutos($id=null){
 

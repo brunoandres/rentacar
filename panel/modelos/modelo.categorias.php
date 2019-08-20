@@ -42,16 +42,16 @@ class ModeloCategorias{
 	    //Filtro por total de categorias
 	    if ($habilitado==null && $habilitado_chile==null) {
 	    	
-	    	$query = "select b.nombre as categoria,count(*) as cantidad from autos a, categorias b where a.id_categoria = b.id and a.id_categoria=$id GROUP by a.id_categoria";
+	    	$query = "select b.nombre as categoria,count(*) as cantidad from autos a, categorias b where a.id_categoria = b.id and a.id_categoria=$id and a.estado=1 GROUP by a.id_categoria";
 
 	    //Filtro cantidad por categoria los autos habilitados
 	    }elseif ($habilitado_chile==null) {
 
-	    	$query = "select b.nombre as categoria,count(*) as cantidad from autos a, categorias b where a.estado = 1 and a.id_categoria = b.id and a.id_categoria=$id GROUP by a.id_categoria";
+	    	$query = "select b.nombre as categoria,count(*) as cantidad from autos a, categorias b where a.estado = 1 and a.id_categoria = b.id and a.id_categoria=$id and a.estado=1 GROUP by a.id_categoria";
 	    //Filtro cantidad por categoria los autos habilitados a chile
 	    }elseif ($habilitado==null) {
 
-	    	$query = "select b.nombre as categoria,count(*) as cantidad from autos a, categorias b where a.viaja_chile = 1 and a.id_categoria = b.id and a.id_categoria=$id GROUP by a.id_categoria";
+	    	$query = "select b.nombre as categoria,count(*) as cantidad from autos a, categorias b where a.viaja_chile = 1 and a.id_categoria = b.id and a.id_categoria=$id and a.estado=1 GROUP by a.id_categoria";
 	    }
 	    
 	    $sql = mysqli_query($link,$query);

@@ -9,10 +9,13 @@
       </div>
       <div class="col-sm-6">
         <ul class="pull-right">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Faq</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="inicio">Inicio</a></li>
+          <li><a href="quienes-somos">Quienes Somos</a></li>
+          <li><a href="servicios">Servicios</a></li>
+          <li><a href="tarifas">Tarifas</a></li>
+          <li><a href="flota">Flota</a></li>
+          <li><a href="contacto">Contacto</a></li>
+          <li><a href="reservar">Reservar</a></li>
         </ul>
       </div>
     </div>

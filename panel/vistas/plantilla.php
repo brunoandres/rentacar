@@ -55,7 +55,6 @@ session_start();
   <!-- Bootstrap time Picker -->
   <link rel="stylesheet" href="vistas/plugins/timepicker/bootstrap-timepicker.min.css">
 
-  <!-- SweetAlert 2 -->
   <link rel="stylesheet" href="vistas/bower_components/select2/dist/css/select2.min.css">
 
   <!-- Bootstrap Color Picker -->
@@ -116,6 +115,7 @@ session_start();
   <!-- ChartJS http://www.chartjs.org/-->
   <script src="vistas/bower_components/Chart.js/Chart.js"></script>
   <script src="vistas/bower_components/select2/dist/js/select2.full.js"></script>
+  
 
 
   <!-- bootstrap datepicker -->

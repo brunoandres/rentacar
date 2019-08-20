@@ -127,7 +127,7 @@ body > section {
 
 .center {
   text-align: center;
-  padding-bottom: 55px;
+  padding-bottom: 5px;
 }
 
 .scaleIn {
@@ -1333,7 +1333,7 @@ ul.social_icons li  a i{
 ********* Portfolio CSS ******
 **************************/
 #portfolio {
-  margin-top: 100px;
+  margin-top: 10px;
 }
 
 #contact-page {
@@ -1840,7 +1840,7 @@ ul.sidebar-gallery {
   padding-top: 30px;
   padding-bottom: 30px;
   color: #fff;
-  background: #000;
+  background: #343a40;
 }
 
 #footer a {

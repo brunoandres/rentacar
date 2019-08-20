@@ -2,20 +2,70 @@
 
 $new = new ControladorConfiguraciones();
 $lugares = $new->listarLugares();
-$adicionales = $new->listarAdicionales();
+
+if (isset($_POST['checkout'])) {
 
 ?>
 <section id="portfolio">
   <div class="container">
     <div class="center">
-      <h2>Hay disponibilidad!</h2>
+      <h2>Detalle Reserva</h2>
       <p class="lead">Complete el siguiente formulario para continuar con su reserva desde el <?php echo $_SESSION['fecha_desde']; ?> hasta el <?php echo $_SESSION['fecha_hasta']; ?></p>
       <p># Código reserva : <?php echo $_SESSION['codigo']; ?></p>
     </div>
-    <div class="row h-100 justify-content-center align-items-center">
+    <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Detalle Reserva</span>
+            <!--<span class="badge badge-secondary badge-pill">3</span>-->
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Product name</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$12</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Second product</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$8</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Third item</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$5</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0">Promo code</h6>
+                <small>EXAMPLECODE</small>
+              </div>
+              <span class="text-success">-$5</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+              <strong>$20</strong>
+            </li>
+          </ul>
+
+          <form class="card p-2">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Promo code">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary">Redeem</button>
+              </div>
+            </div>
+          </form>
+        </div>
         <div class="col-md-8 order-md-1">
           <h3 class="mb-3">Datos Personales</h3>
-          <form class="needs-validation" novalidate method="post" action="confirma">
+          <form class="needs-validation" novalidate method="post">
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">Nombre</label>
@@ -48,7 +98,7 @@ $adicionales = $new->listarAdicionales();
 
             <div class="mb-3">
               <label for="email">Dirección de Email</label>
-              <input type="email" class="form-control" id="email" placeholder="juanperez@example.com" required="">
+              <input type="email" class="form-control" id="email" placeholder="juanperez@example.com">
               <div class="invalid-feedback">
                 Complete el campo con su dirección de email válido.
               </div>
@@ -65,7 +115,7 @@ $adicionales = $new->listarAdicionales();
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="country">Lugar de retiro</label>
-                <select class="form-control" id="select_categoria" name="select_categoria" style="width: 100%;">
+                <select class="form-control" id="select_categoria" name="select_categoria" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
                           <?php foreach ($lugares as $lugar) {?>
                             <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
                           <?php } ?>
@@ -76,7 +126,7 @@ $adicionales = $new->listarAdicionales();
               </div>
               <div class="col-md-6 mb-3">
                 <label for="country">Lugar de entrega</label>
-                <select class="form-control" id="select_categoria" name="select_categoria" style="width: 100%;">
+                <select class="form-control" id="select_categoria" name="select_categoria" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
                           <?php foreach ($lugares as $lugar) {?>
                             <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
                           <?php } ?>
@@ -93,13 +143,7 @@ $adicionales = $new->listarAdicionales();
                 </div>
               </div>-->
             </div>
-            <p>Los adicionales están sujetos a disponibilidad.</p>
-            <select class="form-control select2" multiple="multiple" id="adicionales" name="adicionales" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
-                    <?php foreach ($adicionales as $adicional) {?>
-                      <option value="<?php echo $adicional['id']; ?>"><?php echo $adicional['nombre'].' $ '.$adicional['tarifa']; ?></option>
-                    <?php } ?>
-            </select>
-            <!--
+            <hr class="mb-4">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="same-address">
               <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
@@ -125,8 +169,8 @@ $adicionales = $new->listarAdicionales();
                 <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
                 <label class="custom-control-label" for="paypal">Paypal</label>
               </div>
-            </div>-->
-            <!--<div class="row">
+            </div>
+            <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="cc-name">Name on card</label>
                 <input type="text" class="form-control" id="cc-name" placeholder="" required>
@@ -142,8 +186,8 @@ $adicionales = $new->listarAdicionales();
                   Credit card number is required
                 </div>
               </div>
-            </div>-->
-            <!--<div class="row">
+            </div>
+            <div class="row">
               <div class="col-md-3 mb-3">
                 <label for="cc-expiration">Expiration</label>
                 <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
@@ -158,9 +202,9 @@ $adicionales = $new->listarAdicionales();
                   Security code required
                 </div>
               </div>
-            </div>-->
+            </div>
             <hr class="mb-4">
-            <button class="btn btn-success btn-lg btn-block" type="submit" name="checkout">Continue to checkout</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
           </form>
         </div>
       </div>
@@ -169,3 +213,6 @@ $adicionales = $new->listarAdicionales();
   <!--/.container-->
 </section>
 <!--/#contact-page-->
+<?php }else{
+  echo "NO POST";
+} ?>

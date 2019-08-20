@@ -145,7 +145,7 @@ class ModeloReservas
 
 
 			//echo $contador=$msj.$reserva;
-			var_dump($contador);
+			//var_dump($contador);
 		return $contador;
 
 	}

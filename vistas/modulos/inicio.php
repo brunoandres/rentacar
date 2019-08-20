@@ -1,38 +1,28 @@
-<div class="slider">
-  <div class="container">
-    <div id="about-slider">
-      <div id="carousel-slider" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators visible-xs">
-          <li data-target="#carousel-slider" data-slide-to="0" class="active"></li>
-          <li data-target="#carousel-slider" data-slide-to="1"></li>
-          <li data-target="#carousel-slider" data-slide-to="2"></li>
-        </ol>
-
-        <div class="carousel-inner">
-          <div class="item active">
-            <img src="inc/hyundai.png" class="img-responsive" alt="austral rentacar bariloche">
-          </div>
-          <div class="item">
-            <img src="inc/gol_trend.png" class="img-responsive" alt="austral rentacar bariloche">
-          </div>
-          <div class="item">
-            <img src="inc/voyage.gif" class="img-responsive" alt="austral rentacar bariloche">
-          </div>
-        </div>
-
-        <a class="left carousel-control hidden-xs" href="#carousel-slider" data-slide="prev">
-					<i class="fa fa-angle-left"></i>
-				</a>
-
-        <a class=" right carousel-control hidden-xs" href="#carousel-slider" data-slide="next">
-					<i class="fa fa-angle-right"></i>
-				</a>
-      </div>
-      <!--/#carousel-slider-->
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="inc/hyundai.png" alt="austral rentacar bariloche">
     </div>
-    <!--/#about-slider-->
+    <div class="carousel-item">
+      <img class="d-block w-100" src="inc/gol_trend.png" alt="austral rentacar bariloche">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="inc/voyage.gif" alt="austral rentacar bariloche">
+    </div>
   </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Anterior</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Siguiente</span>
+  </a>
 </div>
 
 <section id="feature">

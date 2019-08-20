@@ -1,4 +1,4 @@
-<?php  
+<?php
 if (empty($_GET['ruta'])) {
   $_GET['ruta'] = null;
   header("location: inicio");
@@ -6,31 +6,36 @@ if (empty($_GET['ruta'])) {
 ?>
 
 <header id="header">
-  <nav class="navbar navbar-fixed-top" role="banner">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#"> <img src="inc/austral-rent-a-car.png" alt=""> </a>
-      </div>
-
-      <div class="collapse navbar-collapse navbar-right">
-        <ul class="nav navbar-nav">
-          <li class="<?php if($_GET['ruta']=='inicio'){ echo 'active'; } ?>"><a href="inicio">Inicio</a></li>
-          <li class="<?php if($_GET['ruta']=='quienes-somos'){ echo 'active'; } ?>"><a href="quienes-somos">Quienes Somos</a></li>
-          <li class="<?php if($_GET['ruta']=='servicios'){ echo 'active'; } ?>"><a href="servicios">Servicios</a></li>
-          <li class="<?php if($_GET['ruta']=='tarifas'){ echo 'active'; } ?>"><a href="tarifas">Tarifas</a></li>
-          <li class="<?php if($_GET['ruta']=='flota'){ echo 'active'; } ?>"><a href="flota">Flota</a></li>
-          <li class="<?php if($_GET['ruta']=='contacto'){ echo 'active'; } ?>"><a href="contacto">Contacto</a></li>
-          <li class="<?php if($_GET['ruta']=='reservar'){ echo 'active'; } ?>"><a href="reservar">Reservar</a></li>
-        </ul>
-      </div>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand ml-5" href="#"> <img src="inc/austral-rent-a-car.png" alt=""> </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item <?php if($_GET['ruta']=='inicio'){ echo 'active'; } ?>">
+          <a class="nav-link" href="inicio">Inicio <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item <?php if($_GET['ruta']=='quienes-somos'){ echo 'active'; } ?>">
+          <a class="nav-link" href="quienes-somos">Quienes Somos</a>
+        </li>
+        <li class="nav-item <?php if($_GET['ruta']=='servicios'){ echo 'active'; } ?>">
+          <a class="nav-link" href="servicios">Servicios</a>
+        </li>
+        <li class="nav-item <?php if($_GET['ruta']=='tarifas'){ echo 'active'; } ?>">
+          <a class="nav-link" href="tarifas">Tarifas</a>
+        </li>
+        <li class="nav-item <?php if($_GET['ruta']=='flota'){ echo 'active'; } ?>">
+          <a class="nav-link" href="flota">Flota</a>
+        </li>
+        <li class="nav-item <?php if($_GET['ruta']=='contacto'){ echo 'active'; } ?>">
+          <a class="nav-link" href="contacto">Contacto</a>
+        </li>
+        <li class="nav-item <?php if($_GET['ruta']=='reservar' || $_GET['ruta']=='formulario' || $_GET['ruta']=='confirma'){ echo 'active'; } ?>">
+          <a class="nav-link" href="reservar">Reservar</a>
+        </li>
+      </ul>
     </div>
-    <!--/.container-->
   </nav>
   <!--/nav-->
 </header>

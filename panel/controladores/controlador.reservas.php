@@ -34,10 +34,35 @@ class ControladorReservas
 
 					$_SESSION['fecha_desde'] = $fecha_desde;
 					$_SESSION['fecha_hasta'] = $fecha_hasta;
+
+					/*echo'<script>
+
+					swal({
+							type: "success",
+							title: "Hay disponibilidad!",
+							showConfirmButton: true,
+							confirmButtonText: "Continuar..."
+							}).then(function(result){
+								window.location="formulario"
+							})
+
+					</script>';*/
+
 					header("location:formulario");
 
 				}else{
-					echo '<br><h3>Autos disponibles : 0</h3>';
+					echo'<script>
+
+					swal({
+							type: "error",
+							title: "No hay disponibilidad, intente cambiar las fechas o categoria seleccionada.",
+							showConfirmButton: true,
+							confirmButtonText: "Volver a intentar"
+							}).then(function(result){
+		
+							})
+
+					</script>';
 				}
 
 				/*if ($respuesta>0) {

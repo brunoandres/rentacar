@@ -15,32 +15,32 @@ $data = $new->nuevaReserva();
     </div>
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
-        <div id="sendmessage">Your message has been sent. Thank you!</div>
-        <div id="errormessage"></div>
         <form method="post">
           <div class="form-group">
             <label for="exampleInputPassword1">Categoria</label>
             <select class="form-control" name="categoria">
               <?php foreach ($categorias as $categoria) { ?>
-                <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
+                <option value="<?php echo $categoria['id']; ?>" <?php if (isset($_POST['categoria']) && $categoria['id']==$_POST['categoria']) {
+                  echo "selected";
+                } ?>><?php echo $categoria['nombre']; ?></option>
               <?php } ?>
             </select>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Fecha desde</label>
-            <input type="text" id="datepicker" class="form-control" name="fecha_desde" placeholder="Seleccione una fecha" autocomplete="off" value="<?php echo date('Y-m-d'); ?>" readonly>
+            <input type="text" id="datepicker" class="form-control" name="fecha_desde" placeholder="Seleccione una fecha" autocomplete="off" value="<?php if(isset($_POST['fecha_desde'])){ echo $_POST['fecha_desde']; }else{ echo date('Y-m-d'); } ?>" readonly>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Fecha hasta</label>
-            <input type="text" id="datepicker2" class="form-control" name="fecha_hasta" placeholder="Seleccione una fecha" autocomplete="off" value="<?php echo date('Y-m-d'); ?>" readonly>
+            <input type="text" id="datepicker2" class="form-control" name="fecha_hasta" placeholder="Seleccione una fecha" autocomplete="off" value="<?php if(isset($_POST['fecha_hasta'])){ echo $_POST['fecha_hasta']; }else{ echo date('Y-m-d'); } ?>" readonly>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Hora desde</label>
-            <input type="text" id="single-input" name="hora_desde" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php echo "15:00"; ?>" readonly>
+            <input type="text" id="single-input" name="hora_desde" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_desde'])){ echo $_POST['hora_desde']; }else{ echo "15:00"; } ?>" readonly>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Hora hasta</label>
-            <input type="text" id="single-input2" name="hora_hasta" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php echo "15:00"; ?>" readonly>
+            <input type="text" id="single-input2" name="hora_hasta" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_hasta'])){ echo $_POST['hora_hasta']; }else{ echo "15:00"; } ?>" readonly>
           </div>
           <input type="submit" name="buscarDisponibilidad" value="Buscar disponibilidad" class="btn btn-success">
         </form>
