@@ -11,7 +11,7 @@ $categoria_seleccionada = explode(" ", $tarifa['categoria']);
 if (isset($_POST['checkout'])) {
 
 ?>
-<section id="portfolio">
+<section id="portfolio" class="wow fadeInDown">
   <div class="container">
     <div class="center">
       <h2>Confirme su Reserva</h2>

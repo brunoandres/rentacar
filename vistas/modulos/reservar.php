@@ -7,7 +7,7 @@ $data = $new->nuevaReserva();
 
 ?>
 
-<section id="portfolio">
+<section id="portfolio" class="wow fadeInDown">
   <div class="container">
     <div class="center">
       <h2>Reservas On-line</h2>
@@ -60,13 +60,13 @@ $data = $new->nuevaReserva();
           </div>-->
           <div class="form-group">
             <label for="exampleInputPassword1">Hora desde</label>
-            <input type="text" id="single-input" name="hora_desde" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_desde'])){ echo $_POST['hora_desde']; }else{ echo "15:00"; } ?>" readonly>
+            <input type="time" id="single-input" name="hora_desde" max="23:59" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_desde'])){ echo $_POST['hora_desde']; }else{ echo "15:00"; } ?>" required="">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Hora hasta</label>
-            <input type="text" id="single-input2" name="hora_hasta" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_hasta'])){ echo $_POST['hora_hasta']; }else{ echo "15:00"; } ?>" readonly>
+            <input type="time" id="single-input2" name="hora_hasta" max="23:59" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_hasta'])){ echo $_POST['hora_hasta']; }else{ echo "15:00"; } ?>">
           </div>
-          <input type="submit" name="buscarDisponibilidad" value="Buscar disponibilidad" class="btn btn-success">
+          <input type="submit" name="buscarDisponibilidad" value="Buscar disponibilidad" class="btn btn-success" required="">
         </form>
       </div>
     </div>

@@ -195,6 +195,8 @@
 $("#fechadesde").mask("9999-99-99");
 $("#fechahasta").mask("9999-99-99");
 
+$("#single-input").mask("99:99");
+$("#single-input2").mask("99:99");
 /*$("#datepicker-input").datepicker({
   showOn: "button",
   buttonImageOnly: true,

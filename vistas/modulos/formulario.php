@@ -5,8 +5,13 @@ $lugares = $new->listarLugares();
 $adicionales = $new->listarAdicionales();
 $categoria = $_SESSION['categoria'];
 $adicionales_modal = $new->listarAdicionales();
+
+if (empty($_SESSION['codigo'])) {
+  header("location:inicio");
+}
+
 ?>
-<section id="portfolio">
+<section id="portfolio" class="wow fadeInDown">
   <div class="container">
     <div class="center">
       <h2><div class="alert alert-success" role="alert">
@@ -205,10 +210,9 @@ $adicionales_modal = $new->listarAdicionales();
         <strong>* Adicionales</strong>
         <p>Todos los adicionales añaden un costo al total de la reserva, en caso de rotura ó robo de los mismos, se deberan abonar con los siguientes valores.</p>
         <ul>
-
-            <?php foreach ($adicionales_modal as $ad) { ?>  
-            <li><?php echo $ad['nombre']; ?> : <?php echo '$'.$ad['tarifa']; ?></li>
-            <?php } ?>
+          <?php foreach ($adicionales_modal as $ad) { ?>  
+          <li><?php echo $ad['nombre']; ?> : <?php echo '$'.$ad['tarifa']; ?></li>
+          <?php } ?>
         </ul>
         <p>* Todos los vehículos cuentan con cubiertas de hielo y nieve.</p>
         <p>* Los precios estan expresados en pesos Argentinos.
