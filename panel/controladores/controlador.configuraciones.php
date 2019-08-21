@@ -42,6 +42,13 @@ class ControladorConfiguraciones{
 
 	}
 
+	static public function tarifaAdicional($id){
+
+		$tarifa = ModeloConfiguraciones::buscarTarifaAdicional($id);
+		return $tarifa;
+
+	}
+
   //Metodo para listar las temporadas
   static public function listarTemporadas($id=null,$estado=null){
 

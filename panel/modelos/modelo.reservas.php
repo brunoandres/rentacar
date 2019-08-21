@@ -46,6 +46,23 @@ class ModeloReservas
 
 	}
 
+	static function buscarTarifa($categoria){
+
+		$tarifa = array();
+		$link = Conexion::ConectarMysql();
+		$query = "select a.id as id_tarifa,a.por_dia as valor_tarifa_diaria,a.por_semana as valor_tarifa_semanal,b.nombre as nombre_temporada,b.fecha_desde as fecha_desde_temporada,b.fecha_hasta as fecha_hasta_temporada,c.nombre as categoria,c.activa as categoria_activa,c.promo as permite_promo from tarifas a, temporadas b, categorias c where a.id_temporada = b.id and a.id_categoria = c.id and a.activa = 1 and b.activa = 1 and c.activa and c.id = $categoria";
+		$sql = mysqli_query($link,$query);
+		while ($filas = mysqli_fetch_assoc($sql)) {
+			$tarifa['valor_diario'] = $filas['valor_tarifa_diaria'];
+			$tarifa['valor_semanal'] = $filas['valor_tarifa_semanal'];
+			$tarifa['permite_promo'] = $filas['permite_promo'];
+			$tarifa['categoria'] = $filas['categoria'];
+		}
+
+		return $tarifa;
+		mysql_close($link);
+	}
+
 	static function codigoReserva($longitud){
 
 		$key = '';

@@ -4,13 +4,16 @@ $new = new ControladorConfiguraciones();
 $lugares = $new->listarLugares();
 $adicionales = $new->listarAdicionales();
 
+$categoria = $_SESSION['categoria'];
+
 ?>
 <section id="portfolio">
   <div class="container">
     <div class="center">
       <h2>Hay disponibilidad!</h2>
-      <p class="lead">Complete el siguiente formulario para continuar con su reserva desde el <?php echo $_SESSION['fecha_desde']; ?> hasta el <?php echo $_SESSION['fecha_hasta']; ?></p>
+      <p class="lead">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></p>
       <p># Código reserva : <?php echo $_SESSION['codigo']; ?></p>
+      <p>Categoria  : <?php echo $categoria; ?></p>
     </div>
     <div class="row h-100 justify-content-center align-items-center">
         <div class="col-md-8 order-md-1">
@@ -20,6 +23,7 @@ $adicionales = $new->listarAdicionales();
               <div class="col-md-6 mb-3">
                 <label for="firstName">Nombre</label>
                 <input type="text" class="form-control" id="firstName" placeholder="Ingrese nombre" value="" required>
+                <input type="hidden" name="id_categoria" value="<?php echo $categoria; ?>">
                 <div class="invalid-feedback">
                   Complete el campo con su nombre.
                 </div>
@@ -94,7 +98,7 @@ $adicionales = $new->listarAdicionales();
               </div>-->
             </div>
             <p>Los adicionales están sujetos a disponibilidad.</p>
-            <select class="form-control select2" multiple="multiple" id="adicionales" name="adicionales" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
+            <select class="form-control select2" multiple="multiple" id="adicionales" name="adicionales[]" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
                     <?php foreach ($adicionales as $adicional) {?>
                       <option value="<?php echo $adicional['id']; ?>"><?php echo $adicional['nombre'].' $ '.$adicional['tarifa']; ?></option>
                     <?php } ?>

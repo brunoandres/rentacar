@@ -8,23 +8,23 @@
 
 
     <!-- Bootstrap -->
-    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vistas/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="vistas/css/font-awesome.min.css">
     <link href="vistas/css/animate.min.css" rel="stylesheet">
     <link href="vistas/css/prettyPhoto.css" rel="stylesheet">
     <link href="vistas/css/style.css" rel="stylesheet">
     <link href="vistas/css/responsive.css" rel="stylesheet">
+
     <!-- =======================================================
       Theme Name: Gp
       Theme URL: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-templat/
       Author: BootstrapMade
       Author URL: https://bootstrapmade.com
     ======================================================= -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="vistas/css/jquery.timepicker.min.css">
 
     <!-- datepicker -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="vistas/css/jquery-ui.css">
 
     <!-- timepicker -->
     <link rel="stylesheet" href="vistas/css/bootstrap-clockpicker.min.css">
@@ -40,19 +40,21 @@
     <script src="vistas/js/wow.min.js"></script>
     <script src="vistas/js/main.js"></script>
 
+
+
     <!-- datepicker -->
 
     <!-- SweetAlert 2 -->
     <script src="panel/vistas/plugins/sweetalert2/sweetalert2.all.js"></script>
 
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="vistas/js/jquery-1.12.4.js"></script>
+    <script src="vistas/js/jquery-ui.js"></script>
     <script src="vistas/js/bootstrap-clockpicker.min.js"></script>
 
     <script src="panel/vistas/bower_components/select2/dist/js/select2.full.js"></script>
 
-    <title>Austral Rentacar</title>
+    <title>Patagonia Austral Rentacar Bariloche</title>
   </head>
   <body>
 
@@ -97,9 +99,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
 
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
-    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/holder.min.js"></script>
+    <script src="vistas/js/popper.min.js"></script>
+    <script src="vistas/js/bootstrap.min.js"></script>
+    <script src="vistas/js/holder.min.js"></script>
     <script>
       // Example starter JavaScript for disabling form submissions if there are invalid fields
       (function() {
@@ -124,6 +126,6 @@
     </script>
 
     <script src="vistas/js/script.js"></script>
-
+    <script src="vistas/js/maskDate.js"></script>
   </body>
 </html>

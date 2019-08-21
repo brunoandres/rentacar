@@ -1,16 +1,21 @@
 <?php
+$categoria = $_POST['id_categoria'];
+$total_dias = $_SESSION['total_dias'];
 
 $new = new ControladorConfiguraciones();
 $lugares = $new->listarLugares();
 
+$new2 = new ControladorReservas();
+$tarifa = $new2->tarifaReserva($categoria);
+$categoria_seleccionada = explode(" ", $tarifa['categoria']);
 if (isset($_POST['checkout'])) {
 
 ?>
 <section id="portfolio">
   <div class="container">
     <div class="center">
-      <h2>Detalle Reserva</h2>
-      <p class="lead">Complete el siguiente formulario para continuar con su reserva desde el <?php echo $_SESSION['fecha_desde']; ?> hasta el <?php echo $_SESSION['fecha_hasta']; ?></p>
+      <h2>Confirme su Reserva</h2>
+      <p class="lead">Verifique los datos de su reserva para confirmarla.</p>
       <p># Código reserva : <?php echo $_SESSION['codigo']; ?></p>
     </div>
     <div class="row">
@@ -22,189 +27,133 @@ if (isset($_POST['checkout'])) {
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Product name</h6>
-                <small class="text-muted">Brief description</small>
+                <h6 class="my-0">Categoria elegida</h6>
+                <small class="text-muted"><?php echo $tarifa['categoria']; ?></small>
               </div>
-              <span class="text-muted">$12</span>
+              <span class="text-success"><strong>(<?php echo $categoria_seleccionada[1]; ?>)</strong></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
+                <h6 class="my-0">Días de reservas</h6>
+                <small class="text-muted">Cantidad de días</small>
               </div>
-              <span class="text-muted">$8</span>
+              <span class="text-success"><strong>(<?php echo $total_dias; ?>)</strong></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
+                <h6 class="my-0">Valor diario</h6>
+                <small class="text-muted">Tarifa por día</small>
               </div>
-              <span class="text-muted">$5</span>
+              <span class="text-success"><strong>$<?php echo $tarifa['valor_diario']; ?></strong></span>
             </li>
             <li class="list-group-item d-flex justify-content-between bg-light">
               <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
+                <h6 class="my-0">Valor reserva</h6>
+                
+                  
+                <small class="text-muted">Por días selecionados</small>
               </div>
-              <span class="text-success">-$5</span>
+              <span class="text-success"><strong>$<?php echo $tarifa['valor_diario']*$total_dias; ?></strong></span>
             </li>
+            
+
+            <?php  
+            $tarifa_ad = null;
+            if (!empty($_POST['adicionales'])) {
+              $adicionales = $_POST['adicionales'];
+              foreach ($adicionales as $adicional => $value) {
+                $tarifa_adicional = $new->tarifaAdicional($value);
+                
+                $tarifa_ad+=$tarifa_adicional['tarifa'];
+              }
+            
+
+            ?>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0"><?php echo $tarifa_adicional['nombre']; ?> + </h6>
+                <small class="text-muted">Adicional seleccionado</small>
+              </div>
+              <span class="text-success"><strong>$<?php echo $tarifa_adicional['tarifa']; ?></strong></span>
+            </li>
+            <?php } ?>
+
             <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
+              <span>Total Reserva (ARG)</span>
+              <strong>
+
+              
+              <?php 
+              $total = null;
+
+              if ($tarifa['permite_promo']==0) {
+                $total = ($tarifa['valor_diario']*$total_dias)+$tarifa_ad;
+              }else{
+                $total = $tarifa['valor_semanal'];
+              } 
+
+              echo '$'.$total;
+              ?>
+     
+              </strong>
             </li>
+
           </ul>
 
-          <form class="card p-2">
+          <form class="card p-2" method="GET">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Promo code">
+              <input type="text" class="form-control" placeholder="Código Descuento">
               <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary">Redeem</button>
+                <button type="submit" class="btn btn-secondary">Aplicar</button>
               </div>
             </div>
           </form>
         </div>
         <div class="col-md-8 order-md-1">
-          <h3 class="mb-3">Datos Personales</h3>
+          <h3 class="mb-3">Detalles de su Reserva</h3>
           <form class="needs-validation" novalidate method="post">
+            <hr class="mb-4">
             <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="firstName">Nombre</label>
-                <input type="text" class="form-control" id="firstName" placeholder="Ingrese nombre" value="" required>
-                <div class="invalid-feedback">
-                  Complete el campo con su nombre.
-                </div>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="lastName">Apellido</label>
-                <input type="text" class="form-control" id="lastName" placeholder="Ingrese apellido" value="" required>
-                <div class="invalid-feedback">
-                  Complete el campo con su apellido.
-                </div>
-              </div>
-            </div>
 
-            <div class="mb-3">
-              <label for="username">N° de Teléfono</label>
-              <div class="input-group">
-                <!--<div class="input-group-prepend">
-                  <span class="input-group-text">@</span>
-                </div>-->
-                <input type="number" class="form-control" id="username" placeholder="Ingrese su número de teléfono" required>
-                <div class="invalid-feedback" style="width: 100%;">
-                  Complete el campo con su número de teléfono
-                </div>
+              <div class="col-md-12">
+              
+                <ul><div class="shadow-none p-3 mb-5 bg-light rounded">Fecha desde </div></ul>
+                <ul><div class="shadow-none p-3 mb-5 bg-light rounded">Fecha hasta </div></ul>  
+                <ul><div class="shadow-none p-3 mb-5 bg-light rounded">Lugar de retiro </div></ul>
+                <ul><div class="shadow-none p-3 mb-5 bg-light rounded">Lugar de entrega</div></ul>
+      
               </div>
-            </div>
 
-            <div class="mb-3">
-              <label for="email">Dirección de Email</label>
-              <input type="email" class="form-control" id="email" placeholder="juanperez@example.com">
-              <div class="invalid-feedback">
-                Complete el campo con su dirección de email válido.
-              </div>
-            </div>
+              <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+  Launch demo modal
+</button>
 
-            <div class="mb-3">
-              <label for="address">N° de Vuelo</label>
-              <input type="text" class="form-control" id="address" placeholder="AR1694">
-              <div class="invalid-feedback">
-                Complete el campo con su n° de vuelo.
-              </div>
-            </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="country">Lugar de retiro</label>
-                <select class="form-control" id="select_categoria" name="select_categoria" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
-                          <?php foreach ($lugares as $lugar) {?>
-                            <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
-                          <?php } ?>
-                  </select>
-                <div class="invalid-feedback">
-                  Seleccione un lugar de retiro.
-                </div>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="country">Lugar de entrega</label>
-                <select class="form-control" id="select_categoria" name="select_categoria" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
-                          <?php foreach ($lugares as $lugar) {?>
-                            <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
-                          <?php } ?>
-                  </select>
-                <div class="invalid-feedback">
-                  Seleccione un lugar de entrega.
-                </div>
-              </div>
-              <!--<div class="col-md-3 mb-3">
-                <label for="zip">Zip</label>
-                <input type="text" class="form-control" id="zip" placeholder="" required>
-                <div class="invalid-feedback">
-                  Zip code required.
-                </div>
-              </div>-->
             </div>
             <hr class="mb-4">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="same-address">
-              <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-            </div>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="save-info">
-              <label class="custom-control-label" for="save-info">Save this information for next time</label>
-            </div>
-            <hr class="mb-4">
-
-            <h4 class="mb-3">Payment</h4>
-
-            <div class="d-block my-3">
-              <div class="custom-control custom-radio">
-                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                <label class="custom-control-label" for="credit">Credit card</label>
-              </div>
-              <div class="custom-control custom-radio">
-                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                <label class="custom-control-label" for="debit">Debit card</label>
-              </div>
-              <div class="custom-control custom-radio">
-                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                <label class="custom-control-label" for="paypal">Paypal</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="cc-name">Name on card</label>
-                <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                <small class="text-muted">Full name as displayed on card</small>
-                <div class="invalid-feedback">
-                  Name on card is required
-                </div>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="cc-number">Credit card number</label>
-                <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                <div class="invalid-feedback">
-                  Credit card number is required
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3 mb-3">
-                <label for="cc-expiration">Expiration</label>
-                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                <div class="invalid-feedback">
-                  Expiration date required
-                </div>
-              </div>
-              <div class="col-md-3 mb-3">
-                <label for="cc-expiration">CVV</label>
-                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                <div class="invalid-feedback">
-                  Security code required
-                </div>
-              </div>
-            </div>
-            <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+            <br>
+            <button class="btn btn-danger btn-lg btn-block" type="submit">Confirmar Reserva</button>
           </form>
         </div>
       </div>

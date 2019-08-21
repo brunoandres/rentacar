@@ -13,7 +13,7 @@ $data = $new->nuevaReserva();
       <h2>Reservas On-line</h2>
       <p class="lead">Seleccione una categoria e ingrese las fechas para buscar disponibilidad.</p>
     </div>
-    <div class="row">
+    <div class="row h-100 justify-content-center align-items-center">
       <div class="col-sm-6 col-sm-offset-3">
         <form method="post">
           <div class="form-group">
@@ -26,14 +26,38 @@ $data = $new->nuevaReserva();
               <?php } ?>
             </select>
           </div>
+
           <div class="form-group">
+            <label>Fecha desde</label>
+            <div class="input-group">
+              <input type="text" class="form-control fechadesde" name="fecha_desde" placeholder="YYYY / MM / DD" id="fechadesde" autocomplete="off" value="<?php if(isset($_POST['fecha_desde'])){ echo $_POST['fecha_desde']; }else{ echo date('Y-m-d'); } ?>">
+              <span class="input-group-btn">
+            <!--<button class="btn btn-default" type="button" id="datepicker-btn"><i class="fa fa-calendar" aria-hidden="true"></i></button>-->
+            </span>
+            </div>
+            <!-- /input-group -->
+          </div>
+
+          <div class="form-group">
+            <label>Fecha hasta</label>
+            <div class="input-group">
+              <input type="text" class="form-control fechahasta" name="fecha_hasta" placeholder="YYYY / MM / DD" id="fechahasta" autocomplete="off" value="<?php if(isset($_POST['fecha_hasta'])){ echo $_POST['fecha_desde']; }else{ echo date('Y-m-d'); } ?>">
+              <span class="input-group-btn">
+            <!--<button class="btn btn-default" type="button" id="datepicker-btn"><i class="fa fa-calendar" aria-hidden="true"></i></button>-->
+            </span>
+            </div>
+            <!-- /input-group -->
+          </div>
+
+
+          <!--<div class="form-group">
             <label for="exampleInputPassword1">Fecha desde</label>
             <input type="text" id="datepicker" class="form-control" name="fecha_desde" placeholder="Seleccione una fecha" autocomplete="off" value="<?php if(isset($_POST['fecha_desde'])){ echo $_POST['fecha_desde']; }else{ echo date('Y-m-d'); } ?>" readonly>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Fecha hasta</label>
             <input type="text" id="datepicker2" class="form-control" name="fecha_hasta" placeholder="Seleccione una fecha" autocomplete="off" value="<?php if(isset($_POST['fecha_hasta'])){ echo $_POST['fecha_hasta']; }else{ echo date('Y-m-d'); } ?>" readonly>
-          </div>
+          </div>-->
           <div class="form-group">
             <label for="exampleInputPassword1">Hora desde</label>
             <input type="text" id="single-input" name="hora_desde" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_desde'])){ echo $_POST['hora_desde']; }else{ echo "15:00"; } ?>" readonly>

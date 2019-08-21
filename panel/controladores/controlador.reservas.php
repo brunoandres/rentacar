@@ -10,6 +10,14 @@ class ControladorReservas
 
 	}
 
+	static function totalDias($fecha_i,$fecha_f){
+		
+		$dias	= (strtotime($fecha_i)-strtotime($fecha_f))/86400;
+		$dias 	= abs($dias); $dias = floor($dias);		
+		return $dias;
+	}
+
+
 	static function nuevaReserva(){
 
 	    if (isset($_POST['buscarDisponibilidad'])) {
@@ -22,7 +30,10 @@ class ControladorReservas
 		      $hora_hasta  = $_POST['hora_hasta'];
 		  	  $categoria   = $_POST['categoria'];
 
-		      $respuesta = ModeloReservas:: buscarDisponibilidad($categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
+		  	  $total_dias = self::totalDias($fecha_desde,$fecha_hasta);
+
+		  	  if ($total_dias>=3) {
+		  	  	$respuesta = ModeloReservas:: buscarDisponibilidad($categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
 				$codigo = ModeloReservas::codigoReserva(5);
 
 				if (!empty($respuesta)) {
@@ -34,7 +45,9 @@ class ControladorReservas
 
 					$_SESSION['fecha_desde'] = $fecha_desde;
 					$_SESSION['fecha_hasta'] = $fecha_hasta;
-
+					$_SESSION['categoria'] = $categoria;
+					$_SESSION['total_dias'] = $total_dias;
+ 
 					/*echo'<script>
 
 					swal({
@@ -87,6 +100,22 @@ class ControladorReservas
 					alert('No hay disponibilidad!');
 				</script>";
 			}*/
+		  	  }else{
+
+		  	  	echo'<script>
+
+					swal({
+							type: "error",
+							title: "El periodo mínimo de alquiler son de 3 días.",
+							showConfirmButton: true,
+							confirmButtonText: "Volver a intentar"
+							}).then(function(result){
+		
+							})
+
+					</script>';
+
+		  	  }	      
 	    }
   	}
 
@@ -160,6 +189,14 @@ class ControladorReservas
 
 		$categorias = ModeloCategorias::listarCategorias();
 		return $categorias;
+
+	}
+
+	//Buscar los valores de las categorias por temporada
+	static public function tarifaReserva($categoria){
+
+		$tarifas = ModeloReservas::buscarTarifa($categoria);
+		return $tarifas;
 
 	}
 

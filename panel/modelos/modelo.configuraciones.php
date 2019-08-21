@@ -88,6 +88,27 @@ class ModeloConfiguraciones{
       mysqli_close( $link );
   }
 
+  static public function buscarTarifaAdicional($id){
+
+      $tarifa_adicional = array();
+      $link = Conexion::ConectarMysql();
+      
+      $query = "select * from adicionales where id = $id";
+      $sql = mysqli_query($link,$query);
+      
+     
+      while ($filas = mysqli_fetch_array($sql)) {
+          $tarifa_adicional['nombre']=$filas['nombre'];
+          $tarifa_adicional['tarifa']=$filas['tarifa'];
+      }
+
+      return $tarifa_adicional;
+      // Cerrar la conexión.
+      mysqli_close( $link );
+  }
+
+  
+
   static public function listarLugares($id){
 
     $link = Conexion::ConectarMysql();
