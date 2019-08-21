@@ -117,38 +117,12 @@ if (isset($_POST['checkout'])) {
 
               <div class="col-md-12">
               
-                <ul><div class="shadow-none p-3 mb-5 bg-light rounded">Fecha desde </div></ul>
-                <ul><div class="shadow-none p-3 mb-5 bg-light rounded">Fecha hasta </div></ul>  
-                <ul><div class="shadow-none p-3 mb-5 bg-light rounded">Lugar de retiro </div></ul>
-                <ul><div class="shadow-none p-3 mb-5 bg-light rounded">Lugar de entrega</div></ul>
-      
+                <ul>Fecha desde</ul>
+                <ul>Fecha hasta</ul>
+                <ul>Lugar retiro</ul>
+                <ul>Lugar entrega</ul>
+
               </div>
-
-              <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
             </div>
             <hr class="mb-4">
@@ -165,3 +139,4 @@ if (isset($_POST['checkout'])) {
 <?php }else{
   echo "NO POST";
 } ?>
+

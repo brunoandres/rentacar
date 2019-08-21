@@ -3,17 +3,23 @@
 $new = new ControladorConfiguraciones();
 $lugares = $new->listarLugares();
 $adicionales = $new->listarAdicionales();
-
 $categoria = $_SESSION['categoria'];
-
+$adicionales_modal = $new->listarAdicionales();
 ?>
 <section id="portfolio">
   <div class="container">
     <div class="center">
-      <h2>Hay disponibilidad!</h2>
+      <h2><div class="alert alert-success" role="alert">
+  Reserva Disponible!
+</div></h2>
       <p class="lead">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></p>
       <p># Código reserva : <?php echo $_SESSION['codigo']; ?></p>
-      <p>Categoria  : <?php echo $categoria; ?></p>
+    </div>
+    <div class="row h-100 justify-content-center align-items-center">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+      Ver más Info
+    </button>
     </div>
     <div class="row h-100 justify-content-center align-items-center">
         <div class="col-md-8 order-md-1">
@@ -36,38 +42,40 @@ $categoria = $_SESSION['categoria'];
                 </div>
               </div>
             </div>
-
-            <div class="mb-3">
-              <label for="username">N° de Teléfono</label>
-              <div class="input-group">
-                <!--<div class="input-group-prepend">
-                  <span class="input-group-text">@</span>
-                </div>-->
-                <input type="number" class="form-control" id="username" placeholder="Ingrese su número de teléfono" required>
-                <div class="invalid-feedback" style="width: 100%;">
-                  Complete el campo con su número de teléfono
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="username">N° de Teléfono</label>
+                <div class="input-group">
+                  <!--<div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                  </div>-->
+                  <input type="number" class="form-control" id="username" placeholder="Cod. Área + Nº" required>
+                  <div class="invalid-feedback" style="width: 100%;">
+                    Complete el campo con su número de teléfono
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="mb-3">
-              <label for="email">Dirección de Email</label>
-              <input type="email" class="form-control" id="email" placeholder="juanperez@example.com" required="">
-              <div class="invalid-feedback">
-                Complete el campo con su dirección de email válido.
+              <div class="col-md-6 mb-3">
+                <label for="email">Dirección de Email</label>
+                <input type="email" class="form-control" id="email" placeholder="juanperez@example.com" required="">
+                <div class="invalid-feedback">
+                  Complete el campo con su dirección de email válido.
+                </div>
               </div>
-            </div>
 
-            <div class="mb-3">
-              <label for="address">N° de Vuelo</label>
-              <input type="text" class="form-control" id="address" placeholder="AR1694">
-              <div class="invalid-feedback">
-                Complete el campo con su n° de vuelo.
-              </div>
             </div>
 
             <div class="row">
-              <div class="col-md-6 mb-3">
+              <div class="col-md-4 mb-3">
+                <label for="address">N° de Vuelo</label>
+                <input type="text" class="form-control" id="address" placeholder="Ej: AR1694">
+                <div class="invalid-feedback">
+                  Complete el campo con su n° de vuelo.
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-3">
                 <label for="country">Lugar de retiro</label>
                 <select class="form-control" id="select_categoria" name="select_categoria" style="width: 100%;">
                           <?php foreach ($lugares as $lugar) {?>
@@ -78,7 +86,8 @@ $categoria = $_SESSION['categoria'];
                   Seleccione un lugar de retiro.
                 </div>
               </div>
-              <div class="col-md-6 mb-3">
+
+              <div class="col-md-4 mb-3">
                 <label for="country">Lugar de entrega</label>
                 <select class="form-control" id="select_categoria" name="select_categoria" style="width: 100%;">
                           <?php foreach ($lugares as $lugar) {?>
@@ -89,15 +98,18 @@ $categoria = $_SESSION['categoria'];
                   Seleccione un lugar de entrega.
                 </div>
               </div>
-              <!--<div class="col-md-3 mb-3">
-                <label for="zip">Zip</label>
-                <input type="text" class="form-control" id="zip" placeholder="" required>
-                <div class="invalid-feedback">
-                  Zip code required.
-                </div>
-              </div>-->
+
             </div>
-            <p>Los adicionales están sujetos a disponibilidad.</p>
+
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Información Adicional</label>
+                  <textarea class="form-control" placeholder="Ingrese alguna Información adicional que desee agregar para su reserva."></textarea>
+                </div>
+              </div>
+            </div>
+            <p class="text-justify">Los adicionales están sujetos a disponibilidad.</p>
             <select class="form-control select2" multiple="multiple" id="adicionales" name="adicionales[]" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
                     <?php foreach ($adicionales as $adicional) {?>
                       <option value="<?php echo $adicional['id']; ?>"><?php echo $adicional['nombre'].' $ '.$adicional['tarifa']; ?></option>
@@ -164,7 +176,7 @@ $categoria = $_SESSION['categoria'];
               </div>
             </div>-->
             <hr class="mb-4">
-            <button class="btn btn-success btn-lg btn-block" type="submit" name="checkout">Continue to checkout</button>
+            <button class="btn btn-info btn-lg btn-block" type="submit" name="checkout">Click para continuar</button>
           </form>
         </div>
       </div>
@@ -173,3 +185,39 @@ $categoria = $_SESSION['categoria'];
   <!--/.container-->
 </section>
 <!--/#contact-page-->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Información a tener en cuenta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <strong>* Entrega y devolución : </strong>
+        <p>Las entregas y devoluciones de los vehículos se realizan en el Centro de Bariloche, Terminal de Omnibus y Aeropuerto, de ser necesario especifique su dirección en zona céntrica en el campo observación.</p>
+        <strong>* Horarios : </strong>
+        <p>El horario de devolución del vehículo deberá ser el mismo definido en la reserva, de lo contrario se cobrará el adicional como un día más de alquiler.
+        <strong>Consulte!</strong></p>
+        <strong>* Adicionales</strong>
+        <p>Todos los adicionales añaden un costo al total de la reserva, en caso de rotura ó robo de los mismos, se deberan abonar con los siguientes valores.</p>
+        <ul>
+
+            <?php foreach ($adicionales_modal as $ad) { ?>  
+            <li><?php echo $ad['nombre']; ?> : <?php echo '$'.$ad['tarifa']; ?></li>
+            <?php } ?>
+        </ul>
+        <p>* Todos los vehículos cuentan con cubiertas de hielo y nieve.</p>
+        <p>* Los precios estan expresados en pesos Argentinos.
+        El pago se realiza directamente en <strong>efectivo</strong> o por medio de <strong>  transferencia bancaria.</p></strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
