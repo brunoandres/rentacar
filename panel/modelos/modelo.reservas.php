@@ -167,6 +167,51 @@ class ModeloReservas
 
 	}
 
+	static public function nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones){
+
+		$link = Conexion::ConectarMysql();
+
+		//Desactivamos el autommit transaccional
+		mysqli_autocommit($link,FALSE);
+
+	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `create`, `update`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen)";
+	    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+
+	    if ($sql) {
+
+	    	//Recupero la ultima reserva insertada
+	    	$id_reserva_generado = mysqli_insert_id($link);
+
+	    	//Audito
+	    	auditar($_SESSION["id_user"],$query);
+
+	    	$query_detalle = "INSERT INTO `reservas_detalle`(`id_reserva`, `telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`) VALUES ($id_reserva_generado,'$telefono','$email',$retiro,$entrega,'$nro_vuelo','$observaciones')";
+	    	$sql_detalle = mysqli_query($link,$query_detalle) or die (mysqli_error($link));
+
+	    	if ($sql_detalle) {
+	    		//Audito
+	    		auditar($_SESSION["id_user"],$query_detalle);
+	    		mysqli_commit($link);
+
+	    		return "ok";
+
+	    	}else{
+
+	    		mysqli_rollback($link);
+	    		return "error";
+	    	}
+
+	    }else{
+
+	    	return "error";
+	    }
+
+	    // Cerrar la conexión.
+	    mysqli_close( $link );
+
+
+	}
+
 }
 
 

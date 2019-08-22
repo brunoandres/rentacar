@@ -107,8 +107,6 @@ class ModeloConfiguraciones{
       mysqli_close( $link );
   }
 
-  
-
   static public function listarLugares($id){
 
     $link = Conexion::ConectarMysql();
@@ -127,7 +125,7 @@ class ModeloConfiguraciones{
       $sql = mysqli_query($link,$query);
 
       while ($filas = mysqli_fetch_array($sql)) {
-        $lugares[]=$filas;
+        $lugares['nombre']=$filas['lugar'];
       }
       return $lugares;
     }

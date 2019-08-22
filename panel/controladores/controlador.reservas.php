@@ -22,17 +22,20 @@ class ControladorReservas
 
 	    if (isset($_POST['buscarDisponibilidad'])) {
 
-	    	$codigo = 'null';
+
+    		$codigo = 'null';
 		      //Verificar si hay disponibilidad, devolver true
-		      $fecha_desde = $_POST['fecha_desde'];
-		      $fecha_hasta = $_POST['fecha_hasta'];
-		      $hora_desde  = $_POST['hora_desde'];
-		      $hora_hasta  = $_POST['hora_hasta'];
-		  	  $categoria   = $_POST['categoria'];
+	      	$fecha_desde = $_POST['fecha_desde'];
+	      	$fecha_hasta = $_POST['fecha_hasta'];
+	      	$hora_desde  = $_POST['hora_desde'];
+	      	$hora_hasta  = $_POST['hora_hasta'];
+	  	  	$categoria   = $_POST['categoria'];
+	  	  	$nombre		 = $_POST['nombre'];
+	  	  	$apellido 	 = $_POST['apellido'];
 
-		  	  $total_dias = self::totalDias($fecha_desde,$fecha_hasta);
+	  	  	$total_dias = self::totalDias($fecha_desde,$fecha_hasta);
 
-		  	  if ($total_dias>=3) {
+	  	  	if ($total_dias>=3) {
 		  	  	$respuesta = ModeloReservas:: buscarDisponibilidad($categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
 				$codigo = ModeloReservas::codigoReserva(5);
 
@@ -42,11 +45,15 @@ class ControladorReservas
 					}
 
 					$_SESSION['codigo'] = $codigo;
-
 					$_SESSION['fecha_desde'] = $fecha_desde;
 					$_SESSION['fecha_hasta'] = $fecha_hasta;
-					$_SESSION['categoria'] = $categoria;
-					$_SESSION['total_dias'] = $total_dias;
+					$_SESSION['hora_desde']  = $hora_desde;
+					$_SESSION['hora_hasta']  = $hora_hasta;
+ 					$_SESSION['categoria']   = $categoria;
+					$_SESSION['total_dias']  = $total_dias;
+					$_SESSION['mensaje']     = 'Reserva Disponible!';
+					$_SESSION['nombre']      = $nombre; 
+					$_SESSION['apellido']    = $apellido;
  
 					/*echo'<script>
 
@@ -115,7 +122,8 @@ class ControladorReservas
 
 					</script>';
 
-		  	  }	      
+		  	  }
+	    		      
 	    }
   	}
 
@@ -132,28 +140,28 @@ class ControladorReservas
 	}
 
 	//Funcion para agregar nueva reservas
-	static function crearReserva(){
+	static function nuevaReservaInsert(){
 
-		if (isset($_POST['btnCrearReserva'])) {
+		if (isset($_POST['nuevaReserva'])) {
 			/*$nombre = $_POST['nombre'];
 			$fecha_desde = $_POST['fecha_desde'];
 			$fecha_hasta = $_POST['fecha_hasta'];
 			$email = $_POST['email'];
 			$categoria = $_POST['categoria'];*/
 
-			//$respuesta = ModeloReservas::nuevaReserva($nombre,$fecha_desde,$fecha_hasta,$email,$categoria);
-			//if ($respuesta=="ok") {
+			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones);
+			if ($respuesta=="ok") {
 				echo'<script>
 
 				swal({
 						type: "success",
-						title: "Reserva guardada correctamente",
+						title: "Perfecto! Su reserva ha sido completada correctamente",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar"
 						}).then(function(result){
 								if (result.value) {
 
-								window.location = "confirmadas";
+								window.location = "inicio";
 
 								}
 							})

@@ -1,13 +1,35 @@
 <?php
+
+if (empty($_SESSION['codigo'])) {
+  echo "<script>
+  window.location='inicio';
+  </script>";
+}
+
+
 $categoria = $_POST['id_categoria'];
 $total_dias = $_SESSION['total_dias'];
+$retiro = $_POST['retiro'];
+$entrega = $_POST['entrega'];
 
 $new = new ControladorConfiguraciones();
 $lugares = $new->listarLugares();
 
+
+// Lugares
+
+$lugar_retiro = $new->listarLugares($retiro);
+$lugar_entrega = $new->listarLugares($entrega);
+
+
 $new2 = new ControladorReservas();
 $tarifa = $new2->tarifaReserva($categoria);
 $categoria_seleccionada = explode(" ", $tarifa['categoria']);
+
+
+//Metodo para guardar nueva reserva
+$nuevaReserva = $new2->nuevaReservaInsert();
+
 if (isset($_POST['checkout'])) {
 
 ?>
@@ -21,7 +43,7 @@ if (isset($_POST['checkout'])) {
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">Detalle Reserva</span>
+            <span class="text-muted"><i class="fa fa-money" aria-hidden="true"></i> Tarifa y Adicionales</span>
             <!--<span class="badge badge-secondary badge-pill">3</span>-->
           </h4>
           <ul class="list-group mb-3">
@@ -100,7 +122,7 @@ if (isset($_POST['checkout'])) {
 
           </ul>
 
-          <form class="card p-2" method="GET">
+          <form class="card p-2" method="POST">
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Código Descuento">
               <div class="input-group-append">
@@ -110,24 +132,31 @@ if (isset($_POST['checkout'])) {
           </form>
         </div>
         <div class="col-md-8 order-md-1">
-          <h3 class="mb-3">Detalles de su Reserva</h3>
-          <form class="needs-validation" novalidate method="post">
+          <h3 class="mb-3"><i class="fa fa-info" aria-hidden="true"></i> Detalles de su Reserva</h3>
+          <form class="needs-validation" method="post">
+            <input type="hidden" name="categoria_confirmada" value="<?php echo $categoria; ?>">
+            <input type="hidden" name="codigo_reserva" value="<?php echo $_SESSION['codigo']; ?>">
+            <input type="hidden" name="nombre_reserva" value="<?php echo $_SESSION['nombre']; ?>">
+            <input type="hidden" name="nombre_reserva" value="<?php echo $_SESSION['apellido']; ?>">
+            <input type="hidden" name="fecha_desde" value="<?php echo $_SESSION['fecha_desde']; ?>">
+            <input type="hidden" name="fecha_hasta" value="<?php echo $_SESSION['fecha_hasta']; ?>">
             <hr class="mb-4">
             <div class="row">
 
               <div class="col-md-12">
               
-                <ul>Fecha desde</ul>
-                <ul>Fecha hasta</ul>
-                <ul>Lugar retiro</ul>
-                <ul>Lugar entrega</ul>
+                <ul><i class="fa fa-calendar" aria-hidden="true"></i> Fecha desde : <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> </ul>
+                <ul><i class="fa fa-calendar" aria-hidden="true"></i> Fecha hasta : <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?> </ul>
+                <ul><i class="fa fa-map-marker" aria-hidden="true"></i> Lugar retiro : <?php echo $lugar_retiro['nombre']; ?></ul>
+                <ul><i class="fa fa-map-marker" aria-hidden="true"></i> Lugar entrega : <?php echo $lugar_entrega['nombre']; ?></ul>
 
               </div>
 
             </div>
             <hr class="mb-4">
             <br>
-            <button class="btn btn-danger btn-lg btn-block" type="submit">Confirmar Reserva</button>
+            <a href="inicio"><button class="btn btn-default btn-lg btn-block" type="button" onclick="return confirm('Desea cancelar su reserva?')">Cancelar <i class="fa fa-times" aria-hidden="true"></i></button></a>
+            <button class="btn btn-danger btn-lg btn-block mt-1" type="submit" name="nuevaReserva">Confirmar Reserva <i class="fa fa-check" aria-hidden="true"></i> </button>
           </form>
         </div>
       </div>

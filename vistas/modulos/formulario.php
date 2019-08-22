@@ -7,7 +7,9 @@ $categoria = $_SESSION['categoria'];
 $adicionales_modal = $new->listarAdicionales();
 
 if (empty($_SESSION['codigo'])) {
-  header("location:inicio");
+  echo "<script>
+  window.location='inicio';
+  </script>";
 }
 
 ?>
@@ -15,7 +17,7 @@ if (empty($_SESSION['codigo'])) {
   <div class="container">
     <div class="center">
       <h2><div class="alert alert-success" role="alert">
-  Reserva Disponible!
+  <?php echo $_SESSION['mensaje']; ?>
 </div></h2>
       <p class="lead">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></p>
       <p># Código reserva : <?php echo $_SESSION['codigo']; ?></p>
@@ -82,7 +84,7 @@ if (empty($_SESSION['codigo'])) {
 
               <div class="col-md-4 mb-3">
                 <label for="country">Lugar de retiro</label>
-                <select class="form-control" id="select_categoria" name="select_categoria" style="width: 100%;">
+                <select class="form-control" id="retiro" name="retiro" style="width: 100%;">
                           <?php foreach ($lugares as $lugar) {?>
                             <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
                           <?php } ?>
@@ -94,7 +96,7 @@ if (empty($_SESSION['codigo'])) {
 
               <div class="col-md-4 mb-3">
                 <label for="country">Lugar de entrega</label>
-                <select class="form-control" id="select_categoria" name="select_categoria" style="width: 100%;">
+                <select class="form-control" id="entrega" name="entrega" style="width: 100%;">
                           <?php foreach ($lugares as $lugar) {?>
                             <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
                           <?php } ?>
