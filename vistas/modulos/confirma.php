@@ -12,6 +12,15 @@ $total_dias = $_SESSION['total_dias'];
 $retiro = $_POST['retiro'];
 $entrega = $_POST['entrega'];
 
+
+$nombre = $_POST['nombre'];
+$apellido = $_POST['apellido'];
+$telefono = $_POST['telefono'];
+$email = $_POST['email'];
+$vuelo = $_POST['vuelo'];
+$informacion = $_POST['informacion'];
+$adicionales = $_POST['adicionales'];
+
 $new = new ControladorConfiguraciones();
 $lugares = $new->listarLugares();
 
@@ -136,10 +145,17 @@ if (isset($_POST['checkout'])) {
           <form class="needs-validation" method="post">
             <input type="hidden" name="categoria_confirmada" value="<?php echo $categoria; ?>">
             <input type="hidden" name="codigo_reserva" value="<?php echo $_SESSION['codigo']; ?>">
-            <input type="hidden" name="nombre_reserva" value="<?php echo $_SESSION['nombre']; ?>">
-            <input type="hidden" name="nombre_reserva" value="<?php echo $_SESSION['apellido']; ?>">
+            <input type="hidden" name="nombre_reserva" value="<?php echo $nombre; ?>">
+            <input type="hidden" name="apellido_reserva" value="<?php echo $apellido; ?>">
+            <input type="hidden" name="telefono_reserva" value="<?php echo $telefono; ?>">
+            <input type="hidden" name="email_reserva" value="<?php echo $email; ?>">
+            <input type="hidden" name="vuelo_reserva" value="<?php echo $vuelo; ?>">
             <input type="hidden" name="fecha_desde" value="<?php echo $_SESSION['fecha_desde']; ?>">
             <input type="hidden" name="fecha_hasta" value="<?php echo $_SESSION['fecha_hasta']; ?>">
+            <input type="hidden" name="retiro_reserva" value="<?php echo $retiro; ?>">
+            <input type="hidden" name="retiro_reserva" value="<?php echo $entrega; ?>">
+            <input type="hidden" name="informacion_reserva" value="<?php echo $informacion; ?>">
+            <input type="hidden" name="adicionales_reserva" value="<?php echo $adicionales; ?>">
             <hr class="mb-4">
             <div class="row">
 

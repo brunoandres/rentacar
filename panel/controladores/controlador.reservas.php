@@ -30,8 +30,8 @@ class ControladorReservas
 	      	$hora_desde  = $_POST['hora_desde'];
 	      	$hora_hasta  = $_POST['hora_hasta'];
 	  	  	$categoria   = $_POST['categoria'];
-	  	  	$nombre		 = $_POST['nombre'];
-	  	  	$apellido 	 = $_POST['apellido'];
+	  	  	//$nombre		 = $_POST['nombre'];
+	  	  	//$apellido 	 = $_POST['apellido'];
 
 	  	  	$total_dias = self::totalDias($fecha_desde,$fecha_hasta);
 
@@ -52,8 +52,8 @@ class ControladorReservas
  					$_SESSION['categoria']   = $categoria;
 					$_SESSION['total_dias']  = $total_dias;
 					$_SESSION['mensaje']     = 'Reserva Disponible!';
-					$_SESSION['nombre']      = $nombre; 
-					$_SESSION['apellido']    = $apellido;
+					/*$_SESSION['nombre']      = $nombre; 
+					$_SESSION['apellido']    = $apellido;*/
  
 					/*echo'<script>
 
@@ -143,11 +143,13 @@ class ControladorReservas
 	static function nuevaReservaInsert(){
 
 		if (isset($_POST['nuevaReserva'])) {
-			/*$nombre = $_POST['nombre'];
+			$nombre = $_POST['nombre_reserva'];
+			$apellido = $_POST['apellido_reserva'];
 			$fecha_desde = $_POST['fecha_desde'];
 			$fecha_hasta = $_POST['fecha_hasta'];
 			$email = $_POST['email'];
-			$categoria = $_POST['categoria'];*/
+			$categoria = $_POST['categoria'];
+
 
 			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones);
 			if ($respuesta=="ok") {
@@ -167,7 +169,7 @@ class ControladorReservas
 							})
 
 				</script>';
-			//}
+			}
 		}
 
 	}
