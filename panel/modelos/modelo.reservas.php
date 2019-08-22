@@ -167,7 +167,7 @@ class ModeloReservas
 
 	}
 
-	static public function nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones){
+	static public function nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales){
 
 		$link = Conexion::ConectarMysql();
 
@@ -191,6 +191,13 @@ class ModeloReservas
 	    	if ($sql_detalle) {
 	    		//Audito
 	    		auditar($_SESSION["id_user"],$query_detalle);
+
+	    		foreach ($adicionales as $adicional) {
+
+	    			$query_adicionales = "INSERT INTO `reservas_adicionales`(`id_reserva`, `id_adicional`) VALUES ($id_reserva_generado,$adicional)";
+	    			$sql_adicionales= mysqli_query($link,$query_adicionales) or die (mysqli_error($link));
+	    		}
+
 	    		mysqli_commit($link);
 
 	    		return "ok";

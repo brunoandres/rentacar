@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 20-08-2019 a las 03:03:28
+-- Tiempo de generación: 22-08-2019 a las 17:48:32
 -- Versión del servidor: 5.7.26
--- Versión de PHP: 5.6.40
+-- Versión de PHP: 7.1.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `auditorias` (
   `query` text COLLATE utf8_spanish2_ci NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=81 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `auditorias`
@@ -148,7 +148,10 @@ INSERT INTO `auditorias` (`id`, `id_usuario`, `query`, `date`) VALUES
 (74, 2, 'INSERT INTO `lugares`(`lugar`, `activo`, `observaciones`) VALUES (\'Hotel Llao Llao\',0,\'\')', '2019-08-19 14:41:06'),
 (75, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'Renault\',`modelo`=\'Clio\',`patente`=\'ABC123\',`estado`=1,`viaja_chile`=1, `observaciones`=\'pequeño rayon lateral derecho \' WHERE id = 1', '2019-08-19 14:59:01'),
 (76, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'Ford\',`modelo`=\'Focus\',`patente`=\'JEM442\',`estado`=0,`viaja_chile`=0, `observaciones`=\'auto de bruno!\' WHERE id = 3', '2019-08-19 15:01:42'),
-(77, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'Ford\',`modelo`=\'Focus\',`patente`=\'JEM442\',`estado`=1,`viaja_chile`=0, `observaciones`=\'auto de bruno!\' WHERE id = 3', '2019-08-19 15:01:46');
+(77, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'Ford\',`modelo`=\'Focus\',`patente`=\'JEM442\',`estado`=1,`viaja_chile`=0, `observaciones`=\'auto de bruno!\' WHERE id = 3', '2019-08-19 15:01:46'),
+(78, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria A\',`activa`=1,`promo`=0 WHERE id = 1', '2019-08-20 15:09:30'),
+(79, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria A\',`activa`=1,`promo`=1 WHERE id = 1', '2019-08-20 15:18:02'),
+(80, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria A\',`activa`=1,`promo`=0 WHERE id = 1', '2019-08-20 15:18:49');
 
 -- --------------------------------------------------------
 
@@ -204,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `nombre`, `activa`, `promo`, `create`, `update`) VALUES
-(1, 'Categoria A', 1, 1, '2019-08-13 12:36:48', '2019-08-13 12:38:01'),
+(1, 'Categoria A', 1, 0, '2019-08-13 12:36:48', '2019-08-20 15:18:49'),
 (2, 'Categoria B', 1, 1, '2019-08-13 12:36:48', '2019-08-16 15:58:29'),
 (3, 'Categoria C', 1, 1, '2019-08-13 12:36:48', '2019-08-16 15:58:32'),
 (4, 'Categoria D', 1, 1, '2019-08-13 12:36:48', '2019-08-16 15:58:36'),
@@ -273,6 +276,7 @@ DROP TABLE IF EXISTS `reservas`;
 CREATE TABLE IF NOT EXISTS `reservas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_categoria` int(11) NOT NULL,
+  `codigo` varchar(10) DEFAULT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   `apellido` varchar(100) NOT NULL,
   `fecha_desde` date DEFAULT NULL,
@@ -293,8 +297,8 @@ CREATE TABLE IF NOT EXISTS `reservas` (
 -- Volcado de datos para la tabla `reservas`
 --
 
-INSERT INTO `reservas` (`id`, `id_categoria`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `create`, `update`) VALUES
-(1, 1, 'Bruno Andres ', '', '2019-07-01', '2019-07-08', NULL, NULL, '600.00', 7, 1, 1, '2019-08-13 12:39:23', '2019-08-13 12:39:23');
+INSERT INTO `reservas` (`id`, `id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `create`, `update`) VALUES
+(1, 1, NULL, 'Bruno', 'Ovando', '2019-07-01', '2019-07-08', '10:00:00', NULL, '600.00', 7, 1, 1, '2019-08-13 12:39:23', '2019-08-22 16:31:15');
 
 -- --------------------------------------------------------
 

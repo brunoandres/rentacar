@@ -143,15 +143,28 @@ class ControladorReservas
 	static function nuevaReservaInsert(){
 
 		if (isset($_POST['nuevaReserva'])) {
+
+			$categoria = $_POST['categoria'];
+			$codigo = $_POST['codigo'];
 			$nombre = $_POST['nombre_reserva'];
 			$apellido = $_POST['apellido_reserva'];
 			$fecha_desde = $_POST['fecha_desde'];
 			$fecha_hasta = $_POST['fecha_hasta'];
-			$email = $_POST['email'];
-			$categoria = $_POST['categoria'];
-
-
-			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones);
+			$hora_desde = $_POST['hora_desde'];
+			$hora_hasta = $_POST['hora_hasta'];
+			$tarifa = $_POST['tarifa'];
+			$total_dias = $_POST['total_dias'];
+			$estado = 1;
+			$origen = 1;
+			$telefono = $_POST['telefono_reserva'];
+			$email = $_POST['email_reserva'];
+			$retiro = $_POST['retiro_reserva'];
+			$entrega = $_POST['entrega_reserva'];
+			$vuelo = $_POST['vuelo_reserva'];
+			$observaciones = $_POST['informacion_reserva'];
+			$adicionales = $_POST['adicionales_reserva'];
+			
+			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales);
 			if ($respuesta=="ok") {
 				echo'<script>
 

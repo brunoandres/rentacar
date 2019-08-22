@@ -17,8 +17,8 @@ if (empty($_SESSION['codigo'])) {
   <div class="container">
     <div class="center">
       <h2><div class="alert alert-success" role="alert">
-  <?php echo $_SESSION['mensaje']; ?>
-</div></h2>
+      <?php echo $_SESSION['mensaje']; ?>
+      </div></h2>
       <p class="lead">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></p>
       <p># Código reserva : <?php echo $_SESSION['codigo']; ?></p>
     </div>
@@ -28,7 +28,7 @@ if (empty($_SESSION['codigo'])) {
       Ver más Info
     </button>
     </div>
-    <div class="row h-100 justify-content-center align-items-center">
+      <div class="row h-100 justify-content-center align-items-center">
         <div class="col-md-8 order-md-1">
           <h3 class="mb-3">Datos Personales</h3>
           <form class="needs-validation" novalidate method="post" action="confirma">
@@ -84,10 +84,10 @@ if (empty($_SESSION['codigo'])) {
 
               <div class="col-md-4 mb-3">
                 <label for="country">Lugar de retiro</label>
-                <select class="form-control" id="retiro" name="retiro" style="width: 100%;">
-                          <?php foreach ($lugares as $lugar) {?>
-                            <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
-                          <?php } ?>
+                  <select class="form-control" id="retiro" name="retiro" style="width: 100%;">
+                    <?php foreach ($lugares as $lugar) {?>
+                      <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
+                    <?php } ?>
                   </select>
                 <div class="invalid-feedback">
                   Seleccione un lugar de retiro.
@@ -96,10 +96,10 @@ if (empty($_SESSION['codigo'])) {
 
               <div class="col-md-4 mb-3">
                 <label for="country">Lugar de entrega</label>
-                <select class="form-control" id="entrega" name="entrega" style="width: 100%;">
-                          <?php foreach ($lugares as $lugar) {?>
-                            <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
-                          <?php } ?>
+                  <select class="form-control" id="entrega" name="entrega" style="width: 100%;">
+                    <?php foreach ($lugares as $lugar) {?>
+                      <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
+                    <?php } ?>
                   </select>
                 <div class="invalid-feedback">
                   Seleccione un lugar de entrega.
@@ -117,11 +117,11 @@ if (empty($_SESSION['codigo'])) {
               </div>
             </div>
             <p class="text-justify">Los adicionales están sujetos a disponibilidad.</p>
-            <select class="form-control select2" multiple="multiple" id="adicionales" name="adicionales[]" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
-                    <?php foreach ($adicionales as $adicional) {?>
-                      <option value="<?php echo $adicional['id']; ?>"><?php echo $adicional['nombre'].' $ '.$adicional['tarifa']; ?></option>
-                    <?php } ?>
-            </select>
+              <select class="form-control select2" multiple="multiple" id="adicionales" name="adicionales[]" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
+                <?php foreach ($adicionales as $adicional) {?>
+                  <option value="<?php echo $adicional['id']; ?>"><?php echo $adicional['nombre'].' $ '.$adicional['tarifa']; ?></option>
+                <?php } ?>
+              </select>
             <!--
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="same-address">
@@ -221,8 +221,7 @@ if (empty($_SESSION['codigo'])) {
         El pago se realiza directamente en <strong>efectivo</strong> o por medio de <strong>  transferencia bancaria.</p></strong>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-        
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>   
       </div>
     </div>
   </div>

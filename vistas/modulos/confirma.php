@@ -153,9 +153,10 @@ if (isset($_POST['checkout'])) {
             <input type="hidden" name="fecha_desde" value="<?php echo $_SESSION['fecha_desde']; ?>">
             <input type="hidden" name="fecha_hasta" value="<?php echo $_SESSION['fecha_hasta']; ?>">
             <input type="hidden" name="retiro_reserva" value="<?php echo $retiro; ?>">
-            <input type="hidden" name="retiro_reserva" value="<?php echo $entrega; ?>">
+            <input type="hidden" name="entrega_reserva" value="<?php echo $entrega; ?>">
             <input type="hidden" name="informacion_reserva" value="<?php echo $informacion; ?>">
             <input type="hidden" name="adicionales_reserva" value="<?php echo $adicionales; ?>">
+            <?php var_dump($adicionales); ?>
             <hr class="mb-4">
             <div class="row">
 
