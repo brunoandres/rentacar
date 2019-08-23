@@ -17,11 +17,9 @@ class ControladorReservas
 		return $dias;
 	}
 
-
 	static function nuevaReserva(){
 
 	    if (isset($_POST['buscarDisponibilidad'])) {
-
 
     		$codigo = 'null';
 		      //Verificar si hay disponibilidad, devolver true
@@ -144,16 +142,16 @@ class ControladorReservas
 
 		if (isset($_POST['nuevaReserva'])) {
 
-			$categoria = $_POST['categoria'];
-			$codigo = $_POST['codigo'];
+			$categoria = $_POST['categoria_confirmada'];
+			$codigo = $_POST['codigo_reserva'];
 			$nombre = $_POST['nombre_reserva'];
 			$apellido = $_POST['apellido_reserva'];
 			$fecha_desde = $_POST['fecha_desde'];
 			$fecha_hasta = $_POST['fecha_hasta'];
 			$hora_desde = $_POST['hora_desde'];
 			$hora_hasta = $_POST['hora_hasta'];
-			$tarifa = $_POST['tarifa'];
-			$total_dias = $_POST['total_dias'];
+			$tarifa = '7000';
+			$total_dias = $_POST['total_dias_reserva'];
 			$estado = 1;
 			$origen = 1;
 			$telefono = $_POST['telefono_reserva'];
@@ -165,7 +163,9 @@ class ControladorReservas
 			$adicionales = $_POST['adicionales_reserva'];
 			
 			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales);
-			if ($respuesta=="ok") {
+
+			echo "respuesta: ".$respuesta;
+			/*if ($respuesta=="ok") {
 				echo'<script>
 
 				swal({
@@ -182,7 +182,7 @@ class ControladorReservas
 							})
 
 				</script>';
-			}
+			}*/
 		}
 
 	}

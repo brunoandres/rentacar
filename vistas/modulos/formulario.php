@@ -3,13 +3,15 @@
 $new = new ControladorConfiguraciones();
 $lugares = $new->listarLugares();
 $adicionales = $new->listarAdicionales();
-$categoria = $_SESSION['categoria'];
+
 $adicionales_modal = $new->listarAdicionales();
 
 if (empty($_SESSION['codigo'])) {
   echo "<script>
   window.location='inicio';
   </script>";
+}else{
+  $categoria = $_SESSION['categoria'];
 }
 
 ?>
