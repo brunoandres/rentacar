@@ -1,12 +1,7 @@
 <?php
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
-//$lugares = $new->listarLugares();
-//$editar = $new->editarLugar();
-/*$editarConfiguracion = new ControladorConfiguraciones();
-$editarConfiguracion -> editarConfiguracion();
-
-*/
+$lugares = $new->listarLugares();
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -43,22 +38,22 @@ $editarConfiguracion -> editarConfiguracion();
 
               <?php
 
-              foreach ($configuraciones as $value) {
+              foreach ($lugares as $lugar) {
 
               ?>
 
               <tr>
-                <td width="50%"><?php echo $value['nombre'];?></td>
+                <td width="50%"><?php echo $lugar['lugar'];?></td>
                 
-                <td><?php if ($value['activa']==1) {
+                <td><?php if ($lugar['activo']==1) {
                   echo "<span class='label label-success'>Si</span>";
                 }else{
                   echo "<span class='label label-danger'>No</span>";
                 };?></td>
-                <td width="20%"><?php echo $value['observaciones'];?></td>
+                <td width="20%"><?php echo $lugar['observaciones'];?></td>
                 <td width="50%" align="left">
 
-                  <button class="btn btn-warning btnEditarConfiguracion" idConfig="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarConfig"><i class="fa fa-pencil"></i></button>
+                  <button class="btn btn-warning btnEditarLugar" idLugar="<?php echo $lugar['id']; ?>" data-toggle="modal" data-target="#modalEditarLugares"><i class="fa fa-pencil"></i></button>
 
 
                 </td>
@@ -93,7 +88,7 @@ $editarConfiguracion -> editarConfiguracion();
 MODAL EDITAR CATEGORÍA
 ======================================-->
 
-<div id="modalEditarLugar" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+<div id="modalEditarLugares" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
 
   <div class="modal-dialog">
 
@@ -128,16 +123,16 @@ MODAL EDITAR CATEGORÍA
 
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nombreConfig" id="nombreConfig" required autocomplete="off" placeholder="Nombre de configuración">
+                <input type="text" class="form-control input-lg" name="nombreLugar" id="nombreLugar" required autocomplete="off" placeholder="Nombre Lugar">
 
-                 <input type="hidden"  name="id_configuracion" id="idConfiguracion" required>
+                 <input type="hidden"  name="id_lugar" id="idLugar" required>
 
               </div>
             </div>
 
             <div class="form-group">
               <label>Observaciones</label>
-              <textarea class="form-control" rows="3" name="observaciones" placeholder="Ingrese alguna observación adicional..."></textarea>
+              <textarea class="form-control" rows="3" name="observaciones" id="observaciones" placeholder="Ingrese alguna observación adicional..."></textarea>
             </div>
 
             <div class="checkbox">

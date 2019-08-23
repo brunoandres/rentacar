@@ -27,7 +27,7 @@
           <div class="icon">
             <i class="fa fa-file-text-o" aria-hidden="true"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="#" class="small-box-footer">Ver más <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -35,14 +35,14 @@
         <!-- small box -->
         <div class="small-box bg-green">
           <div class="inner">
-            <h3>53<sup style="font-size: 20px">%</sup></h3>
+            <h3>5<sup style="font-size: 20px">%</sup></h3>
 
             <p>Categorias</p>
           </div>
           <div class="icon">
             <i class="ion ion-stats-bars"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="categorias" class="small-box-footer">Ver más <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -50,14 +50,14 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
           <div class="inner">
-            <h3>44</h3>
+            <h3>30</h3>
 
-            <p>User Registrations</p>
+            <p>Autos</p>
           </div>
           <div class="icon">
             <i class="ion ion-person-add"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="autos" class="small-box-footer">Ver más <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -65,14 +65,14 @@
         <!-- small box -->
         <div class="small-box bg-red">
           <div class="inner">
-            <h3>65</h3>
+            <h3>3</h3>
 
-            <p>Unique Visitors</p>
+            <p>Configuraciones</p>
           </div>
           <div class="icon">
             <i class="ion ion-pie-graph"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="configuraciones" class="small-box-footer">Ver más <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->

@@ -1,9 +1,14 @@
 <?php
 
 $new = new ControladorConfiguraciones();
+
+//Cargo mi combo dinamico con los lugares
 $lugares = $new->listarLugares();
+
+//Cargo mi combo dinamico con los adicionales
 $adicionales = $new->listarAdicionales();
 
+//Cargo los adicionales para mostrar en ventana modal
 $adicionales_modal = $new->listarAdicionales();
 
 if (empty($_SESSION['codigo'])) {
@@ -23,6 +28,7 @@ if (empty($_SESSION['codigo'])) {
       </div></h2>
       <p class="lead">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></p>
       <p># Código reserva : <?php echo $_SESSION['codigo']; ?></p>
+      <p><?php echo $_SESSION['categoria']; ?></p>
     </div>
     <div class="row h-100 justify-content-center align-items-center">
     <!-- Button trigger modal -->

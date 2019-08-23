@@ -91,7 +91,7 @@ class ModeloReservas
 		$new = new ModeloCategorias();
 
 		$link 		= Conexion::ConectarMysql();
-		$query 		= "select * from reservas where id_categoria = $categoria and estado = 1";
+		$query 		= "select * from reservas where id_categoria = $categoria and estado = 1 and fecha_hasta >= '2019-08-01'";
 		$resultado 	= mysqli_query($link,$query);
 
 		//retorno valor de buscarDisponibilidad (flag)
@@ -125,6 +125,9 @@ class ModeloReservas
 			//retorno valor de buscarDisponibilidad (flag), entra en mi bucle como false
 			$reserva_ok = false;
 			$data[] = $filas;
+
+			//Defino variable para saber si puedo entregar el auto en el dia
+			$disponibleEnEldia = false;
 			//guardo los datos ya desde la base de datos para recorrer
 			$fechaDesdeConfirmada=$filas['fecha_desde'];
 			$fechaHastaConfirmada=$filas['fecha_hasta'];
@@ -142,11 +145,14 @@ class ModeloReservas
 			} else $reserva_ok= false;
 
 			if ($reserva_ok==false){
-				$contador = $contador - 1;
+				//Descontar en un el total de autos para cada reserva recorrida
+				//Seteo varible $contador a entero para no tener problemas de tipo de operador
+				settype($contador, "integer");
+				$contador = $contador-1;
 				$sumaDeChoques =$sumaDeChoques+1;
 			}
 
-		}
+		}//FIN WHILE
 
 		if ($contador > 0){
 			$reserva_ok= true;
@@ -154,15 +160,14 @@ class ModeloReservas
 		//echo "SI Tenes auto <br>";
 				//echo $contador;
 		}else{
-				$reserva_ok=false;
-				$msj='falta auto';
-			    //echo "NO Tenes auto <br>";
-				//echo $contador;
+			$reserva_ok=false;
+			$msj='falta auto';
+		    //echo "NO Tenes auto <br>";
+			//echo $contador;
 		}
 
-
-			//echo $contador=$msj.$reserva;
-			//var_dump($contador);
+		//echo $contador=$msj.$reserva;
+		//var_dump($contador);
 		return $contador;
 
 	}
@@ -174,7 +179,7 @@ class ModeloReservas
 		//Desactivamos el autommit transaccional
 		mysqli_autocommit($link,FALSE);
 
-	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `create`, `update`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen)";
+	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen)";
 	    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
 
 	    if ($sql) {
@@ -190,13 +195,13 @@ class ModeloReservas
 
 	    	if ($sql_detalle) {
 	    		//Audito
-	    		auditar($_SESSION["id_user"],$query_detalle);
+	    		//auditar($_SESSION["id_user"],$query_detalle);
 
-	    		foreach ($adicionales as $adicional) {
+	    		/*foreach ($adicionales as $adicional => $value) {
 
-	    			$query_adicionales = "INSERT INTO `reservas_adicionales`(`id_reserva`, `id_adicional`) VALUES ($id_reserva_generado,$adicional)";
+	    			$query_adicionales = "INSERT INTO `reservas_adicionales`(`id_reserva`, `id_adicional`) VALUES ($id_reserva_generado,$value)";
 	    			$sql_adicionales= mysqli_query($link,$query_adicionales) or die (mysqli_error($link));
-	    		}
+	    		}*/
 
 	    		mysqli_commit($link);
 

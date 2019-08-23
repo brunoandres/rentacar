@@ -8,6 +8,9 @@
       <div class="col-sm-8 col-sm-offset-2">
         <div id="sendmessage">Your message has been sent. Thank you!</div>
         <div id="errormessage"></div>
+        <p>Teléfonos de contacto</p>
+        <p class="pull-right">+54 9 2944317005</p>
+        <p>+54 9 2944242615</p>
         <form action="" method="post" role="form" class="contactForm">
           <div class="form-group">
             <input type="text" name="name" class="form-control" id="name" placeholder="Nombre y Apellido" data-rule="minlen:4"

@@ -12,7 +12,7 @@ class ModeloConfiguraciones{
     $configuraciones = array();
     $link = Conexion::ConectarMysql();
 
-    //el id puede venir vacio, asi retorno todas las categorias
+    //el id puede venir vacio, asi retorno todas listarAdicionaleslas categorias
     if ($id == null) {
       $query = "select * from configuraciones";
       $sql = mysqli_query($link,$query);
@@ -141,7 +141,7 @@ class ModeloConfiguraciones{
 
     //el id puede venir vacio, asi retorno todas los adicionales
     if ($id == null) {
-      $query = "select * from adicionales order by nombre asc";
+      $query = "select * from adicionales where habilitado = 1 order by nombre asc";
       $sql = mysqli_query($link,$query);
       while ($filas = mysqli_fetch_array($sql)) {
         $adicionales[]=$filas;

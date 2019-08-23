@@ -17,32 +17,31 @@ class ControladorReservas
 		return $dias;
 	}
 
-	static function nuevaReserva(){
+	static function buscarDisponibilidad(){
 
 	    if (isset($_POST['buscarDisponibilidad'])) {
 
     		$codigo = 'null';
-		      //Verificar si hay disponibilidad, devolver true
 	      	$fecha_desde = $_POST['fecha_desde'];
 	      	$fecha_hasta = $_POST['fecha_hasta'];
 	      	$hora_desde  = $_POST['hora_desde'];
 	      	$hora_hasta  = $_POST['hora_hasta'];
 	  	  	$categoria   = $_POST['categoria'];
-	  	  	//$nombre		 = $_POST['nombre'];
-	  	  	//$apellido 	 = $_POST['apellido'];
 
 	  	  	$total_dias = self::totalDias($fecha_desde,$fecha_hasta);
 
 	  	  	if ($total_dias>=3) {
 		  	  	$respuesta = ModeloReservas:: buscarDisponibilidad($categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
+
+		  	  	//Generar un codigo de reserva aleatorio
 				$codigo = ModeloReservas::codigoReserva(5);
+				//var_dump($respuesta);
 
-				if (!empty($respuesta)) {
-					foreach ($respuesta as $value) {
-					echo '<br><h3>Autos disponibles : '.$value.'</h3>';
-					}
+				//Si contador devuelve mayor a 1 es por que hay disponibilidad
+				settype($respuesta, "integer");
+				if ($respuesta>=1 && $respuesta!='') {
 
-					$_SESSION['codigo'] = $codigo;
+					$_SESSION['codigo']      = $codigo;
 					$_SESSION['fecha_desde'] = $fecha_desde;
 					$_SESSION['fecha_hasta'] = $fecha_hasta;
 					$_SESSION['hora_desde']  = $hora_desde;
@@ -50,30 +49,21 @@ class ControladorReservas
  					$_SESSION['categoria']   = $categoria;
 					$_SESSION['total_dias']  = $total_dias;
 					$_SESSION['mensaje']     = 'Reserva Disponible!';
-					/*$_SESSION['nombre']      = $nombre; 
-					$_SESSION['apellido']    = $apellido;*/
  
-					/*echo'<script>
+					echo "<script>
 
-					swal({
-							type: "success",
-							title: "Hay disponibilidad!",
-							showConfirmButton: true,
-							confirmButtonText: "Continuar..."
-							}).then(function(result){
-								window.location="formulario"
-							})
+					window.location='formulario';
 
-					</script>';*/
+					</script>";
 
-					header("location:formulario");
+					
 
 				}else{
 					echo'<script>
 
 					swal({
 							type: "error",
-							title: "No hay disponibilidad, intente cambiar las fechas o categoria seleccionada.",
+							title: "No hay disponibilidad para las fechas indicadas.",
 							showConfirmButton: true,
 							confirmButtonText: "Volver a intentar"
 							}).then(function(result){
@@ -140,7 +130,8 @@ class ControladorReservas
 	//Funcion para agregar nueva reservas
 	static function nuevaReservaInsert(){
 
-		if (isset($_POST['nuevaReserva'])) {
+		if (isset($_POST['confirmaReserva'])) {
+
 
 			$categoria = $_POST['categoria_confirmada'];
 			$codigo = $_POST['codigo_reserva'];
@@ -150,7 +141,7 @@ class ControladorReservas
 			$fecha_hasta = $_POST['fecha_hasta'];
 			$hora_desde = $_POST['hora_desde'];
 			$hora_hasta = $_POST['hora_hasta'];
-			$tarifa = '7000';
+			$tarifa = $_POST['tarifa_reserva'];
 			$total_dias = $_POST['total_dias_reserva'];
 			$estado = 1;
 			$origen = 1;
@@ -160,17 +151,50 @@ class ControladorReservas
 			$entrega = $_POST['entrega_reserva'];
 			$vuelo = $_POST['vuelo_reserva'];
 			$observaciones = $_POST['informacion_reserva'];
-			$adicionales = $_POST['adicionales_reserva'];
+			$adicionales = $_SESSION['adicionales'];
 			
-			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales);
+			/*$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales);*/
 
-			echo "respuesta: ".$respuesta;
+			echo'<script>
+
+				swal({
+						type: "success",
+						title: "Perfecto! Su reserva ha sido completada correctamente",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){
+								if (result.value) {
+
+								window.location = "inicio";
+
+								}
+							})
+
+				</script>';
+			
 			/*if ($respuesta=="ok") {
 				echo'<script>
 
 				swal({
 						type: "success",
 						title: "Perfecto! Su reserva ha sido completada correctamente",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){
+								if (result.value) {
+
+								window.location = "inicio";
+
+								}
+							})
+
+				</script>';
+			}else{
+				echo'<script>
+
+				swal({
+						type: "error",
+						title: "Error!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar"
 						}).then(function(result){

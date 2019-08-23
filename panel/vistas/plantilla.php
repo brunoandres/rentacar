@@ -225,6 +225,7 @@ CUERPO DOCUMENTO
   <script src="vistas/js/tarifas.js"></script>
   <script src="vistas/js/configuraciones.js"></script>
   <script src="vistas/js/autos.js"></script>
+  <script src="vistas/js/lugares.js"></script>
   <script src="vistas/tablas/tablas.js"></script>
   <script src="vistas/js/script.js"></script>
   <script src="vistas/js/validator.js"></script>
