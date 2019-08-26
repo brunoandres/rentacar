@@ -21,11 +21,12 @@ if (isset($_POST['checkout'])) {
   $_SESSION['email'] = $_POST['email'];
   $_SESSION['vuelo'] = $_POST['vuelo'];
   $_SESSION['informacion'] = $_POST['informacion'];
-
-  if (empty($_POST['adicionales'])) {
+  $_SESSION['hora_desde'] = $_POST['hora_desde'];
+  $_SESSION['hora_hasta'] = $_POST['hora_hasta'];
+  
+   if (empty($_POST['adicionales'])) {
     $_SESSION['adicionales']='';
   }else{
-
     $_SESSION['adicionales'] = $_POST['adicionales'];
   } 
 
@@ -163,7 +164,8 @@ if (isset($_POST['checkout'])) {
           <input type="hidden" name="retiro_reserva" value="<?php echo $_SESSION['retiro']; ?>">
           <input type="hidden" name="entrega_reserva" value="<?php echo $_SESSION['entrega']; ?>">
           <input type="hidden" name="informacion_reserva" value="<?php echo $_SESSION['informacion']; ?>">
-          
+          <input type="hidden" name="hora_desde_reserva" value="<?php echo $_SESSION['hora_desde']; ?>">
+          <input type="hidden" name="hora_hasta_reserva" value="<?php echo $_SESSION['hora_hasta']; ?>">
           <input type="hidden" name="total_dias_reserva" value="<?php echo $_SESSION['total_dias']; ?>">
           <input type="hidden" name="tarifa_reserva" value="<?php echo $_SESSION['tarifa']; ?>">
           <hr class="mb-4">

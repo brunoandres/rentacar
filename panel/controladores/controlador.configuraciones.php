@@ -2,6 +2,13 @@
 
 class ControladorConfiguraciones{
 
+	static public function diasMinimos(){
+
+		$dias = ModeloConfiguraciones::diasMinimos();
+		return $dias;
+
+	}
+
 	//Metodo para listar los autos
   static public function listarAutos($id=null){
 

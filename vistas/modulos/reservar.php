@@ -58,8 +58,14 @@ $data = $new->buscarDisponibilidad();
             <label for="exampleInputPassword1">Hora hasta</label>
             <input type="time" id="single-input2" name="hora_hasta" max="23:59" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_hasta'])){ echo $_POST['hora_hasta']; }else{ echo "15:00"; } ?>" >
           </div>
-          <input type="submit" name="buscarDisponibilidad" value="Buscar disponibilidad" class="btn btn-success" required="">
+          <button type="submit" name="buscarDisponibilidad" class="btn btn-success">Buscar Disponibilidad <i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
+
+
+        <form id="myForm" action="aca" method="POST">
+          
+        </form>
+
       </div>
     </div>
     <!--/.row-->

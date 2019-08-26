@@ -10,6 +10,7 @@ class ControladorReservas
 
 	}
 
+	//Funcion para contabilizar los dias entre fechas seleccionadas.
 	static function totalDias($fecha_i,$fecha_f){
 		
 		$dias	= (strtotime($fecha_i)-strtotime($fecha_f))/86400;
@@ -17,21 +18,40 @@ class ControladorReservas
 		return $dias;
 	}
 
+	//Funcion principal que busca disponibilidad, devuelve el contador de autos disponibles.
 	static function buscarDisponibilidad(){
 
 	    if (isset($_POST['buscarDisponibilidad'])) {
 
-    		$codigo = 'null';
+	    	//Codigo de reserva es null, hasta que se genere aleatoriamente.
+    		$codigo = NULL;
 	      	$fecha_desde = $_POST['fecha_desde'];
 	      	$fecha_hasta = $_POST['fecha_hasta'];
 	      	$hora_desde  = $_POST['hora_desde'];
 	      	$hora_hasta  = $_POST['hora_hasta'];
 	  	  	$categoria   = $_POST['categoria'];
 
+	  	  	//Total de dias entre fechas.
 	  	  	$total_dias = self::totalDias($fecha_desde,$fecha_hasta);
 
-	  	  	if ($total_dias>=3) {
+	  	  	//Busco los dias minimo de alquiler
+	  	  	$cantidad_dias_configuracion = ModeloConfiguraciones::diasMinimos();
+
+	  	  	//En caso de no encontrar la configuracion o que ésta esté mal definida, por defecto serán 3 dias minimo de alquiler.
+	  	  	if (!empty($cantidad_dias_configuracion)) {
+	  	  		$minimo_de_dias = $cantidad_dias_configuracion['dias'];
+	  	  		settype($minimo_de_dias, "integer");
+	  	  	}else{
+	  	  		$minimo_de_dias=3;
+	  	  	}
+
+	  	  	var_dump($minimo_de_dias);
+
+	  	  	//Cantidad de dias minimos para reservar.
+	  	  	if ($total_dias>=$minimo_de_dias) {
 		  	  	$respuesta = ModeloReservas:: buscarDisponibilidad($categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
+
+		  	  	
 
 		  	  	//Generar un codigo de reserva aleatorio
 				$codigo = ModeloReservas::codigoReserva(5);
@@ -50,14 +70,13 @@ class ControladorReservas
 					$_SESSION['total_dias']  = $total_dias;
 					$_SESSION['mensaje']     = 'Reserva Disponible!';
  
-					echo "<script>
+					/*echo "<script>
 
 					window.location='formulario';
 
-					</script>";
+					</script>";*/
 
-					
-
+					var_dump($respuesta);
 				}else{
 					echo'<script>
 
@@ -101,7 +120,7 @@ class ControladorReservas
 
 					swal({
 							type: "error",
-							title: "El periodo mínimo de alquiler son de 3 días.",
+							title: "El periodo mínimo de alquiler son de '.$minimo_de_dias.' dias.",
 							showConfirmButton: true,
 							confirmButtonText: "Volver a intentar"
 							}).then(function(result){
@@ -153,7 +172,7 @@ class ControladorReservas
 			$observaciones = $_POST['informacion_reserva'];
 			$adicionales = $_SESSION['adicionales'];
 			
-			/*$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales);*/
+			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales);
 
 			echo'<script>
 

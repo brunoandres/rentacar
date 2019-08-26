@@ -212,6 +212,20 @@ class ModeloConfiguraciones{
 	    mysqli_close( $link );
 	}
 
+  static public function diasMinimos(){
+
+    $link = Conexion::ConectarMysql();
+    $cantidad = array();
+ 
+    $query = "select * from configuraciones where nombre like '%Cantidad Dias%'";
+    $sql = mysqli_query($link,$query);
+    while ($filas = mysqli_fetch_assoc($sql)) {
+       $cantidad['dias'] = $filas['valor'];
+    }
+    return $cantidad;
+
+  }
+
 
 
   ////////////////////////////////////////

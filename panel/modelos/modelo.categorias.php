@@ -58,6 +58,7 @@ class ModeloCategorias{
 	    while ($filas = mysqli_fetch_assoc($sql)) {
 			$total['total']=$filas['cantidad'];
 		}
+
 	    return $total;
 	    // Cerrar la conexión.
 	    mysqli_close( $link );
