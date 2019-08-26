@@ -48,6 +48,8 @@ if (empty($_SESSION['codigo'])) {
                 <div class="invalid-feedback">
                   Complete el campo con su nombre.
                 </div>
+                <input type="hidden" name="hora_desde" value="<?php echo $_SESSION['hora_desde']; ?>">
+                <input type="hidden" name="hora_hasta" value="<?php echo $_SESSION['hora_hasta']; ?>">
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Apellido</label>

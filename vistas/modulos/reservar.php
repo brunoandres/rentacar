@@ -50,20 +50,15 @@ $data = $new->buscarDisponibilidad();
           </div>
 
           <div class="form-group">
-            <label for="exampleInputPassword1">Hora desde</label>
+            <label>Hora desde</label>
             <input type="time" id="single-input" name="hora_desde" max="23:59" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_desde'])){ echo $_POST['hora_desde']; }else{ echo "15:00"; } ?>" required="">
           </div>
           
           <div class="form-group">
-            <label for="exampleInputPassword1">Hora hasta</label>
-            <input type="time" id="single-input2" name="hora_hasta" max="23:59" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_hasta'])){ echo $_POST['hora_hasta']; }else{ echo "15:00"; } ?>" >
+            <label>Hora hasta</label>
+            <input type="time" id="single-input2" name="hora_hasta" max="23:59" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_hasta'])){ echo $_POST['hora_hasta']; }else{ echo "15:00"; } ?>" required="">
           </div>
-          <button type="submit" name="buscarDisponibilidad" class="btn btn-success">Buscar Disponibilidad <i class="fa fa-search" aria-hidden="true"></i></button>
-        </form>
-
-
-        <form id="myForm" action="aca" method="POST">
-          
+          <button type="submit" name="buscarDisponibilidad" class="btn btn-success btn-lg">Buscar Disponibilidad <i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
 
       </div>

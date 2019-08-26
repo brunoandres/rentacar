@@ -86,7 +86,7 @@ class ModeloReservas
 
 	//Funcion principal para buscar disponibilidad entre fechas
 	static function buscarDisponibilidad($categoria,$fechaDesdeReserva,$fechaHastaReserva,$hora_desde,$hora_hasta){
-
+		$contador_autos = null;
 		//Instancio mi clase categorias para traer total de autos para cada una.
 		$new = new ModeloCategorias();
 
@@ -103,19 +103,19 @@ class ModeloReservas
 		//busco total de autos por categorias
 		switch ($categoria) {
 			case 1:
-				$contador = $new::autosPorCategoria(1);
+				$contador = $new::autosPorCategoria(1,null,null);
 				break;
 			case 2:
-				$contador = $new::autosPorCategoria(2);
+				$contador = $new::autosPorCategoria(2,null,null);
 				break;
 			case 3:
-				$contador = $new::autosPorCategoria(3);
+				$contador = $new::autosPorCategoria(3,null,null);
 				break;
 			case 4:
-				$contador = $new::autosPorCategoria(4);
+				$contador = $new::autosPorCategoria(4,null,null);
 				break;
 			case 5:
-				$contador = $new::autosPorCategoria(5);
+				$contador = $new::autosPorCategoria(5,null,null);
 				break;
 		}
 		$sumaDeChoques = 0;
@@ -133,6 +133,11 @@ class ModeloReservas
 			$fechaHastaConfirmada=$filas['fecha_hasta'];
 			$nroReserva=$filas['id'];
 
+			//Total de autos por categoria
+			$contador_autos = $contador['total'];
+
+			var_dump($contador);
+
        		///Primero evaluo contra las fechas de reservas confirmadas
 			//Evaluo que NO este en el rango la fecha
 			if (!self::check_in_range($fechaDesdeReserva, $fechaHastaReserva, $fechaDesdeConfirmada)) {
@@ -147,14 +152,14 @@ class ModeloReservas
 			if ($reserva_ok==false){
 				//Descontar en un el total de autos para cada reserva recorrida
 				//Seteo varible $contador a entero para no tener problemas de tipo de operador
-				settype($contador, "integer");
-				$contador = $contador-1;
+				settype($contador_autos, "integer");
+				$contador_autos = $contador_autos-1;
 				$sumaDeChoques =$sumaDeChoques+1;
 			}
 
 		}//FIN WHILE
 
-		if ($contador > 0){
+		if ($contador_autos > 0){
 			$reserva_ok= true;
 			$msj= 'Si tiene auto';
 		//echo "SI Tenes auto <br>";
@@ -168,7 +173,7 @@ class ModeloReservas
 
 		//echo $contador=$msj.$reserva;
 		//var_dump($contador);
-		return $contador;
+		return $contador_autos;
 
 	}
 
@@ -186,22 +191,19 @@ class ModeloReservas
 
 	    	//Recupero la ultima reserva insertada
 	    	$id_reserva_generado = mysqli_insert_id($link);
-
-	    	//Audito
-	    	auditar($_SESSION["id_user"],$query);
-
-	    	$query_detalle = "INSERT INTO `reservas_detalle`(`id_reserva`, `telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`) VALUES ($id_reserva_generado,'$telefono','$email',$retiro,$entrega,'$nro_vuelo','$observaciones')";
+	   
+	    	$query_detalle = "INSERT INTO `reservas_detalle`(`id_reserva`, `telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`) VALUES ($id_reserva_generado,'$telefono','$email',$retiro,$entrega,'$vuelo','$observaciones')";
 	    	$sql_detalle = mysqli_query($link,$query_detalle) or die (mysqli_error($link));
 
 	    	if ($sql_detalle) {
 	    		//Audito
 	    		//auditar($_SESSION["id_user"],$query_detalle);
 
-	    		/*foreach ($adicionales as $adicional => $value) {
+	    		foreach ($adicionales as $adicional => $value) {
 
 	    			$query_adicionales = "INSERT INTO `reservas_adicionales`(`id_reserva`, `id_adicional`) VALUES ($id_reserva_generado,$value)";
 	    			$sql_adicionales= mysqli_query($link,$query_adicionales) or die (mysqli_error($link));
-	    		}*/
+	    		}
 
 	    		mysqli_commit($link);
 

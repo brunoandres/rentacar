@@ -10,6 +10,15 @@ class ControladorReservas
 
 	}
 
+	//Funcion para validar que una fecha sea correcta
+	static function validateDate($date, $format = 'Y-m-d'){
+
+    	$d = DateTime::createFromFormat($format, $date);
+    	return $d && $d->format($format) == $date;
+
+	}
+
+
 	//Funcion para contabilizar los dias entre fechas seleccionadas.
 	static function totalDias($fecha_i,$fecha_f){
 		
@@ -31,6 +40,22 @@ class ControladorReservas
 	      	$hora_hasta  = $_POST['hora_hasta'];
 	  	  	$categoria   = $_POST['categoria'];
 
+	  	  	//Valido que las fechas sean al menos correctas
+	  	  	if (!self::validateDate($fecha_desde) || !self::validateDate($fecha_hasta)) {
+	  	  		echo'<script>
+
+					swal({
+							type: "error",
+							title: "Ha ingresado fechas inválidas, intente nuevamente.",
+							showConfirmButton: true,
+							confirmButtonText: "Volver a intentar"
+							}).then(function(result){
+		
+							})
+
+					</script>';
+	  	  	}
+
 	  	  	//Total de dias entre fechas.
 	  	  	$total_dias = self::totalDias($fecha_desde,$fecha_hasta);
 
@@ -49,15 +74,14 @@ class ControladorReservas
 
 	  	  	//Cantidad de dias minimos para reservar.
 	  	  	if ($total_dias>=$minimo_de_dias) {
-		  	  	$respuesta = ModeloReservas:: buscarDisponibilidad($categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
 
-		  	  	
+		  	  	$respuesta = ModeloReservas:: buscarDisponibilidad($categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
 
 		  	  	//Generar un codigo de reserva aleatorio
 				$codigo = ModeloReservas::codigoReserva(5);
 				//var_dump($respuesta);
 
-				//Si contador devuelve mayor a 1 es por que hay disponibilidad
+				//Si contador devuelve mayor igual a 1 es por que hay disponibilidad
 				settype($respuesta, "integer");
 				if ($respuesta>=1 && $respuesta!='') {
 
@@ -70,13 +94,12 @@ class ControladorReservas
 					$_SESSION['total_dias']  = $total_dias;
 					$_SESSION['mensaje']     = 'Reserva Disponible!';
  
-					/*echo "<script>
+					echo "<script>
 
 					window.location='formulario';
 
-					</script>";*/
+					</script>";
 
-					var_dump($respuesta);
 				}else{
 					echo'<script>
 
@@ -91,29 +114,6 @@ class ControladorReservas
 
 					</script>';
 				}
-
-				/*if ($respuesta>0) {
-					$alpha = "123qwertyuiopa456sdfghjklzxcvbnm789";
-		      $code = "";
-		      $longitud=5;
-		      for($i=0;$i<$longitud;$i++){
-		          $code .= $alpha[rand(0, strlen($alpha)-1)];
-
-		      }
-		      $_SESSION['code'] = $code;
-		      $_SESSION['fecha_desde'] = $_POST['fecha_desde'];
-		      $_SESSION['fecha_hasta'] = $_POST['fecha_hasta'];
-		      $_SESSION['hora_desde'] = $_POST['hora_desde'];
-		      $_SESSION['hora_hasta'] = $_POST['hora_hasta'];
-
-					//si existe disponibilidad, guardo los datos para enviar al siguiente
-		      //formulario para completar con los datos personales y demas
-		      header('Location: formulario');
-				}else{
-					echo "<script>
-					alert('No hay disponibilidad!');
-				</script>";
-			}*/
 		  	  }else{
 
 		  	  	echo'<script>
@@ -129,8 +129,7 @@ class ControladorReservas
 
 					</script>';
 
-		  	  }
-	    		      
+		  	}   		      
 	    }
   	}
 
@@ -151,15 +150,14 @@ class ControladorReservas
 
 		if (isset($_POST['confirmaReserva'])) {
 
-
 			$categoria = $_POST['categoria_confirmada'];
 			$codigo = $_POST['codigo_reserva'];
 			$nombre = $_POST['nombre_reserva'];
 			$apellido = $_POST['apellido_reserva'];
 			$fecha_desde = $_POST['fecha_desde'];
 			$fecha_hasta = $_POST['fecha_hasta'];
-			$hora_desde = $_POST['hora_desde'];
-			$hora_hasta = $_POST['hora_hasta'];
+			$hora_desde = $_POST['hora_desde_reserva'];
+			$hora_hasta = $_POST['hora_hasta_reserva'];
 			$tarifa = $_POST['tarifa_reserva'];
 			$total_dias = $_POST['total_dias_reserva'];
 			$estado = 1;
