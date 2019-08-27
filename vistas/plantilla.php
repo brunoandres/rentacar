@@ -32,17 +32,18 @@
 
     <link rel="stylesheet" href="panel/vistas/bower_components/select2/dist/css/select2.min.css">
 
+
+    <!-- ALERTAS -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="vistas/js/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script src="vistas/js/jquery.prettyPhoto.js"></script>
     <script src="vistas/js/jquery.isotope.min.js"></script>
     <script src="vistas/js/wow.min.js"></script>
     <script src="vistas/js/main.js"></script>
-
-
-
-    <!-- datepicker -->
 
     <!-- SweetAlert 2 -->
     <script src="panel/vistas/plugins/sweetalert2/sweetalert2.all.js"></script>
@@ -92,6 +93,7 @@
 
     ?>
 
+
     <?php include 'inc/footer.php'; ?>
 
     <!-- Bootstrap core JavaScript
@@ -127,5 +129,7 @@
 
     <script src="vistas/js/script.js"></script>
     <script src="vistas/js/maskDate.js"></script>
+
+    <script src="vistas/js/alert.js"></script>
   </body>
 </html>

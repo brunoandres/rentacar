@@ -79,12 +79,11 @@ class ControladorReservas
 
 		  	  	//Generar un codigo de reserva aleatorio
 				$codigo = ModeloReservas::codigoReserva(5);
-				//var_dump($respuesta);
+				var_dump($respuesta);
 
 				//Si contador devuelve mayor igual a 1 es por que hay disponibilidad
-				settype($respuesta, "integer");
-				if ($respuesta>=1 && $respuesta!='') {
-
+				if ($respuesta>=1 || $respuesta===null) {
+	
 					$_SESSION['codigo']      = $codigo;
 					$_SESSION['fecha_desde'] = $fecha_desde;
 					$_SESSION['fecha_hasta'] = $fecha_hasta;
@@ -99,6 +98,19 @@ class ControladorReservas
 					window.location='formulario';
 
 					</script>";
+
+					/*echo'<script>
+
+					swal({
+							type: "success",
+							title: "DISPONIBLE!",
+							showConfirmButton: true,
+							confirmButtonText: "Volver a intentar"
+							}).then(function(result){
+		
+							})
+
+					</script>';*/
 
 				}else{
 					echo'<script>
@@ -169,23 +181,18 @@ class ControladorReservas
 			$vuelo = $_POST['vuelo_reserva'];
 			$observaciones = $_POST['informacion_reserva'];
 			$adicionales = $_SESSION['adicionales'];
+
+			if (empty($adicionales)) {
+				$tiene_adicionales = 0;
+			}else{
+				$tiene_adicionales = 1;
+			}
 			
-			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales);
+			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales);
 
 			echo'<script>
 
-				swal({
-						type: "success",
-						title: "Perfecto! Su reserva ha sido completada correctamente",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar"
-						}).then(function(result){
-								if (result.value) {
-
-								window.location = "inicio";
-
-								}
-							})
+					window.location = "inicio";
 
 				</script>';
 			

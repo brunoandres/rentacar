@@ -43,7 +43,7 @@ if (empty($_SESSION['codigo'])) {
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">Nombre</label>
-                <input type="text" class="form-control" id="firstName" name="nombre" placeholder="Ingrese nombre" value="" required>
+                <input type="text" class="form-control" maxlength="50" id="firstName" name="nombre" placeholder="Ingrese nombre" value="" required>
                 <input type="hidden" name="id_categoria" value="<?php echo $categoria; ?>">
                 <div class="invalid-feedback">
                   Complete el campo con su nombre.
@@ -53,7 +53,7 @@ if (empty($_SESSION['codigo'])) {
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Apellido</label>
-                <input type="text" class="form-control" id="lastName" name="apellido" placeholder="Ingrese apellido" value="" required>
+                <input type="text" class="form-control" maxlength="50" id="lastName" name="apellido" placeholder="Ingrese apellido" value="" required>
                 <div class="invalid-feedback">
                   Complete el campo con su apellido.
                 </div>
@@ -66,7 +66,7 @@ if (empty($_SESSION['codigo'])) {
                   <!--<div class="input-group-prepend">
                     <span class="input-group-text">@</span>
                   </div>-->
-                  <input type="number" class="form-control" id="username" name="telefono" placeholder="Cod. Área + Nº" required>
+                  <input type="number" class="form-control" maxlength="20" id="username" name="telefono" placeholder="Cod. Área + Nº" required>
                   <div class="invalid-feedback" style="width: 100%;">
                     Complete el campo con su número de teléfono
                   </div>
@@ -75,7 +75,7 @@ if (empty($_SESSION['codigo'])) {
 
               <div class="col-md-6 mb-3">
                 <label for="email">Dirección de Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="juanperez@example.com" required="">
+                <input type="email" class="form-control" maxlength="80" id="email" name="email" placeholder="juanperez@example.com" required="">
                 <div class="invalid-feedback">
                   Complete el campo con su dirección de email válido.
                 </div>
@@ -86,7 +86,7 @@ if (empty($_SESSION['codigo'])) {
             <div class="row">
               <div class="col-md-4 mb-3">
                 <label for="address">N° de Vuelo</label>
-                <input type="text" class="form-control" id="address" name="vuelo" placeholder="Ej: AR1694">
+                <input type="text" class="form-control" maxlength="15" id="address" name="vuelo" placeholder="Ej: AR1694" minlength="0">
                 <div class="invalid-feedback">
                   Complete el campo con su n° de vuelo.
                 </div>

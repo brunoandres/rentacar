@@ -141,7 +141,7 @@ class ModeloConfiguraciones{
 
     //el id puede venir vacio, asi retorno todas los adicionales
     if ($id == null) {
-      $query = "select * from adicionales where habilitado = 1 order by nombre asc";
+      $query = "select * from adicionales where habilitado = 1 order by tarifa asc";
       $sql = mysqli_query($link,$query);
       while ($filas = mysqli_fetch_array($sql)) {
         $adicionales[]=$filas;

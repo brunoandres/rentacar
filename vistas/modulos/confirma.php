@@ -186,6 +186,11 @@ if (isset($_POST['checkout'])) {
           <a href="inicio"><button class="btn btn-default btn-lg btn-block" type="button" onclick="return confirm('Desea cancelar su reserva?')">Cancelar <i class="fa fa-times" aria-hidden="true"></i></button></a>
           <button class="btn btn-danger btn-lg btn-block mt-1" type="submit" name="confirmaReserva">Confirmar Reserva <i class="fa fa-check" aria-hidden="true"></i> </button>
         </form>
+
+        <form id="confirma_reserva">
+          <input type="text" name="" placeholder="Nombre">
+          <button type="submit">Enviar</button>
+        </form>
       
       </div>
     </div>
