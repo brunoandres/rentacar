@@ -14,7 +14,7 @@ class AjaxLugares{
 	public function ajaxEditarLugar(){
 
 		$id = $this->idLugar;
-		$respuesta = ControladorConfiguraciones::listarLugares($id);
+		$respuesta = ControladorConfiguraciones::listarLugares2($id);
 
 		foreach ($respuesta as $lugar) {
 			echo json_encode($lugar);

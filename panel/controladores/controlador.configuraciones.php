@@ -10,7 +10,7 @@ class ControladorConfiguraciones{
 	}
 
 	//Metodo para listar los autos
-  static public function listarAutos($id=null){
+  	static public function listarAutos($id=null){
 
 		$autos = ModeloConfiguraciones::listarAutos($id);
 		return $autos;
@@ -18,33 +18,41 @@ class ControladorConfiguraciones{
 	}
 
 	//Metodo para listar lugares
-  static public function listarLugares($id=null){
+  	static public function listarLugares($id=null,$filtro=null){
 
-		$lugares = ModeloConfiguraciones::listarLugares($id);
+		$lugares = ModeloConfiguraciones::listarLugares($id,$filtro);
+		return $lugares;
+
+	}
+
+	//Metodo para listar lugares
+  	static public function listarLugares2($id){
+
+		$lugares = ModeloConfiguraciones::listarLugares2($id);
 		return $lugares;
 
 	}
 
 	//Metodo para listar los autos
-  static public function totalAutos($id=null){
+  	static public function totalAutos($id=null){
 
 		$total = ModeloConfiguraciones::totalAutos($id);
 		return $total;
 
 	}
 
-  //Metodo para listar las configuraciones del sistema
-  static public function listarConfiguraciones($id=null){
+  	//Metodo para listar las configuraciones del sistema
+  	static public function listarConfiguraciones($id=null){
 
 		$configuraciones = ModeloConfiguraciones::listarConfiguraciones($id);
 		return $configuraciones;
 
 	}
 
-  //Metodo para listar los adicionales
-  static public function listarAdicionales($id=null){
+  	//Metodo para listar los adicionales
+  	static public function listarAdicionales($id=null,$filtro=null){
 
-		$adicionales = ModeloConfiguraciones::listarAdicionales($id);
+		$adicionales = ModeloConfiguraciones::listarAdicionales($id,$filtro);
 		return $adicionales;
 
 	}
@@ -56,8 +64,8 @@ class ControladorConfiguraciones{
 
 	}
 
-  //Metodo para listar las temporadas
-  static public function listarTemporadas($id=null,$estado=null){
+  	//Metodo para listar las temporadas
+  	static public function listarTemporadas($id=null,$estado=null){
 
 		$temporadas = ModeloConfiguraciones::listarTemporadas($id,$estado);
 		return $temporadas;
@@ -65,22 +73,22 @@ class ControladorConfiguraciones{
 	}
 
 	//Metodo para listar data de temporadas
-  static public function listarTemporadasDetalle($id){
+  	static public function listarTemporadasDetalle($id){
 
 		$temporadas = ModeloConfiguraciones::listarTemporadasDetalle($id);
 		return $temporadas;
 
 	}
 
-  //Metodo para listar las tarifas definidas por temporadas
-  static public function listarTarifas($id=null){
+  	//Metodo para listar las tarifas definidas por temporadas
+  	static public function listarTarifas($id=null){
 
       $respuesta = ModeloConfiguraciones::listarTarifas($id);
       return $respuesta;
-  }
+  	}	
 
-  //Metodo para guardar un auto
-  static public function nuevoAuto(){
+  	//Metodo para guardar un auto
+  	static public function nuevoAuto(){
 
     if (isset($_POST['nuevoAuto'])) {
 
@@ -139,8 +147,8 @@ class ControladorConfiguraciones{
 
   }
 
-  //Metodo para guardar un auto
-  static public function editarAuto(){
+  	//Metodo para guardar un auto
+  	static public function editarAuto(){
 
     if (isset($_POST['editarAuto'])) {
 
@@ -619,7 +627,7 @@ class ControladorConfiguraciones{
 		}
   }
 
-  //funcion para editar adicionales
+  	//funcion para editar adicionales
 	static function editarAdicional(){
 
 		if(isset($_POST["editarAdicional"])){
@@ -703,8 +711,88 @@ class ControladorConfiguraciones{
 
 	}
 
+	//funcion para editar adicionales
+	static function editarLugar(){
 
+		if(isset($_POST["editarLugar"])){
 
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nombreLugar"])){
+
+				$nombre = $_POST['nombreLugar'];
+        		$observaciones = $_POST['observaciones'];
+				if (empty($_POST['activaLugar'])) {
+					$lugar_activo = 0;
+				}else{
+					$lugar_activo = 1;
+				}
+
+				$id = $_POST['id_lugar'];
+
+				$respuesta = ModeloConfiguraciones::editarLugar($nombre,$lugar_activo,$observaciones,$id);
+
+				if($respuesta == "ok"){
+
+					echo'<script>
+
+					swal({
+						  type: "success",
+						  title: "Lugar editado correctamente",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+									if (result.value) {
+
+									window.location = "lugares";
+
+									}
+								})
+
+					</script>';
+
+				}else{
+
+  					echo'<script>
+
+  					swal({
+  						  type: "error",
+  						  title: "Error al editar lugar",
+  						  showConfirmButton: true,
+  						  confirmButtonText: "Cerrar"
+  						  }).then(function(result){
+  									if (result.value) {
+
+  									window.location = "lugares";
+
+  									}
+  								})
+
+  					</script>';
+
+  				}
+			}else{
+
+				echo'<script>
+
+					swal({
+						  type: "error",
+						  title: "¡El lugar no puede ir vacío o llevar caracteres especiales!",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
+
+							window.location = "lugares";
+
+							}
+						})
+
+			  	</script>';
+
+			}
+
+		}
+
+	}
 
 }
 

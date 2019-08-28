@@ -29,7 +29,7 @@ $editar = $new->editarAuto();
         <div class="box">
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="categorias" class="table table-bordered table-striped tablas" style="width:100%">
+            <table id="autos" class="table table-bordered table-striped tablas" style="width:100%">
               <thead>
               <tr>
                 <th align="center">Marca</th>

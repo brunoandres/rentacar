@@ -1,7 +1,8 @@
 <?php
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
-$lugares = $new->listarLugares();
+$lugares = $new->listarLugares(null,1);
+$editarLugar = $new->editarLugar();
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -102,7 +103,7 @@ MODAL EDITAR CATEGORÍA
 
         <div class="modal-header" style="background:#3c8dbc; color:white">
 
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <a href="lugares"><button type="button" class="close" data-dismiss="">&times;</button></a>
 
           <h4 class="modal-title">Editar lugar</h4>
 
@@ -125,7 +126,7 @@ MODAL EDITAR CATEGORÍA
 
                 <input type="text" class="form-control input-lg" name="nombreLugar" id="nombreLugar" required autocomplete="off" placeholder="Nombre Lugar">
 
-                 <input type="hidden"  name="id_lugar" id="idLugar" required>
+                 <input type="hidden" name="id_lugar" id="idLugar" required>
 
               </div>
             </div>
@@ -137,9 +138,9 @@ MODAL EDITAR CATEGORÍA
 
             <div class="checkbox">
               <label>
-                <input type="checkbox" value="1" name="checkActiva" class="flat-red" checked>
-                ¿Lugar activo?
-              </label>
+                <input type="checkbox" value="1" name="activaLugar" id="activaLugar">
+                  ¿Lugar activo?
+                </label>
             </div>
 
           </div>
@@ -152,9 +153,9 @@ MODAL EDITAR CATEGORÍA
 
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+          <a href="lugares"><button type="button" class="btn btn-default pull-left" data-dismiss="">Salir</button></a>
 
-          <button type="submit" class="btn btn-primary" name="editarConfiguracion">Guardar cambios</button>
+          <button type="submit" class="btn btn-primary" name="editarLugar">Guardar cambios</button>
 
         </div>
 

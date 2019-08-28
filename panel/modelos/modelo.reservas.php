@@ -94,7 +94,8 @@ class ModeloReservas
 		$query 		= "select * from reservas where id_categoria = $categoria and estado = 1 and fecha_hasta >= '2019-08-01'";
 		$resultado 	= mysqli_query($link,$query);
 
-		echo "resultados query: ".$total_result = mysqli_num_rows($resultado);
+		//Total de resultados de la consulta
+		$total_result = mysqli_num_rows($resultado);
 
 		//retorno valor de buscarDisponibilidad (flag)
 		$reserva_ok = false;
@@ -119,12 +120,12 @@ class ModeloReservas
 			case 5:
 				$contador = $new::autosPorCategoria(5,null,null);
 				break;
-		}*/
+		}
 
+		$total = intval($contador['total']);*/
 		for ($i=1; $i <= $categoria ; $i++) { 
 			
-			
-			$contador = $new::autosPorCategoria($categoria,null,null);
+			$contador = $new::autosPorCategoria($i,null,null);
 			$total = intval($contador['total']);
 			
 			
@@ -136,54 +137,67 @@ class ModeloReservas
 
 		$sumaDeChoques = 0;
 		$data = array();
-		while ($filas = mysqli_fetch_assoc($resultado)) {
 
-			//retorno valor de buscarDisponibilidad (flag), entra en mi bucle como false
-			$reserva_ok = false;
-			$data[] = $filas;
+		//Si hay resultados de busqueda, mi variable contador de autos es alterada
+		if ($total_result>=1) {
 
-			//Defino variable para saber si puedo entregar el auto en el dia
-			$disponibleEnEldia = false;
-			//guardo los datos ya desde la base de datos para recorrer
-			$fechaDesdeConfirmada=$filas['fecha_desde'];
-			$fechaHastaConfirmada=$filas['fecha_hasta'];
-			$nroReserva=$filas['id'];
+			while ($filas = mysqli_fetch_assoc($resultado)) {
 
-			//Total de autos por categoria
-			$contador_autos = $total;
+				//retorno valor de buscarDisponibilidad (flag), entra en mi bucle como false
+				$reserva_ok = false;
+				$data[] = $filas;
 
-       		///Primero evaluo contra las fechas de reservas confirmadas
-			//Evaluo que NO este en el rango la fecha
-			if (!self::check_in_range($fechaDesdeReserva, $fechaHastaReserva, $fechaDesdeConfirmada)) {
-				if (!self::check_in_range($fechaDesdeReserva, $fechaHastaReserva, $fechaHastaConfirmada))
-					if (!self::check_in_range($fechaDesdeConfirmada, $fechaHastaConfirmada, $fechaDesdeReserva))
-						if (!self::check_in_range($fechaDesdeConfirmada, $fechaHastaConfirmada, $fechaHastaReserva))
-							$reserva_ok= true;
+				//Defino variable para saber si puedo entregar el auto en el dia
+				$disponibleEnEldia = false;
+				//guardo los datos ya desde la base de datos para recorrer
+				$fechaDesdeConfirmada=$filas['fecha_desde'];
+				$fechaHastaConfirmada=$filas['fecha_hasta'];
+				$nroReserva=$filas['id'];
+
+				//Total de autos por categoria
+				$contador_autos = $total;
+				var_dump($contador_autos);
+
+	       		///Primero evaluo contra las fechas de reservas confirmadas
+				//Evaluo que NO este en el rango la fecha
+				if (!self::check_in_range($fechaDesdeReserva, $fechaHastaReserva, $fechaDesdeConfirmada)) {
+					if (!self::check_in_range($fechaDesdeReserva, $fechaHastaReserva, $fechaHastaConfirmada))
+						if (!self::check_in_range($fechaDesdeConfirmada, $fechaHastaConfirmada, $fechaDesdeReserva))
+							if (!self::check_in_range($fechaDesdeConfirmada, $fechaHastaConfirmada, $fechaHastaReserva))
+								$reserva_ok= true;
+						else $reserva_ok = false;
 					else $reserva_ok = false;
-				else $reserva_ok = false;
-			} else $reserva_ok= false;
+				} else $reserva_ok= false;
 
-			if ($reserva_ok==false){
-				//Descontar en un el total de autos para cada reserva recorrida
-				//Seteo varible $contador a entero para no tener problemas de tipo de operador
-				
-				$sumaDeChoques =$sumaDeChoques+1;
-				$contador_autos = $contador_autos-$sumaDeChoques;
-			}
+				if ($reserva_ok==false){
+					//Descontar en un el total de autos para cada reserva recorrida
+					//Seteo varible $contador a entero para no tener problemas de tipo de operador
+					
+					$sumaDeChoques =$sumaDeChoques+1;
+					$contador_autos = $contador_autos-$sumaDeChoques;
+				}
 
-		}//FIN WHILE
+				var_dump($contador_autos);
 
-		if ($contador_autos > 0){
-			$reserva_ok= true;
-			$msj= 'Si tiene auto';
+			}//FIN WHILE
 
+			/*if ($contador_autos > 0){
+				$reserva_ok= true;
+				$msj= 'Si tiene auto';
+
+			}else{
+				$reserva_ok=false;
+				$msj='falta auto';
+
+			}*/
+		
 		}else{
-			$reserva_ok=false;
-			$msj='falta auto';
 
+			//Mi contador de autos no es alterado y toma el resultado de la base
+			$contador_autos=$total;
 		}
 
-		var_dump($contador_autos);
+		//Retorno cantidad de autos entre las fechas solicitadas
 		return $contador_autos;
 
 	}

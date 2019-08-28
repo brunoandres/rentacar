@@ -19,7 +19,7 @@ $(".tablas").on("click", ".btnEditarLugar", function(){
      	success: function(respuesta){
 
         if (respuesta['activo']==1) {
-			$("#checkActiva").prop("checked",true);
+			$("#activaLugar").prop("checked",true);
 		}
  		$("#nombreLugar").val(respuesta["lugar"]);
 		$("#observaciones").val(respuesta["observaciones"]);

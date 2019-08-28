@@ -107,14 +107,20 @@ class ModeloConfiguraciones{
       mysqli_close( $link );
   }
 
-  static public function listarLugares($id){
+  static public function listarLugares($id,$filtro){
 
     $link = Conexion::ConectarMysql();
     $lugares = array();
 
     //el id puede venir vacio, asi retorno todas los adicionales
     if ($id == null) {
-      $query = "select * from lugares where activo = 1 order by lugar asc";
+
+      if ($filtro == null) {
+        $query = "select * from lugares where activo = 1 order by lugar asc";
+      }else{
+        $query = "select * from lugares order by lugar asc";
+      }
+
       $sql = mysqli_query($link,$query);
       while ($filas = mysqli_fetch_array($sql)) {
         $lugares[]=$filas;
@@ -134,14 +140,39 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
   }
 
-  static public function listarAdicionales($id){
+  static public function listarLugares2($id){
+
+    $link = Conexion::ConectarMysql();
+    $lugares = array();
+
+  
+    $query = "select * from lugares where id = $id";
+    $sql = mysqli_query($link,$query);
+
+    while ($filas = mysqli_fetch_array($sql)) {
+      $lugares[]=$filas;
+    }
+    return $lugares;
+    
+    // Cerrar la conexión.
+    mysqli_close( $link );
+  }
+
+  static public function listarAdicionales($id,$filtro){
 
     $link = Conexion::ConectarMysql();
     $adicionales = array();
 
     //el id puede venir vacio, asi retorno todas los adicionales
     if ($id == null) {
-      $query = "select * from adicionales where habilitado = 1 order by tarifa asc";
+
+      if ($filtro == null) {
+        $query = "select * from adicionales where habilitado = 1 order by tarifa asc";
+      }else{
+        $query = "select * from adicionales order by tarifa asc";
+      }
+
+      
       $sql = mysqli_query($link,$query);
       while ($filas = mysqli_fetch_array($sql)) {
         $adicionales[]=$filas;
@@ -333,6 +364,20 @@ class ModeloConfiguraciones{
   ////////////////////////////////////////
   //// Metodos para editar///////////////
   ////////////////////////////////////////
+
+  static function editarLugar($nombre,$activo,$observaciones,$id){
+
+    $link = Conexion::ConectarMysql();
+    $query = "UPDATE `lugares` SET `lugar`='$nombre',`activo`=$activo, `observaciones`='$observaciones' WHERE id = $id";
+    $sql = mysqli_query($link,$query);
+    if ($sql) {
+      auditar($_SESSION["id_user"],$query);
+      return "ok";
+    }else{
+      return "error";
+    }
+    mysqli_close($link);
+  }
 
   static function editarAdicional($nombre,$tarifa,$activo,$observaciones,$id){
 

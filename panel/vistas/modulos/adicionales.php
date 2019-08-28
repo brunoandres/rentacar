@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
-$adicionales = $new->listarAdicionales();
+$adicionales = $new->listarAdicionales(null,1);
 $date = date('d/m/Y H:i:s');
 $editarAdicional = $new->editarAdicional();
 

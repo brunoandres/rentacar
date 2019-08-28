@@ -82,7 +82,7 @@ class ControladorReservas
 				var_dump($respuesta);
 
 				//Si contador devuelve mayor igual a 1 es por que hay disponibilidad
-				if ($respuesta>=1 || $respuesta===null) {
+				if ($respuesta>=1) {
 	
 					$_SESSION['codigo']      = $codigo;
 					$_SESSION['fecha_desde'] = $fecha_desde;
