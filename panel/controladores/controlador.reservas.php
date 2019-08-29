@@ -62,6 +62,9 @@ class ControladorReservas
 	  	  	//Busco los dias minimo de alquiler
 	  	  	$cantidad_dias_configuracion = ModeloConfiguraciones::diasMinimos();
 
+	  	  	//Busco el margen horario para reservar
+	  	  	$margen_horario_disponible = ModeloConfiguraciones::margenHorario();
+
 	  	  	//En caso de no encontrar la configuracion o que ésta esté mal definida, por defecto serán 3 dias minimo de alquiler.
 	  	  	if (!empty($cantidad_dias_configuracion)) {
 	  	  		$minimo_de_dias = $cantidad_dias_configuracion['dias'];
@@ -93,13 +96,13 @@ class ControladorReservas
 					$_SESSION['total_dias']  = $total_dias;
 					$_SESSION['mensaje']     = 'Reserva Disponible!';
  
-					echo "<script>
+					/*echo "<script>
 
 					window.location='formulario';
 
-					</script>";
+					</script>";*/
 
-					/*echo'<script>
+					echo'<script>
 
 					swal({
 							type: "success",
@@ -110,7 +113,7 @@ class ControladorReservas
 		
 							})
 
-					</script>';*/
+					</script>';
 
 				}else{
 					echo'<script>
@@ -126,7 +129,7 @@ class ControladorReservas
 
 					</script>';
 				}
-		  	  }else{
+	  	  	}else{
 
 		  	  	echo'<script>
 

@@ -92,7 +92,7 @@ $new->nuevaTempo();
 
             <div class="box-footer">
               <button type="submit" name="nuevaTemporada" class="btn btn-primary">Guardar</button>
-              <a href="temporadas"> <button type="button" class="btn btn-default">Cancelar</button> </a>
+              <a href="inicio"> <button type="button" class="btn btn-default">Cancelar</button> </a>
             </div>
           </form>
         </div>

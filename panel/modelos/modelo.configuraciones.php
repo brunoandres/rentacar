@@ -243,6 +243,8 @@ class ModeloConfiguraciones{
 	    mysqli_close( $link );
 	}
 
+
+  //Defino los dias minimos de alquiler 
   static public function diasMinimos(){
 
     $link = Conexion::ConectarMysql();
@@ -252,8 +254,25 @@ class ModeloConfiguraciones{
     $sql = mysqli_query($link,$query);
     while ($filas = mysqli_fetch_assoc($sql)) {
        $cantidad['dias'] = $filas['valor'];
+       $cantidad['activo'] = $filas['activa'];
     }
     return $cantidad;
+
+  }
+
+  //Defino los dias minimos de alquiler 
+  static public function margenHorario(){
+
+    $link = Conexion::ConectarMysql();
+    $margen = array();
+ 
+    $query = "select * from configuraciones where nombre like '%Margen Horario%'";
+    $sql = mysqli_query($link,$query);
+    while ($filas = mysqli_fetch_assoc($sql)) {
+       $margen['margen'] = $filas['valor'];
+       $margen['activo'] = $filas['activa'];
+    }
+    return $margen;
 
   }
 

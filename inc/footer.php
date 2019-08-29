@@ -16,6 +16,7 @@
           <li><a href="flota">Flota</a></li>
           <li><a href="contacto">Contacto</a></li>
           <li><a href="reservar">Reservar</a></li>
+          <li><a href="panel/">Administración</a></li>
         </ul>
       </div>
     </div>
