@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 22-08-2019 a las 17:48:32
+-- Tiempo de generación: 29-08-2019 a las 17:53:28
 -- Versión del servidor: 5.7.26
 -- Versión de PHP: 7.1.29
 
@@ -47,10 +47,10 @@ CREATE TABLE IF NOT EXISTS `adicionales` (
 INSERT INTO `adicionales` (`id`, `nombre`, `tarifa`, `habilitado`, `observaciones`, `create`, `update`) VALUES
 (1, 'GPS', '705', 1, 'gps gps gps gps gps gps gps gps', '2019-08-13 12:39:42', '2019-08-15 21:27:55'),
 (2, 'Silla Bebé', '600', 1, 'silla para bebes', '2019-08-13 12:39:42', '2019-08-15 21:23:46'),
-(3, 'Cadenas para nieve', '1000', 1, 'cadenas para nieve el par', '2019-08-13 12:39:42', '2019-08-15 21:23:00'),
-(4, 'Buster', '950', 1, 'nada de nada! buster buster', '2019-08-13 12:39:42', '2019-08-15 21:27:37'),
+(3, 'Cadenas para nieve', '1000', 1, 'cadenas para nieve el par', '2019-08-13 12:39:42', '2019-08-28 14:40:28'),
+(4, 'Buster', '950', 1, 'nada de nada! buster buster', '2019-08-13 12:39:42', '2019-08-28 14:40:19'),
 (5, 'Permiso Aduana', '800', 1, 'formulario necesario para pasar a chile', '2019-08-13 12:39:42', '2019-08-15 21:23:40'),
-(6, 'Equipo celular', '1300', 1, 'chip movistar o a eleccion', '2019-08-15 21:16:41', '2019-08-15 21:23:13');
+(6, 'Equipo celular', '1300', 1, 'chip movistar o a eleccion', '2019-08-15 21:16:41', '2019-08-28 15:02:16');
 
 -- --------------------------------------------------------
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `auditorias` (
   `query` text COLLATE utf8_spanish2_ci NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=81 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=119 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `auditorias`
@@ -151,7 +151,45 @@ INSERT INTO `auditorias` (`id`, `id_usuario`, `query`, `date`) VALUES
 (77, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'Ford\',`modelo`=\'Focus\',`patente`=\'JEM442\',`estado`=1,`viaja_chile`=0, `observaciones`=\'auto de bruno!\' WHERE id = 3', '2019-08-19 15:01:46'),
 (78, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria A\',`activa`=1,`promo`=0 WHERE id = 1', '2019-08-20 15:09:30'),
 (79, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria A\',`activa`=1,`promo`=1 WHERE id = 1', '2019-08-20 15:18:02'),
-(80, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria A\',`activa`=1,`promo`=0 WHERE id = 1', '2019-08-20 15:18:49');
+(80, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria A\',`activa`=1,`promo`=0 WHERE id = 1', '2019-08-20 15:18:49'),
+(81, 2, 'INSERT INTO `autos`(`id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`, `observaciones`) VALUES (2,\'Renault\',\'Duster\',\'AAAAAAA\',1,0,\'\')', '2019-08-23 15:54:07'),
+(82, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria C\',`activa`=1,`promo`=0 WHERE id = 3', '2019-08-23 16:23:30'),
+(83, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria D\',`activa`=1,`promo`=0 WHERE id = 4', '2019-08-23 16:23:34'),
+(84, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria E\',`activa`=1,`promo`=0 WHERE id = 5', '2019-08-23 16:23:37'),
+(85, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria B\',`activa`=1,`promo`=1 WHERE id = 2', '2019-08-23 16:23:45'),
+(86, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria B\',`activa`=1,`promo`=1 WHERE id = 2', '2019-08-23 16:23:48'),
+(87, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria B\',`activa`=1,`promo`=0 WHERE id = 2', '2019-08-23 16:23:59'),
+(88, 2, 'INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`) VALUES (2,\'EWR8I\',\'bruno\',\'ovando\',\'2019-08-23\',\'2019-08-27\',\'\',\'\',\'9600\',4,1,1)', '2019-08-23 16:39:07'),
+(89, 2, 'INSERT INTO `reservas_detalle`(`id_reserva`, `telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`) VALUES (7,\'2944636416\',\'andres.92013@hotmail.com\',1,1,\'\',\'\')', '2019-08-23 16:39:07'),
+(90, 2, 'UPDATE `adicionales` SET `nombre`=\'Buster\',`tarifa`=\'950\',`habilitado`=0, `observaciones`=\'nada de nada! buster buster\' WHERE id = 4', '2019-08-23 17:23:41'),
+(91, 2, 'UPDATE `adicionales` SET `nombre`=\'Cadenas para nieve\',`tarifa`=\'1000\',`habilitado`=0, `observaciones`=\'cadenas para nieve el par\' WHERE id = 3', '2019-08-23 17:23:46'),
+(92, 2, 'UPDATE `adicionales` SET `nombre`=\'Equipo celular\',`tarifa`=\'1300\',`habilitado`=0, `observaciones`=\'chip movistar o a eleccion\' WHERE id = 6', '2019-08-23 17:23:50'),
+(93, 2, 'UPDATE `adicionales` SET `nombre`=\'Buster\',`tarifa`=\'950\',`habilitado`=1, `observaciones`=\'nada de nada! buster buster\' WHERE id = 4', '2019-08-28 14:40:19'),
+(94, 2, 'UPDATE `adicionales` SET `nombre`=\'Cadenas para nieve\',`tarifa`=\'1000\',`habilitado`=1, `observaciones`=\'cadenas para nieve el par\' WHERE id = 3', '2019-08-28 14:40:28'),
+(95, 2, 'UPDATE `lugares` SET `lugar`=\'Terminal ómnibus Bariloche\',`activo`=1, `observaciones`=\'estacionamiento terminal\' WHERE id = 3', '2019-08-28 15:01:01'),
+(96, 2, 'UPDATE `lugares` SET `lugar`=\'Terminal ómnibus Bariloche\',`activo`=0, `observaciones`=\'estacionamiento terminal\' WHERE id = 3', '2019-08-28 15:01:07'),
+(97, 2, 'UPDATE `lugares` SET `lugar`=\'Terminal ómnibus Bariloche\',`activo`=1, `observaciones`=\'estacionamiento terminal\' WHERE id = 3', '2019-08-28 15:01:24'),
+(98, 2, 'UPDATE `lugares` SET `lugar`=\'Aeropuerto\',`activo`=0, `observaciones`=\'estacionamiento aeropuerto\' WHERE id = 1', '2019-08-28 15:01:32'),
+(99, 2, 'UPDATE `lugares` SET `lugar`=\'Centro Civico\',`activo`=0, `observaciones`=\'centro civico plaza\' WHERE id = 2', '2019-08-28 15:01:36'),
+(100, 2, 'UPDATE `configuraciones` SET `nombre`=\'Dolar\',`valor`=\'60.00\',`activa`=1 WHERE id = 1', '2019-08-28 15:02:01'),
+(101, 2, 'UPDATE `adicionales` SET `nombre`=\'Equipo celular\',`tarifa`=\'1300\',`habilitado`=1, `observaciones`=\'chip movistar o a eleccion\' WHERE id = 6', '2019-08-28 15:02:16'),
+(102, 2, 'UPDATE `autos` SET `id_categoria`=3,`marca`=\'OTRO DE CAT C\',`modelo`=\'NO SE\',`patente`=\'1\',`estado`=0,`viaja_chile`=0, `observaciones`=\'\' WHERE id = 13', '2019-08-28 16:40:23'),
+(103, 2, 'UPDATE `autos` SET `id_categoria`=3,`marca`=\'CATE C\',`modelo`=\'NI IDEA\',`patente`=\'PIRULO\',`estado`=0,`viaja_chile`=0, `observaciones`=\'\' WHERE id = 12', '2019-08-28 16:48:49'),
+(104, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'CATEGORIA A\',`modelo`=\'NULO\',`patente`=\'NULO\',`estado`=0,`viaja_chile`=0, `observaciones`=\'\' WHERE id = 11', '2019-08-28 16:48:53'),
+(105, 2, 'UPDATE `autos` SET `id_categoria`=2,`marca`=\'CUALQUIERA\',`modelo`=\'TAMBIEN\',`patente`=\'NOSE\',`estado`=0,`viaja_chile`=0, `observaciones`=\'\' WHERE id = 10', '2019-08-28 16:48:57'),
+(106, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'Renault\',`modelo`=\'Clio\',`patente`=\'ABC123\',`estado`=0,`viaja_chile`=0, `observaciones`=\'pequeño rayon lateral derecho \' WHERE id = 1', '2019-08-28 16:49:01'),
+(107, 2, 'UPDATE `autos` SET `id_categoria`=2,`marca`=\'Renault\',`modelo`=\'Duster\',`patente`=\'AAAAAAA\',`estado`=0,`viaja_chile`=0, `observaciones`=\'\' WHERE id = 9', '2019-08-28 16:49:05'),
+(108, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'CATEGORIA A\',`modelo`=\'NULO\',`patente`=\'NULO\',`estado`=1,`viaja_chile`=0, `observaciones`=\'\' WHERE id = 11', '2019-08-28 16:49:20'),
+(109, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'CATEGORIA A\',`modelo`=\'NULO\',`patente`=\'NULO\',`estado`=0,`viaja_chile`=0, `observaciones`=\'\' WHERE id = 11', '2019-08-28 16:49:34'),
+(110, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'CATEGORIA A\',`modelo`=\'NULO\',`patente`=\'NULO\',`estado`=1,`viaja_chile`=0, `observaciones`=\'\' WHERE id = 11', '2019-08-28 16:49:48'),
+(111, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'Renault\',`modelo`=\'Clio\',`patente`=\'ABC123\',`estado`=1,`viaja_chile`=0, `observaciones`=\'pequeño rayon lateral derecho \' WHERE id = 1', '2019-08-28 16:51:03'),
+(112, 2, 'INSERT INTO `configuraciones`(`nombre`, `valor`,`activa`) VALUES (\'Margen Horario\',\'2\',1)', '2019-08-29 12:04:40'),
+(113, 2, 'INSERT INTO `configuraciones`(`nombre`, `valor`,`activa`) VALUES (\'Cantidad de Dias\',\'5\',1)', '2019-08-29 12:04:58'),
+(114, 2, 'UPDATE `configuraciones` SET `nombre`=\'Cantidad Dias\',`valor`=\'5.00\',`activa`=1 WHERE id = 6', '2019-08-29 12:06:21'),
+(115, 2, 'UPDATE `configuraciones` SET `nombre`=\'Cantidad Dias\',`valor`=\'1\',`activa`=1 WHERE id = 6', '2019-08-29 12:23:07'),
+(116, 2, 'UPDATE `configuraciones` SET `nombre`=\'Margen Horario\',`valor`=\'1\',`activa`=1 WHERE id = 5', '2019-08-29 17:02:34'),
+(117, 2, 'UPDATE `configuraciones` SET `nombre`=\'Margen Horario\',`valor`=\'1.00\',`activa`=0 WHERE id = 5', '2019-08-29 17:02:43'),
+(118, 2, 'UPDATE `autos` SET `id_categoria`=1,`marca`=\'Renault\',`modelo`=\'Clio\',`patente`=\'ABC123\',`estado`=0,`viaja_chile`=0, `observaciones`=\'pequeño rayon lateral derecho \' WHERE id = 1', '2019-08-29 17:26:36');
 
 -- --------------------------------------------------------
 
@@ -173,17 +211,19 @@ CREATE TABLE IF NOT EXISTS `autos` (
   `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_autos_categorias1` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `autos`
 --
 
 INSERT INTO `autos` (`id`, `id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`, `observaciones`, `create`, `update`) VALUES
-(1, 1, 'Renault', 'Clio', 'ABC123', 1, 1, 'pequeño rayon lateral derecho ', '2019-08-13 12:39:58', '2019-08-19 14:59:01'),
-(2, 1, 'VW', 'Suran', 'AB123CD', 1, 1, '', '2019-08-13 12:39:58', '2019-08-15 21:10:09'),
-(3, 1, 'Ford', 'Focus', 'JEM442', 1, 0, 'auto de bruno!', '2019-08-13 15:46:27', '2019-08-19 15:01:46'),
-(8, 2, 'Renault', 'Sandero', 'ABD696', 1, 0, '', '2019-08-15 21:05:08', '2019-08-15 21:10:39');
+(1, 1, 'Renault', 'Clio', 'ABC123', 0, 0, 'pequeño rayon lateral derecho ', '2019-08-13 12:39:58', '2019-08-29 17:26:36'),
+(9, 2, 'Renault', 'Duster', 'AAAAAAA', 0, 0, '', '2019-08-23 15:54:07', '2019-08-28 16:49:05'),
+(10, 2, 'CUALQUIERA', 'TAMBIEN', 'NOSE', 0, 0, '', '2019-08-28 16:33:45', '2019-08-28 16:48:57'),
+(11, 1, 'CATEGORIA A', 'NULO', 'NULO', 1, 0, '', '2019-08-28 16:35:11', '2019-08-29 17:24:00'),
+(12, 3, 'CATE C', 'NI IDEA', 'PIRULO', 0, 0, '', '2019-08-28 16:37:07', '2019-08-28 16:48:49'),
+(13, 3, 'OTRO DE CAT C', 'NO SE', '1', 0, 0, '', '2019-08-28 16:38:33', '2019-08-28 16:40:23');
 
 -- --------------------------------------------------------
 
@@ -208,10 +248,10 @@ CREATE TABLE IF NOT EXISTS `categorias` (
 
 INSERT INTO `categorias` (`id`, `nombre`, `activa`, `promo`, `create`, `update`) VALUES
 (1, 'Categoria A', 1, 0, '2019-08-13 12:36:48', '2019-08-20 15:18:49'),
-(2, 'Categoria B', 1, 1, '2019-08-13 12:36:48', '2019-08-16 15:58:29'),
-(3, 'Categoria C', 1, 1, '2019-08-13 12:36:48', '2019-08-16 15:58:32'),
-(4, 'Categoria D', 1, 1, '2019-08-13 12:36:48', '2019-08-16 15:58:36'),
-(5, 'Categoria E', 1, 1, '2019-08-13 12:36:48', '2019-08-16 15:58:39');
+(2, 'Categoria B', 1, 0, '2019-08-13 12:36:48', '2019-08-23 16:23:58'),
+(3, 'Categoria C', 1, 0, '2019-08-13 12:36:48', '2019-08-23 16:23:30'),
+(4, 'Categoria D', 1, 0, '2019-08-13 12:36:48', '2019-08-23 16:23:34'),
+(5, 'Categoria E', 1, 0, '2019-08-13 12:36:48', '2019-08-23 16:23:37');
 
 -- --------------------------------------------------------
 
@@ -223,21 +263,23 @@ DROP TABLE IF EXISTS `configuraciones`;
 CREATE TABLE IF NOT EXISTS `configuraciones` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(250) COLLATE utf8_spanish2_ci NOT NULL,
-  `valor` decimal(10,2) NOT NULL,
-  `activa` tinyint(1) NOT NULL,
+  `valor` decimal(10,2) DEFAULT NULL,
+  `activa` tinyint(1) DEFAULT NULL,
   `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `configuraciones`
 --
 
 INSERT INTO `configuraciones` (`id`, `nombre`, `valor`, `activa`, `create`, `update`) VALUES
-(1, 'Dolar', '60.00', 0, '2019-08-13 12:38:54', '2019-08-16 16:29:14'),
+(1, 'Dolar', '60.00', 1, '2019-08-13 12:38:54', '2019-08-28 15:02:01'),
 (3, 'Porcentaje Adicional', '80.00', 1, '2019-08-16 16:16:00', '2019-08-16 16:18:26'),
-(4, 'Porcentaje Descuento', '12.00', 1, '2019-08-16 16:18:37', '2019-08-16 16:18:37');
+(4, 'Porcentaje Descuento', '12.00', 1, '2019-08-16 16:18:37', '2019-08-16 16:18:37'),
+(5, 'Margen Horario', '1.00', 0, '2019-08-29 12:04:40', '2019-08-29 17:02:43'),
+(6, 'Cantidad Dias', '1.00', 1, '2019-08-29 12:04:58', '2019-08-29 12:23:07');
 
 -- --------------------------------------------------------
 
@@ -249,7 +291,7 @@ DROP TABLE IF EXISTS `lugares`;
 CREATE TABLE IF NOT EXISTS `lugares` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `lugar` varchar(200) COLLATE utf32_spanish2_ci NOT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT '1',
+  `activo` tinyint(1) DEFAULT NULL,
   `observaciones` text COLLATE utf32_spanish2_ci NOT NULL,
   `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -261,10 +303,10 @@ CREATE TABLE IF NOT EXISTS `lugares` (
 --
 
 INSERT INTO `lugares` (`id`, `lugar`, `activo`, `observaciones`, `create`, `update`) VALUES
-(1, 'Aeropuerto', 1, '', '2019-08-16 17:08:13', '2019-08-16 17:08:13'),
-(2, 'Centro Civico', 1, '', '2019-08-19 14:40:05', '2019-08-19 14:40:05'),
-(3, 'Terminal ómnibus Bariloche', 1, '', '2019-08-19 14:40:47', '2019-08-19 14:40:47'),
-(4, 'Hotel Llao Llao', 0, '', '2019-08-19 14:41:06', '2019-08-19 14:41:06');
+(1, 'Aeropuerto', 0, 'estacionamiento aeropuerto', '2019-08-16 17:08:13', '2019-08-28 15:01:32'),
+(2, 'Centro Civico', 0, 'centro civico plaza', '2019-08-19 14:40:05', '2019-08-28 15:01:36'),
+(3, 'Terminal ómnibus Bariloche', 1, 'estacionamiento terminal', '2019-08-19 14:40:47', '2019-08-28 15:01:24'),
+(4, 'Hotel Llao Llao', 1, 'entrada hotel', '2019-08-19 14:41:06', '2019-08-28 14:44:16');
 
 -- --------------------------------------------------------
 
@@ -286,19 +328,21 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   `tarifa` decimal(10,2) DEFAULT NULL,
   `total_dias` int(11) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
-  `origen` tinyint(1) DEFAULT NULL,
+  `origen` tinyint(1) DEFAULT NULL COMMENT 'reserva desde el panel = null, 1 es desde la web',
+  `exterior` tinyint(1) DEFAULT NULL COMMENT 'para saber si viaja a chile',
+  `adicionales` tinyint(1) DEFAULT NULL,
   `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_Reservas_categorias1` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `reservas`
 --
 
-INSERT INTO `reservas` (`id`, `id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `create`, `update`) VALUES
-(1, 1, NULL, 'Bruno', 'Ovando', '2019-07-01', '2019-07-08', '10:00:00', NULL, '600.00', 7, 1, 1, '2019-08-13 12:39:23', '2019-08-22 16:31:15');
+INSERT INTO `reservas` (`id`, `id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `exterior`, `adicionales`, `create`, `update`) VALUES
+(4, 1, 'V6NFU', 'BRUNO', 'OVANDO', '2019-08-29', '2019-08-30', '15:00:00', '15:00:00', '2000.00', 1, 1, 1, NULL, 0, '2019-08-29 12:23:38', '2019-08-29 12:23:38');
 
 -- --------------------------------------------------------
 
@@ -337,7 +381,7 @@ CREATE TABLE IF NOT EXISTS `reservas_detalle` (
 --
 
 INSERT INTO `reservas_detalle` (`id_reserva`, `telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`) VALUES
-(1, '2944636416', 'brunoandres2013@gmail.com', 'aeropuerto', 'aeropuerto', '910', NULL);
+(4, '2944636416', 'brunoandres2013@gmail.com', '4', '4', 'AR159', '');
 
 -- --------------------------------------------------------
 
@@ -358,7 +402,7 @@ CREATE TABLE IF NOT EXISTS `tarifas` (
   PRIMARY KEY (`id`),
   KEY `id_temporada` (`id_temporada`),
   KEY `id_categoria` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `tarifas`
@@ -368,7 +412,8 @@ INSERT INTO `tarifas` (`id`, `por_dia`, `por_semana`, `id_temporada`, `id_catego
 (1, '2000', '12000', 1, 1, 1, '2019-08-13 12:40:12', '2019-08-16 15:58:03'),
 (2, '2400', '12999', 1, 2, 1, '2019-08-13 12:40:12', '2019-08-16 15:56:41'),
 (3, '3000', '13000', 1, 3, 1, '2019-08-13 12:40:12', '2019-08-13 12:40:13'),
-(4, '3190', '14008', 1, 4, 1, '2019-08-13 12:40:12', '2019-08-13 12:40:13');
+(4, '3190', '14008', 1, 4, 1, '2019-08-13 12:40:12', '2019-08-13 12:40:13'),
+(5, '1900', '6900', 1, 5, 1, '2019-08-27 16:51:10', '2019-08-27 16:51:10');
 
 -- --------------------------------------------------------
 
@@ -437,13 +482,6 @@ ALTER TABLE `autos`
 --
 ALTER TABLE `reservas`
   ADD CONSTRAINT `fk_Reservas_categorias1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `reservas_adicionales`
---
-ALTER TABLE `reservas_adicionales`
-  ADD CONSTRAINT `fk_adicionales_has_reservas_adicionales1` FOREIGN KEY (`id_reserva`) REFERENCES `adicionales` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_adicionales_has_reservas_reservas1` FOREIGN KEY (`id_adicional`) REFERENCES `reservas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `reservas_detalle`
