@@ -123,16 +123,13 @@ class ModeloReservas
 		}
 
 		$total = intval($contador['total']);*/
-		for ($i=1; $i <= $categoria ; $i++) { 
-			
+		for ($i=1; $i <= $categoria ; $i++) {
+
 			$contador = $new::autosPorCategoria($i,null,null);
 			$total = intval($contador['total']);
-			
-			
-		}
-		/*$contador = settype($contador, "integer");
-		var_dump($contador);*/
 
+
+		}
 		echo "TOTAL AUTOS  <br>";
 		var_dump($total);
 
@@ -144,14 +141,14 @@ class ModeloReservas
 
 			while ($filas = mysqli_fetch_assoc($resultado)) {
 
-				//Busco el margen horario para reservar
+						//Busco el margen horario para reservar
 		  	  	$margen_horario_disponible = ModeloConfiguraciones::margenHorario();
 		  	  	$margen_activo = $margen_horario_disponible['activo'];
 		  	  	$margen_horario_configuracion = $margen_horario_disponible['margen'];
 
 		  	  	//Si la configuracion está mal definida o viene null
 		  	  	if (!empty($margen_horario_disponible)) {
-		  	  		
+
 		  	  		//Si la configuracion está activa
 		  	  		if ($margen_activo=='1') {
 		  	  			$margen_activo = true;
@@ -167,9 +164,8 @@ class ModeloReservas
 
 		  	  	}else{
 		  	  		$margen_activo = false;
-		  	  		$margen_horario = 1;
+		  	  		$margen_horario = 2;
 		  	  	}
-
 
 		  	  	echo "MARGEN ACTIVO  <br>";
 		  	  	var_dump($margen_activo);
@@ -192,7 +188,7 @@ class ModeloReservas
 				$contador_autos = $total;
 				var_dump($contador_autos);
 
-	       		///Primero evaluo contra las fechas de reservas confirmadas
+     		///Primero evaluo contra las fechas de reservas confirmadas
 				//Evaluo que NO este en el rango la fecha
 				if (!self::check_in_range($fechaDesdeReserva, $fechaHastaReserva, $fechaDesdeConfirmada)) {
 					if (!self::check_in_range($fechaDesdeReserva, $fechaHastaReserva, $fechaHastaConfirmada))
@@ -203,67 +199,36 @@ class ModeloReservas
 					else $reserva_ok = false;
 				} else $reserva_ok= false;
 
-				//Verifico si tengo margen activo
-				if ($margen_activo==true) {
+				var_dump($margen_activo);
 
-					//Agrego una hora más a las reservas ya confirmadas
-					$horaDesdeReservaConfirmada = date('H:i:s', strtotime($horaHastaConfirmada .'+ 1 hour'));
-						
-					//Evaluo primero si no tengo reservas para el mismo dia, si la fecha de la reserva es el mismo con una ya cargada evaluo tambien la diferencia horaria, que el margen sea el establecido, en ese caso podria entregar el auto el mismo dia.
-					if ($reserva_ok==false && $fechaHastaConfirmada==$fechaDesdeReserva && $horaDesdeReservaConfirmada <= $hora_desde){
-							
-						$margen_horario = true;
-
-					}else{
-						
-						if ($reserva_ok==false && $margen_horario==false){
-							//Descontar en un el total de autos para cada reserva recorrida
-							//Seteo varible $contador a entero para no tener problemas de tipo de operador
-							
-							$sumaDeChoques =$sumaDeChoques+1;
-							$contador_autos = $contador_autos-$sumaDeChoques;
-						}
-					}
-
-				}else{
-
-					if ($reserva_ok==false) {
-						$sumaDeChoques =$sumaDeChoques+1;
-						$contador_autos = $contador_autos-$sumaDeChoques;
-					}
-
-					var_dump($contador_autos);
-
-				}
-
-				var_dump($horaDesdeReservaConfirmada);
+				//Agrego una hora más a las reservas ya confirmadas
+				$horaDesdeReservaConfirmada = date('H:i:s', strtotime($horaHastaConfirmada .'+ 1 hour'));
 				var_dump($horaHastaConfirmada);
+				var_dump($hora_desde);
 
-				var_dump($margen_horario);
-
-				//Recien con esta condicion donde no tengo reservas y tampoco el margen coincide, definitivamente no hay disponibilidad ni para el mismo dia.
-				/*if ($reserva_ok==false && $margen_horario==false){
+				if ($reserva_ok==false){
 					//Descontar en un el total de autos para cada reserva recorrida
 					//Seteo varible $contador a entero para no tener problemas de tipo de operador
-					
-					$sumaDeChoques =$sumaDeChoques+1;
-					$contador_autos = $contador_autos-$sumaDeChoques;
-				}
 
-				var_dump($contador_autos);*/
+					if ($margen_activo == true) {
+
+						if ($fechaHastaConfirmada==$fechaDesdeReserva && $horaDesdeReservaConfirmada <= $hora_desde) {
+							$margen_horario = true;
+							var_dump($contador_autos);
+						}
+					
+					}else{
+
+						$sumaDeChoques =$sumaDeChoques+1;
+						$contador_autos = $contador_autos-$sumaDeChoques;
+						var_dump($contador_autos);
+					}
+		
+				}
+				var_dump($data);
 
 			}//FIN WHILE
 
-			/*if ($contador_autos > 0){
-				$reserva_ok= true;
-				$msj= 'Si tiene auto';
-
-			}else{
-				$reserva_ok=false;
-				$msj='falta auto';
-
-			}*/
-		
 		}else{
 
 			//Mi contador de autos no es alterado y toma el resultado de la base
@@ -289,13 +254,13 @@ class ModeloReservas
 
 	    	//Recupero la ultima reserva insertada
 	    	$id_reserva_generado = mysqli_insert_id($link);
-	   
+
 	    	$query_detalle = "INSERT INTO `reservas_detalle`(`id_reserva`, `telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`) VALUES ($id_reserva_generado,'$telefono','$email',$retiro,$entrega,'$vuelo','$observaciones')";
 	    	$sql_detalle = mysqli_query($link,$query_detalle) or die (mysqli_error($link));
 
-	    
+
 	    	if ($sql_detalle) {
-	    		
+
 	    		if (!empty($adicionales)) {
 	    			foreach ($adicionales as $adicional => $value) {
 
@@ -303,7 +268,7 @@ class ModeloReservas
 	    			$sql_adicionales= mysqli_query($link,$query_adicionales) or die (mysqli_error($link));
 	    			}
 	    		}
-	    		
+
 	    		//var_dump($adicionales);
 
 	    		mysqli_commit($link);
