@@ -73,7 +73,7 @@ class ControladorReservas
 	  	  		$minimo_de_dias=3;
 	  	  	}
 
-	  	  	var_dump($minimo_de_dias);
+	  	  	//var_dump($minimo_de_dias);
 
 	  	  	//Cantidad de dias minimos para reservar.
 	  	  	if ($total_dias>=$minimo_de_dias) {
@@ -82,8 +82,11 @@ class ControladorReservas
 
 		  	  	//Generar un codigo de reserva aleatorio
 				$codigo = ModeloReservas::codigoReserva(5);
-				var_dump($respuesta);
 
+			var_dump($respuesta);
+				/***** valor de retorno funcion disponibilidad
+				
+				***/
 				//Si contador devuelve mayor igual a 1 es por que hay disponibilidad
 				if ($respuesta>=1) {
 	
@@ -96,13 +99,13 @@ class ControladorReservas
 					$_SESSION['total_dias']  = $total_dias;
 					$_SESSION['mensaje']     = 'Reserva Disponible!';
  
-					/*echo "<script>
+					echo "<script>
 
 					window.location='formulario';
 
-					</script>";*/
+					</script>";
 
-					echo'<script>
+					/*echo'<script>
 
 					swal({
 							type: "success",
@@ -113,7 +116,7 @@ class ControladorReservas
 		
 							})
 
-					</script>';
+					</script>';*/
 
 				}else{
 					echo'<script>
