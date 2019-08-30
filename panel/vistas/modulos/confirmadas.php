@@ -1,7 +1,7 @@
 <?php  
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorReservas();
-$reservas = $new->listarReservas(1);
+$reservas = $new->listarReservas();
 
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -29,13 +29,15 @@ $reservas = $new->listarReservas(1);
 
               <thead>
               <tr>
-                <th>N°</th>
+                <th>N° RESERVA</th>
                 <th>Nombre</th>
                 <th>Categoria</th>
-                <th width="10%">Desde</th>
-                <th>Hora</th>
+                <th>Desde</th>
+                <th>Hasta</th>
                 <th>Retira</th>
+                <th>Entrega</th>
                 <th>Vuelo</th>
+                <th>Adicionales</th>
                 <th>Opciones <i class="fa fa-gears"></i></th>
               </tr>
               </thead>
@@ -45,36 +47,33 @@ $reservas = $new->listarReservas(1);
               foreach ($reservas as $reserva => $value) { ?>
 
               <tr>                                     
-                <td><?php echo $value['id_reserva'];?></td>
-                <td><?php echo $value['nombre'];?></td>
-                <td><?php echo $value['categoria'];?></td>
-                <td><?php echo date("d/m/Y", strtotime($value['fecha']));?></td>
-                <td><?php echo $value['hdesde'];?></td>
-                <td><?php echo $value['retiro'];?></td>
-                <td><?php echo $value['vuelo']; ?></td>
-                <td width="20%">
-
-                  <button type="button" name="view" id="<?php echo $value["id_reserva"];?>" class="btn btn-info btn-sm view_data"><i class="fa fa-eye" aria-hidden="true"></i></button>
-
-                  <button type="button" name="edit" value="Edit" id="<?php echo $value["id_reserva"];?>" class="btn btn-warning btn-sm edit_data"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
-
-                  <a href="anular_reserva.php?reserva=<?php echo $value["id_reserva"];?>"onclick="return confirm('Estás seguro que deseas anular la reserva?');"><button type="button" class="btn btn-sm btn-danger">Anular</button></a>
-
-                </td>      
+                <td><?php echo $value['ID_RESERVA'];?></td>
+                <td><?php echo $value['NOMBRE_APELLIDO'];?></td>
+                <td><?php echo $value['CATEGORIA'];?></td>
+                <td><?php echo date("d/m/Y", strtotime($value['FECHA_DESDE']));?></td>
+                <td><?php echo date("d/m/Y", strtotime($value['FECHA_HASTA']));?></td>
+                <td><?php echo $value['LUGAR_RETIRO'];?></td>
+                <td><?php echo $value['LUGAR_ENTREGA'];?></td>
+                <td><?php echo $value['NRO_DE_VUELO'];?></td>
+                <td><?php echo $value['ADICIONALES'];?></td>
+                <td><?php echo $value['OBSERVACIONES']; ?></td>
+                  
               </tr>
               <?php } ?>                    
                                       
               </tbody>
               <tfoot>
                 <tr>
-                  <th>N°</th>
-                  <th>Nombre</th>
-                  <th>Categoria</th>
-                  <th width="10%">Desde</th>
-                  <th>Hora</th>
-                  <th>Retira</th>
-                  <th>Vuelo</th>
-                  <th>Opciones <i class="fa fa-gears"></i></th>
+                  <th>N° RESERVA</th>
+                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Desde</th>
+                <th>Hasta</th>
+                <th>Retira</th>
+                <th>Entrega</th>
+                <th>Vuelo</th>
+                <th>Adicionales</th>
+                <th>Opciones <i class="fa fa-gears"></i></th>
                 </tr>
               </tfoot>
             </table>

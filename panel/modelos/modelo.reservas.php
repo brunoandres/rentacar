@@ -16,7 +16,7 @@ class ModeloReservas
 	    }else{
 	    	$sql = "";
 	    }
-	    $query = "select a.id_reserva,a.nombre,a.tel,a.vehiculo,a.email,a.vehiculo as cat,a.fdesde as fecha,a.fdesde as pasaFechaD,a.fhasta as pasaFechaH,date_format(a.fhasta,'%d %M %Y')as fechah,a.hdesde,a.retiro,a.vuelo,a.origen,a.estado, b.categoria FROM reservas a, categorias b WHERE a.vehiculo=b.id_categoria and a.estado=1 and year(a.fdesde)=2019 ".$sql." order by a.id_reserva desc";
+	    $query = "select a.id as ID_RESERVA,a.id_categoria as CATEGORIA,a.codigo as CODIGO_RESERVA,CONCAT(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL,a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,a.retiro as LUGAR_RETIRO,a.entrega as LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as ADICIONALES from reservas a left join  reservas_adicionales b on a.id = b.id_adicional left join adicionales c ON a.id = c.id $sql";
 	    $sql = mysqli_query($link,$query);
 
 
@@ -279,7 +279,7 @@ class ModeloReservas
 		//Desactivamos el autommit transaccional
 		mysqli_autocommit($link,FALSE);
 
-	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `adicionales`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen,$tiene_adicionales)";
+	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `adicionales`,`telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen,$tiene_adicionales,'$telefono','$email',$retiro,$entrega,'$nro_vuelo','$observaciones')";
 	    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
 
 	    if ($sql) {
@@ -287,34 +287,22 @@ class ModeloReservas
 	    	//Recupero la ultima reserva insertada
 	    	$id_reserva_generado = mysqli_insert_id($link);
 
-	    	$query_detalle = "INSERT INTO `reservas_detalle`(`id_reserva`, `telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`) VALUES ($id_reserva_generado,'$telefono','$email',$retiro,$entrega,'$vuelo','$observaciones')";
-	    	$sql_detalle = mysqli_query($link,$query_detalle) or die (mysqli_error($link));
+    		if (!empty($adicionales)) {
+    			foreach ($adicionales as $adicional => $value) {
 
+    			$query_adicionales = "INSERT INTO `reservas_adicionales`(`id_reserva`, `id_adicional`) VALUES ($id_reserva_generado,$value)";
+    			$sql_adicionales= mysqli_query($link,$query_adicionales) or die (mysqli_error($link));
+    			}
+    		}
 
-	    	if ($sql_detalle) {
+    		//var_dump($adicionales);
 
-	    		if (!empty($adicionales)) {
-	    			foreach ($adicionales as $adicional => $value) {
+    		mysqli_commit($link);
 
-	    			$query_adicionales = "INSERT INTO `reservas_adicionales`(`id_reserva`, `id_adicional`) VALUES ($id_reserva_generado,$value)";
-	    			$sql_adicionales= mysqli_query($link,$query_adicionales) or die (mysqli_error($link));
-	    			}
-	    		}
-
-	    		//var_dump($adicionales);
-
-	    		mysqli_commit($link);
-
-	    		return "ok";
-
-	    	}else{
-
-	    		mysqli_rollback($link);
-	    		return "error";
-	    	}
+    		return "ok";
 
 	    }else{
-
+	    	mysqli_rollback($link);
 	    	return "error";
 	    }
 
