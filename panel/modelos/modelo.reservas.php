@@ -16,7 +16,7 @@ class ModeloReservas
 	    }else{
 	    	$sql = "";
 	    }
-	    $query = "select a.id as ID_RESERVA,a.id_categoria as CATEGORIA,a.codigo as CODIGO_RESERVA,CONCAT(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL,a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,a.retiro as LUGAR_RETIRO,a.entrega as LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as ADICIONALES from reservas a left join  reservas_adicionales b on a.id = b.id_adicional left join adicionales c ON a.id = c.id $sql";
+	    $query = "select a.id as ID_RESERVA,a.id_categoria,a.codigo as CODIGO_RESERVA,CONCAT(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL,a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,e.lugar as LUGAR_RETIRO,e.lugar as LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as ADICIONALES,d.nombre as CATEGORIA from reservas a left join reservas_adicionales b on a.id = b.id_adicional left join adicionales c ON a.id = c.id LEFT join categorias d on a.id_categoria = d.id LEFT JOIN lugares e on a.retiro = e.id and a.entrega = e.id $sql";
 	    $sql = mysqli_query($link,$query);
 
 
@@ -276,10 +276,17 @@ class ModeloReservas
 
 		$link = Conexion::ConectarMysql();
 
+		//CONVIERTO LAS FECHAS PARA EL CALENDARIO
+		$start = date_create($fecha_desde);
+		$start_calendar = date_format($start, 'Y-m-d 15:00:00');
+
+		$end = date_create($fecha_hasta);
+		$end_calendar = date_format($end, 'Y-m-d 15:00:00');
+
 		//Desactivamos el autommit transaccional
 		mysqli_autocommit($link,FALSE);
 
-	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `adicionales`,`telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen,$tiene_adicionales,'$telefono','$email',$retiro,$entrega,'$nro_vuelo','$observaciones')";
+	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `adicionales`,`telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`,`start`, `end`, `color`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen,$tiene_adicionales,'$telefono','$email',$retiro,$entrega,'$vuelo','$observaciones','$start_calendar','$end_calendar','#FF0000')";
 	    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
 
 	    if ($sql) {

@@ -77,7 +77,7 @@ if (isset($_POST['checkout'])) {
             </div>
             <span class="text-success"><strong>(<?php echo $_SESSION['total_dias']; ?>)</strong></span>
           </li>
-          
+ 
           <li class="list-group-item d-flex justify-content-between bg-light">
             <div class="text-success">
               <h6 class="my-0">Valor reserva</h6>
@@ -85,8 +85,18 @@ if (isset($_POST['checkout'])) {
                 
               <small class="text-muted">Por días selecionados</small>
             </div>
-            <span class="text-success"><strong>$<?php echo $tarifa['valor_diario']*$_SESSION['total_dias']; ?></strong></span>
+            <span class="text-success"><strong>$<?php echo $total_por_dias = $tarifa['valor_diario']*$_SESSION['total_dias']; ?></strong></span>
           </li>
+
+          <?php if (!$tarifa['permite_promo']==0): ?>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Tarifa Promocional</h6>
+                <small class="text-muted">Por Alquiler semanal</small>
+              </div>
+              <span class="text-danger"><strong>- $ <?php echo $total_por_dias-$tarifa['valor_semanal']; ?></strong></span>
+            </li>
+          <?php endif ?>
           
 
           <?php  
@@ -107,10 +117,10 @@ if (isset($_POST['checkout'])) {
           ?>
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
-              <h6 class="my-0"><?php echo $tarifa_adicional['nombre']; ?> + </h6>
+              <h6 class="my-0"><?php echo $tarifa_adicional['nombre']; ?>  </h6>
               <small class="text-muted">Adicional seleccionado</small>
             </div>
-            <span class="text-success"><strong>$<?php echo $tarifa_adicional['tarifa']; ?></strong></span>
+            <span class="text-success"><strong>+ $<?php echo $tarifa_adicional['tarifa']; ?></strong></span>
           </li>
 
 
@@ -129,10 +139,11 @@ if (isset($_POST['checkout'])) {
             if ($tarifa['permite_promo']==0) {
               $total = ($tarifa['valor_diario']*$_SESSION['total_dias'])+$tarifa_ad;
             }else{
-              $total = $tarifa['valor_semanal'];
+              $total = $tarifa['valor_semanal']+$tarifa_ad;
             } 
             $_SESSION['tarifa'] = $total;
             echo '$'.$total;
+            
             ?>
    
             </strong>
@@ -185,11 +196,6 @@ if (isset($_POST['checkout'])) {
           <br>
           <a href="inicio"><button class="btn btn-default btn-lg btn-block" type="button" onclick="return confirm('Desea cancelar su reserva?')">Cancelar <i class="fa fa-times" aria-hidden="true"></i></button></a>
           <button class="btn btn-danger btn-lg btn-block mt-1" type="submit" name="confirmaReserva">Confirmar Reserva <i class="fa fa-check" aria-hidden="true"></i> </button>
-        </form>
-
-        <form id="confirma_reserva">
-          <input type="text" name="" placeholder="Nombre">
-          <button type="submit">Enviar</button>
         </form>
       
       </div>

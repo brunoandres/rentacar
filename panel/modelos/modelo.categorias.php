@@ -6,14 +6,20 @@ require_once 'modelo.funciones.php';
 
 class ModeloCategorias{
 
-  	static function listarCategorias($id){
+  	static function listarCategorias($id,$filtro){
 
 		$categorias = array();
 		$link = Conexion::ConectarMysql();
 
 		//el id puede venir vacio, asi retorno todas las categorias
 		if ($id == null) {
-			$query = "select * from categorias order by nombre asc";
+
+			if ($filtro == null) {
+		        $query = "select * from categorias where activa = 1 order by nombre asc";
+	        }else{
+		        $query = "select * from categorias order by nombre asc";
+	        }
+
 			$sql = mysqli_query($link,$query);
 		    while ($filas = mysqli_fetch_array($sql)) {
 		      $categorias[]=$filas;

@@ -158,6 +158,20 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
   }
 
+  static public function buscarAdicionales($id){
+
+    $link = Conexion::ConectarMysql();
+    $adicionales = array();
+
+    $query = "select a.id,a.nombre,GROUP_CONCAT(b.nombre) as adicionales from reservas a, adicionales b, reservas_adicionales c where a.id = c.id_reserva and b.id = c.id_adicional and a.id = $id";
+    $sql = mysqli_query($link,$query);
+    while ($filas = mysqli_fetch_array($sql)) {
+      $adicionales['adicionales']=$filas['adicionales'];
+    }
+    return $adicionales;
+
+  }
+
   static public function listarAdicionales($id,$filtro){
 
     $link = Conexion::ConectarMysql();

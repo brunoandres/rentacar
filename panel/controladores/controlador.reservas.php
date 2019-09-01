@@ -97,7 +97,7 @@ class ControladorReservas
 					$_SESSION['hora_hasta']  = $hora_hasta;
  					$_SESSION['categoria']   = $categoria;
 					$_SESSION['total_dias']  = $total_dias;
-					$_SESSION['mensaje']     = 'Reserva Disponible!';
+					$_SESSION['mensaje']     = 'Reserva Disponible';
  
 					echo "<script>
 
@@ -195,10 +195,10 @@ class ControladorReservas
 			}
 			
 			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales);
-
+			
 			echo'<script>
 
-					window.location = "inicio";
+					window.location = "reservar";
 
 				</script>';
 			

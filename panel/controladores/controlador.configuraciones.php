@@ -57,6 +57,13 @@ class ControladorConfiguraciones{
 
 	}
 
+	//Buscar adicionales de las reservas
+	static public function buscarAdicionales($id){
+
+		$adicionales = ModeloConfiguraciones::buscarAdicionales($id);
+		return $adicionales;
+	}
+
 	static public function tarifaAdicional($id){
 
 		$tarifa = ModeloConfiguraciones::buscarTarifaAdicional($id);

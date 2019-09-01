@@ -1,6 +1,7 @@
 <?php  
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorReservas();
+$newConf = new ControladorConfiguraciones();
 $reservas = $new->listarReservas();
 
 ?>
@@ -29,7 +30,7 @@ $reservas = $new->listarReservas();
 
               <thead>
               <tr>
-                <th>N° RESERVA</th>
+                <th width="8%">N° RESERVA</th>
                 <th>Nombre</th>
                 <th>Categoria</th>
                 <th>Desde</th>
@@ -44,10 +45,18 @@ $reservas = $new->listarReservas();
               <tbody>
 
               <?php
-              foreach ($reservas as $reserva => $value) { ?>
+              foreach ($reservas as $reserva => $value) { 
+
+                $adicionales = NULL;
+                $tiene_adicionales = $newConf->buscarAdicionales($value['ID_RESERVA']);
+                if (!empty($tiene_adicionales)) {
+                  $adicionales = $tiene_adicionales['adicionales'];
+                }
+
+              ?>
 
               <tr>                                     
-                <td><?php echo $value['ID_RESERVA'];?></td>
+                <td align="center"><?php echo $value['ID_RESERVA'];?></td>
                 <td><?php echo $value['NOMBRE_APELLIDO'];?></td>
                 <td><?php echo $value['CATEGORIA'];?></td>
                 <td><?php echo date("d/m/Y", strtotime($value['FECHA_DESDE']));?></td>
@@ -55,7 +64,7 @@ $reservas = $new->listarReservas();
                 <td><?php echo $value['LUGAR_RETIRO'];?></td>
                 <td><?php echo $value['LUGAR_ENTREGA'];?></td>
                 <td><?php echo $value['NRO_DE_VUELO'];?></td>
-                <td><?php echo $value['ADICIONALES'];?></td>
+                <td><?php echo $adicionales;?></td>
                 <td><?php echo $value['OBSERVACIONES']; ?></td>
                   
               </tr>

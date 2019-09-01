@@ -2,9 +2,9 @@
 
 class ControladorCategorias{
 
-	static public function listarCategorias($id=null){
+	static public function listarCategorias($id=null,$filtro=null){
 
-		$categorias = ModeloCategorias::listarCategorias($id);
+		$categorias = ModeloCategorias::listarCategorias($id,$filtro);
 		return $categorias;
 
 	}

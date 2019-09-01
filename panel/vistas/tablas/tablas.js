@@ -15,7 +15,7 @@
       "language":{
         "url":"spanish.json"
       },
-      "order": [[ 0, "desc" ]],
+      "order": [[ 0, "asc" ]],
       responsive: true
     })
   })

@@ -29,8 +29,9 @@
     <!-- timepicker -->
     <link rel="stylesheet" href="vistas/css/bootstrap-clockpicker.min.css">
 
-
+    <link rel="stylesheet" href="vistas/css/galeria.css">
     <link rel="stylesheet" href="panel/vistas/bower_components/select2/dist/css/select2.min.css">
+
 
 
     <!-- ALERTAS -->
@@ -125,6 +126,35 @@
           });
         }, false);
       })();
+    </script>
+
+    <script type="text/javascript">
+            $(document).ready(function(){
+
+          $(".filter-button").click(function(){
+              var value = $(this).attr('data-filter');
+              
+              if(value == "all")
+              {
+                  //$('.filter').removeClass('hidden');
+                  $('.filter').show('1000');
+              }
+              else
+              {
+      //            $('.filter[filter-item="'+value+'"]').removeClass('hidden');
+      //            $(".filter").not('.filter[filter-item="'+value+'"]').addClass('hidden');
+                  $(".filter").not('.'+value).hide('3000');
+                  $('.filter').filter('.'+value).show('3000');
+                  
+              }
+          });
+          
+          if ($(".filter-button").removeClass("active")) {
+      $(this).removeClass("active");
+      }
+      $(this).addClass("active");
+
+      });
     </script>
 
     <script src="vistas/js/script.js"></script>

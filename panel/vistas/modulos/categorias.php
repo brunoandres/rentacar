@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorCategorias();
-$categorias = $new->listarCategorias();
+$categorias = $new->listarCategorias(null,1);
 $editarCategoria = $new-> editarCategoria();
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -30,34 +30,46 @@ $editarCategoria = $new-> editarCategoria();
               <thead>
               <tr>
                 <th align="center">Categoria</th>
-                <th align="center">Estado</th>
-                <th align="center">Promociones</th>
+                <th align="center" width="10%">Cantidad Autos</th>
+                <th align="center">Estado Categoria</th>
+                <th align="center">Permite Promociones</th>
                 <th align="center">Opciones <i class="fa fa-gears"></i></th>
               </tr>
               </thead>
               <tbody>
 
               <?php
-
+              $new = new ModeloCategorias();
               foreach ($categorias as $value) {
+
+                
+                $cantidad_por_categoria = $new::autosPorCategoria($value['id'],null,null);
+
+                if (!empty($cantidad_por_categoria)) {
+                  $total = $cantidad_por_categoria['total'];
+                }else{
+                  $total = '<span class="label label-danger">Sin Autos habilitados</span>';
+                }
+                  
 
               ?>
 
               <tr>
                 <td><?php echo $value['nombre'];?></td>
+                <td><?php echo $total; ?></td>
                 <td><?php if ($value['activa']==1) {
                   echo "<span class='label label-success'>Vigente</span>";
                 }else{
-                  echo "<span class='label label-danger'>Inactiva</span>";
+                  echo "<span class='label label-warning'>Inactiva</span>";
                 };?></td>
                 <td><?php if ($value['promo']==1) {
                   echo "<span class='label label-success'>Permite</span>";
                 }else{
-                  echo "<span class='label label-danger'>No permite</span>";
+                  echo "<span class='label label-warning'>No permite</span>";
                 };?></td>
                 <td align="left">
 
-                  <button class="btn btn-warning btnEditarCategoria" idCategoria="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>
+                  <button class="btn btn-info btnEditarCategoria" idCategoria="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>
 
 
                 </td>
@@ -71,8 +83,9 @@ $editarCategoria = $new-> editarCategoria();
               <tfoot>
                 <tr>
                   <th align="center">Categoria</th>
-                  <th align="center">Estado</th>
-                  <th align="center">Permite promociones</th>
+                  <th align="center" width="10%">Cantidad Autos</th>
+                  <th align="center">Estado Categoria</th>
+                  <th align="center">Permite Promociones</th>
                   <th align="center">Opciones <i class="fa fa-gears"></i></th>
               </tr>
               </tfoot>
