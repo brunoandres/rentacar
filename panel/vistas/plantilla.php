@@ -187,6 +187,10 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "nuevo-lugar" ||
          $_GET["ruta"] == "editar-venta" ||
          $_GET["ruta"] == "rango" ||
+         $_GET["ruta"] == "devuelven-hoy" ||
+         $_GET["ruta"] == "devuelven-manana" ||
+         $_GET["ruta"] == "entregar-hoy" ||
+         $_GET["ruta"] == "entregar-manana" ||
          $_GET["ruta"] == "salir"){
 
         include "modulos/".$_GET["ruta"].".php";
@@ -229,11 +233,12 @@ CUERPO DOCUMENTO
   <script src="vistas/tablas/tablas.js"></script>
   <script src="vistas/js/script.js"></script>
   <script src="vistas/js/validator.js"></script>
+  <script src="vistas/js/view.js"></script>
   <script>
   $('.timepicker').timepicker({
     showInputs: false
   })
-
+  
   </script>
 
 </body>

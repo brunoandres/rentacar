@@ -7,16 +7,34 @@ class ModeloReservas
 {
 
 	public function __construct() {}
-	static public function listarReservas($estado = NULL){
+
+	static function listarTotalReservas(){
+
+		$link = Conexion::ConectarMysql();
+		$query = "select * from reservas where estado = 1 and fecha_desde >= '2019-01-01'";
+		$sql = mysqli_query($link,$query);
+		$total = mysqli_num_rows($sql);
+
+		return $total;
+
+	}
+
+	static public function listarReservas($estado=null,$filtro=null){
 
 		$reservas = array();
 		$link = Conexion::ConectarMysql();
-	    if (!empty($estado)) {
-	    	$sql = " and a.estado = ".$estado;
-	    }else{
-	    	$sql = "";
-	    }
-	    $query = "select a.id as ID_RESERVA,a.id_categoria,a.codigo as CODIGO_RESERVA,CONCAT(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL,a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,e.lugar as LUGAR_RETIRO,e.lugar as LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as ADICIONALES,d.nombre as CATEGORIA from reservas a left join reservas_adicionales b on a.id = b.id_adicional left join adicionales c ON a.id = c.id LEFT join categorias d on a.id_categoria = d.id LEFT JOIN lugares e on a.retiro = e.id and a.entrega = e.id $sql";
+	   	
+	   	if (!$estado == null) {
+	   		$query_estado = " where a.estado = $estado";
+
+	   		if (!$filtro == null) {
+	   			$query_mov = " and $filtro";
+	   		}else{
+	   			$query_mov = "";
+	   		}
+	   	}
+	   	
+	    $query = "select a.id as ID_RESERVA,a.id_categoria,a.codigo as CODIGO_RESERVA,CONCAT(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL,a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,e.lugar as LUGAR_RETIRO,e.lugar as LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as ADICIONALES,d.nombre as CATEGORIA from reservas a left join reservas_adicionales b on a.id = b.id_adicional left join adicionales c ON a.id = c.id LEFT join categorias d on a.id_categoria = d.id left JOIN lugares e on a.retiro = e.id and a.entrega = e.id $query_estado $query_mov";
 	    $sql = mysqli_query($link,$query);
 
 
@@ -105,7 +123,7 @@ class ModeloReservas
 		$new = new ModeloCategorias();
 
 		$link 		= Conexion::ConectarMysql();
-		$query 		= "select * from reservas where id_categoria = $categoria and estado = 1 and fecha_hasta >= '2019-08-01'";
+		$query 		= "select * from reservas where id_categoria = $categoria and estado = 1 and fecha_hasta >= (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
 		$resultado 	= mysqli_query($link,$query);
 
 		//Total de resultados de la consulta
@@ -272,6 +290,53 @@ class ModeloReservas
 
 	}
 
+	//Funcion para contabilizar los autos que hay que entregar para una cierta fecha dada, si la fecha no se la especifico, por defecto será el dia de hoy
+	static public function autosParaEntregar($categoria,$fecha=null){
+
+		$link = Conexion::ConectarMysql();
+
+		$contador_autos = null;
+		//Instancio mi clase categorias para traer total de autos para cada una.
+		$new = new ModeloCategorias();
+
+		if ($fecha==null) {
+			$query = "select * from reservas where id_categoria = $categoria and fecha_hasta <= curdate() and fecha_hasta >= (DATE_SUB(CURDATE(), INTERVAL 1 MONTH))";
+		}else{
+			$query = "select * from reservas where id_categoria = $categoria and fecha_hasta <= curdate() and fecha_hasta >= '$fecha'";
+		}
+
+		$resultado 	= mysqli_query($link,$query);
+
+		//Total de resultados de la consulta
+		$total_result = mysqli_num_rows($resultado);
+
+		//retorno valor de buscarDisponibilidad (flag)
+		$total_positivo = false;
+
+		//variable pora ir contando los cruces de reserva
+		$reservas_encontradas = 0;
+
+		//Recorro todas las categorias disponibles para guardar el total de autos
+		for ($i=1; $i <= $categoria ; $i++) {
+
+			$contador = $new::autosPorCategoria($i,null,null);
+			$total_de_autos = intval($contador['total']);
+
+		}
+
+		if ($contador_autos > $total_result) {
+
+			$contador_autos = true;
+			
+		}else{
+			$contador_autos = false;
+		}
+
+		return $contador_autos;
+
+	}
+
+	//Funcion para guardar una nueva reserva
 	static public function nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales=null,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales=null){
 
 		$link = Conexion::ConectarMysql();

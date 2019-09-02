@@ -67,6 +67,8 @@ $text = null;
       || $_GET['ruta']=='autos'
       || $_GET['ruta']=='nuevo-auto') {
         echo "active";
+      }else{
+        echo "active";
       } ?>">
         <a href="#">
           <i class="fa fa-edit"></i> <span>Administración</span>

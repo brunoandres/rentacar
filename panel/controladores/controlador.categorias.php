@@ -2,6 +2,13 @@
 
 class ControladorCategorias{
 
+	static public function listarTotalCategorias(){
+
+		$total = ModeloCategorias::listarTotalCategorias();
+		return $total;
+
+	}
+
 	static public function listarCategorias($id=null,$filtro=null){
 
 		$categorias = ModeloCategorias::listarCategorias($id,$filtro);
@@ -9,7 +16,7 @@ class ControladorCategorias{
 
 	}
 
-  static public function totalPorCategoria($id=null,$habilitado=null,$habilitado_chile=null){
+  	static public function totalPorCategoria($id=null,$habilitado=null,$habilitado_chile=null){
 
 		$total = ModeloCategorias::autosPorCategoria($id,$habilitado,$habilitado_chile);
 		return $total;

@@ -6,6 +6,17 @@ require_once 'modelo.funciones.php';
 
 class ModeloCategorias{
 
+	static function listarTotalCategorias(){
+
+		$link = Conexion::ConectarMysql();
+		$query = "select * from categorias where activa = 1";
+		$sql = mysqli_query($link,$query);
+		$total = mysqli_num_rows($sql);
+
+		return $total;
+
+	}
+
   	static function listarCategorias($id,$filtro){
 
 		$categorias = array();

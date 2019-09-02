@@ -27,6 +27,15 @@ class ControladorReservas
 		return $dias;
 	}
 
+
+	//Funcion para retornar la cantidad de autos por categoria a una fecha especifica
+	static function totalAutosEntregar($categoria,$fecha=null){
+
+		$cantidad = ModeloReservas::autosParaEntregar($categoria,$fecha);
+		return $cantidad;
+
+	}
+
 	//Funcion principal que busca disponibilidad, devuelve el contador de autos disponibles.
 	static function buscarDisponibilidad(){
 
@@ -196,13 +205,13 @@ class ControladorReservas
 			
 			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales);
 			
-			echo'<script>
+			/*echo'<script>
 
-					window.location = "reservar";
+					window.location = "inicio#reservaok";
 
-				</script>';
+				</script>';*/
 			
-			/*if ($respuesta=="ok") {
+			if ($respuesta=="ok") {
 				echo'<script>
 
 				swal({
@@ -236,19 +245,24 @@ class ControladorReservas
 							})
 
 				</script>';
-			}*/
+			}
 		}
 
 	}
 
-	//listar todas las reservas
-	static function listarReservas($estado = NULL){
+	//listar todas las reservas para mostar en panel
+	static function listarTotalReservas(){
 
-		if (!empty($estado)) {
-			$reservas = ModeloReservas::listarReservas($estado);
-		}else{
-			$reservas = ModeloReservas::listarReservas();
-		}
+		$total = ModeloReservas::listarTotalReservas();
+		return $total;
+
+	}
+
+	//listar todas las reservas
+	static function listarReservas($estado=null,$filtro=null){
+
+		$reservas = ModeloReservas::listarReservas($estado,$filtro);
+		
 		return $reservas;
 
 	}

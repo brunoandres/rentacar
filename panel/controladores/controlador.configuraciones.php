@@ -2,6 +2,55 @@
 
 class ControladorConfiguraciones{
 
+	static function listarTotalesReservasPanel($sql){
+
+		$totales = ModeloConfiguraciones::listarTotalesReservasPanel($sql);
+		return $totales;
+
+	}
+
+	static function listarTotalAutos(){
+
+		$total = ModeloConfiguraciones::listarTotalAutos();
+		return $total;
+
+	}
+
+	static function listarTotalTarifas(){
+
+		$total = ModeloConfiguraciones::listarTotalTarifas();
+		return $total;
+
+	}
+
+	static function listarTotalAdicionales(){
+
+		$total = ModeloConfiguraciones::listarTotalAdicionales();
+		return $total;
+
+	}
+
+	static function listarTotalLugares(){
+
+		$total = ModeloConfiguraciones::listarTotalLugares();
+		return $total;
+
+	}
+
+	static function listarTotalConfiguraciones(){
+
+		$total = ModeloConfiguraciones::listarTotalConfiguraciones();
+		return $total;
+
+	}
+
+	static function listarTotalTemporadas(){
+
+		$total = ModeloConfiguraciones::listarTotalTemporadas();
+		return $total;
+
+	}
+
 	static public function diasMinimos(){
 
 		$dias = ModeloConfiguraciones::diasMinimos();

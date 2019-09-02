@@ -2,7 +2,9 @@
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorReservas();
 $newConf = new ControladorConfiguraciones();
-$reservas = $new->listarReservas(1,NULL);
+
+$date = date('Y-m-d');     
+$reservas = $new->listarReservas(1,"fecha_hasta = '$date'");
 
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -10,7 +12,7 @@ $reservas = $new->listarReservas(1,NULL);
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Reservas confirmadas
+      Autos que devuelven Hoy
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>

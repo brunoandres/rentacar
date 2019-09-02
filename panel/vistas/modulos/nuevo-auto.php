@@ -49,6 +49,10 @@ $nuevo = $new2->nuevoAuto();
                 <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Nombre del modelo" autocomplete="off" required>
               </div>
               <div class="form-group">
+                <?php if (empty($categorias)): ?>
+                  <br><span class='label label-danger'>Sin Categorias cargadas!</span><br>
+                  <a href="nueva-categoria">Cargar categorias</a><br><br>
+                <?php endif ?>
                 <label for="categoria">Categoria</label>
                 <select class="form-control" id="select_categoria" name="categoria" style="width: 100%;">
                         <?php foreach ($categorias as $categoria) {?>

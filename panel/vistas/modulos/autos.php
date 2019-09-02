@@ -19,7 +19,7 @@ $editar = $new->editarAuto();
       <li><a href="#">Tables</a></li>
       <li class="active">Data tables</li>
     </ol>
-    <a href="nuevo-auto" align="right"> <button type="button" class="btn btn-info">Nuevo</button> </a>
+    
   </section>
  
   <!-- Main content -->

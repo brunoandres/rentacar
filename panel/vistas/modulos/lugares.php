@@ -30,7 +30,7 @@ $editarLugar = $new->editarLugar();
               <thead>
               <tr>
                 <th align="center">Nombre</th>          
-                <th align="center">Activo</i></th>
+                <th align="center">Estado</i></th>
                 <th align="center">Observaciones</i></th>
                 <th align="center">Opciones <i class="fa fa-gears"></i></th>
               </tr>
@@ -47,9 +47,9 @@ $editarLugar = $new->editarLugar();
                 <td width="50%"><?php echo $lugar['lugar'];?></td>
                 
                 <td><?php if ($lugar['activo']==1) {
-                  echo "<span class='label label-success'>Si</span>";
+                  echo "<span class='label label-success'>Activo</span>";
                 }else{
-                  echo "<span class='label label-danger'>No</span>";
+                  echo "<span class='label label-danger'>Inactivo</span>";
                 };?></td>
                 <td width="20%"><?php echo $lugar['observaciones'];?></td>
                 <td width="50%" align="left">
@@ -68,7 +68,7 @@ $editarLugar = $new->editarLugar();
               <tfoot>
                 <tr>
                 <th align="center">Nombre</th>          
-                <th align="center">Activo</i></th>
+                <th align="center">Estado</i></th>
                 <th align="center">Observaciones</i></th>
                 <th align="center">Opciones <i class="fa fa-gears"></i></th>
               </tfoot>

@@ -7,6 +7,83 @@ require_once 'funciones.php';
 
 class ModeloConfiguraciones{
 
+  static function listarTotalesReservasPanel($sql){
+
+    $link = Conexion::ConectarMysql();
+    $query = "select * from reservas where estado = 1 and $sql";
+    $sql = mysqli_query($link,$query);
+    $total = mysqli_num_rows($sql);
+
+    return $total;
+
+  }
+
+  static function listarTotalAutos(){
+
+    $link = Conexion::ConectarMysql();
+    $query = "select * from autos where estado = 1";
+    $sql = mysqli_query($link,$query);
+    $total = mysqli_num_rows($sql);
+
+    return $total;
+
+  }
+
+  static function listarTotalLugares(){
+
+    $link = Conexion::ConectarMysql();
+    $query = "select * from lugares where activo = 1";
+    $sql = mysqli_query($link,$query);
+    $total = mysqli_num_rows($sql);
+
+    return $total;
+
+  }
+
+  static function listarTotalAdicionales(){
+
+    $link = Conexion::ConectarMysql();
+    $query = "select * from adicionales where habilitado = 1";
+    $sql = mysqli_query($link,$query);
+    $total = mysqli_num_rows($sql);
+
+    return $total;
+
+  }
+
+  static function listarTotalTarifas(){
+
+    $link = Conexion::ConectarMysql();
+    $query = "select * from tarifas where activa = 1";
+    $sql = mysqli_query($link,$query);
+    $total = mysqli_num_rows($sql);
+
+    return $total;
+
+  }
+
+  static function listarTotalConfiguraciones(){
+
+    $link = Conexion::ConectarMysql();
+    $query = "select * from configuraciones where activa = 1";
+    $sql = mysqli_query($link,$query);
+    $total = mysqli_num_rows($sql);
+
+    return $total;
+
+  }
+
+  static function listarTotalTemporadas(){
+
+    $link = Conexion::ConectarMysql();
+    $query = "select * from temporadas where activa = 1";
+    $sql = mysqli_query($link,$query);
+    $total = mysqli_num_rows($sql);
+
+    return $total;
+
+  }
+
   static function listarConfiguraciones($id){
 
     $configuraciones = array();

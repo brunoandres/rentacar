@@ -35,7 +35,7 @@ $editarConfiguracion -> editarConfiguracion();
               <tr>
                 <th align="center">Nombre</th>
                 <th align="center">Valor</i></th>
-                <th align="center">Activo</i></th>
+                <th align="center">Estado</i></th>
                 <th align="center">Opciones <i class="fa fa-gears"></i></th>
               </tr>
               </thead>
@@ -51,9 +51,9 @@ $editarConfiguracion -> editarConfiguracion();
                 <td width="50%"><?php echo $value['nombre'];?></td>
                 <td width="20%"><?php echo $value['valor'];?></td>
                 <td><?php if ($value['activa']==1) {
-                  echo "<span class='label label-success'>Si</span>";
+                  echo "<span class='label label-success'>Activa</span>";
                 }else{
-                  echo "<span class='label label-danger'>No</span>";
+                  echo "<span class='label label-danger'>Inactiva</span>";
                 };?></td>
                 <td width="50%" align="left">
 
@@ -72,7 +72,7 @@ $editarConfiguracion -> editarConfiguracion();
                 <tr>
                 <th align="center">Nombre</th>
                 <th align="center">Valor</i></th>
-                <th align="center">Activo</i></th>
+                <th align="center">Estado</i></th>
                 <th align="center">Opciones <i class="fa fa-gears"></i></th>
               </tr>
               </tfoot>

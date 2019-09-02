@@ -1,6 +1,12 @@
 <?php  
 
-session_destroy();
+unset($_SESSION['codigo']);     
+unset($_SESSION['fecha_desde']);
+unset($_SESSION['fecha_hasta']);
+unset($_SESSION['hora_desde']);
+unset($_SESSION['hora_hasta']);
+unset($_SESSION['categoria']);
+unset($_SESSION['total_dias']);
 
 ?>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -38,72 +44,25 @@ session_destroy();
     </div>
 
     <div class="row">
-      <div class="features">
-        <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-          <div class="feature-wrap">
-            <i class="fa fa-laptop"></i>
+      <div class="col-md-4 wow fadeInDown">
+        <div class="feature-wrap">
+            <i class="fa fa-laptop fadeInDown"></i>
             <h2>Reservas On-line</h2>
             <h3>Haz tu reserva mediante nuestra web.</h3>
           </div>
-        </div>
-        <!--/.col-md-4-->
-
-        <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-          <div class="feature-wrap">
+      </div>
+      <div class="col-md-4">
+        <div class="feature-wrap wow fadeInDown">
             <i class="fa fa-comments"></i>
             <h2>Atención personalizada</h2>
             <h3>Entregas y retiro sin cargo en aeropuerto,y puntos de S.C. de Bariloche.</h3>
-          </div>
         </div>
-        <!--/.col-md-4-->
-
-        <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-          <div class="feature-wrap">
+      </div>
+      <div class="col-md-4">
+        <div class="feature-wrap wow fadeInDown">
             <i class="fa fa-cogs"></i>
             <h2>Coordinación</h2>
             <h3>Recibe tu auto sin demoras y listo para circular.</h3>
-          </div>
-        </div>
-        <!--/.col-md-4-->
-
-
-
-        
-
-      </div>
-      <!--/.services-->
-    </div>
-    <!--/.row-->
-
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
         </div>
       </div>
 
@@ -113,3 +72,4 @@ session_destroy();
   <!--/.container-->
 </section>
 <!--/#feature-->
+

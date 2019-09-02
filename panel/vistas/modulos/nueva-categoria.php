@@ -43,7 +43,7 @@ $new->nuevaCategoria();
               </div>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" value="1" name="checkPromo" class="flat-red" checked>
+                  <input type="checkbox" value="1" name="checkPromo" class="flat-red">
                   ¿Permite promoción?
                 </label>
               </div>

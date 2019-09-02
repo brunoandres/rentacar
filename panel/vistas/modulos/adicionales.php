@@ -40,7 +40,7 @@ $editarAdicional = $new->editarAdicional();
               <tr>
                 <th align="center">Nombre</th>
                 <th align="center">Tarifa</th>
-                <th align="center">Habilitado</th>
+                <th align="center">Estado</th>
                 <th align="center">Observaciones</th>
                 <th align="center"><i class="fa fa-gears"></i></th>
               </tr>
@@ -57,9 +57,9 @@ $editarAdicional = $new->editarAdicional();
                 <td><?php echo $adicional['nombre'];?></td>
                 <td><?php echo '$ '.$adicional['tarifa'];?></td>
                 <td><?php if ($adicional['habilitado']==1) {
-                  echo "<span class='label label-success'>Si</span>";
+                  echo "<span class='label label-success'>Habilitado</span>";
                 }else{
-                  echo "<span class='label label-danger'>No</span>";
+                  echo "<span class='label label-danger'>No habilitado</span>";
                 };?></td>
                 <td><?php echo $adicional['observaciones'];?></td>
                 <td align="center">
@@ -79,7 +79,7 @@ $editarAdicional = $new->editarAdicional();
                 <tr>
                   <th align="center">Nombre</th>
                   <th align="center">Tarifa</th>
-                  <th align="center">Habilitado</th>
+                  <th align="center">Estado</th>
                   <th align="center">Observaciones</th>
                   <th align="center"><i class="fa fa-gears"></i></th>
               </tr>

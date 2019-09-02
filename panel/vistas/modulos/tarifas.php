@@ -44,7 +44,8 @@ $editar = $new->editarTarifa();
                 <th>Por dia</th>
                 <th>Semanal</th>
                 <th>Temporada</th>
-                <th>Opciones</th>
+                <th>Estado</th>
+                <th align="center">Opciones <i class="fa fa-gears"></i></th>
               </tr>
               </thead>
               <tbody>
@@ -59,6 +60,11 @@ $editar = $new->editarTarifa();
                 <td><?php echo '$ '.$value['por_dia']; ?></td>
                 <td><?php echo '$ '.$value['por_semana']; ?></td>
                 <td><?php echo $value['temporada'].' '.mostrarFecha($value['fecha_desde'])." - ".mostrarFecha($value['fecha_hasta']); ?></td>
+                <td><?php if ($value['activa']==1) {
+                  echo "<span class='label label-success'>Activa</span>";
+                }else{
+                  echo "<span class='label label-danger'>Inactiva</span>";
+                } ?></td>
                 <td>
                   <button class="btn btn-warning btnEditarTarifa" idCategoria="<?php echo $value['id_categoria']; ?>" idTarifa="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarTarifa"><i class="fa fa-pencil"></i></button>
                 </td>
@@ -73,6 +79,7 @@ $editar = $new->editarTarifa();
                 <th>Por dia</th>
                 <th>Semanal</th>
                 <th>Temporada</th>
+                <th>Estado</th>
                 <th align="center">Opciones <i class="fa fa-gears"></i></th>
               </tr>
               </tfoot>

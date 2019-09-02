@@ -60,7 +60,7 @@ $editarCategoria = $new-> editarCategoria();
                 <td><?php if ($value['activa']==1) {
                   echo "<span class='label label-success'>Vigente</span>";
                 }else{
-                  echo "<span class='label label-warning'>Inactiva</span>";
+                  echo "<span class='label label-danger'>Inactiva</span>";
                 };?></td>
                 <td><?php if ($value['promo']==1) {
                   echo "<span class='label label-success'>Permite</span>";
