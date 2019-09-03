@@ -9,11 +9,12 @@
         <div id="sendmessage">Your message has been sent. Thank you!</div>
         <div id="errormessage"></div>
         <p>Teléfonos de contacto</p>
+        <i class="fa fa-whatsapp fa-2x"></i>
         <p class="pull-right">+54 9 2944317005</p>
         <p>+54 9 2944242615</p>
-        <form action="" method="post" role="form" class="contactForm">
+        <form method="post" id="formulario">
           <div class="form-group">
-            <input type="text" name="name" class="form-control" id="name" placeholder="Nombre y Apellido" data-rule="minlen:4"
+            <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre y Apellido" data-rule="minlen:4"
               data-msg="Please enter at least 4 chars" />
             <div class="validation"></div>
           </div>
@@ -33,8 +34,9 @@
             <div class="validation"></div>
           </div>
 
-          <div class="text-center"><button type="submit" class="btn btn-success btn-lg">Enviar mensaje</button></div>
+          <div class="text-center"><button type="submit" id="btn" class="btn btn-success btn-lg">Enviar mensaje</button></div>
         </form>
+        <div id="resultado"></div>
       </div>
     </div>
     <!--/.row-->
@@ -43,3 +45,28 @@
 </section>
 <!--/#contact-page-->
 <br><br><br><br>
+
+<script>
+  
+  $(function(){
+
+    $("#btn").click(function(){
+
+      var url = "contacto-email.php";
+
+      $.ajax({
+
+        type:"POST",
+        url:url,
+        data:$("#formulario").serialize(),
+        success:function(data){
+          $("#resultado").html(data);
+        }
+
+      });
+      return false;
+    });
+
+  });
+
+</script>

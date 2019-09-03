@@ -26,7 +26,7 @@ $reservas = $new->listarReservas(1,NULL);
         <div class="box">
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="confirmadas" class="table table-bordered table-striped" style="width:100%">
+            <table id="confirmadas" class="table table-bordered table-striped tablas" style="width:100%">
 
               <thead>
                 <tr>
@@ -82,6 +82,8 @@ $reservas = $new->listarReservas(1,NULL);
 
                   <button type="button" name="view_data" value="" id="<?php echo $value['ID_RESERVA']; ?>" class="btn btn-warning btn-xs view_data"><i class="fa fa-eye" aria-hidden="true"></i></button>
 
+                  <button type="button" name="view_data" value="" idReserva="<?php echo $value['ID_RESERVA']; ?>" class="btn btn-danger btn-xs btnEliminarReserva"><i class="fa fa-times" aria-hidden="true"></i></button>
+
                 </td>
                   
               </tr>
@@ -131,3 +133,13 @@ $reservas = $new->listarReservas(1,NULL);
      </div>
   </div>
 </div>
+
+<?php  
+
+if (isset($_GET['idReserva'])) {
+    
+  $borrar = $new->eliminarReserva($_GET['idReserva']);
+
+}
+
+?>

@@ -2,6 +2,23 @@
 
 class ControladorReservas
 {
+
+	static function eliminarReserva($id){
+
+		$resultado = ModeloReservas::eliminarReserva($id);
+
+		if ($resultado=="ok") {
+			echo "<script>
+		        		window.location = 'confirmadas';
+		        		</script>";
+		}else{
+			echo "<script>
+		        		alert('Error al eliminar Reserva');
+		        		</script>";
+		}
+
+	}
+
 	static function convertirFecha($fecha){
 
 	  $date = str_replace('/', '-', $fecha);

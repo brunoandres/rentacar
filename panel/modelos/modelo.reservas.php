@@ -8,6 +8,20 @@ class ModeloReservas
 
 	public function __construct() {}
 
+	static function eliminarReserva($id){
+
+		$link = Conexion::ConectarMysql();
+		$query = "delete from reservas where id = $id";
+		$sql = mysqli_query($link,$query);
+
+		if ($sql) {
+			return "ok";
+		}else{
+			return "error";
+		}
+
+	}
+
 	static function listarTotalReservas(){
 
 		$link = Conexion::ConectarMysql();

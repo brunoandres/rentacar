@@ -10,7 +10,7 @@ if (empty($_GET['ruta'])) {
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand ml-5" href="#"> <img src="inc/austral-rent-a-car.png" alt=""> </a>
+    <a class="navbar-brand mr-3 p-3 ml-5" href="https://patagoniaaustralrentacar.com.ar"> <img src="inc/austral-rent-a-car.png" alt="Patagonia Austral Rent a Car"> </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item <?php if($_GET['ruta']=='inicio'){ echo 'active'; } ?>">

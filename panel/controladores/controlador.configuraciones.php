@@ -2,12 +2,7 @@
 
 class ControladorConfiguraciones{
 
-	static function listarTotalesReservasPanel($sql){
-
-		$totales = ModeloConfiguraciones::listarTotalesReservasPanel($sql);
-		return $totales;
-
-	}
+	
 
 	static function listarTotalAutos(){
 

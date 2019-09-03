@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 02-09-2019 a las 17:56:25
+-- Tiempo de generación: 03-09-2019 a las 18:00:49
 -- Versión del servidor: 5.7.26
 -- Versión de PHP: 7.1.29
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `auditorias` (
   `query` text COLLATE utf8_spanish2_ci NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=150 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=157 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `auditorias`
@@ -215,7 +215,14 @@ INSERT INTO `auditorias` (`id`, `id_usuario`, `query`, `date`) VALUES
 (146, 2, 'INSERT INTO `tarifas`(`por_dia`, `por_semana`, `id_temporada`, `id_categoria`, `activa`) VALUES (\'1900\',\'5500\',1,1,1)', '2019-09-02 17:35:41'),
 (147, 2, 'INSERT INTO `lugares`(`lugar`, `activo`, `observaciones`) VALUES (\'Cerro Catedral\',1,\'\')', '2019-09-02 17:35:58'),
 (148, 2, 'INSERT INTO `lugares`(`lugar`, `activo`, `observaciones`) VALUES (\'Aeropuerto Bariloche\',1,\'\')', '2019-09-02 17:36:09'),
-(149, 2, 'INSERT INTO `adicionales`(`nombre`, `tarifa`, `habilitado`, `observaciones`) VALUES (\'GPS SATELITAL\',\'500\',1,\'\')', '2019-09-02 17:37:11');
+(149, 2, 'INSERT INTO `adicionales`(`nombre`, `tarifa`, `habilitado`, `observaciones`) VALUES (\'GPS SATELITAL\',\'500\',1,\'\')', '2019-09-02 17:37:11'),
+(150, 2, 'UPDATE `categorias` SET `nombre`=\'Categoria A\',`activa`=1,`promo`=0 WHERE id = 1', '2019-09-03 17:18:34'),
+(151, 2, 'INSERT INTO `categorias`(`nombre`, `activa`, `promo`) VALUES (\'Categoria B\',1,0)', '2019-09-03 17:18:41'),
+(152, 2, 'INSERT INTO `categorias`(`nombre`, `activa`, `promo`) VALUES (\'Categoria C\',1,0)', '2019-09-03 17:18:51'),
+(153, 2, 'INSERT INTO `autos`(`id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`, `observaciones`) VALUES (2,\'Volkswagen \',\'Voyage\',\'AA225BV\',1,0,\'\')', '2019-09-03 17:19:43'),
+(154, 2, 'INSERT INTO `autos`(`id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`, `observaciones`) VALUES (3,\'Volkswagen\',\'Suran\',\'AD888YT\',1,0,\'\')', '2019-09-03 17:20:33'),
+(155, 2, 'INSERT INTO `autos`(`id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`, `observaciones`) VALUES (1,\'Chevrolet\',\'Corsa\',\'AC999TE\',1,0,\'\')', '2019-09-03 17:21:07'),
+(156, 2, 'INSERT INTO `lugares`(`lugar`, `activo`, `observaciones`) VALUES (\'Terminal Omnibus\',1,\'\')', '2019-09-03 17:21:20');
 
 -- --------------------------------------------------------
 
@@ -237,14 +244,17 @@ CREATE TABLE IF NOT EXISTS `autos` (
   `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_autos_categorias1` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `autos`
 --
 
 INSERT INTO `autos` (`id`, `id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`, `observaciones`, `create`, `update`) VALUES
-(1, 1, 'Renault ', 'Clio', 'PPH852', 1, 0, '', '2019-09-02 17:21:26', '2019-09-02 17:21:26');
+(1, 1, 'Renault ', 'Clio', 'PPH852', 1, 0, '', '2019-09-02 17:21:26', '2019-09-02 17:21:26'),
+(2, 2, 'Volkswagen ', 'Voyage', 'AA225BV', 1, 0, '', '2019-09-03 17:19:43', '2019-09-03 17:19:43'),
+(3, 3, 'Volkswagen', 'Suran', 'AD888YT', 1, 0, '', '2019-09-03 17:20:33', '2019-09-03 17:20:33'),
+(4, 1, 'Chevrolet', 'Corsa', 'AC999TE', 1, 0, '', '2019-09-03 17:21:07', '2019-09-03 17:21:07');
 
 -- --------------------------------------------------------
 
@@ -261,14 +271,16 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `categorias`
 --
 
 INSERT INTO `categorias` (`id`, `nombre`, `activa`, `promo`, `create`, `update`) VALUES
-(1, 'CATEGORIA A', 1, 0, '2019-09-02 17:20:51', '2019-09-02 17:29:41');
+(1, 'Categoria A', 1, 0, '2019-09-02 17:20:51', '2019-09-03 17:18:34'),
+(2, 'Categoria B', 1, 0, '2019-09-03 17:18:41', '2019-09-03 17:18:41'),
+(3, 'Categoria C', 1, 0, '2019-09-03 17:18:51', '2019-09-03 17:18:51');
 
 -- --------------------------------------------------------
 
@@ -313,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `lugares` (
   `create` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf32 COLLATE=utf32_spanish2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf32 COLLATE=utf32_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `lugares`
@@ -321,7 +333,8 @@ CREATE TABLE IF NOT EXISTS `lugares` (
 
 INSERT INTO `lugares` (`id`, `lugar`, `activo`, `observaciones`, `create`, `update`) VALUES
 (1, 'Cerro Catedral', 1, '', '2019-09-02 17:35:58', '2019-09-02 17:35:58'),
-(2, 'Aeropuerto Bariloche', 1, '', '2019-09-02 17:36:09', '2019-09-02 17:36:09');
+(2, 'Aeropuerto Bariloche', 1, '', '2019-09-02 17:36:09', '2019-09-02 17:36:09'),
+(3, 'Terminal Omnibus', 1, '', '2019-09-03 17:21:20', '2019-09-03 17:21:20');
 
 -- --------------------------------------------------------
 
@@ -361,13 +374,6 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   KEY `fk_Reservas_categorias1` (`id_categoria`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `reservas`
---
-
-INSERT INTO `reservas` (`id`, `id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `exterior`, `adicionales`, `telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`, `start`, `end`, `color`, `create`, `update`) VALUES
-(1, 1, 'VOAVU', 'Bruno', 'ovando', '2019-09-07', '2019-09-13', '15:00:00', '15:00:00', '11900.00', 6, 1, 1, NULL, 1, '2944636416', 'andres.92013@hotmail.com', 1, 2, '1', '', '2019-09-07 15:00:00', '2019-09-13 15:00:00', '#FF0000', '2019-09-02 17:39:27', '2019-09-02 17:39:27');
-
 -- --------------------------------------------------------
 
 --
@@ -381,13 +387,6 @@ CREATE TABLE IF NOT EXISTS `reservas_adicionales` (
   PRIMARY KEY (`id_reserva`,`id_adicional`),
   KEY `fk_adicionales_has_reservas_reservas1` (`id_adicional`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `reservas_adicionales`
---
-
-INSERT INTO `reservas_adicionales` (`id_reserva`, `id_adicional`) VALUES
-(1, 1);
 
 -- --------------------------------------------------------
 

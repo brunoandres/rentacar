@@ -234,6 +234,7 @@ CUERPO DOCUMENTO
   <script src="vistas/js/script.js"></script>
   <script src="vistas/js/validator.js"></script>
   <script src="vistas/js/view.js"></script>
+  <script src="vistas/js/reservas.js"></script>
   <script>
   $('.timepicker').timepicker({
     showInputs: false

@@ -14,6 +14,7 @@
     <link href="vistas/css/prettyPhoto.css" rel="stylesheet">
     <link href="vistas/css/style.css" rel="stylesheet">
     <link href="vistas/css/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <!-- =======================================================
       Theme Name: Gp
@@ -32,7 +33,9 @@
     <link rel="stylesheet" href="vistas/css/galeria.css">
     <link rel="stylesheet" href="panel/vistas/bower_components/select2/dist/css/select2.min.css">
 
-
+    <!-- Links para Galeria en Flota -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+    <link rel="stylesheet" href="vistas/css/cards-gallery.css">
 
     <!-- ALERTAS -->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -161,5 +164,9 @@
     <script src="vistas/js/maskDate.js"></script>
 
     <script src="vistas/js/alert.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script>
+        baguetteBox.run('.cards-gallery', { animation: 'slideIn'});
+    </script>
   </body>
 </html>
