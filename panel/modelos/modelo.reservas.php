@@ -98,7 +98,7 @@ class ModeloReservas
 	static function codigoReserva($longitud){
 
 		$key = '';
-	    $caracteres="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	    $caracteres="0123456789";
 	    $max = strlen($caracteres)-1;
 	    for($i=0;$i < $longitud;$i++) $key .= $caracteres{mt_rand(0,$max)};
 	    return $key;
@@ -127,6 +127,14 @@ class ModeloReservas
 
 		$dif = date("H:i:s",strtotime("00:00:00") +  strtotime($fin) - strtotime($inicio) );
 		return $dif;
+
+	}
+
+	//Buscar patente libre
+	static function buscarPatente($id_reserva,$categoria){
+
+		$link = Conexion::ConectarMysql();
+		$query = "select id,patente from autos where NOT id in (select id_patente from reservas) and estado = 1 and id_categoria = $categoria";
 
 	}
 
@@ -190,7 +198,7 @@ class ModeloReservas
 		  	  	$margen_activo = $margen_horario_disponible['activo'];
 		  	  	$margen_horario_configuracion = $margen_horario_disponible['margen'];
 
-		  	  	//guardo los datos ya desde la base de datos para recorrer
+		  	  	//Guardo los datos ya desde la base de datos para recorrer
 				$fechaDesdeConfirmada=$filas['fecha_desde'];
 				$fechaHastaConfirmada=$filas['fecha_hasta'];
 				$horaHastaConfirmada=$filas['hora_hasta'];
@@ -207,7 +215,8 @@ class ModeloReservas
 		  	  				$margen_activo = true;
 
 		  	  				if ($margen_horario_configuracion=='0.00' || empty($margen_horario_configuracion)) {
-			  	  				$margen_horario = 2;
+		  	  					//Horas margen por defecto = 3
+			  	  				$margen_horario = 3;
 			  	  				settype($margen_horario, "integer");
 				  	  		}else{
 				  	  			$margen_horario = $margen_horario_configuracion;
@@ -220,7 +229,8 @@ class ModeloReservas
 
 		  	  	}else{
 		  	  		$margen_activo = false;
-		  	  		$margen_horario = 2;
+		  	  		//Horas margen por defecto = 3
+		  	  		$margen_horario = 3;
 		  	  	}
 
 				//retorno valor de buscarDisponibilidad (flag), entra en mi bucle como false
@@ -256,9 +266,7 @@ class ModeloReservas
 				
 				//Pregunto si está activo la configuracion con margen horario
 				if ($margen_activo == true) {
-					var_dump($fechaDesdeConfirmada);
-					var_dump($fechaDesdeReserva);
-					var_dump($margen_activo);
+		
 					//Si el margen horario está activo, pregunto si el dia que se quiere reservar conincide con alguna reserva ya confirmada
 					/*if ('$fechaHastaConfirmada' === '$fechaDesdeReserva') {
 						/*echo "<BR>NO HAY DISPONIBILIDAD, VERIFICAR MARGEN";
