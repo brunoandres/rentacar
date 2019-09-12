@@ -19,6 +19,8 @@ if (empty($_SESSION['codigo'])) {
   $categoria = $_SESSION['categoria'];
 }
 
+$patente = $_SESSION['patente'];
+
 ?>
 <section id="portfolio" class="wow fadeInDown">
   <div class="container">
@@ -45,6 +47,7 @@ if (empty($_SESSION['codigo'])) {
                 <label for="firstName">Nombre</label>
                 <input type="text" class="form-control" maxlength="50" id="firstName" name="nombre" placeholder="Ingrese nombre" value="" required>
                 <input type="hidden" name="id_categoria" value="<?php echo $categoria; ?>">
+                <input type="hidden" name="patente" value="<?php echo $patente; ?>">
                 <div class="invalid-feedback">
                   Complete el campo con su nombre.
                 </div>
