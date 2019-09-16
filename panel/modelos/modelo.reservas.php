@@ -8,6 +8,16 @@ class ModeloReservas
 
 	public function __construct() {}
 
+	static function listarTotalesReservasPanel($query){
+
+		$link = Conexion::ConectarMysql();
+		$query = "select * from reservas where estado = 1 and $query";
+		$sql = mysqli_query($link,$query);
+		$total = mysqli_num_rows($sql);
+		return $total;
+
+	}
+
 	static function eliminarReserva($id){
 
 		$link = Conexion::ConectarMysql();

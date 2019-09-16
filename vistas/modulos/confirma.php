@@ -23,7 +23,7 @@ if (isset($_POST['checkout'])) {
   $_SESSION['informacion'] = $_POST['informacion'];
   $_SESSION['hora_desde'] = $_POST['hora_desde'];
   $_SESSION['hora_hasta'] = $_POST['hora_hasta'];
-  $_SESSION['patente'] = $_POST['patente'];
+  //$_SESSION['patente'] = $_POST['patente'];
   
    if (empty($_POST['adicionales'])) {
     $_SESSION['adicionales']='';
@@ -180,7 +180,7 @@ if (isset($_POST['checkout'])) {
           <input type="hidden" name="hora_hasta_reserva" value="<?php echo $_SESSION['hora_hasta']; ?>">
           <input type="hidden" name="total_dias_reserva" value="<?php echo $_SESSION['total_dias']; ?>">
           <input type="hidden" name="tarifa_reserva" value="<?php echo $_SESSION['tarifa']; ?>">
-          <input type="hidden" name="patente_reserva" value="<?php echo $_SESSION['patente']; ?>">
+          <!--<input type="hidden" name="patente_reserva" value="<?php echo $_SESSION['patente']; ?>">-->
           <hr class="mb-4">
           <div class="row">
 

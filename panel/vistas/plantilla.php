@@ -60,6 +60,7 @@ session_start();
   <!-- Bootstrap Color Picker -->
   <link rel="stylesheet" href="vistas/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
 
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
   <!--=====================================
   PLUGINS DE JAVASCRIPT
@@ -68,6 +69,7 @@ session_start();
   <!-- jQuery 3 -->
   <script src="vistas/bower_components/jquery/dist/jquery.min.js"></script>
 
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
   <!-- bootstrap time picker -->
   <script src="vistas/plugins/timepicker/bootstrap-timepicker.min.js"></script>

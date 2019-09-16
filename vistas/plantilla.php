@@ -24,6 +24,8 @@
     ======================================================= -->
     <link rel="stylesheet" href="vistas/css/jquery.timepicker.min.css">
 
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <!-- datepicker -->
     <link rel="stylesheet" href="vistas/css/jquery-ui.css">
 
@@ -38,7 +40,7 @@
     <link rel="stylesheet" href="vistas/css/cards-gallery.css">
 
     <!-- ALERTAS -->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="vistas/js/jquery.js"></script>
@@ -62,6 +64,10 @@
     <title>Patagonia Austral Rentacar Bariloche</title>
   </head>
   <body>
+    <!--Whaysapp -->
+
+      <a href="https://wa.me/5492944242615?text=Me%20gustaría%20saber%20más%20sobre%20el%20servicio" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
+      <!--fin Whaysapp-->
 
     <?php include 'inc/menu.php'; ?>
 

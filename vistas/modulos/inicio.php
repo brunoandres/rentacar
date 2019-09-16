@@ -36,6 +36,17 @@ unset($_SESSION['total_dias']);
   </a>
 </div>
 
+<?php  
+
+if (isset($_SESSION['reserva_ok'])) {
+ echo "<script>
+ toastr.success('Su reserva ha sido ingresada correctamente, verifique su casilla de correo electrónico.', 'Reserva Confirmada', {timeOut: 3000})
+ </script>";
+ unset($_SESSION['reserva_ok']);
+}
+
+?>
+
 <section id="feature">
   <div class="container">
     <div class="center wow fadeInDown">

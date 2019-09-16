@@ -3,6 +3,13 @@
 class ControladorReservas
 {
 
+	static function listarTotalesReservasPanel($query){
+
+		$total = ModeloReservas::listarTotalesReservasPanel($query);
+		return $total;
+
+	}
+
 	static function eliminarReserva($id){
 
 		$resultado = ModeloReservas::eliminarReserva($id);
@@ -222,29 +229,11 @@ class ControladorReservas
 			
 			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales);
 			
-			/*echo'<script>
-
-					window.location = "inicio#reservaok";
-
-				</script>';*/
-			
 			if ($respuesta=="ok") {
-				echo'<script>
-
-				swal({
-						type: "success",
-						title: "Perfecto! Su reserva ha sido completada correctamente",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar"
-						}).then(function(result){
-								if (result.value) {
-
-								window.location = "inicio";
-
-								}
-							})
-
-				</script>';
+				$_SESSION['reserva_ok'] = true;
+				echo "<script>
+				window.location = 'inicio';
+				</script>";
 			}else{
 				echo'<script>
 

@@ -169,7 +169,7 @@ $newConf = new ControladorConfiguraciones();
             <h3><?php
             $date = date('Y-m-d'); 
             $query = " fecha_desde = '$date'";
-            echo $total = $newConf->listarTotalesReservasPanel($query); 
+            echo $total = $new->listarTotalesReservasPanel($query); 
             ?></h3>
 
             <p>Autos que se retiran Hoy</p>
@@ -189,7 +189,7 @@ $newConf = new ControladorConfiguraciones();
 
             $date = date('Y-m-d'); 
             $query = " fecha_desde = DATE_SUB('$date',INTERVAL -1 DAY)";
-            echo $total = $newConf->listarTotalesReservasPanel($query); 
+            echo $total = $new->listarTotalesReservasPanel($query); 
 
              ?></h3>
 
@@ -212,7 +212,7 @@ $newConf = new ControladorConfiguraciones();
 
             $date = date('Y-m-d'); 
             $query = " fecha_hasta = '$date'";
-            echo $total = $newConf->listarTotalesReservasPanel($query); 
+            echo $total = $new->listarTotalesReservasPanel($query); 
 
             ?><sup style="font-size: 20px"></sup></h3>
             <p>Autos que devuelven Hoy</p>
@@ -233,7 +233,7 @@ $newConf = new ControladorConfiguraciones();
 
             $date = date('Y-m-d'); 
             $query = " fecha_hasta = DATE_SUB('$date',INTERVAL -1 DAY)";
-            echo $total = $newConf->listarTotalesReservasPanel($query); 
+            echo $total = $new->listarTotalesReservasPanel($query); 
 
             ?></h3>
 

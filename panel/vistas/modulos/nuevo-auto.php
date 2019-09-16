@@ -3,6 +3,14 @@ $new = new ControladorCategorias();
 $categorias = $new->listarCategorias();
 $new2 = new ControladorConfiguraciones();
 $nuevo = $new2->nuevoAuto();
+
+if (isset($_SESSION['mensaje'])) {
+  echo "<script>
+ toastr.success('Auto guardado correctamente', 'Listo!', {timeOut: 3000})
+ </script>";
+ unset($_SESSION['mensaje']);
+}
+
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

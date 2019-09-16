@@ -2,8 +2,6 @@
 
 class ControladorConfiguraciones{
 
-	
-
 	static function listarTotalAutos(){
 
 		$total = ModeloConfiguraciones::listarTotalAutos();
@@ -165,22 +163,13 @@ class ControladorConfiguraciones{
       $respuesta = ModeloConfiguraciones::guardarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$observaciones);
 
       if ($respuesta=="ok") {
-        echo'<script>
 
-				swal({
-						type: "success",
-						title: "Auto guardado correctamente",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar"
-						}).then(function(result){
-								if (result.value) {
+ 		$_SESSION['mensaje'] = true;
 
-								window.location = "autos";
+      	echo "<script>
+      	window.location = 'nuevo-auto';
+ 		</script>";
 
-								}
-							})
-
-				</script>';
       } else {
         echo'<script>
 
@@ -225,22 +214,13 @@ class ControladorConfiguraciones{
       $respuesta = ModeloConfiguraciones::editarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$observaciones,$id_auto);
 
       if ($respuesta=="ok") {
-        echo'<script>
 
-				swal({
-						type: "success",
-						title: "Auto editado correctamente",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar"
-						}).then(function(result){
-								if (result.value) {
+      	$_SESSION['mensaje_editado'] = true;
+      	echo "<script>
+ window.location = 'autos';
+ </script>";
 
-								window.location = "autos";
-
-								}
-							})
-
-				</script>';
+      	
       } else {
         echo'<script>
 

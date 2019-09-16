@@ -6,6 +6,17 @@ $autos = $new->listarAutos();
 $categorias = $new2->listarCategorias();
 $editar = $new->editarAuto();
 
+//var_dump($_SESSION['mensaje_editado']);
+if (isset($_SESSION['mensaje_editado']) == true) {
+  echo "<script>
+ toastr.success('Auto editado correctamente', 'Listo!', {timeOut: 3000})
+ </script>";
+ //unset($_SESSION['mensaje_editado']);
+ $_SESSION['mensaje_editado'] = false;
+}else{
+  $_SESSION['mensaje_editado'] = false;
+}
+
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
