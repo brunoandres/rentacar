@@ -64,10 +64,6 @@
     <title>Patagonia Austral Rentacar Bariloche</title>
   </head>
   <body>
-    <!--Whaysapp -->
-
-      <a href="https://wa.me/5492944242615?text=Me%20gustaría%20saber%20más%20sobre%20el%20servicio" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
-      <!--fin Whaysapp-->
 
     <?php include 'inc/menu.php'; ?>
 
@@ -174,5 +170,29 @@
     <script>
         baguetteBox.run('.cards-gallery', { animation: 'slideIn'});
     </script>
+    <script>
+    var IDLE_TIMEOUT = 60; //seconds
+    var _idleSecondsCounter = 0;
+    document.onclick = function() {
+      _idleSecondsCounter = 0;
+      };
+      document.onmousemove = function() {
+      _idleSecondsCounter = 0;
+      };
+      document.onkeypress = function() {
+      _idleSecondsCounter = 0;
+      };
+      window.setInterval(CheckIdleTime, 1000);
+      function CheckIdleTime() {
+      _idleSecondsCounter++;
+      var oPanel = document.getElementById("SecondsUntilExpire");
+      if (oPanel)
+      oPanel.innerHTML = (IDLE_TIMEOUT - _idleSecondsCounter) + "";
+      if (_idleSecondsCounter >= IDLE_TIMEOUT) {
+      //alert("Time expired!");
+      document.location.href = "inicio";
+      }
+    }
+   </script>
   </body>
 </html>

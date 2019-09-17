@@ -88,9 +88,9 @@ $(function () {
         align: 'left',
         autoclose: true,
         'default': 'now'
-      });
+  });
 
-      $('.clockpicker-with-callbacks').clockpicker({
+  $('.clockpicker-with-callbacks').clockpicker({
           donetext: 'Done',
           init: function() {
             console.log("colorpicker initiated");
@@ -135,6 +135,8 @@ $(function () {
         //$('input').prop('readOnly', true);
         $("#single-input").prop("readonly", true);
         $("#single-input2").prop("readonly", true);
+        $("#single-input1").prop("required", true);
+        $("#single-input2").prop("required", true);
       }
 
       

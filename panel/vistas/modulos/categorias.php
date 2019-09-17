@@ -3,6 +3,14 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorCategorias();
 $categorias = $new->listarCategorias(null,1);
 $editarCategoria = $new-> editarCategoria();
+
+if (isset($_SESSION['categoria_ok'])) {
+  echo "<script>
+ toastr.success('Categoria guardada correctamente.', 'Listo', {timeOut: 4000})
+ </script>";
+ unset($_SESSION['categoria_ok']);
+}
+
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

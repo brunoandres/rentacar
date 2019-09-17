@@ -62,6 +62,14 @@ session_start();
 
   <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <!-- timepicker -->
+  <link rel="stylesheet" href="../vistas/css/bootstrap-clockpicker.min.css">
+
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="vistas/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+
   <!--=====================================
   PLUGINS DE JAVASCRIPT
   ======================================-->
@@ -118,13 +126,6 @@ session_start();
   <script src="vistas/bower_components/Chart.js/Chart.js"></script>
   <script src="vistas/bower_components/select2/dist/js/select2.full.js"></script>
   
-
-
-  <!-- bootstrap datepicker -->
-
-  <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="vistas/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-
   <!-- bootstrap color picker -->
   <script src="vistas/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
 
@@ -134,7 +135,7 @@ session_start();
   <!-- script para calendario tradicional -->
 
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="../vistas/js/bootstrap-clockpicker.min.js"></script>
 
 </head>
 
@@ -224,8 +225,8 @@ CUERPO DOCUMENTO
   }
 
   ?>
-  <script type="text/javascript" src="vistas/bower_components/moment/moment.min.js"></script>
-  <script type="text/javascript" src="vistas/bower_components/moment/datetime-moment.js"></script>
+  <script src="vistas/bower_components/moment/moment.min.js"></script>
+  <script src="vistas/bower_components/moment/datetime-moment.js"></script>
   <script src="vistas/js/categorias.js"></script>
   <script src="vistas/js/adicionales.js"></script>
   <script src="vistas/js/tarifas.js"></script>
@@ -237,6 +238,7 @@ CUERPO DOCUMENTO
   <script src="vistas/js/validator.js"></script>
   <script src="vistas/js/view.js"></script>
   <script src="vistas/js/reservas.js"></script>
+
   <script>
   $('.timepicker').timepicker({
     showInputs: false

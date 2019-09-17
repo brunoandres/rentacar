@@ -7,14 +7,12 @@ $categorias = $new2->listarCategorias();
 $editar = $new->editarAuto();
 
 //var_dump($_SESSION['mensaje_editado']);
-if (isset($_SESSION['mensaje_editado']) == true) {
+if (isset($_SESSION['auto_ok'])) {
   echo "<script>
- toastr.success('Auto editado correctamente', 'Listo!', {timeOut: 3000})
+ toastr.success('Auto guardado correctamente', 'Listo!', {timeOut: 4000})
  </script>";
- //unset($_SESSION['mensaje_editado']);
- $_SESSION['mensaje_editado'] = false;
-}else{
-  $_SESSION['mensaje_editado'] = false;
+ unset($_SESSION['auto_ok']);
+ 
 }
 
 ?>

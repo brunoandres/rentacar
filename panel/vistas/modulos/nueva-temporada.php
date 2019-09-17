@@ -50,7 +50,21 @@ $new->nuevaTempo();
                       <input type="text" class="form-control pull-right" name="nombre_temporada" required="" placeholder="Nombre de temporada" autocomplete="off">
                     </div>
                     <!-- /.input group -->
+                    <div class="form-group">
+                    <label>Fecha hasta:</label>
+
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right fechahasta" name="fecha_hasta"required="" autocomplete="off" readonly="" value="<?php echo date("Y-m-d"); ?>" placeholder="Seleccione una fecha">
+                    </div>
+                    <!-- /.input group -->
                   </div>
+                  </div>
+                  
+                </div>
+                <div class="col-md-6">
                   <div class="form-group">
                     <label>Fecha desde:</label>
 
@@ -62,19 +76,7 @@ $new->nuevaTempo();
                     </div>
                     <!-- /.input group -->
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Fecha hasta:</label>
-
-                    <div class="input-group date">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="text" class="form-control pull-right fechahasta" name="fecha_hasta"required="" autocomplete="off" readonly="" value="<?php echo date("Y-m-d"); ?>" placeholder="Seleccione una fecha">
-                    </div>
-                    <!-- /.input group -->
-                  </div>
+                  
                 </div>
               </div>
               <div class="form-group">

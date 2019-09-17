@@ -117,23 +117,13 @@ class ControladorCategorias{
 
 				if($respuesta == "ok"){
 
-					echo'<script>
+					$_SESSION['categoria_ok'] = true;
+					echo "<script>window.location='categorias';</script>";
 
-					swal({
-						  type: "success",
-						  title: "Categoria guardada correctamente",
-						  showConfirmButton: true,
-						  confirmButtonText: "Cerrar"
-						  }).then(function(result){
-									if (result.value) {
-
-									window.location = "categorias";
-
-									}
-								})
-
-					</script>';
-
+				}else{
+					echo "<script>
+					toastr.error('No ha sido posible guardar la categoria.', 'Error', {timeOut: 8000})
+				</script>";
 				}
 
 

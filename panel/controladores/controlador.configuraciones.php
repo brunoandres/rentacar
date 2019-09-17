@@ -164,24 +164,18 @@ class ControladorConfiguraciones{
 
       if ($respuesta=="ok") {
 
- 		$_SESSION['mensaje'] = true;
+ 		$_SESSION['auto_ok'] = true;
 
       	echo "<script>
-      	window.location = 'nuevo-auto';
+      	window.location = 'autos';
  		</script>";
 
-      } else {
-        echo'<script>
-
-				swal({
-						type: "danger",
-						title: "Error al guardar auto.",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar"
-						}).then(function(result){})
-
-				</script>';
-      }
+      	} else {
+	        echo "<script>
+					toastr.error('No ha sido posible guardar el auto.', 'Error', {timeOut: 8000})
+				</script>";
+				
+      	}
 
     }
 
@@ -215,10 +209,18 @@ class ControladorConfiguraciones{
 
       if ($respuesta=="ok") {
 
-      	$_SESSION['mensaje_editado'] = true;
-      	echo "<script>
- window.location = 'autos';
- </script>";
+      	echo'<script>
+
+				swal({
+						type: "success",
+						title: "Auto editado correctamente",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){
+							window.location = "autos";
+							})
+
+				</script>';
 
       	
       } else {
@@ -256,22 +258,11 @@ class ControladorConfiguraciones{
       $respuesta = ModeloConfiguraciones::guardarTarifa($categoria,$temporada,$valor_diario,$valor_semanal,$tarifa_actual);
 
       if ($respuesta=="ok") {
-        echo'<script>
+        $_SESSION['tarifa_ok'] = true;
 
-				swal({
-						type: "success",
-						title: "Tarifa guardada correctamente",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar"
-						}).then(function(result){
-								if (result.value) {
-
-								window.location = "tarifas";
-
-								}
-							})
-
-				</script>';
+      	echo "<script>
+      	window.location = 'tarifas';
+ 		</script>";
       } else {
         echo'<script>
 
@@ -357,22 +348,11 @@ class ControladorConfiguraciones{
       $respuesta = ModeloConfiguraciones::guardarLugar($nombre,$lugar_activo,$observaciones);
 
       if ($respuesta=="ok") {
-        echo'<script>
+        $_SESSION['lugar_ok'] = true;
 
-				swal({
-						type: "success",
-						title: "Lugar guardado correctamente",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar"
-						}).then(function(result){
-								if (result.value) {
-
-								window.location = "lugares";
-
-								}
-							})
-
-				</script>';
+      	echo "<script>
+      	window.location = 'lugares';
+ 		</script>";
       } else {
         echo'<script>
 
@@ -425,22 +405,11 @@ class ControladorConfiguraciones{
       $respuesta = ModeloConfiguraciones::guardarConfiguracion($nombre,$valor,$config_activa);
 
       if ($respuesta=="ok") {
-        echo'<script>
+        $_SESSION['configuracion_ok'] = true;
 
-				swal({
-						type: "success",
-						title: "Configuración guardada correctamente",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar"
-						}).then(function(result){
-								if (result.value) {
-
-								window.location = "configuraciones";
-
-								}
-							})
-
-				</script>';
+      	echo "<script>
+      	window.location = 'configuraciones';
+ 		</script>";
       } else {
         echo'<script>
 
@@ -525,22 +494,11 @@ class ControladorConfiguraciones{
 		      $respuesta = ModeloConfiguraciones::guardarTempo($nombre,$fecha_desde,$fecha_hasta,$temporada_activa,$observaciones);
 
 		      if ($respuesta=="ok") {
-		        echo'<script>
+		        $_SESSION['temporada_ok'] = true;
 
-						swal({
-								type: "success",
-								title: "Temporada guardada correctamente",
-								showConfirmButton: true,
-								confirmButtonText: "Cerrar"
-								}).then(function(result){
-										if (result.value) {
-
-										window.location = "temporadas";
-
-										}
-									})
-
-						</script>';
+		      	echo "<script>
+		      	window.location = 'temporadas';
+		 		</script>";
 		      	}	else{
 		        echo'<script>
 
@@ -625,22 +583,11 @@ class ControladorConfiguraciones{
       $respuesta = ModeloConfiguraciones::guardarAdicional($nombre,$tarifa,$adicional_activo,$observaciones);
 
       if ($respuesta=="ok") {
-        echo'<script>
+        $_SESSION['adicional_ok'] = true;
 
-				swal({
-						type: "success",
-						title: "Adicional guardado correctamente",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar"
-						}).then(function(result){
-								if (result.value) {
-
-								window.location = "adicionales";
-
-								}
-							})
-
-				</script>';
+      	echo "<script>
+      	window.location = 'adicionales';
+ 		</script>";
       }else{
         echo'<script>
 

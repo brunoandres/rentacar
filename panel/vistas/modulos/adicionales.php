@@ -5,6 +5,13 @@ $adicionales = $new->listarAdicionales(null,1);
 $date = date('d/m/Y H:i:s');
 $editarAdicional = $new->editarAdicional();
 
+if (isset($_SESSION['adicional_ok'])) {
+  echo "<script>
+ toastr.success('Adicional guardado correctamente.', 'Listo', {timeOut: 4000})
+ </script>";
+ unset($_SESSION['adicional_ok']);
+}
+
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

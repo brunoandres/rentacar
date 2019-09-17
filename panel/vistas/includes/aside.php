@@ -43,9 +43,7 @@ $text = null;
             echo "active";
             $text = 'text-red';
           }?>"><a href="nueva-reserva"><i class="fa fa-circle-o"></i> Nueva reserva</a></li>
-          <li class="<?php if ($_GET['ruta']=='pendientes') {
-            echo "active";
-          } ?>"><a href="pendientes"><i class="fa fa-circle-o>"></i> Pendientes</a></li>
+          
           <li class="<?php if ($_GET['ruta']=='confirmadas') {
             echo "active";
           } ?>"><a href="confirmadas"><i class="fa fa-circle-o"></i> Confirmadas</a></li>

@@ -456,10 +456,7 @@ class ModeloConfiguraciones{
 
     $link = Conexion::ConectarMysql();
 
-    //convierto fechas
-    $fecha_desde_db = convertirFecha($fecha_desde);
-    $fecha_hasta_db = convertirFecha($fecha_hasta);
-    $query = "INSERT INTO `temporadas`(`nombre`,`fecha_desde`, `fecha_hasta`, `activa`, `observaciones`) VALUES ('$nombre','$fecha_desde_db','$fecha_hasta_db',$activa,'$observaciones')";
+    $query = "INSERT INTO `temporadas`(`nombre`,`fecha_desde`, `fecha_hasta`, `activa`, `observaciones`) VALUES ('$nombre','$fecha_desde','$fecha_hasta',$activa,'$observaciones')";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
     if ($sql) {
       auditar($_SESSION["id_user"],$query);

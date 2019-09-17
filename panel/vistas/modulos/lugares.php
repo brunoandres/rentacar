@@ -3,6 +3,14 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
 $lugares = $new->listarLugares(null,1);
 $editarLugar = $new->editarLugar();
+
+if (isset($_SESSION['lugar_ok'])) {
+  echo "<script>
+ toastr.success('Lugar guardado correctamente.', 'Listo', {timeOut: 4000})
+ </script>";
+ unset($_SESSION['lugar_ok']);
+}
+
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

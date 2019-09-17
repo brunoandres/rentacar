@@ -3,6 +3,13 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
 $temporadas = $new->listarTemporadas(null,null);
 $date = date('d/m/Y H:i:s');
+
+if (isset($_SESSION['temporada_ok'])) {
+  echo "<script>
+ toastr.success('Temporada guardada correctamente.', 'Listo', {timeOut: 4000})
+ </script>";
+ unset($_SESSION['temporada_ok']);
+}
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

@@ -41,7 +41,12 @@ if (isset($_POST['checkout'])) {
   $lugar_entrega = $new->listarLugares($_SESSION['entrega']);
 
   //Cargo mi tarifa segun la categoria
-  $tarifa = $new2->tarifaReserva($_SESSION['categoria']);
+  $tarifa = $new2->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_desde']);
+
+  //Tarifa diaria
+  var_dump($tarifa);
+
+  $tarifa_diaria = $tarifa[1];
 
   //Separo nombre de categoria para mostrar ej (A)
   $categoria_seleccionada = explode(" ", $tarifa['categoria']);

@@ -7,6 +7,14 @@ $editar = $new->editarConfiguracion();
 $editarConfiguracion -> editarConfiguracion();
 
 */
+
+if (isset($_SESSION['configuracion_ok'])) {
+  echo "<script>
+ toastr.success('configuración guardada correctamente', 'Listo!', {timeOut: 4000})
+ </script>";
+ unset($_SESSION['configuracion_ok']);
+ 
+}
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -165,7 +173,7 @@ MODAL EDITAR CATEGORÍA
 
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+          <a href="configuraciones"><button type="button" class="btn btn-default pull-left" data-dismiss="">Salir</button></a>
 
           <button type="submit" class="btn btn-primary" name="editarConfiguracion">Guardar cambios</button>
 

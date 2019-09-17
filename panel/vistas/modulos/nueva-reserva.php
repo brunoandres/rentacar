@@ -22,12 +22,12 @@ $categorias = $new2->listarCategorias();
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
 
       <!-- SELECT2 EXAMPLE -->
       <div class="box box-default">
         <div class="box-header with-border">
-          <h3 class="box-title">Ingrese los siguientes datos para buscar disponibilidad</h3>
+          <h3 class="box-title">Seleccione Fecha Desde, Fecha Hasta, Hora de retiro y entrega para comprobar Disponibilidad.</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -40,13 +40,15 @@ $categorias = $new2->listarCategorias();
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label>Categoria</label>
-                  <select class="form-control" id="select_categoria" name="select_categoria" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
-                          <?php foreach ($categorias as $categoria) {?>
-                            <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
-                          <?php } ?>
-                  </select>
-                </div>
+                <label for="categoria">Categoria</label>
+                <select class="form-control" name="categoria">
+                  <?php foreach ($categorias as $categoria) { ?>
+                    <option value="<?php echo $categoria['id']; ?>" <?php if (isset($_POST['categoria']) && $categoria['id']==$_POST['categoria']) {
+                      echo "selected";
+                    } ?>><?php echo $categoria['nombre']; ?></option>
+                  <?php } ?>
+                </select>
+              </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
@@ -83,8 +85,12 @@ $categorias = $new2->listarCategorias();
 
               <!-- /.form-group -->
             </div>
-            
-            
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Hora desde</label>
+                <input type="time" id="single-input" name="hora_desde" max="23:59" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_desde'])){ echo $_POST['hora_desde']; }?>" required="">
+              </div>
+            </div>
 
           </div>
           <button type="submit" class="btn btn-success">Buscar disponibilidad</button>
@@ -103,7 +109,7 @@ $categorias = $new2->listarCategorias();
   </div>
 
   <?php
-  $new = new ControladorReservas();
-  $new->crearReserva();
+  /*$new = new ControladorReservas();
+  $new->crearReserva();*/
 
   ?>

@@ -5,14 +5,28 @@ $newCat = new ControladorCategorias();
 $categorias = $newCat->listarCategorias();
 $data = $new->buscarDisponibilidad();
 
+if (isset($_SESSION['reserva_error'])) {
+
+  echo "<script>
+ toastr.error('Se ha producido un error al intentar reservar, por favor intente nuevamente.', 'Error al Reservar', {timeOut: 3000})
+ </script>";
+
+ unset($_SESSION['reserva_error']);
+
+}
+
 ?>
 
 <section id="portfolio" class="wow fadeInDown">
   <div class="container">
     <div class="center">
       <h2>Reservas On-line</h2>
+      <div class="alert alert-warning" role="alert">
+          La devolución del vehiculo debe ser dentro de las 24hs. De lo contrario se cobrará un adicional extra.
+          </div>
       <p class="lead">Seleccione una categoria e ingrese las fechas para buscar disponibilidad.</p>
     </div>
+
     <div class="row h-100 justify-content-center align-items-center">
       <div class="col-sm-6 col-sm-offset-3">
         <form method="post">

@@ -7,6 +7,13 @@ $categorias=$new2->listarCategorias();
 $temporadas=$new->listarTemporadas();
 $editar = $new->editarTarifa();
 
+if (isset($_SESSION['tarifa_ok'])) {
+  echo "<script>
+ toastr.success('Tarifa guardada correctamente.', 'Listo', {timeOut: 4000})
+ </script>";
+ unset($_SESSION['tarifa_ok']);
+}
+
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

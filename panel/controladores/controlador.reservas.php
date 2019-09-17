@@ -1,5 +1,7 @@
 <?php
 
+//require_once 'panel/modelos/modelo.conexion.php';
+
 class ControladorReservas
 {
 
@@ -16,12 +18,13 @@ class ControladorReservas
 
 		if ($resultado=="ok") {
 			echo "<script>
-		        		window.location = 'confirmadas';
-		        		</script>";
+ 					toastr.success('Reserva eliminada correctamente.', 'Listo', {timeOut: 8000})
+				</script>";
+
 		}else{
 			echo "<script>
-		        		alert('Error al eliminar Reserva');
-		        		</script>";
+					toastr.error('No ha sido posible eliminar la reserva.', 'Error', {timeOut: 8000})
+				</script>";
 		}
 
 	}
@@ -75,18 +78,9 @@ class ControladorReservas
 
 	  	  	//Valido que las fechas sean al menos correctas
 	  	  	if (!self::validateDate($fecha_desde) || !self::validateDate($fecha_hasta)) {
-	  	  		echo'<script>
-
-					swal({
-							type: "error",
-							title: "Ha ingresado fechas inválidas, intente nuevamente.",
-							showConfirmButton: true,
-							confirmButtonText: "Volver a intentar"
-							}).then(function(result){
-		
-							})
-
-					</script>';
+	  	  		echo "<script>
+ 							toastr.error('Ha ingresado fechas inválidas, intente nuevamente', 'A tener en cuenta', {timeOut: 8000})
+ 						</script>";
 	  	  	}
 
 	  	  	//Total de dias entre fechas.
@@ -116,7 +110,7 @@ class ControladorReservas
 		  	  	//Generar un codigo de reserva aleatorio
 				$codigo = ModeloReservas::codigoReserva(5);
 
-			var_dump($respuesta);
+			//var_dump($respuesta);
 				/***** valor de retorno funcion disponibilidad
 				
 				***/
@@ -138,48 +132,18 @@ class ControladorReservas
 
 					</script>";
 
-					/*echo'<script>
-
-					swal({
-							type: "success",
-							title: "DISPONIBLE!",
-							showConfirmButton: true,
-							confirmButtonText: "Volver a intentar"
-							}).then(function(result){
-		
-							})
-
-					</script>';*/
-
 				}else{
-					echo'<script>
 
-					swal({
-							type: "error",
-							title: "No hay disponibilidad para las fechas indicadas.",
-							showConfirmButton: true,
-							confirmButtonText: "Volver a intentar"
-							}).then(function(result){
-		
-							})
-
-					</script>';
+					echo "<script>
+ 							toastr.error('No hay vehiculos disponibles en las fechas solicitadas.', 'No hay disponibilidad', {timeOut: 8000})
+ 						</script>";
 				}
 	  	  	}else{
 
-		  	  	echo'<script>
-
-					swal({
-							type: "error",
-							title: "El periodo mínimo de alquiler son de '.$minimo_de_dias.' dias.",
-							showConfirmButton: true,
-							confirmButtonText: "Volver a intentar"
-							}).then(function(result){
-		
-							})
-
-					</script>';
-
+	  	  		echo "<script>
+ 						toastr.error('El periodo mínimo de alquiler son de $minimo_de_dias dia/s.', 'A tener en cuenta', {timeOut: 8000})
+ 					</script>";
+		  	 
 		  	}   		      
 	    }
   	}
@@ -201,10 +165,12 @@ class ControladorReservas
 
 		if (isset($_POST['confirmaReserva'])) {
 
+			$link = Conexion::ConectarMysql();
+
 			$categoria = $_POST['categoria_confirmada'];
 			$codigo = $_POST['codigo_reserva'];
-			$nombre = $_POST['nombre_reserva'];
-			$apellido = $_POST['apellido_reserva'];
+			$nombre = mysqli_real_escape_string($link, $_POST['nombre_reserva']);
+			$apellido = mysqli_real_escape_string($link,$_POST['apellido_reserva']);
 			$fecha_desde = $_POST['fecha_desde'];
 			$fecha_hasta = $_POST['fecha_hasta'];
 			$hora_desde = $_POST['hora_desde_reserva'];
@@ -213,12 +179,12 @@ class ControladorReservas
 			$total_dias = $_POST['total_dias_reserva'];
 			$estado = 1;
 			$origen = 1;
-			$telefono = $_POST['telefono_reserva'];
-			$email = $_POST['email_reserva'];
+			$telefono = mysqli_real_escape_string($link,$_POST['telefono_reserva']);
+			$email = mysqli_real_escape_string($link,$_POST['email_reserva']);
 			$retiro = $_POST['retiro_reserva'];
 			$entrega = $_POST['entrega_reserva'];
-			$vuelo = $_POST['vuelo_reserva'];
-			$observaciones = $_POST['informacion_reserva'];
+			$vuelo = mysqli_real_escape_string($link,$_POST['vuelo_reserva']);
+			$observaciones = mysqli_real_escape_string($link,$_POST['informacion_reserva']);
 			$adicionales = $_SESSION['adicionales'];
 
 			if (empty($adicionales)) {
@@ -235,22 +201,11 @@ class ControladorReservas
 				window.location = 'inicio';
 				</script>";
 			}else{
-				echo'<script>
-
-				swal({
-						type: "error",
-						title: "Error!",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar"
-						}).then(function(result){
-								if (result.value) {
-
-								window.location = "inicio";
-
-								}
-							})
-
-				</script>';
+				$_SESSION['reserva_error'] = true;
+				echo "<script>
+				window.location = 'reservar';
+				</script>";
+				
 			}
 		}
 
@@ -290,9 +245,9 @@ class ControladorReservas
 	}
 
 	//Buscar los valores de las categorias por temporada
-	static public function tarifaReserva($categoria){
+	static public function tarifaReserva($categoria,$fecha_desde){
 
-		$tarifas = ModeloReservas::buscarTarifa($categoria);
+		$tarifas = ModeloReservas::buscarTarifa($categoria,$fecha_desde);
 		return $tarifas;
 
 	}
