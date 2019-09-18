@@ -129,11 +129,11 @@ class ControladorReservas
 					$_SESSION['total_dias']  = $total_dias;
 					$_SESSION['mensaje']     = 'Reserva Disponible';
  
-					/*echo "<script>
+					echo "<script>
 
-					window.location='formulario';
+					window.location='checkout';
 
-					</script>";*/
+					</script>";
 
 				}else{
 

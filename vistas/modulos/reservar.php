@@ -16,6 +16,13 @@ if (isset($_SESSION['reserva_error'])) {
 }
 
 ?>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Búsqueda</li>
+    <li class="breadcrumb-item"><a href="#">Checkout</a></li>
+    <li class="breadcrumb-item"><a href="#">Confirmación</a></li>
+  </ol>
+</nav>
 
 <section id="portfolio" class="wow fadeInDown">
   <div class="container">

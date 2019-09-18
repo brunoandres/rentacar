@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 06-06-2019 a las 17:49:39
--- Versión del servidor: 5.7.23
--- Versión de PHP: 5.6.38
+-- Servidor: 10.1.2.127:3306
+-- Tiempo de generación: 18-09-2019 a las 18:01:10
+-- Versión del servidor: 10.2.24-MariaDB
+-- Versión de PHP: 7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,19 +28,16 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `autos`
 --
 
-DROP TABLE IF EXISTS `autos`;
-CREATE TABLE IF NOT EXISTS `autos` (
-  `id_auto` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `autos` (
+  `id_auto` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
   `marca` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
   `modelo` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
   `patente` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `habilitado` tinyint(4) NOT NULL,
   `viaja_chile` tinyint(1) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_auto`),
-  KEY `id_categoria` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `autos`
@@ -79,11 +76,9 @@ INSERT INTO `autos` (`id_auto`, `id_categoria`, `marca`, `modelo`, `patente`, `h
 -- Estructura de tabla para la tabla `categorias`
 --
 
-DROP TABLE IF EXISTS `categorias`;
-CREATE TABLE IF NOT EXISTS `categorias` (
+CREATE TABLE `categorias` (
   `id_categoria` int(11) NOT NULL,
-  `categoria` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
-  PRIMARY KEY (`id_categoria`)
+  `categoria` varchar(30) COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -96,7 +91,7 @@ INSERT INTO `categorias` (`id_categoria`, `categoria`) VALUES
 (2, 'Categoria C'),
 (3, 'Categoria D'),
 (4, 'Categoria E'),
-(5, 'Categoria F (Automático)');
+(5, 'Categoria F');
 
 -- --------------------------------------------------------
 
@@ -104,9 +99,8 @@ INSERT INTO `categorias` (`id_categoria`, `categoria`) VALUES
 -- Estructura de tabla para la tabla `reservas`
 --
 
-DROP TABLE IF EXISTS `reservas`;
-CREATE TABLE IF NOT EXISTS `reservas` (
-  `id_reserva` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `reservas` (
+  `id_reserva` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `tel` varchar(50) NOT NULL,
@@ -116,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   `cantidad_dias` int(11) NOT NULL,
   `total_a_pagar` double(10,2) NOT NULL,
   `vuelo` varchar(25) NOT NULL,
-  `fecha_ingreso_reserva` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `fecha_ingreso_reserva` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `fdesde` date NOT NULL,
   `fhasta` date NOT NULL,
   `hdesde` time NOT NULL,
@@ -131,10 +125,8 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   `patente` varchar(15) NOT NULL,
   `color` varchar(15) NOT NULL,
   `estado` int(1) NOT NULL,
-  `origen` int(1) NOT NULL,
-  PRIMARY KEY (`id_reserva`),
-  KEY `fhasta` (`fhasta`)
-) ENGINE=InnoDB AUTO_INCREMENT=1141 DEFAULT CHARSET=latin1;
+  `origen` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `reservas`
@@ -1032,7 +1024,7 @@ INSERT INTO `reservas` (`id_reserva`, `nombre`, `email`, `tel`, `vehiculo`, `ret
 (918, 'marcelo estray(alina)', 'patagoniaaustralrentacar@hotmail.com ', '5491167463659', 3, 'Aeropuerto', 'Aeropuerto', 10, 28000.00, '1111', '2019-01-06 18:36:57', '2019-02-05', '2019-02-15', '15:00:00', '15:00:00', '', '', '', '', '', '2019-02-05 15:00:00', '2019-02-15 15:00:00', '', '', 2, 1),
 (919, 'Mariana González', 'marianagonzalez1978@yahoo.com.ar', '1559325838', 0, 'Aeropuerto', 'Aeropuerto', 7, 800.00, 'LA 7770', '2019-01-07 20:55:09', '2019-07-20', '2019-07-27', '19:50:00', '18:40:00', 'Quisiera dos buster o una silla para la nena de cuatro años, no puse silla de bebé porque es mas grande. \r\nLes pido por favor la cotización para luego confirmar la operación. Muchaz gracias. Mariana', '', 'Cadenas para nieve', '', 'Buster', '2019-07-20 15:00:00', '2019-07-27 15:00:00', '', '', 2, 1),
 (920, 'Liliana y celina', 'no', '2216059953', 0, 'Aeropuerto', 'Aeropuerto', 3, 4500.00, 'No', '2019-01-05 16:08:00', '2019-01-31', '2019-02-03', '15:00:00', '15:00:00', '', '', '', '', '', '2019-01-31 15:00:00', '2019-02-03 15:00:00', '', '', 1, 1),
-(921, 'mariano ezequiel brancaleone', 'mbrancaleone@hotmail.com.ar', '0111552478395', 0, 'Terminal', 'Terminal', 6, 0.00, 'AR1682', '2019-01-05 22:51:44', '2019-07-28', '2019-08-03', '11:30:00', '12:00:00', '', '', '', '', '', '2019-07-28 15:00:00', '2019-08-03 15:00:00', '', '', 1, 1),
+(921, 'mariano ezequiel brancaleone', 'mbrancaleone@hotmail.com.ar', '0111552478395', 0, 'Terminal', 'Terminal', 6, 0.00, 'AR1682', '2019-07-23 20:36:00', '2019-07-28', '2019-08-03', '11:30:00', '12:00:00', '', '', '', '', '', '2019-07-28 15:00:00', '2019-08-03 15:00:00', '', '', 2, 1),
 (922, 'Federico Petrocco', 'fedco22@hotmail.com', '1159493314', 1, 'Aeropuerto', 'Centro Bariloche', 3, 5700.00, '1666', '2019-01-06 14:33:32', '2019-01-08', '2019-01-11', '13:00:00', '13:00:00', '', '', '', '', 'Buster', '2019-01-08 15:00:00', '2019-01-11 15:00:00', '', '', 1, 1),
 (923, 'Daniel García (villaggi)', 'no', '1111', 0, 'Aeropuerto', 'Aeropuerto', 3, 4500.00, 'Si', '2019-01-06 17:10:39', '2019-01-10', '2019-01-13', '15:00:00', '15:00:00', '', '', '', '', '', '2019-01-10 15:00:00', '2019-01-13 15:00:00', '', '', 1, 1),
 (924, 'ARTURO VACCARO', 'artvaccaro@yahoo.com', '1556181865', 0, 'Aeropuerto', 'Aeropuerto', 9, 13500.00, 'LA 7762', '2019-01-07 22:18:48', '2019-03-06', '2019-03-15', '15:00:00', '14:30:00', 'Si puede ser un Chevrolet, mejor.', '', '', '', '', '2019-03-06 15:00:00', '2019-03-15 15:00:00', '', '', 1, 1),
@@ -1077,7 +1069,7 @@ INSERT INTO `reservas` (`id_reserva`, `nombre`, `email`, `tel`, `vehiculo`, `ret
 (963, 'Juan Manuel Roman', 'juanmauo777@gmail.com', '1166798177', 0, 'Aeropuerto', 'Aeropuerto', 3, 0.00, '1666', '2019-01-29 00:08:23', '2019-04-05', '2019-04-08', '13:00:00', '13:00:00', '', '', '', '', '', '2019-04-05 15:00:00', '2019-04-08 15:00:00', '', '', 1, 1),
 (964, 'NIco danese  (jime)', 'jime', '1111', 3, 'Aeropuerto', 'Aeropuerto', 10, 28000.00, 'No', '2019-01-30 00:16:06', '2019-02-03', '2019-02-13', '15:00:00', '15:00:00', '', '', '', '', '', '2019-02-03 15:00:00', '2019-02-13 15:00:00', '', '', 1, 1),
 (965, 'Alejandro Balcarce Cronos', 'no', '1164176535', 2, 'Aeropuerto', 'Aeropuerto', 10, 20000.00, 'La 7766 12hs', '2019-02-01 15:52:21', '2019-02-07', '2019-02-17', '15:00:00', '15:00:00', '', '', '', '', '', '2019-02-07 15:00:00', '2019-02-17 15:00:00', '', '', 1, 1),
-(966, 'ricardo rodriguez', 'disiento@hotmail.com', '01142469463', 0, 'Centro Bariloche', 'Centro Bariloche', 7, 0.00, '', '2019-02-01 21:43:20', '2019-07-07', '2019-07-14', '10:00:00', '10:00:00', 'somos 3 personas. queremos saber si se puede pasar a Chile gcias', '', '', '', '', '2019-07-07 15:00:00', '2019-07-14 15:00:00', '', '', 1, 1),
+(966, 'ricardo rodriguez', 'disiento@hotmail.com', '01142469463', 0, 'Centro Bariloche', 'Centro Bariloche', 7, 0.00, '', '2019-07-07 11:58:56', '2019-07-07', '2019-07-14', '10:00:00', '10:00:00', 'somos 3 personas. queremos saber si se puede pasar a Chile gcias', '', '', '', '', '2019-07-07 15:00:00', '2019-07-14 15:00:00', '', '', 2, 1),
 (967, 'Santiago Ferrer (Dani villaggi)', 'no', '1111', 4, 'Aeropuerto', 'Aeropuerto', 4, 16000.00, 'Si', '2019-02-02 14:57:21', '2019-03-28', '2019-04-01', '15:00:00', '15:00:00', '', '', '', '', '', '2019-03-28 15:00:00', '2019-04-01 15:00:00', '', '', 1, 1),
 (968, 'mariano alberto moran ', 'marianomoran1990@gmail.com ', '1130691961', 0, 'Aeropuerto', 'Aeropuerto', 8, 12000.00, 'LA 7764', '2019-02-04 14:34:30', '2019-02-24', '2019-03-04', '15:00:00', '15:00:00', '', '', '', '', '', '2019-02-24 15:00:00', '2019-03-04 15:00:00', '', '', 1, 1),
 (969, 'Elisabet Puente', 'elisabetpuente@gmail.com', '1160387185', 4, 'Aeropuerto', 'Aeropuerto', 4, 16000.00, '', '2019-02-04 19:03:27', '2019-04-04', '2019-04-08', '10:30:00', '18:30:00', 'Quisiera saber si tiene capacidad para 10 personas sentadas', '', '', '', '', '2019-04-04 15:00:00', '2019-04-08 15:00:00', '', '', 1, 1),
@@ -1144,8 +1136,8 @@ INSERT INTO `reservas` (`id_reserva`, `nombre`, `email`, `tel`, `vehiculo`, `ret
 (1029, 'Guillermo (papá)', 'no ', '3517518422', 1, 'Aeropuerto', 'Aeropuerto', 5, 9500.00, 'Ni', '2019-04-12 17:49:32', '2019-04-19', '2019-04-24', '15:00:00', '15:00:00', '', 'Silla Bebé', '', '', '', '2019-04-19 15:00:00', '2019-04-24 15:00:00', '', '', 2, 1),
 (1030, 'adolfo godnjkvec(ali)', 'patagoniaaustralrentacar@hotmail ', '1137631194', 0, 'Aeropuerto', 'Aeropuerto', 7, 10500.00, '11111', '2019-03-11 14:57:25', '2019-03-16', '2019-03-23', '00:01:00', '15:00:00', '', '', '', '', '', '2019-03-16 15:00:00', '2019-03-23 15:00:00', '', '', 1, 1),
 (1031, 'Roberto Marques', 'robertomarques567@gmail.com', '1551831390', 2, 'Aeropuerto', 'Aeropuerto', 5, 10000.00, 'AR1694', '2019-03-11 15:58:00', '2019-05-08', '2019-05-13', '13:00:00', '13:00:00', 'Somos 2 personas mayores y queremos la Suran pues es un auto ALTO. Gracias.', '', '', '', '', '2019-05-08 15:00:00', '2019-05-13 15:00:00', '', '', 1, 1),
-(1032, 'mariano ezequiel brancaleone(alina)', 'patagoniaaustralrentacar@hotmail.com ', '1152478395', 0, 'Aeropuerto', 'Aeropuerto', 6, 10800.00, 'ar 1672', '2019-03-12 19:35:33', '2019-07-28', '2019-08-03', '11:00:00', '00:00:00', '', '', '', '', '', '2019-07-28 15:00:00', '2019-08-03 15:00:00', '', '', 1, 0),
-(1033, 'leandro', 'ldiviach@allaria.com.ar', '115508 0486', 0, 'Aeropuerto', 'Aeropuerto', 8, 500.00, '', '2019-03-12 21:31:41', '2019-08-03', '2019-08-11', '15:00:00', '15:00:00', 'Consulta por precio de alquiler categoría A, CORSA CLASSIC 4 PUERTAS C/BAÚL. ', '', 'Cadenas para nieve', '', '', '2019-08-03 15:00:00', '2019-08-11 15:00:00', '', '', 1, 1),
+(1032, 'mariano ezequiel brancaleone(alina)', 'patagoniaaustralrentacar@hotmail.com ', '1152478395', 0, 'Aeropuerto', 'Aeropuerto', 6, 10800.00, 'ar 1672', '2019-07-23 20:34:13', '2019-07-28', '2019-08-03', '11:00:00', '00:00:00', '', '', '', '', '', '2019-07-28 15:00:00', '2019-08-03 15:00:00', '', '', 2, 0),
+(1033, 'leandro', 'ldiviach@allaria.com.ar', '115508 0486', 0, 'Aeropuerto', 'Aeropuerto', 8, 500.00, '', '2019-07-29 19:33:28', '2019-08-03', '2019-08-11', '15:00:00', '15:00:00', 'Consulta por precio de alquiler categoría A, CORSA CLASSIC 4 PUERTAS C/BAÚL. ', '', 'Cadenas para nieve', '', '', '2019-08-03 15:00:00', '2019-08-11 15:00:00', '', '', 2, 1),
 (1034, 'Maria Astrid Doria Rodriguez', 'mariastridoria@hotmail.com', '111562675032', 0, 'Aeropuerto', 'Aeropuerto', 4, 7200.00, 'AR1692', '2019-03-13 16:52:38', '2019-03-29', '2019-04-02', '20:45:00', '20:45:00', '', '', '', '', '', '2019-03-29 15:00:00', '2019-04-02 15:00:00', '', '', 1, 1),
 (1035, 'maria eugenia diaz', 'cascolucia02@gmail.com', '3512032313', 0, 'Aeropuerto', 'Aeropuerto', 4, 7200.00, '5444', '2019-03-13 20:14:31', '2019-03-20', '2019-03-24', '07:00:00', '07:00:00', '', '', '', '', '', '2019-03-20 15:00:00', '2019-03-24 15:00:00', '', '', 1, 1),
 (1036, 'Martin Salomón ', 'no', '1165687114', 1, 'Aeropuerto', 'Aeropuerto', 7, 14000.00, 'Ar1666', '2019-03-14 19:19:06', '2019-03-16', '2019-03-23', '13:30:00', '15:00:00', '', '', '', '', '', '2019-03-16 15:00:00', '2019-03-23 15:00:00', '', '', 1, 1),
@@ -1160,14 +1152,14 @@ INSERT INTO `reservas` (`id_reserva`, `nombre`, `email`, `tel`, `vehiculo`, `ret
 (1045, 'Luciana David', 'luchi_david@yahoo.com.ar', '01146318441', 0, 'Aeropuerto', 'Aeropuerto', 8, 0.00, '', '2019-03-24 17:04:13', '2019-07-27', '2019-08-04', '09:00:00', '04:00:00', '', '', '', '', '', '2019-07-27 15:00:00', '2019-08-04 15:00:00', '', '', 2, 1),
 (1046, 'Sonia Zubiri', 'soniazubiri2@gmail.com', '0111559477687', 0, 'Terminal Ómnibus', 'Terminal Ómnibus', 6, 10800.00, '', '2019-03-22 13:37:11', '2019-03-28', '2019-04-03', '12:00:00', '15:00:00', 'No tengo Disponible acá el vuelo de llegada o partida. Lo. Confirmo a la tarde', '', '', '', '', '2019-03-28 15:00:00', '2019-04-03 15:00:00', '', '', 1, 1),
 (1047, 'Jorge Alonso Casuscelli', 'ja@jorgealonso.es', '34607407473', 0, 'Aeropuerto', 'Aeropuerto', 5, 0.00, '', '2019-03-25 16:23:19', '2019-11-14', '2019-11-19', '15:00:00', '04:00:00', '', '', '', '', '', '2019-11-14 15:00:00', '2019-11-19 15:00:00', '', '', 2, 1),
-(1048, 'gonzalo', 'chapunob@hotmail.com', '3415996243', 2, 'Aeropuerto', 'Aeropuerto', 10, 1300.00, '', '2019-03-22 18:31:37', '2019-07-07', '2019-07-17', '15:00:00', '09:00:00', '', 'Silla Bebé', 'Cadenas para nieve', '', 'Buster', '2019-07-07 15:00:00', '2019-07-17 15:00:00', '', '', 1, 1),
+(1048, 'gonzalo', 'chapunob@hotmail.com', '3415996243', 2, 'Aeropuerto', 'Aeropuerto', 10, 1300.00, '', '2019-06-21 21:30:21', '2019-07-07', '2019-07-17', '15:00:00', '09:00:00', '', 'Silla Bebé', 'Cadenas para nieve', '', 'Buster', '2019-07-07 15:00:00', '2019-07-17 15:00:00', '', '', 2, 1),
 (1049, 'Scotti Norberto Daniel', 'ruizstellamaris@yahoo.com.ar', '1522425103', 0, 'Aeropuerto', 'Aeropuerto', 8, 0.00, '', '2019-03-23 15:21:15', '2019-09-14', '2019-09-22', '09:00:00', '06:00:00', '', '', '', '', '', '2019-09-14 15:00:00', '2019-09-22 15:00:00', '', '', 1, 1),
 (1050, 'adolfo godnkevec(ali)', 'patagoniaaustralrentacar@hotmail.com ', '1137631194', 0, 'Aeropuerto', 'Aeropuerto', 10, 18000.00, '1111', '2019-03-24 18:37:02', '2019-03-30', '2019-04-09', '15:00:00', '15:00:00', '', '', '', '', '', '2019-03-30 15:00:00', '2019-04-09 15:00:00', '', '', 1, 1),
 (1051, 'Martin lerga', 'martin.lerga2@gmail.com', '1151011106', 3, 'Aeropuerto', 'Aeropuerto', 3, 8400.00, 'Ar 1872', '2019-03-26 16:42:26', '2019-03-28', '2019-03-31', '10:20:00', '15:00:00', '', '', '', '', '', '2019-03-28 15:00:00', '2019-03-31 15:00:00', '', '', 1, 1),
 (1052, 'Fernando bacci (ali)', 'patagoniaaustralrentacar@hotmail.com ', '1156394350', 0, 'Aeropuerto', 'Aeropuerto', 5, 7500.00, 'lan 7764', '2019-04-01 15:12:22', '2019-04-08', '2019-04-13', '15:00:00', '00:00:00', '', '', '', '', '', '2019-04-08 15:00:00', '2019-04-13 15:00:00', '', '', 1, 0),
 (1053, 'Mariano Maiola', 'mariano_maiola@outlook.com', '01138500374', 0, 'Aeropuerto', 'Aeropuerto', 4, 0.00, 'WJ- 3192', '2019-04-01 17:18:43', '2019-07-24', '2019-07-28', '23:45:00', '13:00:00', '', '', '', '', '', '2019-07-24 15:00:00', '2019-07-28 15:00:00', '', '', 1, 1),
 (1054, 'Gastón ricardes ', 'gricardes@hotmail.com', '0111541484402', 2, 'Aeropuerto', 'Aeropuerto', 9, 0.00, 'AR1666', '2019-04-02 13:08:43', '2019-08-01', '2019-08-10', '12:00:00', '15:00:00', '', '', '', '', '', '2019-08-01 15:00:00', '2019-08-10 15:00:00', '', '', 1, 1),
-(1055, 'Emiliano Zaidenwerg', 'emilianozaiden@hotmail.com', '1558230830', 1, 'Aeropuerto', 'Aeropuerto', 8, 800.00, '', '2019-04-02 17:51:33', '2019-07-27', '2019-08-04', '11:00:00', '11:00:00', '', 'Silla Bebé', '', '', 'Buster', '2019-07-27 15:00:00', '2019-08-04 15:00:00', '', '', 1, 1),
+(1055, 'Emiliano Zaidenwerg', 'emilianozaiden@hotmail.com', '1558230830', 1, 'Aeropuerto', 'Aeropuerto', 8, 800.00, '', '2019-07-26 15:00:33', '2019-07-27', '2019-08-04', '11:00:00', '11:00:00', '', 'Silla Bebé', '', '', 'Buster', '2019-07-27 15:00:00', '2019-08-04 15:00:00', '', '', 2, 1),
 (1056, 'Tibor barath', 'no', '595981110222', 4, 'Aeropuerto', 'Aeropuerto', 7, 28000.00, 'Ar1698', '2019-04-02 18:25:09', '2019-04-13', '2019-04-20', '15:00:00', '15:00:00', ' $5000 por día km libre y seguro todo riesgo con franquicia de 25mil por accidente y 35mil por vuelco\r\n Dropoff $20mil para la devolución  en el Calafate\r\nLlegada 14.50', '', '', '', '', '2019-04-13 15:00:00', '2019-04-20 15:00:00', '', '', 1, 1),
 (1057, 'beltran oneto (ali)', 'patagoniaaustralrentacar@hotmail.com ', '1150513754', 0, 'Centro Bariloche', 'Aeropuerto', 4, 7200.00, '111', '2019-04-03 12:42:44', '2019-04-29', '2019-05-03', '15:00:00', '15:00:00', 'gol trend 1300$ por dia', '', '', '', '', '2019-04-29 15:00:00', '2019-05-03 15:00:00', '', '', 1, 1),
 (1058, 'DAMIAN GABRIEL VALENCIANO ', 'valencianodamian@hotmail.com', '1157064358', 0, 'Aeropuerto', 'Aeropuerto', 4, 0.00, '7762', '2019-04-03 18:19:52', '2019-07-06', '2019-07-10', '08:30:00', '18:20:00', '', '', '', '', '', '2019-07-06 15:00:00', '2019-07-10 15:00:00', '', '', 1, 1),
@@ -1195,7 +1187,7 @@ INSERT INTO `reservas` (`id_reserva`, `nombre`, `email`, `tel`, `vehiculo`, `ret
 (1080, 'Gonzalo Ferreiros', 'toia180@hotmail.com', '0111540962502', 2, 'Aeropuerto', 'Aeropuerto', 9, 23000.00, 'DN6000 Norwegian', '2019-04-16 00:57:30', '2019-07-26', '2019-08-04', '12:00:00', '11:00:00', '', '', 'Cadenas para nieve', '', '', '2019-07-26 15:00:00', '2019-08-04 15:00:00', '', '', 1, 1),
 (1081, 'facu bara tattoo (ali)', 'patagoniaaustralrentacar@hotmail ', '1124518051', 0, 'Aeropuerto', 'Aeropuerto', 9, 18000.00, '7762', '2019-04-16 13:32:11', '2019-04-26', '2019-05-05', '15:00:00', '15:00:00', 'PRIORIDAD GOL TREND.', '', '', '', '', '2019-04-26 15:00:00', '2019-05-05 15:00:00', '', '', 1, 1),
 (1082, 'Solimo', 'no', '000', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'Si', '2019-04-16 18:49:23', '2019-04-17', '2019-04-20', '15:00:00', '15:00:00', '', '', '', '', '', '2019-04-17 15:00:00', '2019-04-20 15:00:00', '', '', 1, 1),
-(1083, 'Andrea kobilsky', 'no', '11111', 1, 'Aeropuerto', 'Aeropuerto', 3, 6600.00, 'La7762', '2019-04-16 22:02:58', '2019-04-19', '2019-04-22', '10:50:00', '15:00:00', '', '', '', '', '', '2019-04-19 15:00:00', '2019-04-22 15:00:00', '', '', 1, 1),
+(1083, 'Andrea kobilsky', 'no', '11111', 1, 'Aeropuerto', 'Aeropuerto', 3, 6600.00, 'La7762', '2019-07-22 11:59:12', '2019-04-19', '2019-04-22', '10:50:00', '15:00:00', '', '', '', '', '', '2019-04-19 15:00:00', '2019-04-22 15:00:00', '', '', 2, 1),
 (1084, 'Salvatierra papa', 'no hay', '111', 1, 'Aeropuerto', 'Aeropuerto', 8, 17600.00, '1111', '2019-04-17 00:32:45', '2019-04-19', '2019-04-27', '15:00:00', '15:00:00', '', '', '', '', '', '2019-04-19 15:00:00', '2019-04-27 15:00:00', '', '', 1, 1),
 (1085, 'Natalia Perez', 'nataliamariel_perez@yahoo.com.ar', '1560505965', 4, 'Aeropuerto', 'Aeropuerto', 8, 500.00, '1872', '2019-04-19 18:51:11', '2019-09-22', '2019-09-30', '15:00:00', '15:00:00', '', 'Silla Bebé', '', '', '', '2019-09-22 15:00:00', '2019-09-30 15:00:00', '', '', 2, 1),
 (1086, 'santiago Novo', 'snovo@gtdis.com', '91135603553', 2, 'Aeropuerto', 'Aeropuerto', 7, 17800.00, 'DN 6000', '2019-04-17 16:27:17', '2019-08-03', '2019-08-10', '15:00:00', '15:00:00', 'Arreglado con Jimena 16000 final con buster incluido', '', '', '', 'Buster', '2019-08-03 15:00:00', '2019-08-10 15:00:00', '', '', 1, 1),
@@ -1216,7 +1208,7 @@ INSERT INTO `reservas` (`id_reserva`, `nombre`, `email`, `tel`, `vehiculo`, `ret
 (1101, 'ROBERTO VERA', 'robertoveravierci@gmail.com', '595991800552', 3, 'Aeropuerto', 'Aeropuerto', 7, 17500.00, 'latam 7764', '2019-05-16 15:00:27', '2019-05-18', '2019-05-25', '15:00:00', '15:00:00', 'puede pagarse  con tarjeta internacional  en el momento de retirar o reservar ?', '', '', '', '', '2019-05-18 15:00:00', '2019-05-25 15:00:00', '', '', 1, 1),
 (1102, 'Manuel', 'manumanucho@hotmail.com', '0111544072889', 3, 'Aeropuerto', 'Aeropuerto', 8, 24000.00, 'AR1664', '2019-05-16 16:36:05', '2019-07-03', '2019-07-11', '13:00:00', '13:00:00', '', '', '', '', '', '2019-07-03 15:00:00', '2019-07-11 15:00:00', '', '', 1, 1),
 (1103, 'Damian Talamo', 'damiantalamo@gmail.com', '1145777345', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'DN6000', '2019-05-16 19:55:13', '2019-08-14', '2019-08-18', '14:00:00', '23:00:00', 'Aerolíneas Norwegian de ser posible nos gustaría evitar el corsa ', '', '', '', '', '2019-08-14 15:00:00', '2019-08-18 15:00:00', '', '', 1, 1),
-(1104, 'Jose vicente Fernández ', 'capifer@hotmail.com', '58074240', 0, 'Aeropuerto', 'Aeropuerto', 6, 12000.00, 'AR 1682', '2019-05-17 15:11:47', '2019-07-29', '2019-08-04', '15:00:00', '15:00:00', '54 9 11 58074240', '', '', '', '', '2019-07-29 15:00:00', '2019-08-04 15:00:00', '', '', 1, 1),
+(1104, 'Jose vicente Fernández ', 'capifer@hotmail.com', '58074240', 0, 'Aeropuerto', 'Aeropuerto', 6, 12000.00, 'AR 1682', '2019-06-07 16:26:49', '2019-07-29', '2019-08-04', '15:00:00', '15:00:00', '54 9 11 58074240', '', '', '', '', '2019-07-29 15:00:00', '2019-08-04 15:00:00', '', '', 2, 1),
 (1105, 'Jorge Romero ', 'jaromero.jr68@gmail.com', '3515050377', 3, 'Aeropuerto', 'Aeropuerto', 7, 21000.00, 'FO 5444', '2019-05-18 02:28:09', '2019-06-23', '2019-06-30', '18:00:00', '17:00:00', '', '', '', '', '', '2019-06-23 15:00:00', '2019-06-30 15:00:00', '', '', 1, 1),
 (1106, 'Celia Caballero ', 'luencaba@yahoo.com', '1168929384', 0, 'Aeropuerto', 'Aeropuerto', 4, 0.00, '', '2019-05-19 19:17:22', '2019-09-07', '2019-09-11', '12:45:00', '11:00:00', '', '', '', '', '', '2019-09-07 15:00:00', '2019-09-11 15:00:00', '', '', 1, 1),
 (1107, 'Gonzalo Dario Lucero', 'lakde4-0@hotmail.com', '0341156556079', 1, 'Aeropuerto', 'Aeropuerto', 8, 17600.00, 'AR 2806', '2019-05-20 15:48:56', '2019-07-09', '2019-07-17', '11:30:00', '09:30:00', '', '', '', '', '', '2019-07-09 15:00:00', '2019-07-17 15:00:00', '', '', 1, 1),
@@ -1228,7 +1220,7 @@ INSERT INTO `reservas` (`id_reserva`, `nombre`, `email`, `tel`, `vehiculo`, `ret
 (1113, 'Verena (Dani villaggi)', 'no', '1111', 2, 'Aeropuerto', 'Aeropuerto', 8, 20000.00, 'La8092', '2019-05-22 00:12:30', '2019-07-06', '2019-07-14', '17:00:00', '15:00:00', '', '', '', '', '', '2019-07-06 15:00:00', '2019-07-14 15:00:00', '', '', 1, 1),
 (1114, 'Silvia', 'no', '1132599136', 1, 'Aeropuerto', 'Aeropuerto', 4, 8800.00, 'Fo5238', '2019-05-22 00:29:35', '2019-06-08', '2019-06-12', '08:00:00', '15:00:00', '$1300 por dia', '', '', '', '', '2019-06-08 15:00:00', '2019-06-12 15:00:00', '', '', 1, 1),
 (1115, 'fernando rausch', 'frausch@gmail.com', '1545326757', 1, 'Aeropuerto', 'Aeropuerto', 7, 15900.00, 'LA 7764', '2019-05-22 15:49:07', '2019-06-12', '2019-06-19', '16:00:00', '14:29:00', 'El auto que quiero según lo conversado es el voyage con la sillita sin cargo. Gracias', 'Silla Bebé', '', '', '', '2019-06-12 15:00:00', '2019-06-19 15:00:00', '', '', 1, 1),
-(1116, 'Willy Fonseca Mendez', 'wfonsecamendez@gmail.com', '50672811011', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'AR1668', '2019-05-23 18:38:19', '2019-08-20', '2019-08-24', '11:00:00', '09:00:00', 'Necesitamos VEHICULO CON GPS\r\n', '', '', '', '', '2019-08-20 15:00:00', '2019-08-24 15:00:00', '', '', 1, 1),
+(1116, 'Willy Fonseca Mendez', 'wfonsecamendez@gmail.com', '50672811011', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'AR1668', '2019-07-25 14:46:03', '2019-08-20', '2019-08-24', '11:00:00', '09:00:00', 'Necesitamos VEHICULO CON GPS\r\n', '', '', '', '', '2019-08-20 15:00:00', '2019-08-24 15:00:00', '', '', 2, 1),
 (1117, 'Nicolas Lobariñas', 'nicolas.lobarinas@gmail.com', '01155738556', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'FO5238', '2019-05-23 19:32:40', '2019-08-09', '2019-08-12', '09:00:00', '20:00:00', '', '', '', '', '', '2019-08-09 15:00:00', '2019-08-12 15:00:00', '', '', 1, 1),
 (1118, 'Matias Norberto Raul Sarricouet', 'darioleiva@gyra.com', '20781521', 2, 'Aeropuerto', 'Aeropuerto', 7, 17500.00, 'LA7762', '2019-05-24 12:39:26', '2019-08-03', '2019-08-10', '08:30:00', '11:00:00', 'RESERVA DE GYRA.COM.', '', '', '', '', '2019-08-03 15:00:00', '2019-08-10 15:00:00', '', '', 1, 1),
 (1119, 'Juan bello (Seba europcar)', 'no', '11111', 4, 'Aeropuerto', 'Aeropuerto', 5, 30000.00, '1111', '2019-05-25 18:03:27', '2019-07-05', '2019-07-10', '15:00:00', '15:00:00', '$33mil total', '', '', '', '', '2019-07-05 15:00:00', '2019-07-10 15:00:00', '', '', 1, 1),
@@ -1243,7 +1235,7 @@ INSERT INTO `reservas` (`id_reserva`, `nombre`, `email`, `tel`, `vehiculo`, `ret
 (1128, 'Luis montero', 'namabrigui@hotmail.com', '1561861077', 3, 'Aeropuerto', 'Aeropuerto', 5, 15000.00, '', '2019-05-30 20:24:57', '2019-08-13', '2019-08-18', '08:30:00', '15:00:00', 'Por favor comunicarse conmigo!', '', '', '', '', '2019-08-13 15:00:00', '2019-08-18 15:00:00', '', '', 2, 1),
 (1129, 'Luis montero', 'namabrigui@hotmail.com', '1561861077', 3, 'Aeropuerto', 'Aeropuerto', 5, 15000.00, '', '2019-05-31 20:30:15', '2019-08-13', '2019-08-18', '08:30:00', '15:00:00', 'Por favor comunicarse conmigo!', '', '', '', '', '2019-08-13 15:00:00', '2019-08-18 15:00:00', '', '', 2, 1),
 (1130, 'Andres jime', 'no', '2216133372', 4, 'Aeropuerto', 'Aeropuerto', 6, 36000.00, 'Ni', '2019-05-30 20:24:06', '2019-08-24', '2019-08-30', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-24 15:00:00', '2019-08-30 15:00:00', '', '', 1, 1),
-(1131, 'Luis Montero', 'namabrigui@hotmail.com', '1161861077', 4, 'Aeropuerto', 'Aeropuerto', 5, 30000.00, '1111', '2019-05-31 20:29:43', '2019-08-13', '2019-08-18', '08:30:00', '09:00:00', '', '', '', '', '', '2019-08-13 15:00:00', '2019-08-18 15:00:00', '', '', 1, 1),
+(1131, 'Luis Montero', 'namabrigui@hotmail.com', '1161861077', 4, 'Aeropuerto', 'Aeropuerto', 5, 30000.00, '1111', '2019-08-13 02:53:26', '2019-08-13', '2019-08-18', '08:30:00', '09:00:00', '', '', '', '', '', '2019-08-13 15:00:00', '2019-08-18 15:00:00', '', '', 2, 1),
 (1132, 'Fabian Barros', 'fabianedgardobarros16@gmail.com', '0111520237123', 1, 'Aeropuerto', 'Aeropuerto', 7, 15900.00, '', '2019-06-04 19:24:08', '2019-07-27', '2019-08-03', '10:00:00', '15:00:00', '', '', 'Cadenas para nieve', '', '', '2019-07-27 15:00:00', '2019-08-03 15:00:00', '', '', 2, 1),
 (1133, 'gabriel correale', 'corre08@hotmail.com', '1162222703', 1, 'Aeropuerto', 'Aeropuerto', 4, 8800.00, 'latam 7762', '2019-06-01 22:49:18', '2019-08-13', '2019-08-17', '09:20:00', '23:55:00', '', '', '', '', '', '2019-08-13 15:00:00', '2019-08-17 15:00:00', '', '', 1, 1),
 (1134, 'Enrique minaverry', 'no', '1169318855', 0, 'Aeropuerto', 'Aeropuerto', 9, 0.00, 'Ar1682', '2019-06-02 23:40:25', '2019-09-03', '2019-09-12', '15:00:00', '15:00:00', '$13mil total reserva Jime', '', '', '', '', '2019-09-03 15:00:00', '2019-09-12 15:00:00', '', '', 1, 1),
@@ -1252,7 +1244,233 @@ INSERT INTO `reservas` (`id_reserva`, `nombre`, `email`, `tel`, `vehiculo`, `ret
 (1137, 'Seba depto 2', 'no', '111111', 3, 'Terminal Ómnibus', 'Terminal Ómnibus', 7, 21000.00, 'Ni', '2019-06-04 18:41:40', '2019-08-17', '2019-08-24', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-17 15:00:00', '2019-08-24 15:00:00', '', '', 2, 1),
 (1138, 'Fabian barros', 'fabianedgardobarros16@gmail.com', '1120237123', 1, 'Aeropuerto', 'Aeropuerto', 4, 8800.00, 'No', '2019-06-04 19:19:47', '2019-07-27', '2019-07-31', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-27 15:00:00', '2019-07-31 15:00:00', '', '', 1, 1),
 (1139, 'Santiago Romero', 'santirom@fibertel.com.ar', '01140281317', 1, 'Aeropuerto', 'Terminal Ómnibus', 6, 13700.00, 'LA7764', '2019-06-04 20:35:16', '2019-08-04', '2019-08-10', '10:30:00', '13:00:00', 'Mi destino final es SMA y llevo tablas por lo cual sería imprescindible contar con porta equipaje. Gracias ', '', 'Cadenas para nieve', '', '', '2019-08-04 15:00:00', '2019-08-10 15:00:00', '', '', 1, 1),
-(1140, 'Alvaro Zorzini', 'a.zorzini@gmail.com', '0111521571758', 1, 'Aeropuerto', 'Aeropuerto', 8, 17600.00, 'FO5270', '2019-06-04 20:38:11', '2019-08-24', '2019-09-01', '21:00:00', '10:00:00', '', '', '', '', '', '2019-08-24 15:00:00', '2019-09-01 15:00:00', '', '', 1, 1);
+(1140, 'Alvaro Zorzini', 'a.zorzini@gmail.com', '0111521571758', 1, 'Aeropuerto', 'Aeropuerto', 8, 17600.00, 'FO5270', '2019-06-04 20:38:11', '2019-08-24', '2019-09-01', '21:00:00', '10:00:00', '', '', '', '', '', '2019-08-24 15:00:00', '2019-09-01 15:00:00', '', '', 1, 1),
+(1141, 'Martín Fernández Tucu (papá)', 'no', '3815573290', 2, 'Aeropuerto', 'Aeropuerto', 7, 17500.00, 'No', '2019-06-06 18:05:05', '2019-06-22', '2019-06-29', '15:00:00', '15:00:00', '$1500 por dia', '', '', '', '', '2019-06-22 15:00:00', '2019-06-29 15:00:00', '', '', 1, 1),
+(1142, 'Oteo Hugo (papá)', 'no', '1140270971', 4, 'Aeropuerto', 'Aeropuerto', 10, 60000.00, 'Fly 5250', '2019-06-06 18:48:31', '2019-07-26', '2019-08-05', '15:00:00', '15:00:00', '$40mil total', '', '', '', '', '2019-07-26 15:00:00', '2019-08-05 15:00:00', '', '', 1, 1),
+(1143, 'Damian simon', 'patagoniaaustralrentacar@hotmail.com ', '1134899371', 1, 'Aeropuerto', 'Aeropuerto', 7, 9000.00, 'ar 1698', '2019-06-07 15:45:32', '2019-06-08', '2019-06-15', '14:30:00', '00:00:00', '', '', '', '', '', '2019-06-08 15:00:00', '2019-06-15 15:00:00', '', '', 1, 0),
+(1144, 'José Fernández ', 'capifer@hotmail.com', '1558074240', 1, 'Aeropuerto', 'Aeropuerto', 6, 13200.00, 'AR 1682', '2019-07-22 01:27:52', '2019-07-22', '2019-07-28', '15:00:00', '15:00:00', 'Por cambio de fecha, se mantiene la tarifa de 12000 $ pactada inicialmente por categoría A\r\nGracias José.\r\n', '', '', '', '', '2019-07-22 15:00:00', '2019-07-28 15:00:00', '', '', 2, 1),
+(1145, 'RUBEN EUGENIO PEYRAS', 'rpeyras@grabatto.com', '1151837363', 2, 'Aeropuerto', 'Aeropuerto', 5, 12500.00, '7766', '2019-06-08 14:11:44', '2019-07-21', '2019-07-26', '11:40:00', '15:00:00', '', '', '', '', '', '2019-07-21 15:00:00', '2019-07-26 15:00:00', '', '', 1, 1),
+(1146, 'Guillermo Morelli', 'ghmorelli@gmail.com', '59898777393', 4, 'Aeropuerto', 'Aeropuerto', 10, 0.00, '', '2019-08-14 15:42:23', '2019-09-13', '2019-09-23', '15:00:00', '01:00:00', 'Podrán cotizarme hiunday H1 desde el 13/9 al 23/9.\r\nSaludos', '', '', '', '', '2019-09-13 15:00:00', '2019-09-23 15:00:00', '', '', 2, 1),
+(1147, 'maria teresa fleitas', 'mariateresafleitas@yahoo.com.ar', '01144261211', 1, 'Aeropuerto', 'Aeropuerto', 3, 6600.00, 'la7762', '2019-06-11 23:38:44', '2019-07-03', '2019-07-06', '10:45:00', '18:30:00', '', '', '', '', '', '2019-07-03 15:00:00', '2019-07-06 15:00:00', '', '', 1, 1),
+(1148, 'Elisa salzmann', 'elisasalzmann@gmail.com', '1159298157', 2, 'Aeropuerto', 'Terminal Ómnibus', 9, 22500.00, 'Jtr9ja', '2019-06-20 21:45:11', '2019-07-16', '2019-07-25', '13:30:00', '23:50:00', 'Acordamos 20.000$ por esta categoría  y esperamos poder cambiar a categoría más económica si hay disponibilidad ', '', '', '', '', '2019-07-16 15:00:00', '2019-07-25 15:00:00', '', '', 2, 1),
+(1149, 'Elisa salzmann', 'elisasalzmann@gmail.com', '1159298157', 2, 'Aeropuerto', 'Terminal Ómnibus', 9, 22500.00, 'Jtr9ja', '2019-06-12 01:53:17', '2019-07-16', '2019-07-25', '13:30:00', '23:50:00', 'Acordamos 20.000$ por esta categoría  y esperamos poder cambiar a categoría más económica si hay disponibilidad ', '', '', '', '', '2019-07-16 15:00:00', '2019-07-25 15:00:00', '', '', 1, 1),
+(1150, 'Damian Nehuen Adam', 'adandamian@gmail.com', '1530891068', 0, 'Aeropuerto', 'Aeropuerto', 9, 18000.00, 'LATAM 7760', '2019-06-12 17:39:54', '2019-07-05', '2019-07-14', '10:30:00', '10:00:00', '', '', '', '', '', '2019-07-05 15:00:00', '2019-07-14 15:00:00', '', '', 1, 1),
+(1151, 'Leandro Bongiovanni', 'leandro.bongiovanni@aerolineas.com.ar', '1169339007', 3, 'Aeropuerto', 'Aeropuerto', 11, 33500.00, 'ar1668', '2019-06-13 14:25:42', '2019-08-09', '2019-08-20', '11:00:00', '12:00:00', 'Favor informar cotización con retiro y devolución en el aeropuerto. Y se solicita de ser posible dos soportes de tabla de snowboard.\r\nDesde ya muchas gracias.', '', 'Cadenas para nieve', '', '', '2019-08-09 15:00:00', '2019-08-20 15:00:00', '', '', 1, 1),
+(1152, 'Andrea Paula Kobilsky', 'akobilsky@hotmail.com', '011 15 6 3703910', 1, 'Aeropuerto', 'Aeropuerto', 8, 18100.00, 'DN6000', '2019-06-13 16:46:05', '2019-07-20', '2019-07-28', '15:00:00', '15:00:00', '', '', 'Cadenas para nieve', '', '', '2019-07-20 15:00:00', '2019-07-28 15:00:00', '', '', 1, 1),
+(1153, 'Fernando Gabriel Gómez ', 'fernandodoc84@gmail.com ', '0111564259163', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'No realice el cheq in ', '2019-06-13 17:17:03', '2019-06-19', '2019-06-23', '20:00:00', '08:30:00', '', '', '', '', '', '2019-06-19 15:00:00', '2019-06-23 15:00:00', '', '', 1, 1),
+(1154, 'Daniel Alexander Finder', 'danielfinder@gmail.com', '01168591868', 1, 'Aeropuerto', 'Aeropuerto', 8, 18100.00, 'LA7780', '2019-06-14 17:02:50', '2019-07-20', '2019-07-28', '16:30:00', '15:00:00', '', '', 'Cadenas para nieve', '', '', '2019-07-20 15:00:00', '2019-07-28 15:00:00', '', '', 1, 1),
+(1155, 'Gisela Candedo', 'gicandedo@gmail.com', '1133033122', 2, 'Aeropuerto', 'Aeropuerto', 5, 12500.00, 'AR1694', '2019-06-15 14:58:53', '2019-08-09', '2019-08-14', '12:30:00', '19:00:00', 'Preferentemente VW Suran. ', '', '', '', '', '2019-08-09 15:00:00', '2019-08-14 15:00:00', '', '', 1, 1),
+(1156, 'Alexis (torres)', 'no', '3413230316', 0, 'Aeropuerto', 'Aeropuerto', 5, 10000.00, 'Ni', '2019-06-16 18:09:32', '2019-07-15', '2019-07-20', '09:00:00', '15:00:00', '', '', '', '', '', '2019-07-15 15:00:00', '2019-07-20 15:00:00', '', '', 1, 1),
+(1157, 'Marcela Cherasco', 'marcelacherasco@hotmail.com', '1149476042', 2, 'Aeropuerto', 'Aeropuerto', 8, 20000.00, 'La 7764', '2019-06-17 17:19:49', '2019-07-25', '2019-08-02', '11:00:00', '15:00:00', '', '', '', '', '', '2019-07-25 15:00:00', '2019-08-02 15:00:00', '', '', 1, 1),
+(1158, 'Mario Sanguinetti', 'mario.sanguinetti@gmail.com', '5491140459676', 1, 'Centro Bariloche', 'Aeropuerto', 3, 6600.00, 'AR1364', '2019-06-18 12:57:14', '2019-07-30', '2019-08-02', '19:00:00', '19:00:00', 'Por favor confirmar condicion de kilometraje y entrega de tanque de combustible.', '', '', '', '', '2019-07-30 15:00:00', '2019-08-02 15:00:00', '', '', 1, 1),
+(1159, 'Jimena ', 'no', '1111', 1, 'Terminal Ómnibus', 'Terminal Ómnibus', 7, 15400.00, 'Ni', '2019-06-18 13:30:04', '2019-07-13', '2019-07-20', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-13 15:00:00', '2019-07-20 15:00:00', '', '', 2, 1),
+(1160, 'Hernan', 'hciocca@argensun.com.ar', '1', 1, 'Aeropuerto', 'Aeropuerto', 6, 13200.00, 'LA7762', '2019-06-18 15:30:38', '2019-07-10', '2019-07-16', '11:00:00', '15:15:00', 'De las opciones B, opto por la Sandero.\r\nConfirmar si tiene rodado para nieve (no cadena) o que vehículo tiene cubiertas con mejor agarre. Gracias\r\nPD: no me deja ingresar teléfono el sistema', '', '', '', '', '2019-07-10 15:00:00', '2019-07-16 15:00:00', '', '', 1, 1),
+(1161, 'Mariano perkins', 'marianojoseperkins@gmail.com', '0111527921032', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, '', '2019-06-18 23:15:54', '2019-08-09', '2019-08-12', '11:00:00', '21:00:00', '', '', '', '', '', '2019-08-09 15:00:00', '2019-08-12 15:00:00', '', '', 1, 1),
+(1162, 'Rodrigo tomas garcia', 'rodrii.garcia@yahoo.com.ar', '1159264696', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, '', '2019-06-19 00:09:34', '2019-07-04', '2019-07-08', '10:00:00', '18:00:00', '', '', '', '', '', '2019-07-04 15:00:00', '2019-07-08 15:00:00', '', '', 1, 1),
+(1163, 'Alejandra Vilchez', 'raffisalinas@hotmail.com', '3515573020', 0, 'Aeropuerto', 'Aeropuerto', 8, 16000.00, '', '2019-06-24 12:57:37', '2019-07-13', '2019-07-21', '15:00:00', '15:00:00', 'Cantidad Familia tipo', '', '', '', '', '2019-07-13 15:00:00', '2019-07-21 15:00:00', '', '', 2, 1),
+(1164, 'Carlos lavallaz', 'no', '11111', 1, 'Aeropuerto', 'Aeropuerto', 9, 19800.00, 'Si', '2019-06-21 21:21:56', '2019-07-19', '2019-07-28', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-19 15:00:00', '2019-07-28 15:00:00', '', '', 1, 1),
+(1165, 'Sebastian Díaz (papá)', 'no', '3424662987', 1, 'Aeropuerto', 'Terminal Ómnibus', 4, 8800.00, 'No', '2019-06-21 21:26:21', '2019-08-03', '2019-08-07', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-03 15:00:00', '2019-08-07 15:00:00', '', '', 1, 1),
+(1166, 'Francisco Morea (papa)', 'no', '1111', 0, 'Aeropuerto', 'Aeropuerto', 9, 18000.00, 'Ar1696', '2019-06-21 21:50:46', '2019-08-23', '2019-09-01', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-23 15:00:00', '2019-09-01 15:00:00', '', '', 1, 1),
+(1167, 'damian aerolineas (ali)', 'patagoniaaustralrentacar', '1168507111', 0, 'Aeropuerto', 'Aeropuerto', 7, 14000.00, 'ar1872', '2019-06-22 21:55:35', '2019-06-30', '2019-07-07', '15:00:00', '15:00:00', '13,300 total', '', '', '', '', '2019-06-30 15:00:00', '2019-07-07 15:00:00', '', '', 1, 1),
+(1168, 'veronica watanabe', 'veronicawatanabe@gmail.com', '1530403754', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'LA7772', '2019-06-26 21:00:06', '2019-07-09', '2019-07-12', '16:30:00', '17:00:00', '', '', '', '', '', '2019-07-09 15:00:00', '2019-07-12 15:00:00', '', '', 2, 1),
+(1169, 'carly (alina)', 'patagoniaaustralrentacar@hotmail.com ', '18056709514', 0, 'Aeropuerto', 'Aeropuerto', 10, 20000.00, 'ar 1692', '2019-06-28 19:28:31', '2019-07-08', '2019-07-18', '15:00:00', '15:00:00', '470 dolars', '', '', '', '', '2019-07-08 15:00:00', '2019-07-18 15:00:00', '', '', 1, 1),
+(1170, 'CECILIA VILLAMIL', 'ceciliavillamil@yahoo.com', '59899218040', 1, 'Aeropuerto', 'Aeropuerto', 10, 22500.00, 'AR1696', '2019-06-29 19:47:35', '2019-08-02', '2019-08-12', '18:00:00', '09:30:00', 'Ya quedo hablado con Daniel, retiramos el 2/8/2019 en aeropuerto llega el vuelo 17.20 por eso estime a las 18 recoger el VW Voyage con baul sedan. La silla es para una niña de 3 años y vamos a manejar mi esposo o yo. El seguro es total riesgo verdad?  Mi marido es Gustavo GARCIA IBAÑEZ. Gracias! Saludos desde Uruguay', 'Silla Bebé', '', '', '', '2019-08-02 15:00:00', '2019-08-12 15:00:00', '', '', 1, 1),
+(1171, 'martin cordini', 'jorstratta@hotmail.com', '3425343780', 0, 'Aeropuerto', 'Aeropuerto', 5, 10000.00, ' WJ- 3186', '2019-06-29 23:30:53', '2019-07-08', '2019-07-13', '17:00:00', '07:30:00', '', '', '', '', '', '2019-07-08 15:00:00', '2019-07-13 15:00:00', '', '', 1, 1),
+(1172, 'EDGARDO JOSE FILIPPI', 'ejfilippi@gmail.com', '3426120141', 0, 'Aeropuerto', 'Aeropuerto', 5, 10000.00, 'WJ- 3186', '2019-06-29 23:35:48', '2019-07-08', '2019-07-13', '17:00:00', '07:30:00', '', '', '', '', '', '2019-07-08 15:00:00', '2019-07-13 15:00:00', '', '', 1, 1),
+(1173, 'Fernando Russo', 'fernando_ross@hotmail.com ', '03484580402', 0, 'Aeropuerto', 'Aeropuerto', 6, 12000.00, 'LA-7760', '2019-06-30 01:52:49', '2019-08-30', '2019-09-05', '10:00:00', '14:30:00', 'Por favor enviar confirmacion de reserva. \r\nMuchas Gracias. ', '', '', '', '', '2019-08-30 15:00:00', '2019-09-05 15:00:00', '', '', 1, 1),
+(1174, 'David josue villagra', 'villagra.david@hotmail.com', '1162061974', 1, 'Aeropuerto', 'Centro Bariloche', 3, 6600.00, '0862', '2019-06-30 21:34:09', '2019-07-06', '2019-07-09', '09:30:00', '23:00:00', '', '', '', '', '', '2019-07-06 15:00:00', '2019-07-09 15:00:00', '', '', 1, 1),
+(1175, 'daniel nestor cornaglia', 'daniel.cornaglia@aerolineas.com.ar', '1168289950', 1, 'Aeropuerto', 'Aeropuerto', 3, 6600.00, 'ar1672', '2019-07-02 04:03:32', '2019-07-02', '2019-07-05', '15:00:00', '15:00:00', 'hola te habia hablado antes soy amigo de piu de LAN , no tendras algo de cat A somos dos pax , sino no hay drama', '', '', '', '', '2019-07-02 15:00:00', '2019-07-05 15:00:00', '', '', 2, 1),
+(1176, 'ronaldo sarmento', 'rsjunior2904@hotmail.com', '5582999820586', 3, 'Aeropuerto', 'Aeropuerto', 7, 28000.00, '', '2019-08-10 19:04:23', '2019-08-17', '2019-08-24', '15:00:00', '15:00:00', 'hola, gostaria de 5 autos categoria d para essa fecha.\r\nsebastian quem indicou vocês.\r\nobrigado', '', '', '', '', '2019-08-17 15:00:00', '2019-08-24 15:00:00', '', '', 2, 1),
+(1177, 'Seba 1', 'no', '11', 2, 'Terminal Ómnibus', 'Terminal Ómnibus', 7, 17500.00, 'No', '2019-07-05 13:11:11', '2019-08-17', '2019-08-24', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-17 15:00:00', '2019-08-24 15:00:00', '', '', 2, 1),
+(1178, 'Seba 2', 'no', '111', 2, 'Terminal Ómnibus', 'Terminal Ómnibus', 7, 17500.00, 'Ni', '2019-07-05 13:11:59', '2019-08-17', '2019-08-24', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-17 15:00:00', '2019-08-24 15:00:00', '', '', 2, 1),
+(1179, 'Seba 3', 'no', '111', 2, 'Terminal Ómnibus', 'Terminal Ómnibus', 7, 17500.00, 'Ni', '2019-07-05 13:12:23', '2019-08-17', '2019-08-24', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-17 15:00:00', '2019-08-24 15:00:00', '', '', 2, 1),
+(1180, 'Seba 4', 'noni', '111', 1, 'Terminal Ómnibus', 'Terminal Ómnibus', 7, 15400.00, 'Ni', '2019-07-05 13:12:55', '2019-08-17', '2019-08-24', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-17 15:00:00', '2019-08-24 15:00:00', '', '', 2, 1),
+(1181, 'Bernardo Agustín Font', 'bernardoafont@gmail.com', '1140782888', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'FO 5270', '2019-07-02 01:08:43', '2019-08-29', '2019-09-02', '21:00:00', '20:00:00', '', '', '', '', '', '2019-08-29 15:00:00', '2019-09-02 15:00:00', '', '', 1, 1),
+(1182, 'Carla Sofia Ponce', 'carlasofiaponce@gmail.com', '2616865671', 0, 'Centro Bariloche', 'Aeropuerto', 5, 10000.00, 'AR1910', '2019-07-02 03:02:28', '2019-07-02', '2019-07-07', '12:00:00', '12:00:00', '', '', '', '', '', '2019-07-02 15:00:00', '2019-07-07 15:00:00', '', '', 1, 1),
+(1183, 'Daniel cornaglia', 'no', '1168289950', 1, 'Aeropuerto', 'Aeropuerto', 3, 6600.00, 'Ar 1672', '2019-07-02 04:01:48', '2019-07-06', '2019-07-09', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-06 15:00:00', '2019-07-09 15:00:00', '', '', 1, 1),
+(1184, 'CALDERA FERNANDO JAVIER', 'fernando.caldera@latam.com      maruariel@hotmail.', '1159399184', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'LA7766 ARRIBO 12.12HS APR', '2019-07-17 02:53:59', '2019-07-19', '2019-07-22', '15:00:00', '15:00:00', 'De ser posible solicitaria el vehiculo CREVROLET ONIX.\r\nGracias', '', '', '', '', '2019-07-19 15:00:00', '2019-07-22 15:00:00', '', '', 2, 1),
+(1185, 'ALEJANDRO MANUEL ALVAREDO', 'gonzalezhaneck@hotmail.com', '1137749066', 2, 'Aeropuerto', 'Aeropuerto', 3, 7500.00, 'LAN 7782', '2019-07-02 17:31:40', '2019-07-07', '2019-07-10', '02:40:00', '12:00:00', 'SI NO SE PUEDE ENTREGAR FORMALMENTE DEJAR EL VEHÍCULO ', '', '', '', '', '2019-07-07 15:00:00', '2019-07-10 15:00:00', '', '', 1, 1),
+(1186, 'Nestor Favio Huallpa Porcel', 'huallpa.nestor@gmail.com', '1531377731', 1, 'Terminal Ómnibus', 'Aeropuerto', 7, 16400.00, 'LA7774', '2019-07-02 19:46:10', '2019-07-06', '2019-07-13', '22:45:00', '15:00:00', 'Hora de llegada estimadoa al aeropuerte 22:25. ', 'Silla Bebé', 'Cadenas para nieve', '', '', '2019-07-06 15:00:00', '2019-07-13 15:00:00', '', '', 1, 1),
+(1187, 'alicia vandecaveye', 'alicedesing@hotmail.com', '1155929734', 0, 'Aeropuerto', 'Aeropuerto', 7, 14000.00, 'latam 7782', '2019-07-03 16:09:27', '2019-07-14', '2019-07-21', '02:40:00', '15:00:00', '', '', '', '', '', '2019-07-14 15:00:00', '2019-07-21 15:00:00', '', '', 1, 1);
+INSERT INTO `reservas` (`id_reserva`, `nombre`, `email`, `tel`, `vehiculo`, `retiro`, `devolucion`, `cantidad_dias`, `total_a_pagar`, `vuelo`, `fecha_ingreso_reserva`, `fdesde`, `fhasta`, `hdesde`, `hhasta`, `observacion`, `silla`, `cadenas`, `equipaje`, `buster`, `start`, `end`, `patente`, `color`, `estado`, `origen`) VALUES
+(1188, 'daniel ferrari', 'danielferrari@servi-master.com', '3416648011', 2, 'Aeropuerto', 'Aeropuerto', 7, 17500.00, 'ar 1666 ezeiza', '2019-07-03 17:51:47', '2019-07-05', '2019-07-12', '15:25:00', '15:00:00', '', '', '', '', '', '2019-07-05 15:00:00', '2019-07-12 15:00:00', '', '', 1, 1),
+(1189, 'Gerardo Fabián Stivanello', 'florenciadetona.fd@gmail.com', '03454044442', 1, 'Aeropuerto', 'Aeropuerto', 12, 26400.00, '7778', '2019-07-04 16:08:50', '2019-07-07', '2019-07-19', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-07 15:00:00', '2019-07-19 15:00:00', '', '', 1, 1),
+(1190, 'Julian', 'no', '1150643533', 1, 'Aeropuerto', 'Aeropuerto', 4, 8800.00, 'Ar1666', '2019-07-04 18:52:07', '2019-07-05', '2019-07-09', '15:20:00', '15:00:00', '', '', '', '', '', '2019-07-05 15:00:00', '2019-07-09 15:00:00', '', '', 1, 1),
+(1191, 'Max Gordon', 'no', '3541570534', 3, 'Aeropuerto', 'Aeropuerto', 3, 12000.00, '', '2019-07-04 19:22:57', '2019-08-30', '2019-09-02', '15:00:00', '15:00:00', 'Hasta el 1 es la reserva por $6000 total', '', '', '', '', '2019-08-30 15:00:00', '2019-09-02 15:00:00', '', '', 1, 1),
+(1192, 'oscar fernandez', 'gonzalezhaneck@hotmail.com', '1130565982', 1, 'Aeropuerto', 'Aeropuerto', 4, 8800.00, '', '2019-07-05 12:49:37', '2019-08-02', '2019-08-06', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-02 15:00:00', '2019-08-06 15:00:00', '', '', 1, 1),
+(1193, 'hernan sportiuk', 'gonzalezhaneck@hotmail.com', '2944587003', 4, 'Terminal Ómnibus', 'Terminal Ómnibus', 6, 36000.00, '', '2019-08-16 16:10:58', '2019-09-24', '2019-09-30', '15:00:00', '15:00:00', '', '', '', '', '', '2019-09-24 15:00:00', '2019-09-30 15:00:00', '', '', 2, 1),
+(1194, 'hernan sportiuck', 'gonzalezhaneck@hotmail.com', '2944587003', 3, 'Terminal Ómnibus', 'Terminal Ómnibus', 6, 24000.00, '', '2019-08-16 16:12:25', '2019-09-24', '2019-09-30', '15:00:00', '15:00:00', '', '', '', '', '', '2019-09-24 15:00:00', '2019-09-30 15:00:00', '', '', 2, 1),
+(1195, 'hernan sportiuck', 'gonzalezhaneck@hotmail.com', '2944587003', 3, 'Terminal Ómnibus', 'Terminal Ómnibus', 6, 24000.00, '', '2019-08-16 16:11:56', '2019-09-24', '2019-09-30', '15:00:00', '15:00:00', '', '', '', '', '', '2019-09-24 15:00:00', '2019-09-30 15:00:00', '', '', 2, 1),
+(1196, 'hernan sportiuck', 'gonzalezhaneck@hotmail.com', '2944587003', 2, 'Terminal Ómnibus', 'Terminal Ómnibus', 6, 15000.00, '', '2019-08-16 16:11:25', '2019-09-24', '2019-09-30', '15:00:00', '15:00:00', '', '', '', '', '', '2019-09-24 15:00:00', '2019-09-30 15:00:00', '', '', 2, 1),
+(1197, 'hernan sportiuck', 'gonzalezhaneck@hotmail.com', '2944587003', 2, 'Terminal Ómnibus', 'Terminal Ómnibus', 6, 15000.00, '', '2019-08-16 16:10:31', '2019-09-24', '2019-09-30', '15:00:00', '15:00:00', '', '', '', '', '', '2019-09-24 15:00:00', '2019-09-30 15:00:00', '', '', 2, 1),
+(1198, 'Jorge Fernando Vols', 'no', '2615682931', 1, 'Centro Bariloche', 'Aeropuerto', 4, 8800.00, 'No', '2019-07-05 16:54:02', '2019-07-06', '2019-07-10', '10:00:00', '08:00:00', '', '', '', '', '', '2019-07-06 15:00:00', '2019-07-10 15:00:00', '', '', 1, 1),
+(1199, 'Elias Ricardo Maria Gaviña Alvarado', 'egavina@gmail.com', '0111533228838', 0, 'Aeropuerto', 'Aeropuerto', 7, 14500.00, 'LA7791', '2019-08-01 00:32:46', '2019-08-10', '2019-08-17', '12:30:00', '18:00:00', 'VW GOL', '', 'Cadenas para nieve', '', '', '2019-08-10 15:00:00', '2019-08-17 15:00:00', '', '', 2, 1),
+(1200, 'francesca', 'gonzalezhaneck@hotmail.com', '3174035101', 1, 'Aeropuerto', 'Centro Bariloche', 3, 6600.00, '7764 latam 12 hs', '2019-07-05 18:42:51', '2019-07-08', '2019-07-11', '12:00:00', '19:00:00', 'son 2 días $ 2500 x día\r\nentrega en aeropuerto,recepción en hotel', '', '', '', '', '2019-07-08 15:00:00', '2019-07-11 15:00:00', '', '', 1, 1),
+(1201, '', '', '', 0, '', '', 0, 0.00, '', '2019-07-06 01:13:01', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 1, 1),
+(1202, 'Melisa Rita colome (Ali)', 'no', '3512365691', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'No', '2019-07-06 01:38:05', '2019-07-13', '2019-07-16', '09:00:00', '15:00:00', 'Bareko hotel gallardo 362\r\n13,14 y 15 $6000 total\r\n', '', '', '', '', '2019-07-13 15:00:00', '2019-07-16 15:00:00', '', '', 1, 1),
+(1203, 'Ariel salas', 'no', '1140510333', 1, 'Aeropuerto', 'Aeropuerto', 9, 20600.00, 'Wj3182', '2019-07-06 01:44:54', '2019-08-09', '2019-08-18', '07:00:00', '15:00:00', '$2000 por dia', 'Silla Bebé', '', '', 'Buster', '2019-08-09 15:00:00', '2019-08-18 15:00:00', '', '', 1, 1),
+(1204, 'Ariel salas 2', 'no', '1111', 1, 'Aeropuerto', 'Aeropuerto', 9, 20100.00, 'Ni', '2019-07-06 01:46:58', '2019-08-09', '2019-08-18', '07:00:00', '15:00:00', '$2000 por día más Buster', '', '', '', 'Buster', '2019-08-09 15:00:00', '2019-08-18 15:00:00', '', '', 1, 1),
+(1205, 'Elio', 'no', '2214986195', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'Fo5238', '2019-07-06 14:04:31', '2019-07-09', '2019-07-12', '08:20:00', '15:00:00', '', '', '', '', '', '2019-07-09 15:00:00', '2019-07-12 15:00:00', '', '', 1, 1),
+(1206, 'Diego chiani', 'no', '3426114859', 1, 'Centro Bariloche', 'Centro Bariloche', 3, 6600.00, 'No', '2019-07-06 18:08:59', '2019-07-08', '2019-07-11', '09:00:00', '15:00:00', '337 Albarracín', '', '', '', '', '2019-07-08 15:00:00', '2019-07-11 15:00:00', '', '', 1, 1),
+(1207, 'Jime', 'no', '111', 0, 'Terminal Ómnibus', 'Terminal Ómnibus', 3, 6000.00, 'Ni', '2019-07-07 12:01:52', '2019-07-08', '2019-07-11', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-08 15:00:00', '2019-07-11 15:00:00', '', '', 1, 1),
+(1208, 'Alfredo neggri', 'no', '1144384442', 2, 'Aeropuerto', 'Aeropuerto', 7, 12000.00, 'Ni', '2019-07-07 19:43:22', '2019-09-11', '2019-09-18', '15:00:00', '15:00:00', '$16mil total', '', '', '', '', '2019-09-11 15:00:00', '2019-09-18 15:00:00', '', '', 1, 1),
+(1209, 'Alfredo neggri', 'no', '1144384442', 2, 'Aeropuerto', 'Aeropuerto', 7, 12000.00, 'Ni', '2019-07-07 19:45:38', '2019-09-11', '2019-09-18', '15:00:00', '15:00:00', '$16mil total', '', '', '', '', '2019-09-11 15:00:00', '2019-09-18 15:00:00', '', '', 2, 1),
+(1210, 'Alfredo neggri', 'no', '1144384442', 2, 'Aeropuerto', 'Aeropuerto', 7, 12000.00, 'Ni', '2019-07-07 19:44:49', '2019-09-11', '2019-09-18', '15:00:00', '15:00:00', '$16mil total', '', '', '', '', '2019-09-11 15:00:00', '2019-09-18 15:00:00', '', '', 2, 1),
+(1211, 'Alfredo neggri', 'no', '1144384442', 2, 'Aeropuerto', 'Aeropuerto', 7, 12000.00, 'Ni', '2019-07-07 19:45:18', '2019-09-11', '2019-09-18', '15:00:00', '15:00:00', '$16mil total', '', '', '', '', '2019-09-11 15:00:00', '2019-09-18 15:00:00', '', '', 2, 1),
+(1212, '', '', '', 0, '', '', 0, 0.00, '', '2019-07-08 11:31:40', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 1, 1),
+(1213, 'Mariano Ferreyra', 'mar.ferreyra90@hotmail.com', '01136106345', 0, 'Centro Bariloche', 'Centro Bariloche', 5, 10500.00, '', '2019-07-08 15:04:16', '2019-08-17', '2019-08-22', '22:30:00', '22:30:00', 'Me gustaria saber si es posible retirar y entregar en el lugar de hospedaje', '', 'Cadenas para nieve', '', '', '2019-08-17 15:00:00', '2019-08-22 15:00:00', '', '', 1, 1),
+(1214, 'Oscar Rodríguez', 'no', '1154888612', 1, 'Aeropuerto', 'Aeropuerto', 4, 8800.00, 'Ar1872', '2019-07-08 15:47:06', '2019-07-11', '2019-07-15', '13:15:00', '15:00:00', '', '', '', '', '', '2019-07-11 15:00:00', '2019-07-15 15:00:00', '', '', 1, 1),
+(1215, 'Noel de Araujo', 'noel-leon@hotmail.com', '61992759899', 0, 'Centro Bariloche', 'Centro Bariloche', 3, 6000.00, '', '2019-07-14 22:12:03', '2019-07-17', '2019-07-20', '08:01:00', '19:00:00', 'Vou estar hospedado na San Martin número 8400', '', '', '', '', '2019-07-17 15:00:00', '2019-07-20 15:00:00', '', '', 2, 1),
+(1216, 'Noel de Araujo', 'noel-leon@hotmail.com', '61992759899', 0, 'Centro Bariloche', 'Centro Bariloche', 3, 6000.00, '', '2019-07-14 22:11:11', '2019-07-17', '2019-07-20', '08:01:00', '19:00:00', 'Vou estar hospedado na San Martin número 8400', '', '', '', '', '2019-07-17 15:00:00', '2019-07-20 15:00:00', '', '', 2, 1),
+(1217, 'Noel de Araujo', 'noel-leon@hotmail.com', '61992759899', 0, 'Centro Bariloche', 'Centro Bariloche', 3, 6000.00, '', '2019-07-08 19:32:56', '2019-07-17', '2019-07-20', '08:01:00', '19:00:00', 'Vou estar hospedado na San Martin número 8400', '', '', '', '', '2019-07-17 15:00:00', '2019-07-20 15:00:00', '', '', 1, 1),
+(1218, 'Noel de Araujo', 'noel-leon@hotmail.com', '61992759899', 0, 'Centro Bariloche', 'Centro Bariloche', 3, 6000.00, '', '2019-07-08 19:42:46', '2019-07-17', '2019-07-20', '08:01:00', '19:00:00', 'Vou estar hospedado na San Martin número 8400', '', '', '', '', '2019-07-17 15:00:00', '2019-07-20 15:00:00', '', '', 2, 1),
+(1219, 'Jime 2', 'no', '1111', 0, 'Terminal Ómnibus', 'Terminal Ómnibus', 8, 16000.00, '111', '2019-07-09 17:58:50', '2019-07-26', '2019-08-03', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-26 15:00:00', '2019-08-03 15:00:00', '', '', 2, 1),
+(1220, 'Santiago Despontin', 'santiagodespontin@gmail.com', '1136865449', 2, 'Aeropuerto', 'Aeropuerto', 8, 20000.00, 'ar1682', '2019-07-09 04:47:32', '2019-07-15', '2019-07-23', '11:00:00', '12:30:00', '', '', '', '', '', '2019-07-15 15:00:00', '2019-07-23 15:00:00', '', '', 1, 1),
+(1221, 'diego Ramírez (ali)', 'patagoniaaustralrentacar@hotmail.com ', '1168682197', 0, 'Aeropuerto', 'Aeropuerto', 8, 16000.00, '1111', '2019-07-09 20:06:25', '2019-07-26', '2019-08-03', '15:00:00', '15:00:00', '2 autos (el otro es corss de facu alpha)\r\nLa semana esta $15.485 con 1400kms cada uno', '', '', '', '', '2019-07-26 15:00:00', '2019-08-03 15:00:00', '', '', 1, 1),
+(1222, 'Carlos conde', 'carloschacarita51@gmail.com', '1161728298', 0, 'Aeropuerto', 'Aeropuerto', 6, 12500.00, '7764', '2019-07-19 00:29:06', '2019-08-04', '2019-08-10', '10:30:00', '07:30:00', 'Forma de pago', '', 'Cadenas para nieve', '', '', '2019-08-04 15:00:00', '2019-08-10 15:00:00', '', '', 2, 1),
+(1223, 'Ruben Javier Nuñez', 'nunezjav@hotmail.com', '1140474511', 0, 'Aeropuerto', 'Aeropuerto', 5, 10000.00, '', '2019-07-10 03:06:43', '2019-07-21', '2019-07-26', '03:30:00', '18:30:00', 'Buen dia quiero saber precio final del auto mas económico con el mejor seguro con la menor franquicia. para alquilar desde el domingo 21/7 a las 3.30 hs de la mañana en aeropuerto Bariloche hasta el viernes 26/7 18.30 hs devolución en mismo lugar. \r\nGracias. saludos. ', '', '', '', '', '2019-07-21 15:00:00', '2019-07-26 15:00:00', '', '', 1, 1),
+(1224, 'Carlos Barbieri', 'carlosgbarbieri@gmail.com ', '1140439400', 0, 'Aeropuerto', 'Aeropuerto', 6, 12000.00, '6000', '2019-07-10 17:06:25', '2019-09-02', '2019-09-08', '13:30:00', '12:02:00', '', '', '', '', '', '2019-09-02 15:00:00', '2019-09-08 15:00:00', '', '', 1, 1),
+(1225, 'Narvaes Bruno', 'no', '1111', 1, 'Aeropuerto', 'Aeropuerto', 6, 13200.00, 'Ar1692', '2019-07-10 18:23:07', '2019-07-10', '2019-07-16', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-10 15:00:00', '2019-07-16 15:00:00', '', '', 2, 1),
+(1226, 'Narvaes Bruno', 'no', '1111', 1, 'Aeropuerto', 'Aeropuerto', 6, 13200.00, 'Ar1692', '2019-07-10 18:02:05', '2019-07-10', '2019-07-16', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-10 15:00:00', '2019-07-16 15:00:00', '', '', 1, 1),
+(1227, 'Dany1', 'asaaa', '587003', 3, 'Terminal Ómnibus', 'Terminal Ómnibus', 5, 20000.00, 'Aaa', '2019-07-11 13:18:08', '2019-07-22', '2019-07-27', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-22 15:00:00', '2019-07-27 15:00:00', '', '', 2, 1),
+(1228, 'Dany 2', 'aaaaa', '587003', 3, 'Terminal Ómnibus', 'Terminal Ómnibus', 5, 20000.00, 'Aaaaa', '2019-07-11 13:18:34', '2019-07-22', '2019-07-27', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-22 15:00:00', '2019-07-27 15:00:00', '', '', 2, 1),
+(1229, 'Pedro Ariel Liesenfeld ', 'arielliesenfeld@hotmail.com', '3516576780', 3, 'Aeropuerto', 'Aeropuerto', 4, 16000.00, '', '2019-07-12 15:09:25', '2019-07-14', '2019-07-18', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-14 15:00:00', '2019-07-18 15:00:00', '', '', 2, 1),
+(1230, 'Max manceda', 'no', '1111', 3, 'Aeropuerto', 'Aeropuerto', 5, 20000.00, 'Ni', '2019-07-11 23:58:03', '2019-07-11', '2019-07-16', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-11 15:00:00', '2019-07-16 15:00:00', '', '', 1, 1),
+(1231, 'Leonardo ishizuka', 'leoishizuka@hotmail.com', '5511983529882', 3, 'Aeropuerto', 'Aeropuerto', 6, 24000.00, 'AR1692 ', '2019-07-12 00:12:17', '2019-07-20', '2019-07-26', '21:20:00', '15:00:00', 'U$550 con CADENAS para nieve', '', '', '', '', '2019-07-20 15:00:00', '2019-07-26 15:00:00', '', '', 1, 1),
+(1232, 'juan bentin', 'gonzalezhaneck@hotmail.com', '1128231731', 3, 'Aeropuerto', 'Aeropuerto', 6, 24000.00, 'latam 7768', '2019-07-12 14:28:59', '2019-07-22', '2019-07-28', '15:00:00', '15:00:00', 'total a cobrar $ 22000', '', '', '', '', '2019-07-22 15:00:00', '2019-07-28 15:00:00', '', '', 1, 1),
+(1233, 'Alexander Fabricio Marcial', 'alexandermarcial44@hotmail.com', '1130008166', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, '1682', '2019-07-12 15:39:54', '2019-07-15', '2019-07-18', '11:00:00', '16:01:00', 'El valor de lo cotizado incluye el seguro??? Y que tipo de seguro cuenta? La recepción y la entrega en cuestión de combustible cómo se realiza??', '', '', '', '', '2019-07-15 15:00:00', '2019-07-18 15:00:00', '', '', 1, 1),
+(1234, 'Bruno primo', 'no', '1111', 5, 'Aeropuerto', 'Aeropuerto', 4, 16000.00, 'Ni', '2019-07-12 18:16:39', '2019-07-17', '2019-07-21', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-17 15:00:00', '2019-07-21 15:00:00', '', '', 1, 1),
+(1235, 'GUILLERMO HENNEKENS', 'gonzalezhaneck@hotmail.com', '3434551469', 0, 'Centro Bariloche', 'Centro Bariloche', 3, 6000.00, '0000', '2019-07-12 20:18:48', '2019-07-14', '2019-07-17', '15:00:00', '15:00:00', 'HOTEL  GRAN PANAMERICANO KM 20\r\nPOR LA MAÑANA  ', '', '', '', '', '2019-07-14 15:00:00', '2019-07-17 15:00:00', '', '', 1, 1),
+(1236, 'FRANCISCO OTTINO', 'gonzalezhaneck@hotmail.com', '1155254953', 1, 'Aeropuerto', 'Aeropuerto', 9, 19800.00, 'LAN 7764', '2019-07-12 20:30:09', '2019-08-11', '2019-08-20', '11:00:00', '23:00:00', '2 SILLITAS PARA BB\r\nCOBRAR $ 2000 POR DÍA EL ALQUILER\r\n', '', '', '', '', '2019-08-11 15:00:00', '2019-08-20 15:00:00', '', '', 1, 1),
+(1237, 'LUIS AMIGO DE MIGUEL SOSA', 'gonzalezhaneck@hotmail.com', '1155254953', 1, 'Aeropuerto', 'Aeropuerto', 7, 15400.00, 'AR LLEGA 1035HS', '2019-07-12 20:33:27', '2019-08-13', '2019-08-20', '10:30:00', '21:00:00', '2 BUSTERS\r\n TARIFA ACORDADA $ 2000 POR DÍA', '', '', '', '', '2019-08-13 15:00:00', '2019-08-20 15:00:00', '', '', 1, 1),
+(1238, 'MARCELO MIRANDA', 'gonzalezhaneck@hotmail.com', '5521991421862', 0, 'Aeropuerto', 'Aeropuerto', 8, 16000.00, 'AR 1698', '2019-07-12 20:37:05', '2019-08-18', '2019-08-26', '14:40:00', '13:00:00', 'TARIFA ACORDADA $ 1800 X DIA', '', '', '', '', '2019-08-18 15:00:00', '2019-08-26 15:00:00', '', '', 1, 1),
+(1239, 'MARCELO MIRANDA', 'gonzalezhaneck@hotmail.com', '5521991421862', 0, 'Aeropuerto', 'Aeropuerto', 8, 16000.00, 'AR 1698', '2019-07-12 20:39:18', '2019-08-18', '2019-08-26', '14:40:00', '13:00:00', 'TARIFA ACORDADA $ 1800', '', '', '', '', '2019-08-18 15:00:00', '2019-08-26 15:00:00', '', '', 1, 1),
+(1240, 'Matías Noreña 16/07', 'bi', '1111', 1, 'Aeropuerto', 'Aeropuerto', 3, 6600.00, 'No', '2019-07-13 21:28:24', '2019-07-15', '2019-07-18', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-15 15:00:00', '2019-07-18 15:00:00', '', '', 1, 1),
+(1241, 'Juan Manuel Trimarco ', 'jmtrimarco@gmail.com', '01150445185', 0, 'Aeropuerto', 'Aeropuerto', 9, 18500.00, '', '2019-07-14 14:29:49', '2019-08-27', '2019-09-05', '15:00:00', '15:00:00', '', '', 'Cadenas para nieve', '', '', '2019-08-27 15:00:00', '2019-09-05 15:00:00', '', '', 1, 1),
+(1242, 'Natalia gomez', 'gonzalezhaneck@hotmail.com', '1130952380', 0, 'Aeropuerto', 'Aeropuerto', 5, 10000.00, '', '2019-07-30 22:59:20', '2019-08-05', '2019-08-10', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-05 15:00:00', '2019-08-10 15:00:00', '', '', 2, 1),
+(1243, 'Silvia', 'gonzálezhaneck@hotmail.com', '1133600227', 0, 'Aeropuerto', 'Aeropuerto', 5, 10000.00, '', '2019-07-16 12:15:20', '2019-08-19', '2019-08-24', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-19 15:00:00', '2019-08-24 15:00:00', '', '', 1, 1),
+(1244, 'victoria chiavasco', 'victoria@ceciliatours.com.ar', '1159359528', 0, 'Centro Bariloche', 'Aeropuerto', 3, 6000.00, '', '2019-07-31 16:36:03', '2019-08-03', '2019-08-06', '12:00:00', '22:00:00', 'Atencion Daniel!\r\nla idea es retirarlo el 2 en el aeropuerto. llego vuelo  LA7762 ', '', '', '', '', '2019-08-03 15:00:00', '2019-08-06 15:00:00', '', '', 2, 1),
+(1245, 'Diego tislak', 'no', '1111', 3, 'Terminal Ómnibus', 'Terminal Ómnibus', 6, 24000.00, 'Nos', '2019-07-16 14:39:45', '2019-08-14', '2019-08-20', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-14 15:00:00', '2019-08-20 15:00:00', '', '', 1, 1),
+(1246, 'Lucas brosan (caro)', 'no', '1126500755', 0, 'Centro Bariloche', 'Terminal Ómnibus', 3, 6000.00, 'No', '2019-07-16 17:31:37', '2019-07-22', '2019-07-25', '15:00:00', '15:00:00', 'Albarracín 337, 07.30hs\r\n$6900 total', '', '', '', '', '2019-07-22 15:00:00', '2019-07-25 15:00:00', '', '', 1, 1),
+(1247, 'antonio eduardo sartori ', 'aesartor@ig.com.br', '11996223391', 0, 'Aeropuerto', 'Aeropuerto', 6, 12000.00, '8768', '2019-07-18 03:02:58', '2019-08-18', '2019-08-24', '18:00:00', '15:00:00', '', '', '', '', '', '2019-08-18 15:00:00', '2019-08-24 15:00:00', '', '', 2, 1),
+(1248, 'antonio eduardo sartori ', 'aesartor@ig.com.br', '11996223391', 0, 'Aeropuerto', 'Aeropuerto', 6, 12000.00, '8768', '2019-07-17 12:22:52', '2019-08-18', '2019-08-24', '18:00:00', '15:00:00', '', '', '', '', '', '2019-08-18 15:00:00', '2019-08-24 15:00:00', '', '', 1, 1),
+(1249, 'roxana hermana de paola', 'gonzalezhaneck@hotmail.com', '1132493463', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'wj 3192 del palomar a las', '2019-07-17 17:05:49', '2019-07-22', '2019-07-26', '22:40:00', '09:00:00', '', '', '', '', '', '2019-07-22 15:00:00', '2019-07-26 15:00:00', '', '', 1, 1),
+(1250, ' Katherine Manush', 'no', '1111', 0, 'Centro Bariloche', 'Terminal Ómnibus', 3, 6000.00, 'No', '2019-07-17 17:56:30', '2019-07-20', '2019-07-23', '15:00:00', '15:00:00', 'Tronador 4230', '', '', '', '', '2019-07-20 15:00:00', '2019-07-23 15:00:00', '', '', 1, 1),
+(1251, 'Lucas aguirrez', 'lucas@baquiano.biz ', '5491130590562', 1, 'Centro Bariloche', 'Centro Bariloche', 4, 8800.00, 'La778', '2019-07-18 16:57:03', '2019-07-18', '2019-07-22', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-18 15:00:00', '2019-07-22 15:00:00', '', '', 1, 1),
+(1252, 'Pablo oro', 'gonzalez haneck@hotmail.com', '1150497749', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'Latam 7780', '2019-07-19 00:23:35', '2019-07-27', '2019-07-31', '16:10:00', '15:00:00', '', '', '', '', '', '2019-07-27 15:00:00', '2019-07-31 15:00:00', '', '', 1, 1),
+(1253, 'Alejandro sarquis', 'gonzalezhaneck@hotmail.com', '1156910082', 0, 'Aeropuerto', 'Aeropuerto', 5, 10000.00, '', '2019-07-19 01:26:58', '2019-08-11', '2019-08-16', '13:30:00', '15:00:00', '', '', '', '', '', '2019-08-11 15:00:00', '2019-08-16 15:00:00', '', '', 1, 1),
+(1254, 'marcelo palamara', 'gonzalezhaneck@hotmail.com', '1159369135', 3, 'Aeropuerto', 'Aeropuerto', 7, 28000.00, '', '2019-07-19 16:16:25', '2019-08-05', '2019-08-12', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-05 15:00:00', '2019-08-12 15:00:00', '', '', 1, 1),
+(1255, 'Bruno jime', 'no', '11111', 5, 'Aeropuerto', 'Aeropuerto', 5, 20000.00, 'Si', '2019-07-19 16:38:17', '2019-07-24', '2019-07-29', '12:00:00', '15:00:00', '', '', '', '', '', '2019-07-24 15:00:00', '2019-07-29 15:00:00', '', '', 1, 1),
+(1256, 'Cristian ramos (caro 800)', 'no', '1162735905', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'WJ-3192', '2019-07-19 18:58:12', '2019-07-22', '2019-07-26', '00:00:00', '00:00:00', 'Cobrar 8800', '', '', '', '', '2019-07-22 15:00:00', '2019-07-26 15:00:00', '', '', 1, 1),
+(1257, 'Eulalio Coronado ', 'lalotepic@hotmail.de', '5491127040931', 0, 'Centro Bariloche', 'Aeropuerto', 4, 8500.00, 'Wj3175', '2019-07-22 00:18:24', '2019-07-22', '2019-07-26', '11:00:00', '16:00:00', 'Se debe dejar depósito extra ? ', '', 'Cadenas para nieve', '', '', '2019-07-22 15:00:00', '2019-07-26 15:00:00', '', '', 1, 1),
+(1258, 'Ricardo Ruben Morali', 'r_rmorali@hotmail.com', '5491160474119', 4, 'Aeropuerto', 'Aeropuerto', 5, 30500.00, 'LA7764', '2019-07-22 13:51:06', '2019-08-06', '2019-08-11', '11:00:00', '15:00:00', '', '', 'Cadenas para nieve', '', '', '2019-08-06 15:00:00', '2019-08-11 15:00:00', '', '', 1, 1),
+(1259, 'Vaggione Luis Mario', 'luis.vaggione@gmail.com', '3517012823', 3, 'Aeropuerto', 'Aeropuerto', 4, 16000.00, 'Ar1802', '2019-07-22 17:04:47', '2019-07-29', '2019-08-02', '14:50:00', '15:00:00', '', '', '', '', '', '2019-07-29 15:00:00', '2019-08-02 15:00:00', '', '', 1, 1),
+(1260, 'Luciano Monti', 'luciano.monti@wu.com', '1167524438', 0, 'Aeropuerto', 'Aeropuerto', 6, 12000.00, 'LA7772', '2019-07-23 15:38:30', '2019-08-07', '2019-08-13', '23:30:00', '09:30:00', '', '', '', '', '', '2019-08-07 15:00:00', '2019-08-13 15:00:00', '', '', 1, 1),
+(1261, 'Carolina Alexandra (caro)', 'no', '1155139622', 1, 'Aeropuerto', 'Aeropuerto', 7, 15400.00, 'Ni', '2019-07-23 19:31:26', '2019-08-19', '2019-08-26', '15:00:00', '15:00:00', '$17500 total precio caro comisión', '', '', '', '', '2019-08-19 15:00:00', '2019-08-26 15:00:00', '', '', 1, 1),
+(1262, 'Diego Rodríguez Abel (acrux)', 'no', '1111', 3, 'Centro Bariloche', 'Aeropuerto', 3, 12000.00, 'Cerro cate', '2019-08-08 18:05:22', '2019-08-10', '2019-08-13', '09:00:00', '15:00:00', 'Entrega cerro catedral 09hs cobrar $1000 dropoff', '', '', '', '', '2019-08-10 15:00:00', '2019-08-13 15:00:00', '', '', 2, 1),
+(1263, 'Escola Hugo omar', 'hugoescola@yahoo.com.ar', '1149734027', 4, 'Centro Bariloche', 'Centro Bariloche', 7, 23600.00, '', '2019-07-24 00:06:49', '2019-11-03', '2019-11-10', '15:00:00', '15:00:00', 'Vice almirante O Connor 930', '', '', '', '', '2019-11-03 15:00:00', '2019-11-10 15:00:00', '', '', 1, 1),
+(1264, 'Gaston Diaz', 'diazgaston@yahoo.com.ar ', '221155319746', 1, 'Aeropuerto', 'Aeropuerto', 4, 8800.00, 'LA7762', '2019-07-24 01:17:42', '2019-08-10', '2019-08-14', '09:00:00', '19:00:00', '', '', '', '', '', '2019-08-10 15:00:00', '2019-08-14 15:00:00', '', '', 1, 1),
+(1265, 'alfredo rosso', 'gonzalezhaneck@hotmail.com', '1167931451', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, '', '2019-07-24 14:17:32', '2019-07-28', '2019-07-31', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-28 15:00:00', '2019-07-31 15:00:00', '', '', 1, 1),
+(1266, 'maria virginia canepa', 'emprendimientosbelgrano@hotmail.com', '0221154637999', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'aerolineas  9.5 am', '2019-07-24 14:49:23', '2019-08-14', '2019-08-17', '09:00:00', '22:00:00', 'Vuelo de regreso 17 de agosto 23.30pm', '', '', '', '', '2019-08-14 15:00:00', '2019-08-17 15:00:00', '', '', 1, 1),
+(1267, 'Luz Starke Barrantes', 'luz_starke@hotmail.com', '50688438987', 0, 'Aeropuerto', 'Centro Bariloche', 3, 6500.00, 'LATAM 7774', '2019-07-25 14:15:13', '2019-08-20', '2019-08-23', '12:30:00', '08:00:00', 'Por Favor, Necesitamos Carro con GPS', '', 'Cadenas para nieve', '', '', '2019-08-20 15:00:00', '2019-08-23 15:00:00', '', '', 1, 1),
+(1268, 'Pilar trama', 'no', '1136445967', 1, 'Aeropuerto', 'Aeropuerto', 3, 6600.00, 'La 7780', '2019-07-26 14:44:23', '2019-08-16', '2019-08-19', '01:15:00', '15:00:00', 'Entrega madrugada del sábado 17/08 01.15hs', '', '', '', '', '2019-08-16 15:00:00', '2019-08-19 15:00:00', '', '', 1, 1),
+(1269, '', '', '', 0, '', '', 0, 0.00, '', '2019-07-26 20:12:06', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 1, 1),
+(1270, 'Juan Ignacio Konaszczuk', 'jikjuani@gmail.com', '5491133870843', 0, 'Aeropuerto', 'Aeropuerto', 6, 12000.00, 'LA7760', '2019-07-26 20:25:21', '2019-11-24', '2019-11-30', '11:00:00', '12:00:00', 'Precio acordado con Jimena: $11.000', '', '', '', '', '2019-11-24 15:00:00', '2019-11-30 15:00:00', '', '', 1, 1),
+(1271, 'Lu prima', 'no ', '111', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'Ni', '2019-07-27 19:38:42', '2019-08-09', '2019-08-12', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-09 15:00:00', '2019-08-12 15:00:00', '', '', 1, 1),
+(1272, 'Hernan alonso', 'gonzalezhaneck@hotmail.com', '1141876519', 0, 'Aeropuerto', 'Aeropuerto', 5, 10000.00, 'Latam', '2019-07-28 11:05:11', '2019-07-30', '2019-08-04', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-30 15:00:00', '2019-08-04 15:00:00', '', '', 1, 1),
+(1273, 'Pablo Lombi ', 'pablodlombi@gmail.com', '1141485997', 2, 'Aeropuerto', 'Aeropuerto', 5, 13000.00, '60bp12 fly bondi ', '2019-07-29 00:30:38', '2019-08-29', '2019-09-03', '20:00:00', '15:00:00', 'Hola porta equipaje tendrías.  Buster no sé qué es? \r\nY si podría ser la suran ya que somos 5 varones. ', '', 'Cadenas para nieve', '', '', '2019-08-29 15:00:00', '2019-09-03 15:00:00', '', '', 1, 1),
+(1274, 'Virginia mangano', 'no', '2216552911', 1, 'Aeropuerto', 'Aeropuerto', 5, 11000.00, 'La7772', '2019-07-29 18:34:06', '2019-08-16', '2019-08-21', '11:00:00', '15:00:00', '', '', '', '', '', '2019-08-16 15:00:00', '2019-08-21 15:00:00', '', '', 1, 1),
+(1275, 'Virginia mangano', 'no', '2216552911', 1, 'Aeropuerto', 'Aeropuerto', 5, 11000.00, 'La7772', '2019-08-10 18:50:40', '2019-08-16', '2019-08-21', '11:00:00', '15:00:00', '', '', '', '', '', '2019-08-16 15:00:00', '2019-08-21 15:00:00', '', '', 2, 1),
+(1276, 'Carlos macias', 'transportesmacias@hotmail.com', '116378909', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'Fly bondi', '2019-07-29 18:37:19', '2019-08-25', '2019-08-28', '18:30:00', '15:00:00', '', '', '', '', '', '2019-08-25 15:00:00', '2019-08-28 15:00:00', '', '', 1, 1),
+(1277, 'Darío golberg', 'petodario@hotmail.com', '1150566383', 2, 'Aeropuerto', 'Aeropuerto', 11, 300.00, 'Ar1698', '2019-07-29 20:10:36', '2020-02-04', '2020-02-15', '14:40:00', '15:00:00', 'Tarifa acordada $33mil total , 2 BUSTER', '', '', '', 'Buster', '2020-02-04 15:00:00', '2020-02-15 15:00:00', '', '', 1, 1),
+(1278, 'Bruno', 'no', '1111', 5, 'Aeropuerto', 'Aeropuerto', 7, 28000.00, 'Ni', '2019-07-30 23:07:09', '2019-07-31', '2019-08-07', '15:00:00', '15:00:00', '', '', '', '', '', '2019-07-31 15:00:00', '2019-08-07 15:00:00', '', '', 1, 1),
+(1279, 'Gustavo Fernandez ', 'gustavo@probopp.com.ar', '541161601400', 2, 'Aeropuerto', 'Terminal Ómnibus', 9, 22500.00, 'DN6000', '2019-07-31 00:25:15', '2019-08-18', '2019-08-27', '12:00:00', '12:00:00', 'Suran con Portaequipajes \r\nTarifa que acordamos $19mil', '', '', '', '', '2019-08-18 15:00:00', '2019-08-27 15:00:00', '', '', 1, 1),
+(1280, 'Betina 1', 'no', '1111', 2, 'Terminal Ómnibus', 'Terminal Ómnibus', 7, 17500.00, 'Ni', '2019-07-31 01:17:49', '2019-08-17', '2019-08-24', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-17 15:00:00', '2019-08-24 15:00:00', '', '', 1, 1),
+(1281, 'Betina 2', 'no ', '111111', 2, 'Terminal Ómnibus', 'Terminal Ómnibus', 7, 17500.00, 'Bi', '2019-07-31 01:18:57', '2019-08-17', '2019-08-24', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-17 15:00:00', '2019-08-24 15:00:00', '', '', 1, 1),
+(1282, 'Betina 3', 'no', '1111', 3, 'Terminal Ómnibus', 'Terminal Ómnibus', 7, 28000.00, 'Ni', '2019-07-31 01:19:56', '2019-08-17', '2019-08-24', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-17 15:00:00', '2019-08-24 15:00:00', '', '', 1, 1),
+(1283, 'Victoria Chiavasco', 'victoria@ceciliatours.com.ar', '1159359528', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'LA7762', '2019-07-31 16:32:45', '2019-08-02', '2019-08-06', '15:00:00', '23:00:00', '  LA7762 A 02AUG 5 AEPBRC HK3  1230 1452 \r\n  LA7781 A 07AUG 3 BRCAEP HK3  0037 0243  ', '', '', '', '', '2019-08-02 15:00:00', '2019-08-06 15:00:00', '', '', 1, 1),
+(1284, 'DAMIAN ALEJANDRO GONZALEZ', 'damian.gonzalez@', '1553137260', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'LA7762', '2019-08-01 05:08:52', '2019-08-08', '2019-08-12', '15:00:00', '15:00:00', 'Las cadenas te las puedo solicitar en el momento?el vuelo llegaria 9:40', '', '', '', '', '2019-08-08 15:00:00', '2019-08-12 15:00:00', '', '', 1, 1),
+(1285, 'Sol Morea papa', 'no', '11111', 1, 'Aeropuerto', 'Aeropuerto', 4, 8800.00, 'Ni', '2019-08-01 17:48:20', '2019-08-11', '2019-08-15', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-11 15:00:00', '2019-08-15 15:00:00', '', '', 1, 1),
+(1286, 'agustin cid', 'agustincid@hotmail.com', '1539504189', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'dn6006', '2019-08-01 18:39:32', '2019-08-05', '2019-08-08', '01:30:00', '23:50:00', 'hola buenos días, estaría necesitando alquilar un auto desde el día 5/8/19 y recibirlo en el aeropuerto de san carlos de bariloche, a la 1:30 de la madrugada y devolverlo el dia 8/8/19 a las 23:45 de la noche en el mismo aeropuerto pagaria de contado dependiendo el monto o con tarjeta de credito , me gustaria que la unidad sea el renault KWID', '', '', '', '', '2019-08-05 15:00:00', '2019-08-08 15:00:00', '', '', 1, 1),
+(1287, 'Hernán Antara papa', 'no', '111', 1, 'Aeropuerto', 'Aeropuerto', 4, 8800.00, 'Ni', '2019-08-04 19:14:18', '2019-08-05', '2019-08-09', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-05 15:00:00', '2019-08-09 15:00:00', '', '', 2, 1),
+(1288, 'Hernán Antara papa', 'no', '111', 1, 'Aeropuerto', 'Aeropuerto', 4, 8800.00, 'Ni', '2019-08-04 13:02:50', '2019-08-05', '2019-08-09', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-05 15:00:00', '2019-08-09 15:00:00', '', '', 1, 1),
+(1289, 'juan venecia', 'juanvenecia84@gmail.com', '3416111257', 3, 'Aeropuerto', 'Aeropuerto', 3, 12000.00, 'flybondi 0820 hs', '2019-08-05 17:47:04', '2019-08-08', '2019-08-11', '15:00:00', '15:00:00', 'total a aobrar $ 11.500', '', '', '', '', '2019-08-08 15:00:00', '2019-08-11 15:00:00', '', '', 1, 1),
+(1290, 'Guillermo Morea', 'guillemorea@hotmail.com ', '2215371821', 5, 'Aeropuerto', 'Aeropuerto', 7, 28800.00, '', '2019-09-17 15:32:17', '2019-09-29', '2019-10-06', '15:00:00', '13:00:00', '1 sillas y 2 buster ', 'Silla Bebé', '', '', 'Buster', '2019-09-29 15:00:00', '2019-10-06 15:00:00', '', '', 2, 1),
+(1291, 'daniel', 'atriptico@gmail.com', '1167541403', 0, 'Aeropuerto', 'Aeropuerto', 7, 14000.00, '', '2019-08-08 22:36:41', '2019-09-03', '2019-09-10', '13:30:00', '15:00:00', '', '', '', '', '', '2019-09-03 15:00:00', '2019-09-10 15:00:00', '', '', 1, 1),
+(1292, 'hugo escola', 'gonzalezhaneck@hotmail.com', '1149734027', 3, 'Centro Bariloche', 'Aeropuerto', 6, 24000.00, '', '2019-08-08 22:44:05', '2019-11-03', '2019-11-09', '15:00:00', '15:00:00', '', '', '', '', '', '2019-11-03 15:00:00', '2019-11-09 15:00:00', '', '', 1, 1),
+(1293, 'Alfredo caro', 'nooo', '1144444441', 2, 'Aeropuerto', 'Aeropuerto', 7, 17500.00, 'Ni', '2019-08-09 20:46:04', '2019-08-31', '2019-09-07', '15:00:00', '15:00:00', '$16mil total', '', '', '', '', '2019-08-31 15:00:00', '2019-09-07 15:00:00', '', '', 2, 1),
+(1294, 'Alfredo caro', 'nooo', '1144444441', 2, 'Aeropuerto', 'Aeropuerto', 7, 17500.00, 'Ni', '2019-08-09 16:03:26', '2019-08-31', '2019-09-07', '15:00:00', '15:00:00', '$16mil total', '', '', '', '', '2019-08-31 15:00:00', '2019-09-07 15:00:00', '', '', 1, 1),
+(1295, 'Darío maggio', 'maggiodario@hotmail.com', '1165473191', 1, 'Aeropuerto', 'Aeropuerto', 7, 15400.00, 'La 7760', '2019-08-09 20:56:58', '2019-08-23', '2019-08-30', '09:30:00', '15:00:00', 'Silla de bebe', '', '', '', '', '2019-08-23 15:00:00', '2019-08-30 15:00:00', '', '', 1, 1),
+(1296, 'Papa', 'no', '1111', 0, 'Terminal Ómnibus', 'Terminal Ómnibus', 3, 6000.00, 'Ni', '2019-08-10 18:56:53', '2019-08-14', '2019-08-17', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-14 15:00:00', '2019-08-17 15:00:00', '', '', 2, 1),
+(1297, 'Henrique Lima Schilling', 'patagoniaaustralrentacar@hotmail.com ', '555197390018', 0, 'Aeropuerto', 'Aeropuerto', 7, 14000.00, 'voo AR1698', '2019-08-10 17:49:42', '2019-08-19', '2019-08-26', '15:00:00', '15:00:00', 'pagan 1270 reales. en lo posible auto con baul ', '', '', '', '', '2019-08-19 15:00:00', '2019-08-26 15:00:00', '', '', 1, 1),
+(1298, 'Elio', 'no', '2214986195', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'Wj 3182', '2019-08-11 20:20:06', '2019-08-13', '2019-08-17', '10:20:00', '15:00:00', '', '', '', '', '', '2019-08-13 15:00:00', '2019-08-17 15:00:00', '', '', 1, 1),
+(1299, 'Sofía sobrina Lozano ali', 'no', '1164572427', 1, 'Aeropuerto', 'Aeropuerto', 3, 6600.00, 'Centro ñireco Benito cres', '2019-08-15 23:30:05', '2019-08-17', '2019-08-20', '15:00:00', '15:00:00', '3 días cobrar $6000 total', '', '', '', '', '2019-08-17 15:00:00', '2019-08-20 15:00:00', '', '', 2, 1),
+(1300, 'Sofía sobrina Lozano ali', 'no', '1164572427', 1, 'Aeropuerto', 'Aeropuerto', 3, 6600.00, 'Centro ñireco Benito cres', '2019-08-13 14:33:17', '2019-08-17', '2019-08-20', '15:00:00', '15:00:00', '3 días cobrar $6000 total', '', '', '', '', '2019-08-17 15:00:00', '2019-08-20 15:00:00', '', '', 1, 1),
+(1301, 'Gonzalo Machado', 'gonzalomachado85@gmail.com', '5491130081876', 0, 'Aeropuerto', 'Aeropuerto', 6, 12000.00, 'FO5250', '2019-08-21 15:10:05', '2019-12-01', '2019-12-07', '09:00:00', '18:50:00', 'Si es posible me gustaria que sea el Gol o el Onix. Gracias! ', '', '', '', '', '2019-12-01 15:00:00', '2019-12-07 15:00:00', '', '', 2, 1),
+(1302, 'Gabriel Marcelo Patrich  ', 'gpatrich2013@yahoo.com', '19546089037', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'La7768', '2019-08-13 22:12:18', '2019-08-28', '2019-09-01', '16:00:00', '13:00:00', '', '', '', '', '', '2019-08-28 15:00:00', '2019-09-01 15:00:00', '', '', 1, 1),
+(1303, 'Damian piloto alina', 'no', '1145594667', 1, 'Aeropuerto', 'Aeropuerto', 5, 11000.00, '3180', '2019-08-14 05:52:25', '2019-09-01', '2019-09-06', '18:00:00', '20:00:00', '', '', '', '', '', '2019-09-01 15:00:00', '2019-09-06 15:00:00', '', '', 1, 1),
+(1304, 'Ines williams', 'no', '1149694898', 2, 'Aeropuerto', 'Aeropuerto', 12, 30500.00, 'Ar 1694', '2019-08-17 03:09:40', '2019-09-07', '2019-09-19', '11:40:00', '15:00:00', 'Pase a Chile. Pago seña $9000', '', 'Cadenas para nieve', '', '', '2019-09-07 15:00:00', '2019-09-19 15:00:00', '', '', 1, 1),
+(1305, 'Agustín Omar Lombardi (alina)', 'patagoniaaustralrentacar@hotmail.com ', '22154291214', 3, 'Aeropuerto', 'Aeropuerto', 4, 16000.00, 'wj3215', '2019-08-17 15:38:36', '2019-08-28', '2019-09-01', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-28 15:00:00', '2019-09-01 15:00:00', '', '', 1, 1),
+(1306, 'RICARDO LOPEZ', 'ricardolopez1949@gmail.com', '5491145328292', 0, 'Aeropuerto', 'Centro Bariloche', 10, 20000.00, 'LA 7760', '2019-08-18 15:26:11', '2019-12-30', '2020-01-09', '11:30:00', '17:30:00', 'POR FAVOR RESERVAR UN CORSA ', '', '', '', '', '2019-12-30 15:00:00', '2020-01-09 15:00:00', '', '', 1, 1),
+(1307, 'Pablo brard', 'no', '1111', 1, 'Aeropuerto', 'Aeropuerto', 10, 22000.00, 'La7778', '2019-08-18 19:54:11', '2019-09-21', '2019-10-01', '00:15:00', '15:00:00', '$18mil tarifa acordada.wntrega madrugada del domingo 22    00.15hs', '', '', '', '', '2019-09-21 15:00:00', '2019-10-01 15:00:00', '', '', 1, 1),
+(1308, 'Paula caprin', 'paulacaprin@hotmail.com', '1150525024', 0, 'Centro Bariloche', 'Aeropuerto', 8, 16000.00, 'Nooo', '2019-08-19 01:30:30', '2019-08-29', '2019-09-06', '15:00:00', '15:00:00', 'Cabañas 20 de junio 674. 10.00hs mañana . $12 mil total', '', '', '', '', '2019-08-29 15:00:00', '2019-09-06 15:00:00', '', '', 2, 1),
+(1309, 'Paula caprin', 'paulacaprin@hotmail.com', '1150525024', 0, 'Centro Bariloche', 'Aeropuerto', 8, 16000.00, 'Nooo', '2019-08-19 01:29:00', '2019-08-29', '2019-09-06', '15:00:00', '15:00:00', 'Cabañas 20 de junio 674. 10.00hs mañana . $12 mil total', '', '', '', '', '2019-08-29 15:00:00', '2019-09-06 15:00:00', '', '', 1, 1),
+(1310, 'Martín Roberto Hyland', 'hylandmartin@gmail.com', '1557556860', 1, 'Aeropuerto', 'Aeropuerto', 5, 11500.00, '7762', '2019-08-20 00:07:01', '2019-08-20', '2019-08-25', '10:15:00', '12:45:00', '', '', 'Cadenas para nieve', '', '', '2019-08-20 15:00:00', '2019-08-25 15:00:00', '', '', 1, 1),
+(1311, '`Marcelo Cervigni', 'mcervigni@cervignihnos.com.ar', '0232515591231', 4, 'Aeropuerto', 'Aeropuerto', 4, 0.00, '', '2019-08-20 00:47:20', '2020-04-02', '2020-04-06', '11:00:00', '07:00:00', 'Hola\r\nNecesitamos una vand y un auto o 3 autos economicos, somos 13 personas.', '', '', '', '', '2020-04-02 15:00:00', '2020-04-06 15:00:00', '', '', 1, 1),
+(1312, 'MARTIN EDUARDO FRASSIA', 'martinfrassia@gmail.com', '01149980599', 1, 'Aeropuerto', 'Aeropuerto', 11, 24200.00, '7760', '2019-08-20 15:36:14', '2019-08-31', '2019-09-11', '19:50:00', '11:00:00', '', '', '', '', '', '2019-08-31 15:00:00', '2019-09-11 15:00:00', '', '', 1, 1),
+(1313, 'PABLO IGNACIO DI LORETO', 'pablodiloreto91@hotmail.com', '1138472152', 4, 'Aeropuerto', 'Aeropuerto', 3, 18000.00, '7760', '2019-08-20 18:37:05', '2019-11-24', '2019-11-27', '11:30:00', '18:30:00', '', '', '', '', '', '2019-11-24 15:00:00', '2019-11-27 15:00:00', '', '', 1, 1),
+(1314, 'sergio (alina)', 'patagoniaaustralrentacar@hotmail ', '1140765312', 4, 'Aeropuerto', 'Aeropuerto', 3, 18000.00, 'lan 7760', '2019-08-20 18:55:21', '2019-09-20', '2019-09-23', '15:00:00', '15:00:00', '', '', '', '', '', '2019-09-20 15:00:00', '2019-09-23 15:00:00', '', '', 1, 1),
+(1315, 'Pollo papá', 'no', '3329557895', 3, 'Aeropuerto', 'Aeropuerto', 3, 12000.00, 'La7780', '2019-08-21 19:09:09', '2019-08-31', '2019-09-03', '15:00:00', '15:00:00', 'Sábado 31 madrugada 01.30hs', '', '', '', '', '2019-08-31 15:00:00', '2019-09-03 15:00:00', '', '', 1, 1),
+(1316, 'alina ( juan concept)', 'patagoniaaustralrentacar@hotmail.com ', '1111111', 3, 'Aeropuerto', 'Aeropuerto', 3, 12000.00, '1111', '2019-08-21 20:35:42', '2019-08-23', '2019-08-26', '11:00:00', '11:00:00', 'total 16000$ ', '', '', '', '', '2019-08-23 15:00:00', '2019-08-26 15:00:00', '', '', 1, 1),
+(1317, 'Emiliano Ganduglia', 'emilianoganduglia@gmail.com', '1162996451', 1, 'Aeropuerto', 'Aeropuerto', 9, 19800.00, '1872', '2019-08-22 17:15:34', '2019-08-23', '2019-09-01', '11:00:00', '15:00:00', 'retiro y entrego en aeropuerto brc', '', '', '', '', '2019-08-23 15:00:00', '2019-09-01 15:00:00', '', '', 2, 1),
+(1318, 'emiliano Ganduglia', 'emilianoganduglia@gmail.com', '1162996451', 1, 'Aeropuerto', 'Aeropuerto', 6, 13200.00, '1872', '2019-08-22 16:53:31', '2019-08-26', '2019-09-01', '11:01:00', '15:00:00', 'retiro y entrego en aeropuerto', '', '', '', '', '2019-08-26 15:00:00', '2019-09-01 15:00:00', '', '', 1, 1),
+(1319, 'emiliano Ganduglia', 'emilianoganduglia@gmail.com', '1162996451', 1, 'Aeropuerto', 'Aeropuerto', 6, 13200.00, '1872', '2019-08-22 17:16:13', '2019-08-26', '2019-09-01', '11:01:00', '15:00:00', 'retiro y entrego en aeropuerto', '', '', '', '', '2019-08-26 15:00:00', '2019-09-01 15:00:00', '', '', 2, 1),
+(1320, 'Facundo papa', 'no', '1160571420', 3, 'Aeropuerto', 'Aeropuerto', 3, 12000.00, 'Ni', '2019-08-22 19:08:47', '2019-08-27', '2019-08-30', '15:00:00', '15:00:00', 'Del 28 al 30  $7500 total', '', '', '', '', '2019-08-27 15:00:00', '2019-08-30 15:00:00', '', '', 1, 1),
+(1321, 'Frizche', 'no', '000', 1, 'Aeropuerto', 'Aeropuerto', 10, 22000.00, 'Ni', '2019-08-22 19:10:28', '2019-08-29', '2019-09-08', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-29 15:00:00', '2019-09-08 15:00:00', '', '', 1, 1),
+(1322, 'Dario ariel saoretti', 'dariosaoretti@hotmail.com', '1157122009', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'Wj 3186', '2019-08-23 01:52:13', '2019-09-12', '2019-09-16', '08:00:00', '20:02:00', '', '', '', '', '', '2019-09-12 15:00:00', '2019-09-16 15:00:00', '', '', 1, 1),
+(1323, 'Dario ariel saoretti', 'dariosaoretti@hotmail.com', '1157122009', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'Wj 3186', '2019-08-23 01:52:14', '2019-09-12', '2019-09-16', '08:00:00', '20:02:00', '', '', '', '', '', '2019-09-12 15:00:00', '2019-09-16 15:00:00', '', '', 1, 1),
+(1324, 'Alejandro morales Dani villaggi', 'no', '11111', 4, 'Aeropuerto', 'Aeropuerto', 6, 36000.00, '1111', '2019-08-25 13:43:54', '2019-09-13', '2019-09-19', '15:00:00', '15:00:00', '', '', '', '', '', '2019-09-13 15:00:00', '2019-09-19 15:00:00', '', '', 1, 1),
+(1325, 'Maria Felicitas Markous', 'felimarkous@gmail.com', '5491146738084', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'AR1694', '2019-08-26 15:50:11', '2019-08-27', '2019-08-30', '11:00:00', '14:00:00', 'En lo posible por favor quisiéramos un KWID.\r\nGracias', '', '', '', '', '2019-08-27 15:00:00', '2019-08-30 15:00:00', '', '', 2, 1),
+(1326, 'Maria Felicitas Markous', 'felimarkous@gmail.com', '5491146738084', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'AR1694', '2019-08-26 15:29:27', '2019-09-12', '2019-09-16', '11:00:00', '14:00:00', 'Por favor necesitaría en lo posible que sea un KWID.\r\nMuchas gracias', '', '', '', '', '2019-09-12 15:00:00', '2019-09-16 15:00:00', '', '', 1, 1),
+(1327, 'ronald (ali)', 'patagoniaaustralrentacar', '1149272803', 0, 'Aeropuerto', 'Aeropuerto', 5, 10000.00, 'lan 7770', '2019-08-27 18:50:48', '2019-09-01', '2019-09-06', '17:30:00', '15:45:00', '1800 por dia. \r\ntotal $9000', '', '', '', '', '2019-09-01 15:00:00', '2019-09-06 15:00:00', '', '', 1, 1),
+(1328, 'Seba jime', 'no', '1154958236', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'Nw', '2019-08-27 20:33:12', '2019-08-29', '2019-09-01', '15:00:00', '15:00:00', 'Entrega 30/08 Nw 00.50hs', '', '', '', '', '2019-08-29 15:00:00', '2019-09-01 15:00:00', '', '', 1, 1),
+(1329, 'Fernando vacirca', 'no', '1156347652', 0, 'Aeropuerto', 'Aeropuerto', 9, 18000.00, 'La 7780', '2019-08-27 23:35:51', '2019-09-27', '2019-10-06', '01:30:00', '15:00:00', 'Entrega madrugada del 28 01.30hs \r\nCobrar $13mil total', '', '', '', '', '2019-09-27 15:00:00', '2019-10-06 15:00:00', '', '', 1, 1),
+(1330, 'Mauricio kaplan', 'mauricio_kaplan@hotmail.com', '11111', 2, 'Aeropuerto', 'Aeropuerto', 6, 15000.00, 'Ar 1680', '2019-08-28 00:32:35', '2019-09-15', '2019-09-21', '09:50:00', '15:00:00', '', '', '', '', '', '2019-09-15 15:00:00', '2019-09-21 15:00:00', '', '', 1, 1),
+(1331, 'DANIEL gonzalez', 'gonzalezhaneck@hotmail.com', '2944587003', 1, 'Aeropuerto', 'Aeropuerto', 4, 8800.00, '8000', '2019-08-28 00:44:05', '2019-08-29', '2019-09-02', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-29 15:00:00', '2019-09-02 15:00:00', '', '', 1, 1),
+(1332, 'María Belén Clio papa', 'no', '111111', 0, 'Aeropuerto', 'Aeropuerto', 5, 10000.00, 'Ooo', '2019-08-28 00:51:32', '2019-08-27', '2019-09-01', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-27 15:00:00', '2019-09-01 15:00:00', '', '', 1, 1),
+(1333, 'Analía andes papá Piu', 'no', '11111', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'Ni', '2019-08-28 00:53:08', '2019-08-29', '2019-09-01', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-29 15:00:00', '2019-09-01 15:00:00', '', '', 1, 1),
+(1334, 'Javier Ignacio Saez (jime)', 'no', '1138642007', 3, 'Aeropuerto', 'Aeropuerto', 9, 36000.00, 'La 7764', '2019-08-28 02:11:30', '2019-09-13', '2019-09-22', '13:30:00', '15:00:00', 'Cobrar $22500 total $2500 por dia', '', '', '', '', '2019-09-13 15:00:00', '2019-09-22 15:00:00', '', '', 1, 1),
+(1335, 'Darío 1 papá ', 'no', '1168389491', 1, 'Aeropuerto', 'Aeropuerto', 7, 15400.00, 'Ni', '2019-08-28 02:20:46', '2019-08-30', '2019-09-06', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-30 15:00:00', '2019-09-06 15:00:00', '', '', 1, 1),
+(1336, 'Darío 2 papa', 'no', '1168389491', 2, 'Aeropuerto', 'Aeropuerto', 7, 17500.00, 'Ni', '2019-08-28 02:23:13', '2019-08-30', '2019-09-06', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-30 15:00:00', '2019-09-06 15:00:00', '', '', 1, 1),
+(1337, 'Amigo del pollo papa', 'no', '2915116047', 1, 'Aeropuerto', 'Aeropuerto', 3, 6600.00, 'Ni', '2019-08-28 02:28:32', '2019-08-31', '2019-09-03', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-31 15:00:00', '2019-09-03 15:00:00', '', '', 1, 1),
+(1338, 'Gustavo Sanchez papa', 'no', '1133852222', 3, 'Aeropuerto', 'Aeropuerto', 6, 24000.00, 'Ni', '2019-08-29 01:40:34', '2019-09-10', '2019-09-16', '15:00:00', '15:00:00', 'Seña $15mil  . Entrega 13hs', '', '', '', '', '2019-09-10 15:00:00', '2019-09-16 15:00:00', '', '', 1, 1),
+(1339, 'Walter buzzurro papa', 'no', '1158787997', 0, 'Aeropuerto', 'Aeropuerto', 7, 14000.00, 'Ni', '2019-08-29 02:17:56', '2019-09-19', '2019-09-26', '15:00:00', '15:00:00', '', '', '', '', '', '2019-09-19 15:00:00', '2019-09-26 15:00:00', '', '', 1, 1),
+(1340, 'Sergio h1 (alina)', 'patagoniaaustralrentacar@hotmail.com ', '1140765312', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'lan 7760', '2019-08-29 17:46:09', '2019-09-20', '2019-09-23', '15:00:00', '15:00:00', '$5700 total ', '', '', '', '', '2019-09-20 15:00:00', '2019-09-23 15:00:00', '', '', 1, 1),
+(1341, 'analia leonor rinaldi (alina)', 'patagoniaaustralrentacar@hotmail ', '1164006795', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'ar 1873', '2019-08-30 18:14:59', '2019-09-17', '2019-09-20', '11:45:00', '11:00:00', '', '', '', '', '', '2019-09-17 15:00:00', '2019-09-20 15:00:00', '', '', 1, 1),
+(1342, 'Sandra', 'no', '1150986207', 0, 'Aeropuerto', 'Aeropuerto', 4, 8000.00, 'Sublo', '2019-08-30 18:54:53', '2019-09-14', '2019-09-18', '15:00:00', '15:00:00', 'Precio $1800 por día', '', '', '', '', '2019-09-14 15:00:00', '2019-09-18 15:00:00', '', '', 1, 1),
+(1343, 'Pollo papa', 'no ', '1111111', 4, 'Aeropuerto', 'Aeropuerto', 3, 18000.00, 'Ni', '2019-08-30 18:57:33', '2019-08-31', '2019-09-03', '15:00:00', '15:00:00', '', '', '', '', '', '2019-08-31 15:00:00', '2019-09-03 15:00:00', '', '', 1, 1),
+(1344, 'gaston ignacio bourgerois (alina)', 'patagoniaaustralrentacar', '1141614547', 1, 'Aeropuerto', 'Aeropuerto', 3, 6600.00, '1111', '2019-09-03 13:49:18', '2019-09-06', '2019-09-09', '01:30:00', '15:00:00', 'es desde el viernes a la noche, madrugada del sabado tipo 1.30 hs ( el viernes define, va sujeto a espacio)\r\ntotal reserva $5500 ( 2 dias y medio mas $500 por entregar fuera de horario)', '', '', '', '', '2019-09-06 15:00:00', '2019-09-09 15:00:00', '', '', 1, 1),
+(1345, 'Estanislao Garcia Goya', 'tanigoya@gmail.com', '1530368158', 0, 'Aeropuerto', 'Aeropuerto', 11, 22000.00, 'M82XGK', '2019-09-03 15:05:02', '2019-12-25', '2020-01-05', '08:00:00', '20:00:00', '', '', '', '', '', '2019-12-25 15:00:00', '2020-01-05 15:00:00', '', '', 1, 1),
+(1346, 'Estanislao Garcia Goya', 'tanigoya@gmail.com', '1530368158', 2, 'Aeropuerto', 'Aeropuerto', 11, 27500.00, 'M82XGK', '2019-09-03 15:06:49', '2019-12-25', '2020-01-05', '08:00:00', '00:00:00', '', '', '', '', '', '2019-12-25 15:00:00', '2020-01-05 15:00:00', '', '', 1, 1),
+(1347, 'Petete papa', 'no', '111111', 3, 'Aeropuerto', 'Aeropuerto', 4, 16000.00, 'No', '2019-09-03 17:47:03', '2019-09-11', '2019-09-15', '15:00:00', '15:00:00', '', '', '', '', '', '2019-09-11 15:00:00', '2019-09-15 15:00:00', '', '', 1, 1),
+(1348, 'Andres ali', 'no', '1155639102', 0, 'Aeropuerto', 'Aeropuerto', 7, 14000.00, 'No', '2019-09-03 17:52:14', '2019-09-20', '2019-09-27', '12:59:00', '15:00:00', '$1800 p0r día ', '', '', '', '', '2019-09-20 15:00:00', '2019-09-27 15:00:00', '', '', 1, 1),
+(1349, 'Gabriela Leone  ', 'galeon23@hotmail.com', '1159824562', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'La 7766', '2019-09-04 02:39:21', '2019-10-03', '2019-10-06', '20:00:00', '15:30:00', 'Tarifa  acordada $4500 total', '', '', '', '', '2019-10-03 15:00:00', '2019-10-06 15:00:00', '', '', 1, 1),
+(1350, 'Pepe mazzini jime', 'no', '2944619419', 1, 'Aeropuerto', 'Aeropuerto', 7, 15400.00, 'La 7768', '2019-09-04 17:41:36', '2019-10-23', '2019-10-30', '15:30:00', '16:20:00', '$14mil total', '', '', '', '', '2019-10-23 15:00:00', '2019-10-30 15:00:00', '', '', 1, 1),
+(1351, 'Julieta berraza caro ', 'no', '1153362755', 1, 'Aeropuerto', 'Aeropuerto', 3, 6600.00, 'Ni', '2019-09-07 13:40:44', '2019-09-19', '2019-09-22', '15:00:00', '15:00:00', '$6000', '', '', '', '', '2019-09-19 15:00:00', '2019-09-22 15:00:00', '', '', 1, 1),
+(1352, 'Papa', 'gonzalezhaneck@hotmail.com', '1150142124', 1, 'Aeropuerto', 'Aeropuerto', 3, 6600.00, '', '2019-09-07 21:18:03', '2019-09-12', '2019-09-15', '15:00:00', '15:00:00', '', '', '', '', '', '2019-09-12 15:00:00', '2019-09-15 15:00:00', '', '', 2, 1),
+(1353, 'Leonardo Uruguay jime', 'no', '59894783603', 1, 'Aeropuerto', 'Aeropuerto', 7, 15400.00, 'Wj3186', '2019-09-07 21:47:54', '2019-09-12', '2019-09-19', '07:30:00', '15:00:00', '$1800 por dia', '', '', '', '', '2019-09-12 15:00:00', '2019-09-19 15:00:00', '', '', 1, 1),
+(1354, 'Carlos Medina jime', 'no', '1132943193', 1, 'Aeropuerto', 'Aeropuerto', 7, 15400.00, 'Ar1698', '2019-09-07 21:50:32', '2019-09-12', '2019-09-19', '14:41:00', '15:00:00', '$12mil total', '', '', '', '', '2019-09-12 15:00:00', '2019-09-19 15:00:00', '', '', 1, 1),
+(1355, 'Hugo Solimo', 'no', '1111111', 1, 'Aeropuerto', 'Aeropuerto', 5, 11000.00, 'Ni', '2019-09-07 21:51:59', '2019-09-09', '2019-09-14', '15:00:00', '15:00:00', '', '', '', '', '', '2019-09-09 15:00:00', '2019-09-14 15:00:00', '', '', 1, 1),
+(1356, 'Norberto klurfan Papa ', 'noo', '1135839393', 1, 'Aeropuerto', 'Aeropuerto', 7, 15400.00, 'Ni', '2019-09-07 22:13:34', '2019-09-12', '2019-09-19', '11:00:00', '15:00:00', '$2000 por día ', '', '', '', '', '2019-09-12 15:00:00', '2019-09-19 15:00:00', '', '', 1, 1),
+(1357, 'Leonardo Roberto Myskow Kardziejonok', 'leonardo.myskow@gmail.com', '1140227440', 0, 'Aeropuerto', 'Aeropuerto', 3, 6000.00, 'ar1872', '2019-09-08 15:53:27', '2019-10-12', '2019-10-15', '11:20:00', '20:30:00', 'Retiro Aeropuerto vuelo lleva 11:10 horas AR1872 la entrega es en el aeropuerto del día 15 de octubre 21,25 sale el vuelo así que entrego 20:30 horas AR 1693', '', '', '', '', '2019-10-12 15:00:00', '2019-10-15 15:00:00', '', '', 1, 1);
+INSERT INTO `reservas` (`id_reserva`, `nombre`, `email`, `tel`, `vehiculo`, `retiro`, `devolucion`, `cantidad_dias`, `total_a_pagar`, `vuelo`, `fecha_ingreso_reserva`, `fdesde`, `fhasta`, `hdesde`, `hhasta`, `observacion`, `silla`, `cadenas`, `equipaje`, `buster`, `start`, `end`, `patente`, `color`, `estado`, `origen`) VALUES
+(1358, 'Maximiliano Ramos ', 'maximilianojramos@gmail.com', '541157283724', 0, 'Aeropuerto', 'Aeropuerto', 14, 500.00, '', '2019-09-09 02:38:06', '2020-01-10', '2020-01-24', '14:00:00', '15:00:00', '', 'Silla Bebé', '', '', '', '2020-01-10 15:00:00', '2020-01-24 15:00:00', '', '', 1, 1),
+(1359, 'Guillermo Luis Pleitavino', 'glpleitavino@gmail.com', '543512277015', 1, 'Aeropuerto', 'Aeropuerto', 5, 11000.00, '1592,', '2019-09-11 23:34:42', '2019-09-16', '2019-09-21', '15:00:00', '15:00:00', '', '', '', '', '', '2019-09-16 15:00:00', '2019-09-21 15:00:00', '', '', 2, 1),
+(1360, 'Javier Intriago Valle', 'javi.intriago@gmail.com ', '1569763975', 2, 'Aeropuerto', 'Aeropuerto', 8, 23200.00, '1111', '2019-09-12 09:53:25', '2020-02-09', '2020-02-17', '15:00:00', '15:00:00', 'Precio por suran o similar $18000 hablado entre Jimena y Dario.\r\nNro de vuelo y horarios a confirmar.', 'Silla Bebé', '', '', 'Buster', '2020-02-09 15:00:00', '2020-02-17 15:00:00', '', '', 1, 1),
+(1361, 'Matías Gaston farias', 'farias.matias@hotmail.com', '1152618763', 0, 'Centro Bariloche', 'Aeropuerto', 7, 14500.00, 'Dn6000', '2019-09-12 16:06:34', '2020-01-04', '2020-01-11', '08:30:00', '20:30:00', 'Lo retiro  en  Bariloche centro y lo entrego cuando me voy en el aeropuerto.', 'Silla Bebé', '', '', '', '2020-01-04 15:00:00', '2020-01-11 15:00:00', '', '', 1, 1),
+(1362, 'oscar belcastro', 'gonzalezhaneck@hotmail.com', '2944587003', 4, 'Aeropuerto', 'Aeropuerto', 3, 18000.00, '800', '2019-09-14 14:59:45', '2019-10-01', '2019-10-04', '15:00:00', '15:00:00', 'sillita de BB', '', '', '', '', '2019-10-01 15:00:00', '2019-10-04 15:00:00', '', '', 1, 1),
+(1363, 'Julian Aquerman', 'julian_aquerman@hotmail.com', '1161620940', 3, 'Aeropuerto', 'Aeropuerto', 8, 32300.00, 'AR1698', '2019-09-17 21:05:55', '2020-01-25', '2020-02-02', '15:00:00', '13:00:00', 'Por favor que venga con el porta equipaje. Gracias.', '', '', '', 'Buster', '2020-01-25 15:00:00', '2020-02-02 15:00:00', '', '', 1, 1),
+(1364, 'Guido ipzman (jime)', 'no', '1168984328', 3, 'Terminal Ómnibus', 'Terminal Ómnibus', 13, 52000.00, 'Ni', '2019-09-18 14:51:44', '2020-01-19', '2020-02-01', '15:00:00', '15:00:00', 'Entrega Villa la Angostura, Cabaña La estancia.\r\nTarifa convenida $48mil', '', '', '', '', '2020-01-19 15:00:00', '2020-02-01 15:00:00', '', '', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1260,9 +1478,8 @@ INSERT INTO `reservas` (`id_reserva`, `nombre`, `email`, `tel`, `vehiculo`, `ret
 -- Estructura de tabla para la tabla `tarifas`
 --
 
-DROP TABLE IF EXISTS `tarifas`;
-CREATE TABLE IF NOT EXISTS `tarifas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tarifas` (
+  `id` int(11) NOT NULL,
   `categoria` int(1) NOT NULL,
   `fdesde` date NOT NULL,
   `fhasta` date NOT NULL,
@@ -1270,17 +1487,15 @@ CREATE TABLE IF NOT EXISTS `tarifas` (
   `precio_promo` decimal(10,2) NOT NULL,
   `porcentaje` decimal(10,2) NOT NULL,
   `permite_promo` tinyint(4) NOT NULL,
-  `modificado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `categoria` (`categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `modificado` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `tarifas`
 --
 
 INSERT INTO `tarifas` (`id`, `categoria`, `fdesde`, `fhasta`, `precio_dia`, `precio_promo`, `porcentaje`, `permite_promo`, `modificado`) VALUES
-(1, 0, '2018-07-01', '2018-08-31', '1300.00', '8600.00', '1.00', 1, '2018-09-19 16:49:17'),
+(1, 0, '2018-07-01', '2018-08-31', '1300.00', '8600.00', '1.00', 0, '2019-09-09 17:59:18'),
 (2, 1, '2018-07-01', '2018-08-31', '1500.00', '10000.00', '0.00', 0, '2018-07-19 14:28:44'),
 (3, 2, '2018-07-01', '2018-08-31', '2000.00', '12000.00', '0.00', 0, '2018-12-26 19:46:04'),
 (4, 3, '2018-07-01', '2018-08-31', '2500.00', '13600.00', '0.00', 0, '2018-08-08 15:02:56'),
@@ -1291,97 +1506,25 @@ INSERT INTO `tarifas` (`id`, `categoria`, `fdesde`, `fhasta`, `precio_dia`, `pre
 (9, 2, '2018-09-01', '2018-11-30', '1500.00', '10000.00', '0.00', 0, '2018-09-04 21:58:52'),
 (10, 3, '2018-09-01', '2018-11-30', '2500.00', '18000.00', '0.00', 0, '2018-12-06 18:56:22'),
 (11, 4, '2018-09-01', '2018-11-30', '3500.00', '20000.00', '0.00', 0, '2018-08-29 19:46:24'),
-(12, 5, '2018-09-01', '2018-11-30', '1100.00', '7000.00', '0.00', 0, '2018-07-19 13:08:00'),
-(13, 0, '2019-06-01', '2019-08-31', '2000.00', '8600.00', '0.00', 0, '2019-04-29 18:51:20'),
-(14, 1, '2019-06-01', '2019-08-31', '2200.00', '10000.00', '0.00', 0, '2019-04-29 18:51:37'),
-(15, 2, '2019-06-01', '2019-08-31', '2500.00', '12000.00', '0.00', 0, '2019-04-29 18:51:42'),
-(16, 3, '2019-06-01', '2019-08-31', '3000.00', '13600.00', '0.00', 0, '2019-04-29 18:51:46'),
-(17, 4, '2019-06-01', '2019-08-31', '6000.00', '23600.00', '0.00', 0, '2019-04-29 18:51:51'),
-(21, 0, '2019-01-01', '2019-05-31', '1500.00', '0.00', '0.00', 0, '2019-04-29 18:54:05'),
-(22, 1, '2019-01-01', '2019-05-31', '1800.00', '0.00', '0.00', 0, '2019-04-29 18:55:40'),
-(23, 2, '2019-01-01', '2019-05-31', '2000.00', '0.00', '0.00', 0, '2019-04-29 18:55:40'),
-(24, 3, '2019-01-01', '2019-05-31', '2500.00', '0.00', '0.00', 0, '2019-04-29 18:56:12'),
-(25, 4, '2019-01-01', '2019-05-31', '5000.00', '0.00', '0.00', 0, '2019-04-29 18:56:12');
+(12, 5, '2019-06-01', '2019-12-31', '4000.00', '13600.00', '0.00', 0, '2019-07-11 21:52:25'),
+(13, 0, '2019-06-01', '2019-12-31', '2000.00', '8600.00', '0.00', 0, '2019-06-13 16:21:43'),
+(14, 1, '2019-06-01', '2019-12-31', '2200.00', '10000.00', '0.00', 0, '2019-06-13 16:21:50'),
+(15, 2, '2019-06-01', '2019-12-31', '2500.00', '12000.00', '0.00', 0, '2019-06-13 16:21:57'),
+(16, 3, '2019-06-01', '2019-12-31', '4000.00', '13600.00', '0.00', 0, '2019-06-24 12:44:59'),
+(17, 4, '2019-06-01', '2019-12-31', '6000.00', '23600.00', '0.00', 0, '2019-06-13 16:21:29'),
+(21, 0, '2019-12-13', '2020-03-13', '2000.00', '0.00', '0.00', 0, '2019-09-08 16:54:54'),
+(22, 1, '2019-12-13', '2020-03-13', '2400.00', '0.00', '0.00', 0, '2019-09-08 16:38:39'),
+(23, 2, '2019-12-13', '2020-03-13', '2800.00', '0.00', '0.00', 0, '2019-09-08 16:39:27'),
+(24, 3, '2019-12-13', '2020-03-13', '4000.00', '0.00', '0.00', 0, '2019-09-08 16:40:01'),
+(25, 4, '2019-12-13', '2020-03-13', '6000.00', '0.00', '0.00', 0, '2019-09-08 16:40:33');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tarifas_historial`
+-- Estructura de tabla para la tabla `tmpChoques`
 --
 
-DROP TABLE IF EXISTS `tarifas_historial`;
-CREATE TABLE IF NOT EXISTS `tarifas_historial` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `categoria` int(1) NOT NULL,
-  `fdesde` date NOT NULL,
-  `fhasta` date NOT NULL,
-  `precio_dia` decimal(10,2) NOT NULL,
-  `precio_promo` decimal(10,2) NOT NULL,
-  `porcentaje` decimal(10,2) NOT NULL,
-  `permite_promo` tinyint(4) NOT NULL,
-  `modificado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `categoria` (`categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `tarifas_historial`
---
-
-INSERT INTO `tarifas_historial` (`id`, `categoria`, `fdesde`, `fhasta`, `precio_dia`, `precio_promo`, `porcentaje`, `permite_promo`, `modificado`) VALUES
-(1, 0, '2018-07-01', '2018-08-31', '1300.00', '8600.00', '1.00', 1, '2018-09-19 16:49:17'),
-(2, 1, '2018-07-01', '2018-08-31', '1500.00', '10000.00', '0.00', 0, '2018-07-19 14:28:44'),
-(3, 2, '2018-07-01', '2018-08-31', '2000.00', '12000.00', '0.00', 0, '2018-12-26 19:46:04'),
-(4, 3, '2018-07-01', '2018-08-31', '2500.00', '13600.00', '0.00', 0, '2018-08-08 15:02:56'),
-(5, 4, '2018-07-01', '2018-08-31', '3500.00', '23600.00', '0.00', 0, '2018-07-19 14:28:44'),
-(6, 5, '2018-07-01', '2018-08-31', '2000.00', '12000.00', '0.00', 0, '2018-12-26 19:46:15'),
-(7, 0, '2018-09-01', '2018-11-30', '1100.00', '7000.00', '0.00', 0, '2018-09-04 21:58:32'),
-(8, 1, '2018-09-01', '2018-11-30', '1200.00', '8000.00', '0.00', 0, '2018-09-04 21:58:45'),
-(9, 2, '2018-09-01', '2018-11-30', '1500.00', '10000.00', '0.00', 0, '2018-09-04 21:58:52'),
-(10, 3, '2018-09-01', '2018-11-30', '2500.00', '18000.00', '0.00', 0, '2018-12-06 18:56:22'),
-(11, 4, '2018-09-01', '2018-11-30', '3500.00', '20000.00', '0.00', 0, '2018-08-29 19:46:24'),
-(12, 5, '2018-09-01', '2018-11-30', '1100.00', '7000.00', '0.00', 0, '2018-07-19 13:08:00'),
-(13, 0, '2019-06-01', '2019-08-31', '2000.00', '8600.00', '0.00', 0, '2019-04-29 18:51:20'),
-(14, 1, '2019-06-01', '2019-08-31', '2200.00', '10000.00', '0.00', 0, '2019-04-29 18:51:37'),
-(15, 2, '2019-06-01', '2019-08-31', '2500.00', '12000.00', '0.00', 0, '2019-04-29 18:51:42'),
-(16, 3, '2019-06-01', '2019-08-31', '3000.00', '13600.00', '0.00', 0, '2019-04-29 18:51:46'),
-(17, 4, '2019-06-01', '2019-08-31', '6000.00', '23600.00', '0.00', 0, '2019-04-29 18:51:51'),
-(21, 0, '2019-01-01', '2019-05-31', '1500.00', '0.00', '0.00', 0, '2019-04-29 18:54:05'),
-(22, 1, '2019-01-01', '2019-05-31', '1800.00', '0.00', '0.00', 0, '2019-04-29 18:55:40'),
-(23, 2, '2019-01-01', '2019-05-31', '2000.00', '0.00', '0.00', 0, '2019-04-29 18:55:40'),
-(24, 3, '2019-01-01', '2019-05-31', '2500.00', '0.00', '0.00', 0, '2019-04-29 18:56:12'),
-(25, 4, '2019-01-01', '2019-05-31', '5000.00', '0.00', '0.00', 0, '2019-04-29 18:56:12');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `temporadas`
---
-
-DROP TABLE IF EXISTS `temporadas`;
-CREATE TABLE IF NOT EXISTS `temporadas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha_desde` date NOT NULL,
-  `fecha_hasta` date NOT NULL,
-  `vigente` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `temporadas`
---
-
-INSERT INTO `temporadas` (`id`, `fecha_desde`, `fecha_hasta`, `vigente`) VALUES
-(1, '2019-06-01', '2019-10-31', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tmpchoques`
---
-
-DROP TABLE IF EXISTS `tmpchoques`;
-CREATE TABLE IF NOT EXISTS `tmpchoques` (
+CREATE TABLE `tmpChoques` (
   `nro_reserva` int(11) DEFAULT NULL,
   `fecha_desde` date DEFAULT NULL,
   `fecha_hasta` date DEFAULT NULL,
@@ -1390,10 +1533,10 @@ CREATE TABLE IF NOT EXISTS `tmpchoques` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `tmpchoques`
+-- Volcado de datos para la tabla `tmpChoques`
 --
 
-INSERT INTO `tmpchoques` (`nro_reserva`, `fecha_desde`, `fecha_hasta`, `patente`, `categoria`) VALUES
+INSERT INTO `tmpChoques` (`nro_reserva`, `fecha_desde`, `fecha_hasta`, `patente`, `categoria`) VALUES
 (641, '2019-02-05', '2019-02-09', 'AA582FS', 0),
 (660, '2019-02-05', '2019-02-09', 'AA582FS', 0),
 (690, '2019-02-05', '2019-02-09', 'AA582FS', 0),
@@ -1419,15 +1562,13 @@ INSERT INTO `tmpchoques` (`nro_reserva`, `fecha_desde`, `fecha_hasta`, `patente`
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuarios` (
+  `id_usuario` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `usuario` varchar(50) NOT NULL,
   `pass` varchar(50) NOT NULL,
-  `fecha_carga` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `fecha_carga` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -1437,6 +1578,71 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `usuario`, `pass`, `fecha_carga`
 (2, 'administrador', 'cenergon', '2241f43b92035c67d022155bf35118f5', '2018-08-22 18:06:14'),
 (3, 'Jimena', 'jimena', 'c6b5942a869015c357bff85b5407eb4b', '2017-09-28 21:40:03'),
 (4, 'Daniel Gonzalez', 'dgonzalez', '18171f36b7205bc7901cd68e4c56f22c', '2017-07-25 21:20:02');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `autos`
+--
+ALTER TABLE `autos`
+  ADD PRIMARY KEY (`id_auto`),
+  ADD KEY `id_categoria` (`id_categoria`);
+
+--
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id_categoria`);
+
+--
+-- Indices de la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  ADD PRIMARY KEY (`id_reserva`),
+  ADD KEY `fhasta` (`fhasta`);
+
+--
+-- Indices de la tabla `tarifas`
+--
+ALTER TABLE `tarifas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `categoria` (`categoria`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id_usuario`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `autos`
+--
+ALTER TABLE `autos`
+  MODIFY `id_auto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT de la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1365;
+
+--
+-- AUTO_INCREMENT de la tabla `tarifas`
+--
+ALTER TABLE `tarifas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas

@@ -7,7 +7,7 @@ if (empty($_SESSION['codigo'])) {
 }
 
 
-
+$ctrReservas = new ControladorReservas();
 //Si esta seteado mi formulario con los datos personales
 if (isset($_POST['checkout'])) {
 
@@ -33,7 +33,7 @@ if (isset($_POST['checkout'])) {
   ///////////**Controlador configuraciones**///////
   $ctrConfiguraciones = new ControladorConfiguraciones();
   ///////////**Controlador reservas**//////////////
-  $ctrReservas = new ControladorReservas();
+  
 
   //Cargo mi arreglo de tarifa según la categoria
   $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_desde']);
@@ -91,6 +91,15 @@ if (isset($_POST['checkout'])) {
   }
 
 ?>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Búsqueda</a></li>
+    <li class="breadcrumb-item"><a href="#">Checkout</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Confirmación</li>
+  </ol>
+</nav>
+
 <section id="portfolio" class="wow fadeInDown">
   <div class="container">
     <div class="center">
@@ -219,8 +228,10 @@ if (isset($_POST['checkout'])) {
           <input type="hidden" name="informacion_reserva" value="<?php echo $_SESSION['informacion']; ?>">
           <input type="hidden" name="hora_desde_reserva" value="<?php echo $_SESSION['hora_desde']; ?>">
           <input type="hidden" name="hora_hasta_reserva" value="<?php echo $_SESSION['hora_hasta']; ?>">
+          
+
           <input type="hidden" name="total_dias_reserva" value="<?php echo $_SESSION['total_dias']; ?>">
-          <input type="hidden" name="tarifa_reserva" value="<?php echo $_SESSION['tarifa']; ?>">
+          <input type="hidden" name="tarifa_reserva" value="<?php echo $total; ?>">
           <!--<input type="hidden" name="patente_reserva" value="<?php echo $_SESSION['patente']; ?>">-->
           <input type="hidden" name="origen_reserva" value="1">
           <hr class="mb-4">

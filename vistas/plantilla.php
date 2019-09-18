@@ -78,9 +78,8 @@
          $_GET["ruta"] == "flota" ||
          $_GET["ruta"] == "contacto" ||
          $_GET["ruta"] == "reservar" ||
-         $_GET["ruta"] == "cotizador" ||
-         $_GET["ruta"] == "formulario" ||
-         $_GET["ruta"] == "confirma" ){
+         $_GET["ruta"] == "checkout" ||
+         $_GET["ruta"] == "confirmacion" ){
 
         include "modulos/".$_GET["ruta"].".php";
 
@@ -171,7 +170,7 @@
         baguetteBox.run('.cards-gallery', { animation: 'slideIn'});
     </script>
     <script>
-    var IDLE_TIMEOUT = 600; //seconds
+    var IDLE_TIMEOUT = 60; //seconds
     var _idleSecondsCounter = 0;
     document.onclick = function() {
       _idleSecondsCounter = 0;
