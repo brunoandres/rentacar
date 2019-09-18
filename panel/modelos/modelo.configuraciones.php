@@ -341,7 +341,23 @@ class ModeloConfiguraciones{
     $link = Conexion::ConectarMysql();
     $cantidad = array();
  
-    $query = "select * from configuraciones where nombre like '%Cantidad Dias%'";
+    $query = "select * from configuraciones where nombre like '%Cantidad Dias%' and activa=1";
+    $sql = mysqli_query($link,$query);
+    while ($filas = mysqli_fetch_assoc($sql)) {
+       $cantidad['dias'] = $filas['valor'];
+       $cantidad['activo'] = $filas['activa'];
+    }
+    return $cantidad;
+
+  }
+
+  //Defino los dias de promociones de alquiler 
+  static public function diasParaPromociones(){
+
+    $link = Conexion::ConectarMysql();
+    $cantidad = array();
+ 
+    $query = "select * from configuraciones where nombre like '%Promociones%' and activa=1";
     $sql = mysqli_query($link,$query);
     while ($filas = mysqli_fetch_assoc($sql)) {
        $cantidad['dias'] = $filas['valor'];
@@ -357,7 +373,7 @@ class ModeloConfiguraciones{
     $link = Conexion::ConectarMysql();
     $margen = array();
  
-    $query = "select * from configuraciones where nombre like '%Margen Horario%'";
+    $query = "select * from configuraciones where nombre like '%Margen Horario%' and activa=1";
     $sql = mysqli_query($link,$query);
     while ($filas = mysqli_fetch_assoc($sql)) {
        $margen['margen'] = $filas['valor'];

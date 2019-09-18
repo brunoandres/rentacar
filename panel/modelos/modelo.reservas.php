@@ -88,37 +88,38 @@ class ModeloReservas
 
 	}
 
+	//Recibo la categoria y la fecha desde para buscar las tarifas cargadas
 	static function buscarTarifa($categoria,$fecha_desde){
 
 		$tarifa = array();
 		$link = Conexion::ConectarMysql();
-		$query = "select a.id as id_tarifa,a.por_dia as valor_tarifa_diaria,a.por_semana as valor_tarifa_semanal,b.nombre as nombre_temporada,b.fecha_desde as fecha_desde_temporada,b.fecha_hasta as fecha_hasta_temporada,c.nombre as categoria,c.activa as categoria_activa,c.promo as permite_promo from tarifas a, temporadas b, categorias c where a.id_temporada = b.id and a.id_categoria = c.id and a.activa = 1 and b.activa = 1 and c.activa and c.id = $categoria";
+		$query = "select a.id as id_tarifa,a.por_dia as valor_tarifa_diaria,a.por_semana as valor_tarifa_semanal,b.nombre as nombre_temporada,b.fecha_desde as fecha_desde_temporada,b.fecha_hasta as fecha_hasta_temporada,c.nombre as categoria,c.activa as categoria_activa,c.promo as permite_promo from tarifas a, temporadas b, categorias c where a.id_temporada = b.id and a.id_categoria = c.id and a.activa = 1 and b.activa = 1 and c.id = $categoria";
 		$sql = mysqli_query($link,$query);
 		while ($filas = mysqli_fetch_assoc($sql)) {
-			/*$tarifa['valor_diario'] = $filas['valor_tarifa_diaria'];
-			$tarifa['valor_semanal'] = $filas['valor_tarifa_semanal'];
-			$tarifa['permite_promo'] = $filas['permite_promo'];
-			$tarifa['categoria'] = $filas['categoria'];*/
 
-			$rangoDesde = $filas['fecha_desde_temporada'];
-	    	$rangoHasta = $filas['fecha_hasta_temporada'];
-	    	$precioxdia = $filas['valor_tarifa_diaria'];
-	    	$preciopromo =$filas['valor_tarifa_semanal'];
-	    	$categoria = $filas['categoria'];
-	    	$promo = $filas['permite_promo'];
+			$tarifas['fecha_desde_temporada'] = $filas['fecha_desde_temporada'];
+	    	$tarifas['fecha_hasta_temporada'] = $filas['fecha_hasta_temporada'];
+	    	$tarifas['valor_tarifa_diaria'] = $filas['valor_tarifa_diaria'];
+	    	$tarifas['valor_tarifa_semanal'] =$filas['valor_tarifa_semanal'];
+	    	$tarifas['categoria'] = $filas['categoria'];
+	    	$tarifas['permite_promo'] = $filas['permite_promo'];
 
-	    	if (self::check_in_range($rangoDesde,$rangoHasta,$fecha_desde)) {
+	    	//Check in range para verificar las tarifas segun el dia de inicio de reserva
+	    	if (self::check_in_range($tarifas['fecha_desde_temporada'],$tarifas['fecha_hasta_temporada'],$fecha_desde)) {
 	    		
-				array_push($tarifa, $precioxdia, $preciopromo, $promo, $categoria);
+	    		//Inserto en mi array tarifa los siguientes valores para mostrar en la vista confirma.php
+				array_push($tarifa, $tarifas['valor_tarifa_diaria'], $tarifas['valor_tarifa_semanal'], $tarifas['permite_promo'], $tarifas['categoria']);
 
 	    	}
 
 		}
 
+		//Retornos array de tarifas
 		return $tarifa;
 		mysql_close($link);
 	}
 
+	//Funcion para generar un codigo aleatorio de N digitos
 	static function codigoReserva($longitud){
 
 		$key = '';

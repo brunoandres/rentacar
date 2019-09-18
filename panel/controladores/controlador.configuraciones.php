@@ -51,6 +51,13 @@ class ControladorConfiguraciones{
 
 	}
 
+	static public function diasParaPromociones(){
+
+		$diasPromociones = ModeloConfiguraciones::diasParaPromociones();
+		return $diasPromociones;
+
+	}
+
 	//Metodo para listar los autos
   	static public function listarAutos($id=null){
 

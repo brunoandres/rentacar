@@ -6,7 +6,7 @@ if (empty($_SESSION['codigo'])) {
   </script>";
 }
 
-$new2 = new ControladorReservas();
+
 
 //Si esta seteado mi formulario con los datos personales
 if (isset($_POST['checkout'])) {
@@ -25,34 +25,70 @@ if (isset($_POST['checkout'])) {
   $_SESSION['hora_hasta'] = $_POST['hora_hasta'];
   //$_SESSION['patente'] = $_POST['patente'];
   
-   if (empty($_POST['adicionales'])) {
+  if (empty($_POST['adicionales'])) {
     $_SESSION['adicionales']='';
   }else{
     $_SESSION['adicionales'] = $_POST['adicionales'];
   } 
+  ///////////**Controlador configuraciones**///////
+  $ctrConfiguraciones = new ControladorConfiguraciones();
+  ///////////**Controlador reservas**//////////////
+  $ctrReservas = new ControladorReservas();
 
-  //var_dump($_SESSION['adicionales']);
+  //Cargo mi arreglo de tarifa según la categoria
+  $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_desde']);
 
-  $new = new ControladorConfiguraciones();
-  $lugares = $new->listarLugares();
-
-  // Lugares
-  $lugar_retiro = $new->listarLugares($_SESSION['retiro']);
-  $lugar_entrega = $new->listarLugares($_SESSION['entrega']);
-
-  //Cargo mi tarifa segun la categoria
-  $tarifa = $new2->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_desde']);
-
-  //Tarifa diaria
-  var_dump($tarifa);
-
-  $tarifa_diaria = $tarifa[1];
-
-  //Separo nombre de categoria para mostrar ej (A)
-  $categoria_seleccionada = explode(" ", $tarifa['categoria']);
+  if (!empty($tarifa)) {
+    //Cargo permito promociones por categoria
+    $permite_promociones = $tarifa[3];
+    //var_dump($permite_promociones);
 
 
+    //Busco lugares habilitados para mostrar
+    $lugares = $ctrConfiguraciones->listarLugares();
+    // Lugares
+    $lugar_retiro = $ctrConfiguraciones->listarLugares($_SESSION['retiro']);
+    $lugar_entrega = $ctrConfiguraciones->listarLugares($_SESSION['entrega']);
 
+    //Tarifa diaria
+    $tarifa_diaria = $tarifa[0];
+    //Tarifa semanal
+    $tarifa_semanal = $tarifa[1];
+
+    //echo "TARIFA DIARIA : ".$tarifa_diaria;
+    //echo "<br>TARIFA SEMANAL : ".$tarifa_semanal;
+    //Separo nombre de categoria para mostrar ej (A)
+    $categoria_seleccionada = explode(" ", $tarifa[3]);
+
+    //Verifico si la categoria acepta promociones
+    if (intval($tarifa[2] == 1)) {
+
+      $promo = $ctrConfiguraciones->diasParaPromociones();
+      $promo = $promo['dias'];
+
+      if ($promo==null) {
+        $promo = 7;
+      }
+
+      $diasSinPromo = ($_SESSION['total_dias']%$promo);
+      //echo "<br> Cantidad de promos:";
+
+      $cantidadPromociones = (($_SESSION['total_dias']-$diasSinPromo)/$promo);
+      //Precio de la promocion
+      $precio_promo = ($tarifa_semanal*$cantidadPromociones);
+      //Precio por dia 
+      $precio_diario = ($tarifa_diaria*$diasSinPromo);
+      //Total reserva
+      $total = ($precio_diario+$precio_promo);
+      //echo "<br>Total : ".$total;
+    }else{
+      $total = $_SESSION['total_dias']*$tarifa_diaria;
+    }
+  }else{
+    echo "<script>
+  window.location='inicio';
+  </script>";
+  }
 
 ?>
 <section id="portfolio" class="wow fadeInDown">
@@ -72,7 +108,7 @@ if (isset($_POST['checkout'])) {
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0">Categoria elegida</h6>
-              <small class="text-muted">Valor diario : $<?php echo $tarifa['valor_diario']; ?></small>
+              <small class="text-muted">Valor diario : $<?php echo $tarifa[0]; ?></small>
             </div>
             <span class="text-success"><strong>(<?php echo $categoria_seleccionada[1]; ?>)</strong></span>
           </li>
@@ -91,19 +127,27 @@ if (isset($_POST['checkout'])) {
                 
               <small class="text-muted">Por días selecionados</small>
             </div>
-            <span class="text-success"><strong>$<?php echo $total_por_dias = $tarifa['valor_diario']*$_SESSION['total_dias']; ?></strong></span>
+            <span class="text-success"><strong>$<?php echo $total_por_dias = $tarifa[0]*$_SESSION['total_dias']; ?></strong></span>
           </li>
 
-          <?php if (!$tarifa['permite_promo']==0): ?>
+          <?php if ($tarifa[2]==1 && $cantidadPromociones>=1): ?>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Tarifa Promocional</h6>
-                <small class="text-muted">Por Alquiler semanal</small>
+                <h6 class="my-0">Promociones</h6>
+                <small class="text-muted">Por <?php echo $cantidadPromociones; ?> promocion/es</small>
               </div>
-              <span class="text-danger"><strong>- $ <?php echo $total_por_dias-$tarifa['valor_semanal']; ?></strong></span>
+              <span class="text-success"><strong>$ <?php echo $precio_promo; ?></strong></span>
             </li>
           <?php endif ?>
-          
+          <?php if (!$diasSinPromo==0): ?>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Dias sin promo</h6>
+                <small class="text-muted">Por <?php echo $diasSinPromo; ?> dia/s sin promo</small>
+              </div>
+              <span class="text-success"><strong>+ $ <?php echo $precio_diario; ?></strong></span>
+            </li>
+          <?php endif ?>
 
           <?php  
           $tarifa_ad = 0;
@@ -114,7 +158,7 @@ if (isset($_POST['checkout'])) {
             
             foreach ($_SESSION['adicionales'] as $adicional => $value) {
 
-              $tarifa_adicional = $new->tarifaAdicional($value);
+              $tarifa_adicional = $ctrConfiguraciones->tarifaAdicional($value);
               
               $tarifa_ad+=$tarifa_adicional['tarifa'];
             
@@ -136,19 +180,19 @@ if (isset($_POST['checkout'])) {
 
           <li class="list-group-item d-flex justify-content-between">
             <span>Total Reserva (ARG)</span>
-            <strong>
-
+            <strong>$
+              <?php echo $total+$tarifa_ad; ?>
             
-            <?php 
+            <?php /*
             $total = 0;
 
-            if ($tarifa['permite_promo']==0) {
-              $total = ($tarifa['valor_diario']*$_SESSION['total_dias'])+$tarifa_ad;
+            if ($tarifa[2]==0) {
+              $total = ($tarifa[0]*$_SESSION['total_dias'])+$tarifa_ad;
             }else{
-              $total = $tarifa['valor_semanal']+$tarifa_ad;
+              $total = $tarifa[1]+$tarifa_ad;
             } 
             $_SESSION['tarifa'] = $total;
-            echo '$'.$total;
+            echo '$'.$total;*/
             
             ?>
    
@@ -157,14 +201,6 @@ if (isset($_POST['checkout'])) {
 
         </ul>
 
-        <!--<form class="card p-2" method="POST">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Código Descuento">
-            <div class="input-group-append">
-              <button type="submit" class="btn btn-secondary">Aplicar</button>
-            </div>
-          </div>
-        </form>-->
       </div>
       <div class="col-md-8 order-md-1">
         <h3 class="mb-3"><i class="fa fa-info" aria-hidden="true"></i> Detalles de su Reserva</h3>
@@ -186,6 +222,7 @@ if (isset($_POST['checkout'])) {
           <input type="hidden" name="total_dias_reserva" value="<?php echo $_SESSION['total_dias']; ?>">
           <input type="hidden" name="tarifa_reserva" value="<?php echo $_SESSION['tarifa']; ?>">
           <!--<input type="hidden" name="patente_reserva" value="<?php echo $_SESSION['patente']; ?>">-->
+          <input type="hidden" name="origen_reserva" value="1">
           <hr class="mb-4">
           <div class="row">
 
@@ -215,5 +252,5 @@ if (isset($_POST['checkout'])) {
 
 <?php } 
 //Metodo para guardar nueva reserva
-$nuevaReserva = $new2->nuevaReservaInsert();
+$nuevaReserva = $ctrReservas->nuevaReservaInsert();
 ?>

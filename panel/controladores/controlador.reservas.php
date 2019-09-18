@@ -1,6 +1,6 @@
 <?php
 
-//require_once 'panel/modelos/modelo.conexion.php';
+require_once 'controlador.configuraciones.php';
 
 class ControladorReservas
 {
@@ -95,12 +95,15 @@ class ControladorReservas
 	  	  	//En caso de no encontrar la configuracion o que ésta esté mal definida, por defecto serán 3 dias minimo de alquiler.
 	  	  	if (!empty($cantidad_dias_configuracion)) {
 	  	  		$minimo_de_dias = $cantidad_dias_configuracion['dias'];
-	  	  		settype($minimo_de_dias, "integer");
+	  	  		if (!$minimo_de_dias == null) {	
+	  	  			settype($minimo_de_dias, "integer");
+	  	  		}else{
+	  	  			$minimo_de_dias=3;
+	  	  		}
+	  	  		
 	  	  	}else{
 	  	  		$minimo_de_dias=3;
 	  	  	}
-
-	  	  	//var_dump($minimo_de_dias);
 
 	  	  	//Cantidad de dias minimos para reservar.
 	  	  	if ($total_dias>=$minimo_de_dias) {
@@ -126,11 +129,11 @@ class ControladorReservas
 					$_SESSION['total_dias']  = $total_dias;
 					$_SESSION['mensaje']     = 'Reserva Disponible';
  
-					echo "<script>
+					/*echo "<script>
 
 					window.location='formulario';
 
-					</script>";
+					</script>";*/
 
 				}else{
 
@@ -178,7 +181,7 @@ class ControladorReservas
 			$tarifa = $_POST['tarifa_reserva'];
 			$total_dias = $_POST['total_dias_reserva'];
 			$estado = 1;
-			$origen = 1;
+			$origen = $_POST['origen_reserva'];
 			$telefono = mysqli_real_escape_string($link,$_POST['telefono_reserva']);
 			$email = mysqli_real_escape_string($link,$_POST['email_reserva']);
 			$retiro = $_POST['retiro_reserva'];
@@ -195,7 +198,100 @@ class ControladorReservas
 			
 			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales);
 			
+			
+			//Si hay disponibilidad
 			if ($respuesta=="ok") {
+
+				$ctrConfiguraciones = new ControladorConfiguraciones();
+				$lugar_retiro = $ctrConfiguraciones->listarLugares($retiro);
+				//$lugar_devolucion = $ctrConfiguraciones->listarLugares($_SESSION['entrega']);
+
+				foreach ($adicionales as $adicional => $value) {
+
+              		$buscarAdicionales = $ctrConfiguraciones->buscarAdicionales($value);
+              
+              		$adicionales_email = $buscarAdicionales['adicionales'];
+          		}
+
+				//CORREO ELECTRONICO PARA EL SITIO
+				$header .= "From: SITIO - Reservas Patagonia Austral <$email> \r\n";
+				$header .= "Reply-To:" . $from . "\r\n" ."X-Mailer: PHP/" . phpversion();
+				$header .= 'MIME-Version: 1.0' . "\r\n";
+				$header .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+				$asunto ="Nueva Reserva Confirmada - Sitio Oficial Austral Rent a Car";
+					//$header ="--------------------- CONSULTA CENERGON.COM.AR ------------------------------------";
+				$contenido="			Nombre: $nombre <br>
+										Email: $email <br>
+										Teléfono: $telefono <br>
+										Fecha desde: $fecha_desde <br>
+										Fecha hasta: $fecha_hasta <br>
+										Lugar de retiro: $lugar_retiro <br>
+										Hora a entregar: $hora_desde <br>
+										Adicionales: <br>
+										$adicionales_email
+										Observaciones: $observaciones";
+
+				mail("reservas@patagoniaaustralrentacar.com.ar,patagoniaaustralrentacar@gmail.com",$asunto,$contenido,$header);
+
+				//CORREO ELECTRONICO PARA EL CLIENTE
+				$header_cliente .= "From: SITIO - Reservas Patagonia Austral <patagoniaaustralrentacar@gmail.com> \r\n";
+				$header_cliente .= "Reply-To:" . $from . "\r\n" ."X-Mailer: PHP/" . phpversion();
+				$header_cliente .= 'MIME-Version: 1.0' . "\r\n";
+				$header_cliente .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+
+				$asunto_cliente = "Información de su Reserva - Sitio Oficial Rent a Car";
+					//$header ="--------------------- CONSULTA CENERGON.COM.AR ------------------------------------";
+				$contenido_cliente = "Se ha confirmado la Reserva a nombre de $nombre en Austral Rent a Car <br>
+				<br><br>
+
+				Detalles de la reserva:<br><br>
+
+				Desde: $fecha_desde <br>
+				Hasta: $fecha_hasta <br>
+				Vehículo: $categoria <br>
+				Retirar en: $lugar_retiro. <br>
+				Hora: $hora_desde hs. <br>
+				N° de Vuelo: $vuelo <br>
+				Cotización: $ $tarifa <br><br>
+
+				Adicionales:<br><br>
+				$adicionales_email
+
+				* Información <br>
+				<p>Todos los vehículos poseen cubiertas de hielo y nieve.</p>
+				<br>
+				* Horarios  <br>
+				<p>El horario de devolución del vehículo deberá ser el mismo definido en la reserva, de lo contrario se cobrará el adicional como un día más de alquiler.</p>
+				 <br><br>
+
+				* Adicionales <br>
+				<p>Todos los adicionales añaden un costo al total de la reserva, en caso de rotura ó robo de los mismos, se deberan abonar con los siguientes valores.</p>
+				<ul>
+					<li>Silla bebé : $1300</li>
+					<li>Cadenas : $1300</li>
+					<li>Buster : $1500</li>
+				</ul>
+				<br><br>
+
+				* Medios de pago <br>
+				Puede realizar el pago en efectivo a la hora de la entrega,
+				o mediante depósito bancario.<br>
+				Banco Galicia : <br>
+				DU: 32699889 <br>
+				CTA: 4019424-7031-8 <br>
+				CBU: 0070031330004019424784 <br>
+				CUIL: 27326998864 <br>
+				Para mayor información, por favor comuniquese con nosotros. Muchas Gracias.<br><br>
+
+				-------------Info Contacto Rent a Car-------<br><br>
+				Jimena González Whatsapp Tel: +54 9 2944242615.
+
+				<h3>Franquicia</h3>
+			    <p>Para los daños (parciales) ocurridos en nuestros vehículos, el Cliente debe abonar los mismos hasta un valor maximo (FRANQUICIA) de $15.000 por accidente y $25.000 por vuelco (excepto en la categoria E, que la misma tiene un valor de $25.000 por accidente y $35.000 por vuelco). Esta franquicia es fija de acuerdo a las categorias de vehiculos, entonces, si la FRANQUICIA es de $15.000 por accidente, el Cliente debe abonar todas las eventuales reparaciones hasta $15.000. Si el valor a reparar es mayor a la FRANQUICIA, esa difrencia es cubierta por el seguro.</p>";
+
+				mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);
+
 				$_SESSION['reserva_ok'] = true;
 				echo "<script>
 				window.location = 'inicio';
