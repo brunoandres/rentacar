@@ -1,15 +1,14 @@
 /*=============================================
 EDITAR CATEGORIA
 =============================================*/
-$(".tablas").on("click", ".btnEditarAdicional", function(){
+$(".tablas").on("click", ".btnEditarReserva", function(){
 
-	var idAdicional = $(this).attr("idAdicional");
-
+	var idReserva = $(this).attr("idReserva");
 	var datos = new FormData();
-	datos.append("idAdicional", idAdicional);
+	datos.append("idReserva", idReserva);
 
 	$.ajax({
-		url: "ajax/adicionales.ajax.php",
+		url: "ajax/reservas.ajax.php",
 		method: "POST",
     	data: datos,
     	cache: false,
@@ -18,13 +17,16 @@ $(".tablas").on("click", ".btnEditarAdicional", function(){
      	dataType:"json",
      	success: function(respuesta){
 
-        if (respuesta['habilitado']==1) {
-			$("#activaAdicional").prop("checked",true);
-		}
- 		$("#nombreAdicional").val(respuesta["nombre"]);
-		$("#tarifaAdicional").val(respuesta["tarifa"]);
-		$("#observaciones").val(respuesta["observaciones"]);
- 		$("#idAdicional").val(respuesta["id"]);
+ 		$("#nombre").val(respuesta["nombre"]);
+ 		$("#apellido").val(respuesta["apellido"]);
+ 		$("#telefono").val(respuesta["TELEFONO_CONTACTO"]);
+ 		$("#email").val(respuesta["email"]);
+ 		$("#vuelo").val(respuesta["NRO_DE_VUELO"]);
+		$("#retiro").val(respuesta["retiro"]);
+		$("#devolucion").val(respuesta["entrega"]);
+		$("#tarifa").val(respuesta["TARIFA_RESERVA_TOTAL"]);
+		$("#observaciones").val(respuesta["OBSERVACIONES"]);
+ 		$("#idReserva").val(respuesta["ID_RESERVA"]);
 
      	}
 
@@ -41,7 +43,7 @@ $(".tablas").on("click", ".btnEliminarReserva", function(){
 	 var idReserva = $(this).attr("idReserva");
 
 	 swal({
-	 	title: '¿Está seguro de borrar la Reserva '+idReserva+' ?',
+	 	title: '¿Está seguro de borrar la Reserva N° '+idReserva+' ?',
 	 	text: "¡Si no lo está puede cancelar la acción!",
 	 	type: 'warning',
 	 	showCancelButton: true,

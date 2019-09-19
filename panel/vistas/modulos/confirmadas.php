@@ -3,7 +3,9 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorReservas();
 $newConf = new ControladorConfiguraciones();
 $reservas = $new->listarReservas(1,NULL);
-
+//Cargo mi combo dinamico con los lugares
+$lugares = $newConf->listarLugares();
+$editarReserva = $new->editarReserva();
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -80,7 +82,7 @@ $reservas = $new->listarReservas(1,NULL);
 
                   <button type="button" name="view_data" value="" id="<?php echo $value['ID_RESERVA']; ?>" class="btn btn-info btn-xs view_data"><i class="fa fa-eye" aria-hidden="true"></i></button>
 
-                  <button type="button" name="view_data" value="" id="<?php echo $value['ID_RESERVA']; ?>" class="btn btn-warning btn-xs view_data"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                  <button class="btn btn-warning btn-xs btnEditarReserva" idReserva="<?php echo $value['ID_RESERVA']; ?>" data-toggle="modal" data-target="#modalEditarReserva"><i class="fa fa-pencil"></i></button>
 
                   <button type="button" name="view_data" value="" idReserva="<?php echo $value['ID_RESERVA']; ?>" class="btn btn-danger btn-xs btnEliminarReserva"><i class="fa fa-times" aria-hidden="true"></i></button>
 
@@ -143,3 +145,128 @@ if (isset($_GET['idReserva'])) {
 }
 
 ?>
+
+<!--=====================================
+MODAL EDITAR RESERVA
+======================================-->
+
+<div id="modalEditarReserva" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <form role="form" method="post">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+
+         <a href="confirmadas"><button type="button" class="close" data-dismiss="">&times;</button></a>
+
+          <h4 class="modal-title">Editar Reserva</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+
+          <div class="box-body">
+
+            <!-- ENTRADA PARA EL NOMBRE -->
+
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                <input type="text" class="form-control input-lg" name="nombre" id="nombre" required autocomplete="off" placeholder="Nombre">
+                <input type="hidden" name="idReserva" id="idReserva" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                <input type="text" class="form-control input-lg" name="apellido" id="apellido" required autocomplete="off" placeholder="Apellido">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                <input type="text" class="form-control input-lg" name="telefono" id="telefono" required autocomplete="off" placeholder="N° de Teléfono">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                <input type="text" class="form-control input-lg" name="email" id="email" required autocomplete="off" placeholder="Correo Electrónico">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                <input type="text" class="form-control input-lg" name="vuelo" id="vuelo" required autocomplete="off" placeholder="N° de Vuelo">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                <input type="number" step="0.1" class="form-control input-lg" name="tarifa" id="tarifa" required autocomplete="off" placeholder="Ingreso monto de tarifa">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="country">Lugar de retiro</label>
+                <select class="form-control" id="retiro" name="retiro" style="width: 100%;">
+                  <?php foreach ($lugares as $lugar) {?>
+                    <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
+                  <?php } ?>
+                </select>
+            </div>
+
+            <div class="form-group">
+              <label for="country">Lugar de devolución</label>
+                <select class="form-control" id="devolucion" name="devolucion" style="width: 100%;">
+                  <?php foreach ($lugares as $lugar) {?>
+                    <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
+                  <?php } ?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Observaciones</label>
+                <textarea class="form-control" rows="3" name="observaciones" id="observaciones" placeholder="Ingrese alguna observación adicional..."></textarea>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+
+          <a href="confirmadas"><button type="button" class="btn btn-default pull-left" data-dismiss="">Salir</button></a>
+          <button type="submit" class="btn btn-primary" name="editarReserva">Guardar cambios</button>
+
+        </div>
+
+
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

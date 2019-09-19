@@ -40,7 +40,7 @@ unset($_SESSION['total_dias']);
 
 if (isset($_SESSION['reserva_ok'])) {
  echo "<script>
- toastr.success('Su reserva ha sido ingresada correctamente, verifique su casilla de correo electrónico.', 'Reserva Confirmada', {timeOut: 4000})
+ toastr.success('¡MUCHAS GRACIAS POR SU RESERVA!,La misma ha sido ingresada correctamente, verifique su casilla de correo electrónico o carpeta de Spam para ver más detalles. Tambien es posible consultar sobre la misma en la seccion Mi Reserva.', 'Reserva Confirmada', {timeOut: 10000})
  </script>";
  unset($_SESSION['reserva_ok']);
 }

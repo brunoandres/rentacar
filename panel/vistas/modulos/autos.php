@@ -77,6 +77,8 @@ if (isset($_SESSION['auto_ok'])) {
               
                 <td align="left">
 
+                  
+
                   <button class="btn btn-warning btnEditarAuto" idAuto="<?php echo $auto['id']; ?>" data-toggle="modal" data-target="#modalEditarAuto"><i class="fa fa-pencil"></i></button>
 
 
@@ -237,3 +239,4 @@ MODAL EDITAR AUTO
   </div>
 
 </div>
+

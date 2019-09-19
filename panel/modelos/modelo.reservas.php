@@ -58,7 +58,7 @@ class ModeloReservas
 	   		}
 	   	}
 	   	
-	    $query = "select a.id as ID_RESERVA,a.id_categoria,a.codigo as CODIGO_RESERVA,CONCAT(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL,a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,e.lugar as LUGAR_RETIRO,e.lugar as LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as ADICIONALES,d.nombre as CATEGORIA from reservas a left join reservas_adicionales b on a.id = b.id_adicional left join adicionales c ON a.id = c.id LEFT join categorias d on a.id_categoria = d.id left JOIN lugares e on a.retiro = e.id and a.entrega = e.id $query_estado $query_mov";
+	    $query = "select a.id as ID_RESERVA,a.id_categoria,a.codigo as CODIGO_RESERVA,CONCAT(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.nombre,a.apellido,a.email,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL,a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,a.retiro,a.entrega,e.lugar as LUGAR_RETIRO,e.lugar as LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as ADICIONALES,d.nombre as CATEGORIA from reservas a left join reservas_adicionales b on a.id = b.id_adicional left join adicionales c ON a.id = c.id LEFT join categorias d on a.id_categoria = d.id left JOIN lugares e on a.retiro = e.id and a.entrega = e.id $query_estado $query_mov";
 	    $sql = mysqli_query($link,$query);
 
 
@@ -429,6 +429,20 @@ class ModeloReservas
 	    mysqli_close( $link );
 
 
+	}
+
+	//Funcion para editar Reserva
+	static function editarReserva($nombre,$apellido,$tarifa,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$id_reserva){
+
+		$link = Conexion::ConectarMysql();
+		$query = "UPDATE `reservas` SET `nombre`='$nombre',`apellido`='$apellido',`tarifa`=$tarifa,`telefono`='$telefono',`email`='$email',`retiro`=$retiro,`entrega`=$entrega,`nro_vuelo`='$vuelo',`observaciones`='$observaciones' WHERE id = $id_reserva";
+		$sql = mysqli_query($link,$query) or die (mysqli_error($link));
+		if ($sql) {
+			 auditar($_SESSION["id_user"],$query);
+			return "ok";
+		}else{
+			return "error";
+		}
 	}
 
 }

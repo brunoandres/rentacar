@@ -24,6 +24,11 @@ $newConf = new ControladorConfiguraciones();
            $output .= '
 
                 <tr>
+                     <td width="30%"><label>Código Reserva</label></td>
+                     <td width="70%">'.$row["codigo"].'</td>
+                </tr>
+
+                <tr>
                      <td width="30%"><label>Teléfono</label></td>
                      <td width="70%">'.$row["telefono"].'</td>
                 </tr>
@@ -35,7 +40,7 @@ $newConf = new ControladorConfiguraciones();
 
                 <tr>
                      <td width="30%"><label>Total Dias</label></td>
-                     <td width="70%">'.$row["total_dias"].'</td>
+                     <td width="70%">'.$row["total_dias"].' dia/s</td>
                 </tr>
                 
                 <tr>
@@ -45,7 +50,7 @@ $newConf = new ControladorConfiguraciones();
 
                 <tr>
                      <td width="30%"><label>Adicionales</label></td>
-                     <td width="70%">'.$adicionales.'</td>
+                     <td width="70%"><span class="badge badge-primary">'.$adicionales.'</span></td>
                 </tr>
 
                 <tr>

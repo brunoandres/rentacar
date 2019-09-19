@@ -120,7 +120,7 @@ if (empty($_SESSION['codigo'])) {
               </div>
 
               <div class="col-md-4 mb-3">
-                <label for="country">Lugar de entrega</label>
+                <label for="country">Lugar de devolución</label>
                   <select class="form-control" id="entrega" name="entrega" style="width: 100%;">
                     <?php foreach ($lugares as $lugar) {?>
                       <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>

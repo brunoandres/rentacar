@@ -206,12 +206,18 @@ class ControladorReservas
 				$lugar_retiro = $ctrConfiguraciones->listarLugares($retiro);
 				//$lugar_devolucion = $ctrConfiguraciones->listarLugares($_SESSION['entrega']);
 
-				foreach ($adicionales as $adicional => $value) {
+				if (!empty($adicionales)) {
+
+					foreach ($adicionales as $adicional => $value) {
 
               		$buscarAdicionales = $ctrConfiguraciones->buscarAdicionales($value);
               
               		$adicionales_email = $buscarAdicionales['adicionales'];
-          		}
+          			}
+				}else{
+					$adicionales_email = '';
+				}
+				
 
 				//CORREO ELECTRONICO PARA EL SITIO
 				$header .= "From: SITIO - Reservas Patagonia Austral <$email> \r\n";
@@ -293,9 +299,9 @@ class ControladorReservas
 				mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);
 
 				$_SESSION['reserva_ok'] = true;
-				echo "<script>
+				/*echo "<script>
 				window.location = 'inicio';
-				</script>";
+				</script>";*/
 			}else{
 				$_SESSION['reserva_error'] = true;
 				echo "<script>
@@ -303,6 +309,61 @@ class ControladorReservas
 				</script>";
 				
 			}
+		}
+
+	}
+
+	static function editarReserva(){
+
+		if (isset($_POST['editarReserva'])) {
+
+			$link = Conexion::ConectarMysql();
+
+			$nombre = mysqli_real_escape_string($link, $_POST['nombre']);
+			$apellido = mysqli_real_escape_string($link,$_POST['apellido']);
+			//$fecha_desde = $_POST['fecha_desde'];
+			//$fecha_hasta = $_POST['fecha_hasta'];
+			//$hora_desde = $_POST['hora_desde_reserva'];
+			//$hora_hasta = $_POST['hora_hasta_reserva'];
+			$tarifa = $_POST['tarifa'];
+			$telefono = mysqli_real_escape_string($link,$_POST['telefono']);
+			$email = mysqli_real_escape_string($link,$_POST['email']);
+			$retiro = $_POST['retiro'];
+			$devolucion = $_POST['devolucion'];
+			$tarifa = $_POST['tarifa'];
+			$vuelo = mysqli_real_escape_string($link,$_POST['vuelo']);
+			$observaciones = mysqli_real_escape_string($link,$_POST['observaciones']);
+			$id_reserva = $_POST['idReserva'];
+			
+			$respuesta = ModeloReservas::editarReserva($nombre,$apellido,$tarifa,$telefono,$email,$retiro,$devolucion,$vuelo,$observaciones,$id_reserva);
+			if ($respuesta=="ok") {
+
+		      	echo'<script>
+
+						swal({
+								type: "success",
+								title: "Reserva editada correctamente",
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar"
+								}).then(function(result){
+									window.location = "confirmadas";
+									})
+
+						</script>';
+
+		      	
+	      	} else {
+		        echo'<script>
+
+						swal({
+								type: "danger",
+								title: "Error al editar Reserva.",
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar"
+								}).then(function(result){})
+
+						</script>';
+	      	}
 		}
 
 	}

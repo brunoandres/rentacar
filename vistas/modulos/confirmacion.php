@@ -119,24 +119,24 @@ if (isset($_POST['checkout'])) {
               <h6 class="my-0">Categoria elegida</h6>
               <small class="text-muted">Valor diario : $<?php echo $tarifa[0]; ?></small>
             </div>
-            <span class="text-success"><strong>(<?php echo $categoria_seleccionada[1]; ?>)</strong></span>
+            <span class="text-success"><strong><?php echo $categoria_seleccionada[1]; ?></strong></span>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0">Días de reservas</h6>
               <small class="text-muted">Cantidad de días</small>
             </div>
-            <span class="text-success"><strong>(<?php echo $_SESSION['total_dias']; ?>)</strong></span>
+            <span class="text-success"><strong><?php echo $_SESSION['total_dias']; ?> dia/s</strong></span>
           </li>
  
           <li class="list-group-item d-flex justify-content-between bg-light">
             <div class="text-success">
-              <h6 class="my-0">Valor reserva</h6>
+              <h6 class="my-0">Valor Reserva</h6>
               
                 
               <small class="text-muted">Por días selecionados</small>
             </div>
-            <span class="text-success"><strong>$<?php echo $total_por_dias = $tarifa[0]*$_SESSION['total_dias']; ?></strong></span>
+            <span class="text-success"><strong>$<?php echo $total_por_dias = number_format($tarifa[0]*$_SESSION['total_dias'], 0, ",", "."); ?></strong></span>
           </li>
 
           <?php if ($tarifa[2]==1 && $cantidadPromociones>=1): ?>
@@ -145,7 +145,7 @@ if (isset($_POST['checkout'])) {
                 <h6 class="my-0">Promociones</h6>
                 <small class="text-muted">Por <?php echo $cantidadPromociones; ?> promocion/es</small>
               </div>
-              <span class="text-success"><strong>$ <?php echo $precio_promo; ?></strong></span>
+              <span class="text-success"><strong>$ <?php echo number_format($precio_promo, 0, ",", "."); ?></strong></span>
             </li>
           <?php endif ?>
           <?php if (!$diasSinPromo==0): ?>
@@ -154,7 +154,7 @@ if (isset($_POST['checkout'])) {
                 <h6 class="my-0">Dias sin promo</h6>
                 <small class="text-muted">Por <?php echo $diasSinPromo; ?> dia/s sin promo</small>
               </div>
-              <span class="text-success"><strong>+ $ <?php echo $precio_diario; ?></strong></span>
+              <span class="text-success"><strong>+ $ <?php echo number_format($precio_diario, 0, ",", "."); ?></strong></span>
             </li>
           <?php endif ?>
 
@@ -179,7 +179,7 @@ if (isset($_POST['checkout'])) {
               <h6 class="my-0"><?php echo $tarifa_adicional['nombre']; ?>  </h6>
               <small class="text-muted">Adicional seleccionado</small>
             </div>
-            <span class="text-success"><strong>+ $<?php echo $tarifa_adicional['tarifa']; ?></strong></span>
+            <span class="text-success"><strong>+ $<?php echo number_format($tarifa_adicional['tarifa'], 2, ",", "."); ?></strong></span>
           </li>
 
 
@@ -188,9 +188,9 @@ if (isset($_POST['checkout'])) {
 
 
           <li class="list-group-item d-flex justify-content-between">
-            <span>Total Reserva (ARG)</span>
+            <span>Total a Pagar (ARG)</span>
             <strong>$
-              <?php echo $total+$tarifa_ad; ?>
+              <?php echo number_format($total+$tarifa_ad, 0, ",", "."); ?>
             
             <?php /*
             $total = 0;
@@ -239,10 +239,10 @@ if (isset($_POST['checkout'])) {
 
             <div class="col-md-12">
             
-              <ul><i class="fa fa-calendar" aria-hidden="true"></i> Fecha desde : <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde']));?> - <?php echo $_SESSION['hora_desde'].'hs'; ?> </ul>
-              <ul><i class="fa fa-calendar" aria-hidden="true"></i> Fecha hasta : <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?> - <?php echo $_SESSION['hora_hasta'].'hs'; ?> </ul>
-              <ul><i class="fa fa-map-marker" aria-hidden="true"></i> Lugar retiro : <?php echo $lugar_retiro['nombre']; ?></ul>
-              <ul><i class="fa fa-map-marker" aria-hidden="true"></i> Lugar entrega : <?php echo $lugar_entrega['nombre']; ?></ul>
+              <ul><i class="fa fa-calendar" aria-hidden="true"></i> <strong>Fecha desde : </strong><?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde']));?> - <?php echo $_SESSION['hora_desde'].'hs'; ?> </ul>
+              <ul><i class="fa fa-calendar" aria-hidden="true"></i> <strong>Fecha hasta : </strong><?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?> - <?php echo $_SESSION['hora_hasta'].'hs'; ?> </ul>
+              <ul><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Lugar retiro : </strong><?php echo $lugar_retiro['nombre']; ?></ul>
+              <ul><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Lugar entrega : </strong><?php echo $lugar_entrega['nombre']; ?></ul>
 
             </div>
 
@@ -265,3 +265,5 @@ if (isset($_POST['checkout'])) {
 //Metodo para guardar nueva reserva
 $nuevaReserva = $ctrReservas->nuevaReservaInsert();
 ?>
+
+

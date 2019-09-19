@@ -19,4 +19,21 @@ $(document).ready(function(){
                 });
            }
       });
+
+      $(document).on('click', '.view_data_categorias', function(){
+           var id_categoria = $(this).attr("id");
+           if(id_categoria != '')
+           {
+                $.ajax({
+                     url:"http://localhost/rentacar/panel/serverside/categorias-detalles.php",
+                     method:"POST",
+                     data:{id_categoria:id_categoria},
+                     success:function(data){
+                          $('#detalles').html(data);
+                          $('#dataModal').modal('show');
+                     }
+                });
+           }
+      });
  });
+

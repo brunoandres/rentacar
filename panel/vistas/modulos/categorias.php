@@ -77,7 +77,9 @@ if (isset($_SESSION['categoria_ok'])) {
                 };?></td>
                 <td align="left">
 
-                  <button class="btn btn-info btnEditarCategoria" idCategoria="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>
+                  <button type="button" name="view_data_categorias" id="<?php echo $value['id']; ?>" class="btn btn-info btn-xs view_data_categorias"><i class="fa fa-eye" aria-hidden="true"></i></button>
+
+                  <button class="btn btn-warning btn-xs btnEditarCategoria" idCategoria="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>
 
 
                 </td>
@@ -196,4 +198,20 @@ MODAL EDITAR CATEGORÍA
 
   </div>
 
+</div>
+
+<div id="dataModal" class="modal fade">
+  <div class="modal-dialog">
+     <div class="modal-content">
+        <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <h4 class="modal-title">Detalle de Categorias</h4>
+        </div>
+        <div class="modal-body" id="detalles">
+        </div>
+        <div class="modal-footer">
+             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+     </div>
+  </div>
 </div>
