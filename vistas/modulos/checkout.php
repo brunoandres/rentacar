@@ -1,15 +1,15 @@
 <?php
 
-$new = new ControladorConfiguraciones();
+$ctrConfiguraciones = new ControladorConfiguraciones();
 
 //Cargo mi combo dinamico con los lugares
-$lugares = $new->listarLugares();
+$lugares = $ctrConfiguraciones->listarLugares();
 
 //Cargo mi combo dinamico con los adicionales
-$adicionales = $new->listarAdicionales();
+$adicionales = $ctrConfiguraciones->listarAdicionales();
 
 //Cargo los adicionales para mostrar en ventana modal
-$adicionales_modal = $new->listarAdicionales();
+$adicionales_modal = $ctrConfiguraciones->listarAdicionales();
 
 if (empty($_SESSION['codigo'])) {
   echo "<script>

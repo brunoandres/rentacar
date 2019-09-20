@@ -384,7 +384,7 @@ class ModeloReservas
 	}
 
 	//Funcion para guardar una nueva reserva
-	static public function nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales=null,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales=null){
+	static public function nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales=null,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales=null,$direccion_ip=null){
 
 		$link = Conexion::ConectarMysql();
 
@@ -398,7 +398,7 @@ class ModeloReservas
 		//Desactivamos el autommit transaccional
 		mysqli_autocommit($link,FALSE);
 
-	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `adicionales`,`telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`,`start`, `end`, `color`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen,$tiene_adicionales,'$telefono','$email',$retiro,$entrega,'$vuelo','$observaciones','$start_calendar','$end_calendar','#FF0000')";
+	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `adicionales`,`telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`,`start`, `end`, `color`, `direccion_ip`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen,$tiene_adicionales,'$telefono','$email',$retiro,$entrega,'$vuelo','$observaciones','$start_calendar','$end_calendar','#FF0000','$direccion_ip')";
 	    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
 
 	    if ($sql) {

@@ -177,6 +177,8 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "tarifas" ||
          $_GET["ruta"] == "pendientes" ||
          $_GET["ruta"] == "confirmadas" ||
+         $_GET["ruta"] == "checkout" ||
+         $_GET["ruta"] == "confirmacion" ||
          $_GET["ruta"] == "nueva-reserva" ||
          $_GET["ruta"] == "nueva-temporada" ||
          $_GET["ruta"] == "editar-temporada" ||

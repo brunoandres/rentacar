@@ -3,7 +3,7 @@
 $new = new ControladorReservas();
 $newCat = new ControladorCategorias();
 $categorias = $newCat->listarCategorias();
-$data = $new->buscarDisponibilidad();
+$data = $new->buscarDisponibilidad('web');
 
 if (isset($_SESSION['reserva_error'])) {
 

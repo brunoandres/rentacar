@@ -5,6 +5,17 @@ require_once 'controlador.configuraciones.php';
 class ControladorReservas
 {
 
+	//Funcion para tomar la direccion ip del cliente
+	static function direccionIP() {
+	    if (!empty($_SERVER['HTTP_CLIENT_IP']))
+	        return $_SERVER['HTTP_CLIENT_IP'];
+	       
+	    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+	        return $_SERVER['HTTP_X_FORWARDED_FOR'];
+	   
+	    return $_SERVER['REMOTE_ADDR'];
+	}
+
 	static function listarTotalesReservasPanel($query){
 
 		$total = ModeloReservas::listarTotalesReservasPanel($query);
@@ -64,9 +75,15 @@ class ControladorReservas
 	}
 
 	//Funcion principal que busca disponibilidad, devuelve el contador de autos disponibles.
-	static function buscarDisponibilidad(){
+	static function buscarDisponibilidad($origen){
 
 	    if (isset($_POST['buscarDisponibilidad'])) {
+
+	    	if ($origen == 'web') {
+	    		$url_checkout = 'checkout';
+	    	}else{
+	    		$url_checkout = './checkout';
+	    	}
 
 	    	//Codigo de reserva es null, hasta que se genere aleatoriamente.
     		$codigo = NULL;
@@ -131,7 +148,7 @@ class ControladorReservas
  
 					echo "<script>
 
-					window.location='checkout';
+					window.location='$url_checkout';
 
 					</script>";
 
@@ -195,8 +212,11 @@ class ControladorReservas
 			}else{
 				$tiene_adicionales = 1;
 			}
+
+			//Obtener la direccion ip del cliente
+			$direccion_ip = self::direccionIP();
 			
-			/*$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales);*/
+			/*$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales,$direccion_ip);*/
 			
 			$respuesta = "ok";
 			//Si hay disponibilidad
@@ -222,6 +242,8 @@ class ControladorReservas
 	static public function enviarCorreo($nombre,$apellido,$categoria,$codigo,$fecha_desde,$fecha_hasta,$hora_desde,$tarifa,$total_dias,$retiro,$vuelo,$observaciones,$adicionales,$email){
 
 		$ctrConfiguraciones = new ControladorConfiguraciones();
+		$ctrReservas = new ControladorReservas();
+
 		$lugar_retiro = $ctrConfiguraciones->listarLugares($retiro);
 		//$lugar_devolucion = $ctrConfiguraciones->listarLugares($_SESSION['entrega']);
 		$adicionales_email = array();
@@ -234,8 +256,6 @@ class ControladorReservas
       		$adicionales_nombre = $buscarAdicionales['adicional'];
       		$adicionales_tarifa = $buscarAdicionales['tarifa'];
 
-      		$lista_adicionales = implode($adicionales_nombre);
-
       		//Inserto en mi array para luego recorrer y separar
       		array_push($adicionales_email, $adicionales_nombre.' $'.$adicionales_tarifa);
 
@@ -244,13 +264,35 @@ class ControladorReservas
 			$adicionales_nombre = '';
 		}
 
+		//Lugar para mostrar
 		$lugar_email = $ctrConfiguraciones->listarLugares($retiro,null);
 		$lugar_email = $lugar_email['nombre'];
 
-	
+		//Lista de adicionales seleccionados para mostrar
 		$lista = implode(",",$adicionales_email);
-		
 
+		//Formato de moneda
+		$tarifa = number_format($tarifa, 0, ",", ".");
+
+		//Formato Fechas dd/mm/yyyy/
+		$fecha_desde_email = date('d/m/Y', strtotime($fecha_desde));
+		$fecha_hasta_email = date('d/m/Y', strtotime($fecha_hasta));
+
+		//Categoria a mostrar
+		$categoria_email = self::tarifaReserva($categoria,$fecha_desde);
+		$categoria_email = $categoria_email[3];
+
+		//Lista de adicionales habilitados para mostrar
+		$adicionales_habilitados = $ctrConfiguraciones->listarAdicionales(NULL,1);
+
+		$lista_ad_hab = array();
+		foreach ($adicionales_habilitados as $key => $value) {
+			array_push($lista_ad_hab, $value[1].' $'.$value[2]);
+		}
+
+		$lista_adicionales_habilitados = implode(",",$lista_ad_hab);
+		//////////////////////////////////////////////////////////////
+		
 		//CORREO ELECTRONICO PARA EL SITIO
 		$header .= "From: SITIO - Reservas Patagonia Austral <$email> \r\n";
 		$header .= "Reply-To:" . $from . "\r\n" ."X-Mailer: PHP/" . phpversion();
@@ -260,16 +302,17 @@ class ControladorReservas
 		$asunto ="Nueva Reserva Confirmada - Sitio Oficial Austral Rent a Car";
 			//$header ="--------------------- CONSULTA CENERGON.COM.AR ------------------------------------";
 		$contenido="			Nombre: $nombre $apellido <br>
+								Codigo Reserva: $codigo <br>
+								Categoria: $categoria_email <br>
 								Email: $email <br>
 								Teléfono: $telefono <br>
-								Fecha desde: $fecha_desde <br>
-								Fecha hasta: $fecha_hasta <br>
+								Fecha desde: $fecha_desde_email <br>
+								Fecha hasta: $fecha_hasta_email <br>
 								Lugar de retiro: $lugar_email <br>
 								Hora a entregar: $hora_desde <br>
 								Adicionales: <br>
-								$lista
-								
-								
+								$lista	
+								<br>			
 								Observaciones: $observaciones";
 
 		//mail("reservas@patagoniaaustralrentacar.com.ar,patagoniaaustralrentacar@gmail.com",$asunto,$contenido,$header);
@@ -285,19 +328,20 @@ class ControladorReservas
 		$contenido_cliente = "Se ha confirmado la Reserva a nombre de $nombre en Austral Rent a Car <br>
 		<br><br>
 
-		Detalles de la reserva:<br><br>
+		Detalles de su Reserva:<br><br>
 
-		Desde: $fecha_desde <br>
-		Hasta: $fecha_hasta <br>
-		Vehículo: $categoria <br>
-		Retirar en: $lugar_retiro. <br>
-		Hora: $hora_desde hs. <br>
+		Codigo Reserva: $codigo <br>
+		Fecha Desde: $fecha_desde_email <br>
+		Fecha Hasta: $fecha_hasta_email <br>
+		Vehículo: $categoria_email <br>
+		Retirar en: $lugar_email. <br>
+		Hora a retirar: $hora_desde hs. <br>
 		N° de Vuelo: $vuelo <br>
-		Cotización: $ $tarifa <br><br>
+		Tarifa Reserva: $ $tarifa <br><br>
 
-		Adicionales:<br><br>
+		Adicionales seleccionados:<br><br>
 		$lista
-
+		<br>
 		* Información <br>
 		<p>Todos los vehículos poseen cubiertas de hielo y nieve.</p>
 		<br>
@@ -307,11 +351,7 @@ class ControladorReservas
 
 		* Adicionales <br>
 		<p>Todos los adicionales añaden un costo al total de la reserva, en caso de rotura ó robo de los mismos, se deberan abonar con los siguientes valores.</p>
-		<ul>
-			<li>Silla bebé : $1300</li>
-			<li>Cadenas : $1300</li>
-			<li>Buster : $1500</li>
-		</ul>
+		<strong>$lista_adicionales_habilitados</strong>
 		<br><br>
 
 		* Medios de pago <br>
@@ -329,11 +369,13 @@ class ControladorReservas
 
 		<h3>Franquicia</h3>
 	    <p>Para los daños (parciales) ocurridos en nuestros vehículos, el Cliente debe abonar los mismos hasta un valor maximo (FRANQUICIA) de $15.000 por accidente y $25.000 por vuelco (excepto en la categoria E, que la misma tiene un valor de $25.000 por accidente y $35.000 por vuelco). Esta franquicia es fija de acuerdo a las categorias de vehiculos, entonces, si la FRANQUICIA es de $15.000 por accidente, el Cliente debe abonar todas las eventuales reparaciones hasta $15.000. Si el valor a reparar es mayor a la FRANQUICIA, esa difrencia es cubierta por el seguro.</p>";
-
-		//mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);*/
+	    //echo($contenido_cliente);
+		//mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);
 
 	}
 
+
+	//Funcion para editar Reservas
 	static function editarReserva(){
 
 		if (isset($_POST['editarReserva'])) {
