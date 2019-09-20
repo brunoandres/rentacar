@@ -249,6 +249,22 @@ class ModeloConfiguraciones{
 
   }
 
+  static public function buscarAdicionalesSeleccionados($id){
+
+    $link = Conexion::ConectarMysql();
+    $adicionales = array();
+
+    $query = "select * from adicionales where id = $id";
+    $sql = mysqli_query($link,$query);
+    while ($filas = mysqli_fetch_array($sql)) {
+      $adicionales['adicional']=$filas['nombre'];
+      $adicionales['tarifa']=$filas['tarifa'];
+    }
+    return $adicionales;
+
+  }
+  
+
   static public function listarAdicionales($id,$filtro){
 
     $link = Conexion::ConectarMysql();

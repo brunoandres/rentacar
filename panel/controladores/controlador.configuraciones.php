@@ -113,6 +113,13 @@ class ControladorConfiguraciones{
 		return $adicionales;
 	}
 
+	//Buscar adicionales seleccionados para mostrar
+	static public function buscarAdicionalesSeleccionados($id){
+
+		$adicionalesSeleccionados = ModeloConfiguraciones::buscarAdicionalesSeleccionados($id);
+		return $adicionalesSeleccionados;
+	}
+
 	static public function tarifaAdicional($id){
 
 		$tarifa = ModeloConfiguraciones::buscarTarifaAdicional($id);
