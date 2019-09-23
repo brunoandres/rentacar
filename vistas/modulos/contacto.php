@@ -34,7 +34,7 @@
 
           <div class="text-center"><button type="submit" id="btn" name="btnForm" class="btn btn-success btn-lg">Enviar mensaje</button></div>
         </form>
-        <div id="resultado"></div>
+        <div id="msj"></div>
       </div>
     </div>
     <!--/.row-->

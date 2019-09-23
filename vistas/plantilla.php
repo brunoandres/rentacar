@@ -226,7 +226,7 @@
         url:url,
         data:{nombre:nombre,email:email,asunto:asunto,mensaje:mensaje},
         success:function(data){
-          $("#resultado").html(data);
+          $("#msj").html(data);
         }
 
       });
