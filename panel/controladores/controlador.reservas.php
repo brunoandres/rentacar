@@ -228,10 +228,6 @@ class ControladorReservas
 			
 			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales,$direccion_ip);
 
-			$existeReservaMismoCodigo = self::verificarCodigoReserva($codigo,$direccion_ip);
-
-			//Verifico que no existe una reserva confirmada con mismo codigo y direccion ip
-			if ($existeReservaMismoCodigo==0) {
 				//Si hay disponibilidad
 				if ($respuesta=="ok") {
 
@@ -248,12 +244,7 @@ class ControladorReservas
 					</script>";
 					
 				}
-			}else{
-				$_SESSION['reserva_error_codigo'] = true;
-				echo "<script>
-				window.location = 'reservar';
-				</script>";
-			}				
+			}			
 		}
 	}
 

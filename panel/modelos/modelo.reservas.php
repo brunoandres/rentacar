@@ -410,29 +410,38 @@ class ModeloReservas
 	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `adicionales`,`telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`,`start`, `end`, `color`, `direccion_ip`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen,$tiene_adicionales,'$telefono','$email',$retiro,$entrega,'$vuelo','$observaciones','$start_calendar','$end_calendar','#FF0000','$direccion_ip')";
 	    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
 
-	    if ($sql) {
+	    $existeReservaMismoCodigo = self::verificarCodigoReserva($codigo,$direccion_ip);
+	    //Verifico que no existe una reserva confirmada con mismo codigo y direccion ip
 
-	    	//Recupero la ultima reserva insertada
-	    	$id_reserva_generado = mysqli_insert_id($link);
+	    if ($existeReservaMismoCodigo==0) {
 
-    		if (!empty($adicionales)) {
-    			foreach ($adicionales as $adicional => $value) {
+	    	if ($sql) {
+		    	//Recupero la ultima reserva insertada
+		    	$id_reserva_generado = mysqli_insert_id($link);
 
-    			$query_adicionales = "INSERT INTO `reservas_adicionales`(`id_reserva`, `id_adicional`) VALUES ($id_reserva_generado,$value)";
-    			$sql_adicionales= mysqli_query($link,$query_adicionales) or die (mysqli_error($link));
-    			}
-    		}
+	    		if (!empty($adicionales)) {
+	    			foreach ($adicionales as $adicional => $value) {
 
-    		//var_dump($adicionales);
+	    			$query_adicionales = "INSERT INTO `reservas_adicionales`(`id_reserva`, `id_adicional`) VALUES ($id_reserva_generado,$value)";
+	    			$sql_adicionales= mysqli_query($link,$query_adicionales) or die (mysqli_error($link));
+	    			}
+	    		}
 
-    		mysqli_commit($link);
+	    		//var_dump($adicionales);
 
-    		return "ok";
+	    		mysqli_commit($link);
 
+	    		return "ok";
+
+		    }else{
+		    	mysqli_rollback($link);
+		    	return "error";
+		    }
 	    }else{
-	    	mysqli_rollback($link);
 	    	return "error";
 	    }
+
+	    
 
 	    // Cerrar la conexión.
 	    mysqli_close( $link );
