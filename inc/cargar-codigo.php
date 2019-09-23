@@ -11,7 +11,7 @@ if (mysqli_num_rows($result) > 0) {
 	while ($row = mysqli_fetch_assoc($result)) {
 
 		echo '<div class="row">
-        <div class="col-md-6 order-md-2 mb-6">
+        <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Detalles</span>
             <span class="badge badge-secondary badge-pill">3</span>
@@ -19,8 +19,8 @@ if (mysqli_num_rows($result) > 0) {
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Categoria</h6>
-                <small class="text-muted">Categoria seleccionada</small>
+                <h6 class="my-0">Categoria seleccionada</h6>
+                <small class="text-muted"></small>
               </div>
               <span class="text-muted">'.$row['categoria'].'</span>
             </li>
