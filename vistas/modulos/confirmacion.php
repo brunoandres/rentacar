@@ -84,11 +84,11 @@ if (isset($_POST['checkout'])) {
     }else{
       $total = $_SESSION['total_dias']*$tarifa_diaria;
     }
-  }else{
+  }/*else{
     echo "<script>
   window.location='inicio';
   </script>";
-  }
+  }*/
 
 ?>
 
