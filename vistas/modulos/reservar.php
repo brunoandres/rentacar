@@ -72,12 +72,64 @@ if (isset($_SESSION['reserva_error'])) {
 
           <div class="form-group">
             <label>Hora desde</label>
-            <input type="time" id="single-input" name="hora_desde" max="23:59" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_desde'])){ echo $_POST['hora_desde']; }?>" required="">
+              <select class="form-control" name="hora_desde" required="">
+                <option value="">seleccionar hora...</option>
+                <option value="00:00">00:00hs</option>
+                <option value="01:00">01:00hs</option>
+                <option value="02:00">02:00hs</option>
+                <option value="03:00">03:00hs</option>
+                <option value="04:00">04:00hs</option>
+                <option value="05:00">05:00hs</option>
+                <option value="06:00">06:00hs</option>
+                <option value="07:00">07:00hs</option>
+                <option value="08:00">08:00hs</option>
+                <option value="09:00">09:00hs</option>
+                <option value="10:00">10:00hs</option>
+                <option value="11:00">11:00hs</option>
+                <option value="12:00">12:00hs</option>
+                <option value="13:00">13:00hs</option>
+                <option value="14:00">14:00hs</option>
+                <option value="15:00">15:00hs</option>
+                <option value="16:00">16:00hs</option>
+                <option value="17:00">17:00hs</option>
+                <option value="18:00">18:00hs</option>
+                <option value="19:00">19:00hs</option>
+                <option value="20:00">20:00hs</option>
+                <option value="21:00">21:00hs</option>
+                <option value="22:00">22:00hs</option>
+                <option value="23:00">23:00hs</option>
+              </select>
           </div>
           
           <div class="form-group">
             <label>Hora hasta</label>
-            <input type="time" id="single-input2" name="hora_hasta" max="23:59" class="form-control timepicker" placeholder="Selecciona una hora" autocomplete="off" value="<?php if(isset($_POST['hora_hasta'])){ echo $_POST['hora_hasta']; }?>" required="">
+            <select class="form-control" name="hora_hasta" required="">
+                <option value="">seleccionar hora...</option>
+                <option value="00:00">00:00hs</option>
+                <option value="01:00">01:00hs</option>
+                <option value="02:00">02:00hs</option>
+                <option value="03:00">03:00hs</option>
+                <option value="04:00">04:00hs</option>
+                <option value="05:00">05:00hs</option>
+                <option value="06:00">06:00hs</option>
+                <option value="07:00">07:00hs</option>
+                <option value="08:00">08:00hs</option>
+                <option value="09:00">09:00hs</option>
+                <option value="10:00">10:00hs</option>
+                <option value="11:00">11:00hs</option>
+                <option value="12:00">12:00hs</option>
+                <option value="13:00">13:00hs</option>
+                <option value="14:00">14:00hs</option>
+                <option value="15:00">15:00hs</option>
+                <option value="16:00">16:00hs</option>
+                <option value="17:00">17:00hs</option>
+                <option value="18:00">18:00hs</option>
+                <option value="19:00">19:00hs</option>
+                <option value="20:00">20:00hs</option>
+                <option value="21:00">21:00hs</option>
+                <option value="22:00">22:00hs</option>
+                <option value="23:00">23:00hs</option>
+              </select>
           </div>
           <button type="submit" name="buscarDisponibilidad" class="btn btn-success btn-lg">Buscar Disponibilidad <i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
