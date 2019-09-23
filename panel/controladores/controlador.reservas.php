@@ -309,7 +309,7 @@ class ControladorReservas
 								Fecha desde: $fecha_desde_email <br>
 								Fecha hasta: $fecha_hasta_email <br>
 								Lugar de retiro: $lugar_email <br>
-								Hora a entregar: $hora_desde <br>
+								Hora a entregar: $hora_desde hs. <br>
 								Adicionales: <br>
 								$lista	
 								<br>			
