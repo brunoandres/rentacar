@@ -202,7 +202,7 @@
       var code = $("#code").val();
       $.ajax({
         type : 'POST',
-        url : 'load-code-reservation',
+        url : 'inc/load-code.php',
         data : {code:code},
         success: function(data){
           $("#resultado").html(data);
