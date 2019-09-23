@@ -208,8 +208,8 @@
         success: function(data){
           $("#resultado").html(data);
         }
-      })
-    })
+      });
+    });
 
    </script>
   </body>
