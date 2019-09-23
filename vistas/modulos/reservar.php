@@ -1,5 +1,15 @@
 <?php
 
+unset($_SESSION['codigo']);     
+unset($_SESSION['fecha_desde']);
+unset($_SESSION['fecha_hasta']);
+unset($_SESSION['hora_desde']);
+unset($_SESSION['hora_hasta']);
+unset($_SESSION['categoria']);
+unset($_SESSION['total_dias']);
+unset($_POST['confirmaReserva']);
+
+
 $new = new ControladorReservas();
 $newCat = new ControladorCategorias();
 $categorias = $newCat->listarCategorias();
