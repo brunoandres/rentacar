@@ -225,9 +225,9 @@ class ControladorReservas
 				//Funcion para enviar correo
 				self::enviarCorreo($nombre,$apellido,$categoria,$codigo,$fecha_desde,$fecha_hasta,$hora_desde,$tarifa,$total_dias,$retiro,$vuelo,$observaciones,$adicionales,$email);
 				$_SESSION['reserva_ok'] = true;
-				/*echo "<script>
+				echo "<script>
 				window.location = 'inicio';
-				</script>";*/
+				</script>";
 			}else{
 				$_SESSION['reserva_error'] = true;
 				echo "<script>
