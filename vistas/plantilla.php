@@ -202,7 +202,7 @@
       var code = $("#code").val();
       $.ajax({
         type : 'POST',
-        url : 'inc/load-code.php',
+        url : 'inc/cargar-codigo.php',
         data : {code:code},
         success: function(data){
           $("#resultado").html(data);

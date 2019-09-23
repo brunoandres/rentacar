@@ -13,10 +13,16 @@ if (mysqli_num_rows($result) > 0) {
 		echo $row['nombre'];
 		echo "<br>";
 		echo $row['fecha_desde'];
+		echo "<br>";
+		echo $row['fecha_hasta'];
+		echo "<br>";
+		echo '$ '.$row['tarifa'];
 		echo "</p>";
 	}
 }else{
-	echo "NO EXISTE LA RESERVA";
+	echo "<script>
+ 							toastr.error('No existe Reserva con el código ingresado.', 'Error Código', {timeOut: 8000})
+ 						</script>";
 }
 
 
