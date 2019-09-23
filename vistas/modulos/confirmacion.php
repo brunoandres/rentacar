@@ -149,12 +149,12 @@ if (isset($_POST['checkout'])) {
             </li>
           <?php endif ?>
           <?php if (!$diasSinPromo==0): ?>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <!--<li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 class="my-0">Dias sin promo</h6>
                 <small class="text-muted">Por <?php echo $diasSinPromo; ?> dia/s sin promo</small>
               </div>
-              <span class="text-success"><strong>+ $ <?php echo number_format($precio_diario, 0, ",", "."); ?></strong></span>
+              <span class="text-success"><strong>+ $ <?php echo number_format($precio_diario, 0, ",", "."); ?></strong></span>-->
             </li>
           <?php endif ?>
 
