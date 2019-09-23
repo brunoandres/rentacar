@@ -68,8 +68,6 @@
     <title>Patagonia Austral Rentacar Bariloche</title>
   </head>
   <body>
-    <!--Whatsapp -->
-    <a href="https://wa.me/5492944242615?text=Me%20gustaría%20saber%20más%20sobre%20el%20servicio" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
 
     <?php include 'inc/menu.php'; ?>
 
@@ -88,7 +86,8 @@
          $_GET["ruta"] == "confirmacion" ){
 
         include "modulos/".$_GET["ruta"].".php";
-
+        echo "
+    <a href='https://wa.me/5492944242615?text=Me%20gustaría%20saber%20más%20sobre%20el%20servicio' class='whatsapp' target='_blank'> <i class='fa fa-whatsapp whatsapp-icon'></i></a>";
       }else{
 
         //include "modulos/404.php";
