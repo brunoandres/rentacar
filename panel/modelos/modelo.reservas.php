@@ -346,6 +346,59 @@ class ModeloReservas
 
 	}
 
+	//Funcion para guardar una nueva reserva
+	static public function nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales=null,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales=null,$direccion_ip=null){
+
+		$link = Conexion::ConectarMysql();
+
+		//CONVIERTO LAS FECHAS PARA EL CALENDARIO
+		$start = date_create($fecha_desde);
+		$start_calendar = date_format($start, 'Y-m-d 15:00:00');
+
+		$end = date_create($fecha_hasta);
+		$end_calendar = date_format($end, 'Y-m-d 15:00:00');
+
+		//Desactivamos el autommit transaccional
+		mysqli_autocommit($link,FALSE);
+
+	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `adicionales`,`telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`,`start`, `end`, `color`, `direccion_ip`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen,$tiene_adicionales,'$telefono','$email',$retiro,$entrega,'$vuelo','$observaciones','$start_calendar','$end_calendar','#FF0000','$direccion_ip')";
+	    
+	    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
+
+	    $existeReservaMismoCodigo = self::verificarCodigoReserva($codigo,$direccion_ip);
+	    //Verifico que no existe una reserva confirmada con mismo codigo y direccion ip
+
+	    if ($existeReservaMismoCodigo==0) {
+
+	    	if ($sql) {
+		    	//Recupero la ultima reserva insertada
+		    	$id_reserva_generado = mysqli_insert_id($link);
+
+	    		if (!empty($adicionales)) {
+	    			foreach ($adicionales as $adicional => $value) {
+
+	    			$query_adicionales = "INSERT INTO `reservas_adicionales`(`id_reserva`, `id_adicional`) VALUES ($id_reserva_generado,$value)";
+	    			$sql_adicionales= mysqli_query($link,$query_adicionales) or die (mysqli_error($link));
+	    			}
+	    		}
+
+	    		//var_dump($adicionales);
+
+	    		mysqli_commit($link);
+
+	    		return "ok";
+
+		    }else{
+		    	mysqli_rollback($link);
+		    	return "error";
+		    }
+	    }else{
+	    	return "error";
+	    }
+	    // Cerrar la conexión.
+	    mysqli_close( $link );
+	}
+
 	//Funcion para contabilizar los autos que hay que entregar para una cierta fecha dada, si la fecha no se la especifico, por defecto será el dia de hoy
 	static public function autosParaEntregar($categoria,$fecha=null){
 
@@ -389,63 +442,6 @@ class ModeloReservas
 		}
 
 		return $contador_autos;
-
-	}
-
-	//Funcion para guardar una nueva reserva
-	static public function nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales=null,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales=null,$direccion_ip=null){
-
-		$link = Conexion::ConectarMysql();
-
-		//CONVIERTO LAS FECHAS PARA EL CALENDARIO
-		$start = date_create($fecha_desde);
-		$start_calendar = date_format($start, 'Y-m-d 15:00:00');
-
-		$end = date_create($fecha_hasta);
-		$end_calendar = date_format($end, 'Y-m-d 15:00:00');
-
-		//Desactivamos el autommit transaccional
-		mysqli_autocommit($link,FALSE);
-
-	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `adicionales`,`telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`,`start`, `end`, `color`, `direccion_ip`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen,$tiene_adicionales,'$telefono','$email',$retiro,$entrega,'$vuelo','$observaciones','$start_calendar','$end_calendar','#FF0000','$direccion_ip')";
-	    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
-
-	    $existeReservaMismoCodigo = self::verificarCodigoReserva($codigo,$direccion_ip);
-	    //Verifico que no existe una reserva confirmada con mismo codigo y direccion ip
-
-	    if ($existeReservaMismoCodigo==0) {
-
-	    	if ($sql) {
-		    	//Recupero la ultima reserva insertada
-		    	$id_reserva_generado = mysqli_insert_id($link);
-
-	    		if (!empty($adicionales)) {
-	    			foreach ($adicionales as $adicional => $value) {
-
-	    			$query_adicionales = "INSERT INTO `reservas_adicionales`(`id_reserva`, `id_adicional`) VALUES ($id_reserva_generado,$value)";
-	    			$sql_adicionales= mysqli_query($link,$query_adicionales) or die (mysqli_error($link));
-	    			}
-	    		}
-
-	    		//var_dump($adicionales);
-
-	    		mysqli_commit($link);
-
-	    		return "ok";
-
-		    }else{
-		    	mysqli_rollback($link);
-		    	return "error";
-		    }
-	    }else{
-	    	return "error";
-	    }
-
-	    
-
-	    // Cerrar la conexión.
-	    mysqli_close( $link );
-
 
 	}
 

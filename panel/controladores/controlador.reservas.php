@@ -5,16 +5,6 @@ require_once 'controlador.configuraciones.php';
 class ControladorReservas
 {	
 
-	//Funcion para verificar si existe mismo codigo de reserva con misma direccion ip
-	//Me aseguro de no insertar una reserva duplicada por recarga de formulario
-
-	static function verificarCodigoReserva($codigo,$direccion_ip){
-
-		$existeCodigo = ModeloReservas::verificarCodigoReserva($codigo,$direccion_ip);
-		return $existeCodigo;
-
-	}
-
 	//Funcion para tomar la direccion ip del cliente
 	static function direccionIP() {
 	    if (!empty($_SERVER['HTTP_CLIENT_IP']))
