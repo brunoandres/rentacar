@@ -2,7 +2,7 @@
 
 
 if (isset($_POST['btnForm'])) {
-	if (!empty($_POST['nombre']) && !empty($_POST['email'])) {
+	
 			
 		$nombre = $_POST['nombre'];
 		$email = $_POST['email'];
@@ -30,7 +30,7 @@ if (isset($_POST['btnForm'])) {
 			</div>";
 		}
 
-	}
+	
 }
 
 
