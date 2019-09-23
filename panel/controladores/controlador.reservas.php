@@ -216,18 +216,18 @@ class ControladorReservas
 			//Obtener la direccion ip del cliente
 			$direccion_ip = self::direccionIP();
 			
-			/*$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales,$direccion_ip);*/
+			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales,$direccion_ip);
 			
-			$respuesta = "ok";
+			//$respuesta = "ok";
 			//Si hay disponibilidad
 			if ($respuesta=="ok") {
 
 				//Funcion para enviar correo
 				self::enviarCorreo($nombre,$apellido,$categoria,$codigo,$fecha_desde,$fecha_hasta,$hora_desde,$tarifa,$total_dias,$retiro,$vuelo,$observaciones,$adicionales,$email);
 				$_SESSION['reserva_ok'] = true;
-				/*echo "<script>
+				echo "<script>
 				window.location = 'inicio';
-				</script>";*/
+				</script>";
 			}else{
 				$_SESSION['reserva_error'] = true;
 				echo "<script>
@@ -315,8 +315,8 @@ class ControladorReservas
 								<br>			
 								Observaciones: $observaciones";
 
-		//mail("reservas@patagoniaaustralrentacar.com.ar,patagoniaaustralrentacar@gmail.com",$asunto,$contenido,$header);
-		var_dump($contenido);
+		mail("brunoandres2013@gmail.com",$asunto,$contenido,$header);
+		//var_dump($contenido);
 		//CORREO ELECTRONICO PARA EL CLIENTE
 		$header_cliente .= "From: SITIO - Reservas Patagonia Austral <patagoniaaustralrentacar@gmail.com> \r\n";
 		$header_cliente .= "Reply-To:" . $from . "\r\n" ."X-Mailer: PHP/" . phpversion();
@@ -370,7 +370,7 @@ class ControladorReservas
 		<h3>Franquicia</h3>
 	    <p>Para los daños (parciales) ocurridos en nuestros vehículos, el Cliente debe abonar los mismos hasta un valor maximo (FRANQUICIA) de $15.000 por accidente y $25.000 por vuelco (excepto en la categoria E, que la misma tiene un valor de $25.000 por accidente y $35.000 por vuelco). Esta franquicia es fija de acuerdo a las categorias de vehiculos, entonces, si la FRANQUICIA es de $15.000 por accidente, el Cliente debe abonar todas las eventuales reparaciones hasta $15.000. Si el valor a reparar es mayor a la FRANQUICIA, esa difrencia es cubierta por el seguro.</p>";
 	    //echo($contenido_cliente);
-		//mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);
+		mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);
 
 	}
 
