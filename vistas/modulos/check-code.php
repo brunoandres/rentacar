@@ -32,7 +32,7 @@
  		$.ajax({
  			url : 'load-code-reservation.php',
  			data : 'code='+code,
- 			method : POST,
+ 			type : POST,
  			success: function(data){
  				$("#resultado").html(data);
  			}
