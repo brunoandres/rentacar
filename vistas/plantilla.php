@@ -6,6 +6,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117085817-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-117085817-1');
+    </script>
+
 
     <!-- Bootstrap -->
     <link href="vistas/css/bootstrap.min.css" rel="stylesheet">
@@ -16,12 +26,6 @@
     <link href="vistas/css/responsive.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-    <!-- =======================================================
-      Theme Name: Gp
-      Theme URL: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-templat/
-      Author: BootstrapMade
-      Author URL: https://bootstrapmade.com
-    ======================================================= -->
     <link rel="stylesheet" href="vistas/css/jquery.timepicker.min.css">
 
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -97,7 +101,11 @@
     }
 
     ?>
+    <!--Whatsapp -->
 
+    <a href="https://wa.me/5492944242615?text=Me%20gustaría%20saber%20más%20sobre%20el%20servicio" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
+
+    <a href="https://www.cerotec.net/estadisticas-105591/patagoniaaustralrentacar.com.ar" title="mis estadísticas"><img src="https://www.cerotec.net/contador.php?t=1&s=3&i=105591" alt="Contador de visitas y estadísticas"></a> <br><a href='https://www.cerotec.net/contadores_blogger' style='font-size:12px;' >contador blogger</a>
 
     <?php include 'inc/footer.php'; ?>
 
