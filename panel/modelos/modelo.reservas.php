@@ -306,11 +306,11 @@ class ModeloReservas
 						/*echo "<BR>NO HAY DISPONIBILIDAD, VERIFICAR MARGEN";
 						echo "<BR>RESERVAS CHOCADAS : ".$sumaDeChoques =$sumaDeChoques+1;
 					 	echo "<BR>AUTO DISPONIBLE :".$contador_autos = $contador_autos-$sumaDeChoques;*/
-					 	echo "<BR> ESTOY RETIRANDO UN AUTO MISMO DIA QUE ENTREGAN OTRO";
+					 	//echo "<BR> ESTOY RETIRANDO UN AUTO MISMO DIA QUE ENTREGAN OTRO";
 
 					 	//Si quiero retirar un auto el mismo dia que se entrega, necesito que el margen horario sea superior al configurado, en caso de que asi sea. Se puede entregar el auto el mismo dia con el margen horario establecido previamente
 					 	if ($horaHastaConfirmada < $horaDesdeReserva && $diferencia>=$margen_horario) {
-					 		echo "<BR> EL HORARIO DE ENTREGA ES MENOR O IGUAL AL HORARIO DEL NUEVO RETIRO";
+					 		//echo "<BR> EL HORARIO DE ENTREGA ES MENOR O IGUAL AL HORARIO DEL NUEVO RETIRO";
 
 					 	//Si el margen horario no coincide, es decir se quiere retirar un auto antes de que se entregue, es imposible realizar la reserva	
 					 	}else{

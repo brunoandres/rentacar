@@ -8,14 +8,14 @@ $data = $new->buscarDisponibilidad('web');
 if (isset($_SESSION['reserva_error'])) {
 
   echo "<script>
- toastr.error('Se ha producido un error al intentar reservar, por favor intente nuevamente.', 'Error al Reservar', {timeOut: 3000})
+ toastr.error('Se ha producido un error al intentar reservar, por favor intente nuevamente.', 'Error al Reservar', {timeOut: 6000})
  </script>";
 
  unset($_SESSION['reserva_error']);
 
 }elseif (isset($_SESSION['reserva_error_codigo'])) {
   echo "<script>
- toastr.error('Error al procesar los datos de la Reserva, intente nuevamente.', 'Error al Reservar', {timeOut: 3000})
+ toastr.error('Error al procesar los datos de la Reserva, intente nuevamente.', 'Error al Reservar', {timeOut: 6000})
  </script>";
  unset($_SESSION['reserva_error_codigo']);
 }
