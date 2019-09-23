@@ -22,18 +22,18 @@ if (mysqli_num_rows($result) > 0) {
                 <h6 class="my-0">Categoria</h6>
                 <small class="text-muted">Categoria seleccionada</small>
               </div>
-              <span class="text-muted">"'.$row['categoria'].'"</span>
+              <span class="text-muted">'.$row['nombre'].'</span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 class="my-0">Dias de Alquiler</h6>
                 <small class="text-muted">Cantidad de dias</small>
               </div>
-              <span class="text-muted">"'.$row['total_dias'].'"</span>
+              <span class="text-muted">'.$row['total_dias'].'</span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>Total Reserva (ARG)</span>
-              <strong>" $ '.$row['tarifa'].'"</strong>
+              <strong> $ '.number_format($row['tarifa'], 0, ",", ".");.'</strong>
             </li>
           </ul>
         </div>
@@ -59,7 +59,7 @@ if (mysqli_num_rows($result) > 0) {
 
             <div class="mb-3">
               <label for="email">Dirección de Email</label>
-              <input type="email" class="form-control" id="email" value="'.$row['email'].'" placeholder="you@example.com">
+              <input type="email" class="form-control" id="email" value="'.$row['email'].'" placeholder="you@example.com" readonly>
               <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
@@ -75,7 +75,7 @@ if (mysqli_num_rows($result) > 0) {
               </div>
               <div class="col-md-4 mb-3">
                 <label for="date">Fecha Hasta</label>
-                <input type="text" class="form-control" value="'.$row['fecha_hasta'].'" readonly>
+                <input type="date" class="form-control" value="'.$row['fecha_hasta'].'" readonly>
                 <div class="invalid-feedback">
                   Please provide a valid state.
                 </div>
