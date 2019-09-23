@@ -10,7 +10,7 @@
         <li>+54 9 2944317005</li>
         <li>+54 9 2944242615</li>
 
-        <form method="post" id="formulario">
+        <form id="formulario">
           <div class="form-group">
             <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre y Apellido" data-rule="minlen:4"
               data-msg="Please enter at least 4 chars" />
@@ -32,7 +32,7 @@
             <div class="validation"></div>
           </div>
 
-          <div class="text-center"><button type="submit" id="btn" name="btnForm" class="btn btn-success btn-lg">Enviar mensaje</button></div>
+          <div class="text-center"><button type="button" id="btn" name="btnForm" class="btn btn-success btn-lg">Enviar mensaje</button></div>
         </form>
         <div id="msj"></div>
       </div>
