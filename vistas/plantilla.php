@@ -83,6 +83,7 @@
          $_GET["ruta"] == "contacto" ||
          $_GET["ruta"] == "reservar" ||
          $_GET["ruta"] == "checkout" ||
+         $_GET["ruta"] == "check-code" ||
          $_GET["ruta"] == "confirmacion" ){
 
         include "modulos/".$_GET["ruta"].".php";
