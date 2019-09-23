@@ -200,9 +200,10 @@
     }
 
     $("#button").click(function(){
-      var code = $("#code").val();
+      //var code = $("#code").val();
+      var code = '07555';
       $.ajax({
-        type : POST,
+        type : 'POST',
         url : 'load-code-reservation.php',
         data : {code:code},
         success: function(data){
