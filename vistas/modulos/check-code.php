@@ -13,7 +13,7 @@
               data-msg="Please enter at least 4 chars" />
             <div class="validation"></div>
           </div>
-          <div class="text-center"><button type="submit" id="button" id="button" class="btn btn-success btn-lg">Consultar Código!</button></div>
+          <div class="text-center"><button type="submit" name="button" id="button" class="btn btn-success btn-lg">Consultar Código!</button></div>
         <div id="resultado"></div>
       </div>
     </div>

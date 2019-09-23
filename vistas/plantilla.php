@@ -199,19 +199,18 @@
       }
     }
 
-    $(document).ready(function(){
-      $("#button").click(function(){
-        var code = $("#code").val();
-        $.ajax({
-          type : POST,
-          url : 'load-code-reservation.php',
-          data : {code:code},
-          success: function(data){
-            $("#resultado").html(data);
-          }
-        })
+    $("#button").click(function(){
+      var code = $("#code").val();
+      $.ajax({
+        type : POST,
+        url : 'load-code-reservation.php',
+        data : {code:code},
+        success: function(data){
+          $("#resultado").html(data);
+        }
       })
-    });
+    })
+
    </script>
   </body>
 </html>
