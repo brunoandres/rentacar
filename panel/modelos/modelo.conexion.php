@@ -4,7 +4,7 @@ class Conexion{
 
   static function ConectarMysql(){
 
-    $conn = mysqli_connect("localhost","root","","rentacar");
+    $conn = mysqli_connect("localhost","u756079281_dev","cavaliere","u756079281_dev");
     mysqli_query($conn,"SET NAMES 'utf8'");
     // Check connection
     if (mysqli_connect_errno()){
