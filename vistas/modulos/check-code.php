@@ -8,7 +8,7 @@
       <div class="col-sm-8 col-sm-offset-2">
         <div id="sendmessage">Your message has been sent. Thank you!</div>
         <div id="errormessage"></div>
-        <form method="post" id="formulario">
+        <form>
           <div class="form-group">
             <input type="text" name="code" class="form-control" id="code" placeholder="Código de Reserva" data-rule="minlen:4"
               data-msg="Please enter at least 4 chars" />
