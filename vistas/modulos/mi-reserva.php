@@ -11,7 +11,7 @@
 		    <label for="inputPassword2" class="sr-only">Código</label>
 		    <input type="text" class="form-control" id="code" name="code" placeholder="Ingrese el código de su Reserva...">
 		  </div>
-		  <button type="submit" class="btn btn-primary mb-2" name="button" id="button">Consultar Código!</button>
+		  <button type="button" class="btn btn-primary mb-2" name="button" id="button">Consultar Código!</button>
 		</form>
 		<div id="resultado"></div>
       </div>
