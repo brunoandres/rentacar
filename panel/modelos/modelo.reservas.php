@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 require_once 'modelo.conexion.php';
 require_once 'modelo.categorias.php';
 
@@ -362,7 +365,7 @@ class ModeloReservas
 		mysqli_autocommit($link,FALSE);
 
 	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `adicionales`,`telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`,`start`, `end`, `color`, `direccion_ip`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen,$tiene_adicionales,'$telefono','$email',$retiro,$entrega,'$vuelo','$observaciones','$start_calendar','$end_calendar','#FF0000','$direccion_ip')";
-	    
+
 	    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
 
 	    $existeReservaMismoCodigo = self::verificarCodigoReserva($codigo,$direccion_ip);
