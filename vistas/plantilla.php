@@ -84,7 +84,6 @@
          $_GET["ruta"] == "reservar" ||
          $_GET["ruta"] == "checkout" ||
          $_GET["ruta"] == "check-code" ||
-         $_GET["ruta"] == "load-code-reservation" ||
          $_GET["ruta"] == "confirmacion" ){
 
         include "modulos/".$_GET["ruta"].".php";
@@ -203,7 +202,7 @@
       var code = $("#code").val();
       $.ajax({
         type : 'POST',
-        url : 'load-code-reservation',
+        url : 'load-code-reservation.php',
         data : {code:code},
         success: function(data){
           $("#resultado").html(data);
