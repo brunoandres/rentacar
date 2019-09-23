@@ -68,6 +68,8 @@
     <title>Patagonia Austral Rentacar Bariloche</title>
   </head>
   <body>
+    <!--Whatsapp -->
+    <a href="https://wa.me/5492944242615?text=Me%20gustaría%20saber%20más%20sobre%20el%20servicio" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
 
     <?php include 'inc/menu.php'; ?>
 
@@ -101,9 +103,7 @@
     }
 
     ?>
-    <!--Whatsapp -->
 
-    <a href="https://wa.me/5492944242615?text=Me%20gustaría%20saber%20más%20sobre%20el%20servicio" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
 
     <a href="https://www.cerotec.net/estadisticas-105591/patagoniaaustralrentacar.com.ar" title="mis estadísticas"><img src="https://www.cerotec.net/contador.php?t=1&s=3&i=105591" alt="Contador de visitas y estadísticas"></a> <br><a href='https://www.cerotec.net/contadores_blogger' style='font-size:12px;' >contador blogger</a>
 
