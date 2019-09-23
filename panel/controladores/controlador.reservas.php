@@ -8,7 +8,7 @@ class ControladorReservas
 	//Funcion para verificar si existe mismo codigo de reserva con misma direccion ip
 	//Me aseguro de no insertar una reserva duplicada por recarga de formulario
 
-	static funcion verificarCodigoReserva($codigo,$direccion_ip){
+	static function verificarCodigoReserva($codigo,$direccion_ip){
 
 		$existeCodigo = ModeloReservas::verificarCodigoReserva($codigo,$direccion_ip);
 		return $existeCodigo;
