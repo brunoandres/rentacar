@@ -32,7 +32,7 @@ if (mysqli_num_rows($result) > 0) {
               <span class="text-muted">'.$row['total_dias'].'</span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Total Reserva (ARG)</span>
+              <span>Total (ARG)</span>
               <strong> $ '.number_format($row['tarifa'], 0, ",", ".").'</strong>
             </li>
           </ul>
@@ -73,14 +73,14 @@ if (mysqli_num_rows($result) > 0) {
                   Please select a valid country.
                 </div>
               </div>
-              <div class="col-md-4 mb-3">
+              <div class="col-md-5 mb-3">
                 <label for="date">Fecha Hasta</label>
                 <input type="date" class="form-control" value="'.$row['fecha_hasta'].'" readonly>
                 <div class="invalid-feedback">
                   Please provide a valid state.
                 </div>
               </div>
-              <div class="col-md-3 mb-3">
+              <div class="col-md-2 mb-3">
                 <label for="zip">Hora Retiro</label>
                 <input type="text" class="form-control" value="'.$row['hora_desde'].'" readonly>
                 <div class="invalid-feedback">
