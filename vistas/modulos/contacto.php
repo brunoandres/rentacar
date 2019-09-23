@@ -7,8 +7,8 @@
     <div class="row h-100 justify-content-center align-items-center contact-wrap">
       <div class="col-sm-8 col-sm-offset-2">
         <p>Teléfonos de contacto</p>
-        <li><i class="fa fa-whatsapp fa-2x"></i><p class="pull-right">+54 9 2944317005</p></li>
-        <li><i class="fa fa-whatsapp fa-2x"></i><p class="pull-right">+54 9 2944242615</p></li>
+        <li><i class="fa fa-whatsapp fa-2x"></i><p class="h3">+54 9 2944317005</p></li>
+        <li><i class="fa fa-whatsapp fa-2x"></i><p class="h3">+54 9 2944242615</p></li>
 
         <!--<form method="post" id="formulario">
           <div class="form-group">
