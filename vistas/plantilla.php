@@ -1,6 +1,6 @@
 <?php session_start();?>
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="panel/vistas/bower_components/select2/dist/css/select2.min.css">
 
     <!-- Links para Galeria en Flota -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+    <link rel="stylesheet" href="vistas/css/baguetteBox.min.css"/>
     <link rel="stylesheet" href="vistas/css/cards-gallery.css">
 
     <!-- ALERTAS -->
@@ -48,7 +48,7 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="vistas/js/jquery.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="vistas/js/toastr.min.js"></script>
 
     <script src="vistas/js/jquery.prettyPhoto.js"></script>
     <script src="vistas/js/jquery.isotope.min.js"></script>
@@ -86,8 +86,7 @@
          $_GET["ruta"] == "confirmacion" ){
 
         include "modulos/".$_GET["ruta"].".php";
-        echo "
-    <a href='https://wa.me/5492944242615?text=Me%20gustaría%20saber%20más%20sobre%20el%20servicio' class='whatsapp' target='_blank'> <i class='fa fa-whatsapp whatsapp-icon'></i></a>";
+
       }else{
 
         //include "modulos/404.php";
@@ -103,8 +102,6 @@
 
     ?>
 
-
-    <a href="https://www.cerotec.net/estadisticas-105591/patagoniaaustralrentacar.com.ar" title="mis estadísticas"><img src="https://www.cerotec.net/contador.php?t=1&s=3&i=105591" alt="Contador de visitas y estadísticas"></a> <br><a href='https://www.cerotec.net/contadores_blogger' style='font-size:12px;' >contador blogger</a>
 
     <?php include 'inc/footer.php'; ?>
 
@@ -172,7 +169,7 @@
     <script src="vistas/js/maskDate.js"></script>
 
     <script src="vistas/js/alert.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script src="vistas/js/baguetteBox.min.js"></script>
     <script>
         baguetteBox.run('.cards-gallery', { animation: 'slideIn'});
     </script>

@@ -13,6 +13,11 @@ if (isset($_SESSION['reserva_error'])) {
 
  unset($_SESSION['reserva_error']);
 
+}elseif (isset($_SESSION['reserva_error_codigo'])) {
+  echo "<script>
+ toastr.error('Error al procesar los datos de la Reserva, intente nuevamente.', 'Error al Reservar', {timeOut: 3000})
+ </script>";
+ unset($_SESSION['reserva_error_codigo']);
 }
 
 ?>

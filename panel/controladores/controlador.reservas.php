@@ -3,7 +3,17 @@
 require_once 'controlador.configuraciones.php';
 
 class ControladorReservas
-{
+{	
+
+	//Funcion para verificar si existe mismo codigo de reserva con misma direccion ip
+	//Me aseguro de no insertar una reserva duplicada por recarga de formulario
+
+	static funcion verificarCodigoReserva($codigo,$direccion_ip){
+
+		$existeCodigo = ModeloReservas::verificarCodigoReserva($codigo,$direccion_ip);
+		return $existeCodigo;
+
+	}
 
 	//Funcion para tomar la direccion ip del cliente
 	static function direccionIP() {
@@ -217,24 +227,33 @@ class ControladorReservas
 			$direccion_ip = self::direccionIP();
 			
 			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales,$direccion_ip);
-			
-			//$respuesta = "ok";
-			//Si hay disponibilidad
-			if ($respuesta=="ok") {
 
-				//Funcion para enviar correo
-				self::enviarCorreo($nombre,$apellido,$categoria,$codigo,$fecha_desde,$fecha_hasta,$hora_desde,$tarifa,$total_dias,$retiro,$vuelo,$observaciones,$adicionales,$email);
-				$_SESSION['reserva_ok'] = true;
-				echo "<script>
-				window.location = 'inicio';
-				</script>";
+			$existeReservaMismoCodigo = self::verificarCodigoReserva($codigo,$direccion_ip);
+
+			//Verifico que no existe una reserva confirmada con mismo codigo y direccion ip
+			if ($existeReservaMismoCodigo==0) {
+				//Si hay disponibilidad
+				if ($respuesta=="ok") {
+
+					//Funcion para enviar correo
+					self::enviarCorreo($nombre,$apellido,$categoria,$codigo,$fecha_desde,$fecha_hasta,$hora_desde,$tarifa,$total_dias,$retiro,$vuelo,$observaciones,$adicionales,$email);
+					$_SESSION['reserva_ok'] = true;
+					echo "<script>
+					window.location = 'inicio';
+					</script>";
+				}else{
+					$_SESSION['reserva_error'] = true;
+					echo "<script>
+					window.location = 'reservar';
+					</script>";
+					
+				}
 			}else{
-				$_SESSION['reserva_error'] = true;
+				$_SESSION['reserva_error_codigo'] = true;
 				echo "<script>
 				window.location = 'reservar';
 				</script>";
-				
-			}
+			}				
 		}
 	}
 

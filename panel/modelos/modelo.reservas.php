@@ -8,6 +8,15 @@ class ModeloReservas
 
 	public function __construct() {}
 
+	static function verificarCodigoReserva($codigo,$direccion_ip){
+
+		$link = Conexion::ConectarMysql();
+		$query = "select * from reservas where codigo = '$codigo' and direccion_ip = '$direccion_ip'";
+		$sql = mysqli_query($link,$query);
+		$total = mysqli_num_rows($sql);
+		return $total;
+	}
+
 	static function listarTotalesReservasPanel($query){
 
 		$link = Conexion::ConectarMysql();
