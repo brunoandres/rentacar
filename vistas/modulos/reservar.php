@@ -27,7 +27,7 @@ if (isset($_SESSION['reserva_error'])) {
 <section id="portfolio" class="wow fadeInDown">
   <div class="container">
     <div class="center">
-      <h2>Reservas On-line</h2>
+      <h2>Reservas On-line test</h2>
       <div class="alert alert-warning" role="alert">
           La devolución del vehiculo debe ser dentro de las 24hs. De lo contrario se cobrará un adicional extra.
           </div>
