@@ -33,7 +33,7 @@ if (mysqli_num_rows($result) > 0) {
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>Total Reserva (ARG)</span>
-              <strong> $ '.number_format($row['tarifa'], 0, ",", ".");.'</strong>
+              <strong> $ '.number_format($row['tarifa'], 0, ",", ".").'</strong>
             </li>
           </ul>
         </div>
