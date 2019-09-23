@@ -215,12 +215,16 @@
     $("#btn").click(function(){
 
       var url = "inc/email.php";
-
+      var nombre = $("#nombre").val();
+      var email = $("#email").val();
+      var asunto = $("#asunto").val();
+      var mensaje = $("#mensaje").val();
+      
       $.ajax({
 
         type:"POST",
         url:url,
-        data:$("#formulario").serialize(),
+        data:{nombre:nombre,email:email,asunto:asunto,mensaje:mensaje},
         success:function(data){
           $("#resultado").html(data);
         }
