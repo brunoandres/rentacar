@@ -1,7 +1,7 @@
 <?php  
 $enlace = mysqli_connect("localhost", "u756079281_dev", "cavaliere", "u756079281_dev");
 
-$code = '78185';
+$code = $_POST['code'];
 
 $sql = "select * from reservas where codigo = '$code'";
 

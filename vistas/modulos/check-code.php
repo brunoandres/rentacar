@@ -23,21 +23,3 @@
 </section>
 <!--/#contact-page-->
 <br><br><br><br>
-
-<script>
-  
- $(document).ready(function(){
- 	$("#button").click(function(){
- 		var code = $("#code").val();
- 		$.ajax({
- 			url : 'load-code-reservation.php',
- 			data : 'code='+code,
- 			type : POST,
- 			success: function(data){
- 				$("#resultado").html(data);
- 			}
- 		})
- 	})
- });
-
-</script>
