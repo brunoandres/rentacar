@@ -7,6 +7,7 @@ unset($_SESSION['hora_desde']);
 unset($_SESSION['hora_hasta']);
 unset($_SESSION['categoria']);
 unset($_SESSION['total_dias']);
+unset($_POST['confirmaReserva']);
 
 ?>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
