@@ -190,7 +190,7 @@ if (isset($_POST['checkout'])) {
           <li class="list-group-item d-flex justify-content-between">
             <span>Total a Pagar (ARG)</span>
             <strong>$
-              <?php echo number_format($total+$tarifa_ad, 0, ",", "."); ?>
+              <?php $total_pesos = $total+$tarifa_ad; echo number_format($total_pesos, 0, ",", "."); ?>
             
             <?php /*
             $total = 0;
@@ -231,7 +231,7 @@ if (isset($_POST['checkout'])) {
           
 
           <input type="hidden" name="total_dias_reserva" value="<?php echo $_SESSION['total_dias']; ?>">
-          <input type="hidden" name="tarifa_reserva" value="<?php echo $total; ?>">
+          <input type="hidden" name="tarifa_reserva" value="<?php echo $total_pesos; ?>">
           <!--<input type="hidden" name="patente_reserva" value="<?php echo $_SESSION['patente']; ?>">-->
           <input type="hidden" name="origen_reserva" value="1">
           <hr class="mb-4">
