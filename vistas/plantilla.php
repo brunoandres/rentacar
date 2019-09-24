@@ -16,6 +16,15 @@
       gtag('config', 'UA-117085817-1');
     </script>
 
+    <style>
+      .footerAbsolute{
+        position: absolute !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+    </style>
+
 
     <!-- Bootstrap -->
     <link href="vistas/css/bootstrap.min.css" rel="stylesheet">
