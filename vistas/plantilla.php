@@ -16,15 +16,6 @@
       gtag('config', 'UA-117085817-1');
     </script>
 
-    <style>
-      .footerAbsolute{
-        position: fixed !important;
-        bottom: 0 !important;
-        width: 100% !important;
-      }
-    </style>
-
-
     <!-- Bootstrap -->
     <link href="vistas/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="vistas/css/font-awesome.min.css">
@@ -95,6 +86,16 @@
          $_GET["ruta"] == "confirmacion" ){
 
         include "modulos/".$_GET["ruta"].".php";
+
+        if ($_GET["ruta"] == "mi-reserva") {
+          echo "<style>
+      .footerAbsolute{
+        position: fixed !important;
+        bottom: 0 !important;
+        width: 100% !important;
+      }
+    </style>";
+        }
 
       }else{
 
