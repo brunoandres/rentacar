@@ -20,7 +20,6 @@
       .footerAbsolute{
         position: absolute !important;
         bottom: 0 !important;
-        width: 100% !important;
         height: 100% !important;
       }
     </style>
