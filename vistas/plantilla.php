@@ -18,7 +18,7 @@
 
     <style>
       .footerAbsolute{
-        position: absolute !important;
+        position: fixed !important;
         bottom: 0 !important;
         width: 100% !important;
       }
