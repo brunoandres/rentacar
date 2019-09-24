@@ -25,5 +25,3 @@
     <!--/.row-->
   </div>
 </section>
-<!--/#blog-->
-<br><br><br><br><br><br><br>

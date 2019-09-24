@@ -87,7 +87,10 @@
 
         include "modulos/".$_GET["ruta"].".php";
 
-        if ($_GET["ruta"] == "mi-reserva") {
+        if ($_GET["ruta"] == "mi-reserva" ||
+         $_GET["ruta"] == "quienes-somos"||
+         $_GET["ruta"] == "tarifas"||
+         $_GET["ruta"] == "contacto") {
           echo "<style>
       .footerAbsolute{
         position: fixed !important;

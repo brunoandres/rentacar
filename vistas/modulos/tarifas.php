@@ -39,5 +39,3 @@ $tarifas = $new->listarTarifas();
   </div>
   <!--/.container-->
 </section>
-<!--/#contact-page-->
-<br><br><br><br><br><br><br>
