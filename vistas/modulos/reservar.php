@@ -64,25 +64,21 @@ if (isset($_SESSION['reserva_error'])) {
           </div>
 
           <div class="form-group">
-            <label>Fecha desde</label>
+            <label>Fecha Desde</label>
             <div class="input-group">
-              <input type="text" class="form-control fechadesde" name="fecha_desde" placeholder="YYYY / MM / DD" id="fechadesde" autocomplete="off" value="<?php if(isset($_POST['fecha_desde'])){ echo $_POST['fecha_desde']; }else{ echo date('Y-m-d'); } ?>">
+              <input type="text" class="form-control" name="fecha_desde" placeholder="YYYY / MM / DD" id="datepicker" autocomplete="off" value="<?php if(isset($_POST['fecha_desde'])){ echo $_POST['fecha_desde']; }else{ echo date('Y-m-d'); } ?>" required="required" readonly="readonly">
               <span class="input-group-btn">
-            <!--<button class="btn btn-default" type="button" id="datepicker-btn"><i class="fa fa-calendar" aria-hidden="true"></i></button>-->
             </span>
             </div>
-            <!-- /input-group -->
           </div>
 
           <div class="form-group">
-            <label>Fecha hasta</label>
+            <label>Fecha Hasta</label>
             <div class="input-group">
-              <input type="text" class="form-control fechahasta" name="fecha_hasta" placeholder="YYYY / MM / DD" id="fechahasta" autocomplete="off" value="<?php if(isset($_POST['fecha_hasta'])){ echo $_POST['fecha_hasta']; }else{ echo date('Y-m-d'); } ?>">
+              <input type="text" class="form-control" name="fecha_hasta" placeholder="YYYY / MM / DD" id="datepicker2" autocomplete="off" value="<?php if(isset($_POST['fecha_hasta'])){ echo $_POST['fecha_hasta']; }else{ echo date('Y-m-d'); } ?>" required="required" readonly="readonly">
               <span class="input-group-btn">
-            <!--<button class="btn btn-default" type="button" id="datepicker-btn"><i class="fa fa-calendar" aria-hidden="true"></i></button>-->
             </span>
             </div>
-            <!-- /input-group -->
           </div>
 
           <div class="form-group">
