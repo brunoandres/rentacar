@@ -9,7 +9,7 @@ $newConf = new ControladorConfiguraciones();
  {
       $output = '';
       $id = $_POST['id_reserva'];
-      $query = "SELECT * FROM reservas WHERE id = $id";
+      $query = "SELECT * FROM reservas WHERE id = 1368";
       $result = mysqli_query($link, $query);
       $output .= '
       <div class="table-responsive">

@@ -34,6 +34,7 @@ class ModeloReservas
 		$sql = mysqli_query($link,$query);
 
 		if ($sql) {
+			auditar($_SESSION["id_user"],$query);
 			return "ok";
 		}else{
 			return "error";
@@ -382,7 +383,7 @@ class ModeloReservas
 	    	if ($sql) {
 		    	//Recupero la ultima reserva insertada
 		    	$id_reserva_generado = mysqli_insert_id($link);
-		    	auditar($_SESSION["id_user"],$query);
+		    	
 
 	    		if (!empty($adicionales)) {
 	    			foreach ($adicionales as $adicional => $value) {
