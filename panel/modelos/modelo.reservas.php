@@ -52,22 +52,32 @@ class ModeloReservas
 
 	}
 
-	static public function listarReservas($estado=null,$filtro=null){
+	static public function listarReservas($id=null,$estado=null,$filtro=null){
 
 		$reservas = array();
 		$link = Conexion::ConectarMysql();
-	   	
-	   	if (!$estado == null) {
-	   		$query_estado = " and a.estado = $estado";
 
-	   		if (!$filtro == null) {
-	   			$query_mov = " and $filtro";
-	   		}else{
-	   			$query_mov = "";
-	   		}
-	   	}
+		if (!$estado == null) {
+		   		$query_estado = " and a.estado = $estado";
+
+		   		if (!$filtro == null) {
+		   			$query_mov = " and $filtro";
+		   		}else{
+		   			$query_mov = "";
+		   		}
+	   	 	}
+	   	 	
+		if (!$id == null) {
+			$id_reserva = 'and a.id ='.$id;
+			
+		}else{
+
+			$id_reserva = '';
+		}
 	   	
-	    $query = "select a.id as ID_RESERVA,a.id_categoria,a.codigo as CODIGO_RESERVA,concat(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.nombre,a.apellido,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL, a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,a.retiro,a.entrega, b.lugar as LUGAR_RETIRO,b2.lugar AS LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as CATEGORIA from reservas a INNER join lugares b ON a.retiro = b.id INNER join lugares b2 on a.entrega = b2.id inner join categorias c on a.id_categoria = c.id where a.fecha_desde >= '2019-01-01' $query_estado $query_mov";
+	   	
+	   	
+	    $query = "select a.id as ID_RESERVA,a.id_categoria,a.codigo as CODIGO_RESERVA,concat(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.nombre,a.apellido,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL, a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,a.retiro,a.entrega, b.lugar as LUGAR_RETIRO,b2.lugar AS LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as CATEGORIA from reservas a INNER join lugares b ON a.retiro = b.id INNER join lugares b2 on a.entrega = b2.id inner join categorias c on a.id_categoria = c.id where a.fecha_desde >= '2019-01-01' $query_estado $query_mov $id_reserva";
 	    $sql = mysqli_query($link,$query);
 
 	    while ($filas = mysqli_fetch_assoc($sql)) {
@@ -372,6 +382,7 @@ class ModeloReservas
 	    	if ($sql) {
 		    	//Recupero la ultima reserva insertada
 		    	$id_reserva_generado = mysqli_insert_id($link);
+		    	auditar($_SESSION["id_user"],$query);
 
 	    		if (!empty($adicionales)) {
 	    			foreach ($adicionales as $adicional => $value) {
@@ -384,6 +395,7 @@ class ModeloReservas
 	    		//var_dump($adicionales);
 
 	    		mysqli_commit($link);
+	    		auditar($_SESSION["id_user"],$query_adicionales);
 
 	    		return "ok";
 

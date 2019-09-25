@@ -2,7 +2,7 @@
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorReservas();
 $newConf = new ControladorConfiguraciones();
-$reservas = $new->listarReservas(1,NULL);
+$reservas = $new->listarReservas(NULL,1,NULL);
 //Cargo mi combo dinamico con los lugares
 $lugares = $newConf->listarLugares();
 $editarReserva = $new->editarReserva();
@@ -166,7 +166,7 @@ MODAL EDITAR RESERVA
 
         <div class="modal-header" style="background:#3c8dbc; color:white">
 
-         <a href="confirmadas"><button type="button" class="close" data-dismiss="">&times;</button></a>
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
           <h4 class="modal-title">Editar Reserva</h4>
 
@@ -193,14 +193,14 @@ MODAL EDITAR RESERVA
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
-                <input type="text" class="form-control input-lg" name="apellido" id="apellido" required autocomplete="off" placeholder="Apellido">
+                <input type="text" class="form-control input-lg" name="apellido" id="apellido" autocomplete="off" placeholder="Apellido">
               </div>
             </div>
 
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
-                <input type="text" class="form-control input-lg" name="telefono" id="telefono" required autocomplete="off" placeholder="N° de Teléfono">
+                <input type="text" class="form-control input-lg" name="telefono" id="telefono" autocomplete="off" placeholder="N° de Teléfono">
               </div>
             </div>
 
@@ -214,7 +214,7 @@ MODAL EDITAR RESERVA
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
-                <input type="text" class="form-control input-lg" name="vuelo" id="vuelo" required autocomplete="off" placeholder="N° de Vuelo">
+                <input type="text" class="form-control input-lg" name="vuelo" id="vuelo" autocomplete="off" placeholder="N° de Vuelo">
               </div>
             </div>
 
@@ -258,7 +258,7 @@ MODAL EDITAR RESERVA
 
         <div class="modal-footer">
 
-          <a href="confirmadas"><button type="button" class="btn btn-default pull-left" data-dismiss="">Salir</button></a>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-primary" name="editarReserva">Guardar cambios</button>
 
         </div>

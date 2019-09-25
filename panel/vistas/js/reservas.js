@@ -20,7 +20,7 @@ $(".tablas").on("click", ".btnEditarReserva", function(){
  		$("#nombre").val(respuesta["nombre"]);
  		$("#apellido").val(respuesta["apellido"]);
  		$("#telefono").val(respuesta["TELEFONO_CONTACTO"]);
- 		$("#email").val(respuesta["email"]);
+ 		$("#email").val(respuesta["EMAIL"]);
  		$("#vuelo").val(respuesta["NRO_DE_VUELO"]);
 		$("#retiro").val(respuesta["retiro"]);
 		$("#devolucion").val(respuesta["entrega"]);

@@ -450,9 +450,9 @@ class ControladorReservas
 	}
 
 	//listar todas las reservas
-	static function listarReservas($estado=null,$filtro=null){
+	static function listarReservas($id=null,$estado=null,$filtro=null){
 
-		$reservas = ModeloReservas::listarReservas($estado,$filtro);
+		$reservas = ModeloReservas::listarReservas($id,$estado,$filtro);
 		
 		return $reservas;
 

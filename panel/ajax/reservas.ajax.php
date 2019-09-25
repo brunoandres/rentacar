@@ -14,7 +14,7 @@ class AjaxReservas{
 	public function ajaxEditarReserva(){
 
 		$id = $this->idReserva;
-		$respuesta = ControladorReservas::listarReservas(1,NULL);
+		$respuesta = ControladorReservas::listarReservas($id,1,NULL);
 
 		foreach ($respuesta as $reserva) {
 			echo json_encode($reserva);
