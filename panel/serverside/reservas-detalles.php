@@ -5,11 +5,13 @@ include '../modelos/modelo.configuraciones.php';
 $link = Conexion::ConectarMysql();
 $newConf = new ControladorConfiguraciones();
 
- if(isset($_POST["id_reserva"]))
+var_dump($newConf);
+
+ /*if(isset($_POST["id_reserva"]))
  {
       $output = '';
       $id = $_POST['id_reserva'];
-      $query = "SELECT * FROM reservas WHERE id = 1368";
+      $query = "SELECT * FROM reservas WHERE id = $id";
       $result = mysqli_query($link, $query);
       $output .= '
       <div class="table-responsive">
@@ -65,5 +67,5 @@ $newConf = new ControladorConfiguraciones();
       </div>
       ';
       echo $output;
- }
+ }*/
  ?>
