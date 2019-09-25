@@ -5,9 +5,7 @@ include '../modelos/modelo.configuraciones.php';
 $link = Conexion::ConectarMysql();
 $newConf = new ControladorConfiguraciones();
 
-var_dump($newConf);
-
- /*if(isset($_POST["id_reserva"]))
+if(isset($_POST["id_reserva"]))
  {
       $output = '';
       $id = $_POST['id_reserva'];
@@ -67,5 +65,5 @@ var_dump($newConf);
       </div>
       ';
       echo $output;
- }*/
+ }
  ?>
