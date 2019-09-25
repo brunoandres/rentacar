@@ -9,7 +9,7 @@ $(document).ready(function(){
            if(id_reserva != '')
            {
                 $.ajax({
-                     url:"http://patagoniaaustralrentacar.com.ar/panel/serverside/reservas-detalles.php",
+                     url:"../panel/serverside/reservas-detalles.php",
                      method:"POST",
                      data:{id_reserva:id_reserva},
                      success:function(data){
@@ -36,4 +36,3 @@ $(document).ready(function(){
            }
       });
  });
-
