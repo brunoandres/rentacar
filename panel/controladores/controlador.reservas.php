@@ -323,7 +323,7 @@ class ControladorReservas
 								<br>			
 								Observaciones: $observaciones";
 
-		mail("brunoandres2013@gmail.com",$asunto,$contenido,$header);
+		mail("reservas@patagoniaaustralrentacar.com.ar,patagoniaaustralrentacar@gmail.com",$asunto,$contenido,$header);
 		//var_dump($contenido);
 		//CORREO ELECTRONICO PARA EL CLIENTE
 		$header_cliente .= "From: SITIO - Reservas Patagonia Austral <patagoniaaustralrentacar@gmail.com> \r\n";
@@ -333,6 +333,12 @@ class ControladorReservas
 
 		$asunto_cliente = "Información de su Reserva - Sitio Oficial Rent a Car";
 			//$header ="--------------------- CONSULTA CENERGON.COM.AR ------------------------------------";
+
+		$add = '* Adicionales <br>
+		<p>Todos los adicionales añaden un costo al total de la reserva, en caso de rotura ó robo de los mismos, se deberan abonar con los siguientes valores.</p>
+		<strong>$lista_adicionales_habilitados</strong>
+		<br><br>';
+
 		$contenido_cliente = "Se ha confirmado la Reserva a nombre de $nombre en Austral Rent a Car <br>
 		<br><br>
 
@@ -357,11 +363,6 @@ class ControladorReservas
 		<p>El horario de devolución del vehículo deberá ser el mismo definido en la reserva, de lo contrario se cobrará el adicional como un día más de alquiler.</p>
 		 <br><br>
 
-		* Adicionales <br>
-		<p>Todos los adicionales añaden un costo al total de la reserva, en caso de rotura ó robo de los mismos, se deberan abonar con los siguientes valores.</p>
-		<strong>$lista_adicionales_habilitados</strong>
-		<br><br>
-
 		* Medios de pago <br>
 		Puede realizar el pago en efectivo a la hora de la entrega,
 		o mediante depósito bancario.<br>
@@ -376,7 +377,7 @@ class ControladorReservas
 		Jimena González Whatsapp Tel: +54 9 2944242615.
 
 		<h3>Franquicia</h3>
-	    <p>Para los daños (parciales) ocurridos en nuestros vehículos, el Cliente debe abonar los mismos hasta un valor maximo (FRANQUICIA) de $15.000 por accidente y $25.000 por vuelco (excepto en la categoria E, que la misma tiene un valor de $25.000 por accidente y $35.000 por vuelco). Esta franquicia es fija de acuerdo a las categorias de vehiculos, entonces, si la FRANQUICIA es de $15.000 por accidente, el Cliente debe abonar todas las eventuales reparaciones hasta $15.000. Si el valor a reparar es mayor a la FRANQUICIA, esa difrencia es cubierta por el seguro.</p>";
+    	<p>Para los daños (parciales) ocurridos en nuestros vehículos, el Cliente debe abonar los mismos hasta un valor maximo (FRANQUICIA) de $15.000 por accidente y $25.000 por vuelco (excepto en la categoria E, que la misma tiene un valor de $25.000 por accidente y $35.000 por vuelco). Esta franquicia es fija de acuerdo a las categorias de vehiculos, entonces, si la FRANQUICIA es de $15.000 por accidente, el Cliente debe abonar todas las eventuales reparaciones hasta $15.000. Si el valor a reparar es mayor a la FRANQUICIA, esa difrencia es cubierta por el seguro.</p>";
 	    //echo($contenido_cliente);
 		mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);
 
