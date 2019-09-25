@@ -1,11 +1,11 @@
 <?php
-/*include '../modelos/modelo.conexion.php';
+include '../modelos/modelo.conexion.php';
 include '../controladores/controlador.configuraciones.php';
 include '../modelos/modelo.configuraciones.php';
 $link = Conexion::ConectarMysql();
 $newConf = new ControladorConfiguraciones();
-echo "string";
-/*if(isset($_POST["id_reserva"]))
+
+ if(isset($_POST["id_reserva"]))
  {
       $output = '';
       $id = $_POST['id_reserva'];
@@ -65,5 +65,5 @@ echo "string";
       </div>
       ';
       echo $output;
- }*/
+ }
  ?>
