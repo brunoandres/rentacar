@@ -1,5 +1,5 @@
 <?php
-include '../modelos/modelo.conexion.php';
+/*include '../modelos/modelo.conexion.php';
 include '../controladores/controlador.configuraciones.php';
 include '../modelos/modelo.configuraciones.php';
 $link = Conexion::ConectarMysql();
