@@ -65,8 +65,29 @@
     <script src="panel/vistas/bower_components/select2/dist/js/select2.full.js"></script>
 
     <title>Patagonia Austral Rentacar Bariloche</title>
+
+    <style>
+      .whatsapp {
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:40px;
+  right:40px;
+  background-color:#25d366;
+  color:#FFF;
+  border-radius:50px;
+  text-align:center;
+  font-size:30px;
+  z-index:100;
+}
+
+.whatsapp-icon {
+  margin-top:13px;
+}
+    </style>
   </head>
   <body>
+    <a href="https://wa.me/5492944242615?text=Me%20gustaría%20saber%20más%20sobre%20el%20servicio" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
 
     <?php include 'inc/menu.php'; ?>
 
