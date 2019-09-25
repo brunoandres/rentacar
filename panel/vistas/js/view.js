@@ -25,7 +25,7 @@ $(document).ready(function(){
            if(id_categoria != '')
            {
                 $.ajax({
-                     url:"http://patagoniaaustralrentacar.com.ar/panel/serverside/categorias-detalles.php",
+                     url:"../panel/serverside/categorias-detalles.php",
                      method:"POST",
                      data:{id_categoria:id_categoria},
                      success:function(data){

@@ -207,7 +207,7 @@ MODAL EDITAR RESERVA
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
-                <input type="text" class="form-control input-lg" name="email" id="email" required autocomplete="off" placeholder="Correo Electrónico">
+                <input type="email" class="form-control input-lg" name="email" id="email" required autocomplete="off" placeholder="Correo Electrónico">
               </div>
             </div>
 
