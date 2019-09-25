@@ -4,7 +4,7 @@ $new = new ControladorReservas();
 $newConf = new ControladorConfiguraciones();
 
 $date = date('Y-m-d');     
-$reservas = $new->listarReservas(1,"fecha_hasta = '$date'");
+$reservas = $new->listarReservas(1," a.fecha_hasta = '$date'");
 
 ?>
 <!-- Content Wrapper. Contains page content -->

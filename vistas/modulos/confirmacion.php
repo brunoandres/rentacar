@@ -134,7 +134,7 @@ if (isset($_POST['checkout'])) {
               <h6 class="my-0">Valor Reserva</h6>
               
                 
-              <small class="text-muted">Por días selecionados</small>
+              <small class="text-muted">Por días selecionados normales</small>
             </div>
             <span class="text-success"><strong>$<?php echo $total_por_dias = number_format($tarifa[0]*$_SESSION['total_dias'], 0, ",", "."); ?></strong></span>
           </li>
@@ -143,21 +143,21 @@ if (isset($_POST['checkout'])) {
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 class="my-0">Promociones</h6>
-                <small class="text-muted">Por <?php echo $cantidadPromociones; ?> promocion/es</small>
+                <small class="text-muted">Por <?php echo $cantidadPromociones; ?> promocion/es de <?php echo intval($promo); ?> dias.</small>
               </div>
-              <span class="text-success"><strong>$ <?php echo number_format($precio_promo, 0, ",", "."); ?></strong></span>
-            </li>
-          <?php endif ?>
-          <?php if (!$diasSinPromo==0): ?>
-            <!--<li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Dias sin promo</h6>
-                <small class="text-muted">Por <?php echo $diasSinPromo; ?> dia/s sin promo</small>
-              </div>
-              <span class="text-success"><strong>+ $ <?php echo number_format($precio_diario, 0, ",", "."); ?></strong></span>-->
-            </li>
-          <?php endif ?>
+              <span class="text-success"><strong>$ <?php echo number_format($precio_promo, 0, ",", "."); ?></strong>
 
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">+ <?php echo $diasSinPromo; ?> dia/s</h6>
+                <small class="text-muted">sin promociones</small>
+              </div>
+              <span class="text-success"><strong>$ <?php echo number_format($tarifa[0]*$diasSinPromo, 0, ",", "."); ?></strong>
+               
+            </li>
+          <?php endif ?>
+          
           <?php  
           $tarifa_ad = 0;
             
@@ -191,20 +191,7 @@ if (isset($_POST['checkout'])) {
             <span>Total a Pagar (ARG)</span>
             <strong>$
               <?php $total_pesos = $total+$tarifa_ad; echo number_format($total_pesos, 0, ",", "."); ?>
-            
-            <?php /*
-            $total = 0;
-
-            if ($tarifa[2]==0) {
-              $total = ($tarifa[0]*$_SESSION['total_dias'])+$tarifa_ad;
-            }else{
-              $total = $tarifa[1]+$tarifa_ad;
-            } 
-            $_SESSION['tarifa'] = $total;
-            echo '$'.$total;*/
-            
-            ?>
-   
+  
             </strong>
           </li>
 
@@ -263,7 +250,7 @@ if (isset($_POST['checkout'])) {
 
 <?php } 
 //Metodo para guardar nueva reserva
-$nuevaReserva = $ctrReservas->nuevaReservaInsert();
+$nuevaReserva = $ctrReservas->nuevaReservaInsert('web');
 ?>
 
 

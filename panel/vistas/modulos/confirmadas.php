@@ -55,6 +55,8 @@ $editarReserva = $new->editarReserva();
                 $tiene_adicionales = $newConf->buscarAdicionales($value['ID_RESERVA']);
                 if (!empty($tiene_adicionales)) {
                   $adicionales = $tiene_adicionales['adicionales'];
+                }else{
+                  $adicionales = 'No tiene';
                 }
 
               ?>
@@ -76,7 +78,7 @@ $editarReserva = $new->editarReserva();
                 }?>
                   
                 </td>
-                <td><?php echo $adicionales;?></td>
+                <td><?php echo "<span class='badge badge-secondary'>".$adicionales."</span></h6>"?></td>
 
                 <td>
 

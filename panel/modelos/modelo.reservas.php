@@ -44,7 +44,7 @@ class ModeloReservas
 	static function listarTotalReservas(){
 
 		$link = Conexion::ConectarMysql();
-		$query = "select * from reservas where estado = 1 and fecha_desde >= '2019-01-01'";
+		$query = "select A.id as ID_RESERVA,a.id_categoria,a.codigo as CODIGO_RESERVA,concat(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.nombre,a.apellido,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL, a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,a.retiro,a.entrega, b.lugar as LUGAR_RETIRO,B2.lugar AS LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as CATEGORIA from reservas a INNER join lugares B ON a.retiro = B.id INNER join lugares B2 on a.entrega = B2.id inner join categorias c on a.id_categoria = c.id where a.fecha_desde >= '2019-01-01' and a.estado = 1";
 		$sql = mysqli_query($link,$query);
 		$total = mysqli_num_rows($sql);
 
@@ -58,7 +58,7 @@ class ModeloReservas
 		$link = Conexion::ConectarMysql();
 	   	
 	   	if (!$estado == null) {
-	   		$query_estado = " where a.estado = $estado";
+	   		$query_estado = " and a.estado = $estado";
 
 	   		if (!$filtro == null) {
 	   			$query_mov = " and $filtro";
@@ -67,9 +67,8 @@ class ModeloReservas
 	   		}
 	   	}
 	   	
-	    $query = "select a.id as ID_RESERVA,a.id_categoria,a.codigo as CODIGO_RESERVA,CONCAT(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.nombre,a.apellido,a.email,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL,a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,a.retiro,a.entrega,e.lugar as LUGAR_RETIRO,e.lugar as LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as ADICIONALES,d.nombre as CATEGORIA from reservas a left join reservas_adicionales b on a.id = b.id_adicional left join adicionales c ON a.id = c.id LEFT join categorias d on a.id_categoria = d.id left JOIN lugares e on a.retiro = e.id and a.entrega = e.id $query_estado $query_mov";
+	    $query = "select A.id as ID_RESERVA,a.id_categoria,a.codigo as CODIGO_RESERVA,concat(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.nombre,a.apellido,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL, a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,a.retiro,a.entrega, b.lugar as LUGAR_RETIRO,B2.lugar AS LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as CATEGORIA from reservas a INNER join lugares B ON a.retiro = B.id INNER join lugares B2 on a.entrega = B2.id inner join categorias c on a.id_categoria = c.id where a.fecha_desde >= '2019-01-01' $query_estado $query_mov";
 	    $sql = mysqli_query($link,$query);
-
 
 	    while ($filas = mysqli_fetch_assoc($sql)) {
 	      $reservas[]=$filas;

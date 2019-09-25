@@ -181,9 +181,17 @@ class ControladorReservas
 	}
 
 	//Funcion para agregar nueva reservas
-	static function nuevaReservaInsert(){
+	static function nuevaReservaInsert($url){
 
 		if (isset($_POST['confirmaReserva'])) {
+
+			if ($url == 'web') {
+	    		$url_confirma = 'inicio';
+	    		$url_error = 'reservar';
+	    	}else{
+	    		$url_confirma = './inicio';
+	    		$url_error = './nueva-reserva';
+	    	}
 
 			$link = Conexion::ConectarMysql();
 
@@ -223,15 +231,15 @@ class ControladorReservas
 			if ($respuesta=="ok") {
 
 				//Funcion para enviar correo
-				self::enviarCorreo($nombre,$apellido,$categoria,$codigo,$fecha_desde,$fecha_hasta,$hora_desde,$tarifa,$total_dias,$retiro,$vuelo,$observaciones,$adicionales,$email);
+				self::enviarCorreo($nombre,$apellido,$categoria,$codigo,$fecha_desde,$fecha_hasta,$hora_desde,$tarifa,$total_dias,$retiro,$vuelo,$observaciones,$adicionales,$email,$telefono);
 				$_SESSION['reserva_ok'] = true;
 				echo "<script>
-				window.location = 'inicio';
+				window.location = '$url_confirma';
 				</script>";
 			}else{
 				$_SESSION['reserva_error'] = true;
 				echo "<script>
-				window.location = 'reservar';
+				window.location = '$url_error';
 				</script>";
 				
 			}
@@ -239,7 +247,7 @@ class ControladorReservas
 	}
 
 	//Funcion para envio de email de Reserva
-	static public function enviarCorreo($nombre,$apellido,$categoria,$codigo,$fecha_desde,$fecha_hasta,$hora_desde,$tarifa,$total_dias,$retiro,$vuelo,$observaciones,$adicionales,$email){
+	static public function enviarCorreo($nombre,$apellido,$categoria,$codigo,$fecha_desde,$fecha_hasta,$hora_desde,$tarifa,$total_dias,$retiro,$vuelo,$observaciones,$adicionales,$email,$telefono){
 
 		$ctrConfiguraciones = new ControladorConfiguraciones();
 		$ctrReservas = new ControladorReservas();

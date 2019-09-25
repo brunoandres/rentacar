@@ -1,5 +1,20 @@
 <?php  
 
+unset($_SESSION['codigo']);     
+unset($_SESSION['fecha_desde']);
+unset($_SESSION['fecha_hasta']);
+unset($_SESSION['hora_desde']);
+unset($_SESSION['hora_hasta']);
+unset($_SESSION['categoria']);
+unset($_SESSION['total_dias']);
+unset($_POST['confirmaReserva']);
+
+if (isset($_SESSION['reserva_ok'])) {
+ echo "<script>
+ toastr.success('¡Reserva Confirmada correctamente!.', 'Reserva OK', {timeOut: 6000})
+ </script>";
+ unset($_SESSION['reserva_ok']);
+}
 $new = new ControladorReservas();
 $newCat = new ControladorCategorias();
 $newConf = new ControladorConfiguraciones();

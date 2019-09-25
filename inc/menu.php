@@ -28,12 +28,12 @@ if (empty($_GET['ruta'])) {
         <li class="nav-item <?php if($_GET['ruta']=='flota'){ echo 'active'; } ?>">
           <a class="nav-link" href="flota">Flota</a>
         </li>
-        <li class="nav-item <?php if($_GET['ruta']=='contacto'){ echo 'active'; } ?>">
+        <!--<li class="nav-item <?php if($_GET['ruta']=='contacto'){ echo 'active'; } ?>">
           <a class="nav-link" href="contacto">Contacto</a>
-        </li>
-        <li class="nav-item <?php if($_GET['ruta']=='mi-reserva'){ echo 'active'; } ?>">
+        </li>-->
+        <!--<li class="nav-item <?php if($_GET['ruta']=='mi-reserva'){ echo 'active'; } ?>">
           <a class="nav-link" href="mi-reserva">Mi Reserva</a>
-        </li>
+        </li>-->
         <li class="nav-item <?php if($_GET['ruta']=='reservar' || $_GET['ruta']=='formulario' || $_GET['ruta']=='confirma'){ echo 'active'; } ?>">
           <a class="nav-link" href="reservar">¡Reservar!</a>
         </li>

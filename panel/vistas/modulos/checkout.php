@@ -52,10 +52,13 @@ $adicionales = $ctrConfiguraciones->listarAdicionales();
             <div class="form-group">
               <label for="nombre">Nombre</label>
               <input type="text" class="form-control" maxlength="50" id="nombre" name="nombre" placeholder="Complete el nombre" required="">
+              <input type="hidden" name="id_categoria" value="<?php echo $categoria; ?>">
+              <input type="hidden" name="hora_desde" value="<?php echo $_SESSION['hora_desde']; ?>">
+              <input type="hidden" name="hora_hasta" value="<?php echo $_SESSION['hora_hasta']; ?>">
             </div>
             <div class="form-group">
               <label for="apellido">Apellido</label>
-              <input type="email" class="form-control" maxlength="50" id="apellido" name="apellido" placeholder="Complete el apellido">
+              <input type="TEXT" class="form-control" maxlength="50" id="apellido" name="apellido" placeholder="Complete el apellido">
             </div>
             <div class="form-group">
               <label for="telefono">Teléfono</label>
@@ -69,7 +72,7 @@ $adicionales = $ctrConfiguraciones->listarAdicionales();
 
             <div class="form-group">
               <label for="telefono">Nº de Vuelo / Transporte / Embarcación</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="Complete el correo electrónico / Ingrese un correo válido para enviar comprobante de la Reserva">
+              <input type="text" class="form-control" id="vuelo" name="vuelo" placeholder="Complete el correo electrónico / Ingrese un correo válido para enviar comprobante de la Reserva">
             </div>
 
             <div class="form-group">
@@ -83,7 +86,7 @@ $adicionales = $ctrConfiguraciones->listarAdicionales();
 
             <div class="form-group">
               <label for="devolucion">Lugar de Devolución</label>
-              <select class="form-control" id="devolucion" name="devolucion" style="width: 100%;">
+              <select class="form-control" id="entrega" name="entrega" style="width: 100%;">
                     <?php foreach ($lugares as $lugar) {?>
                       <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
                     <?php } ?>
@@ -96,7 +99,7 @@ $adicionales = $ctrConfiguraciones->listarAdicionales();
             </div>
 
             <div class="form-group">
-        	<p>Los adicionales están sujetos a disponibilidad.</p>
+      	    <p>Los adicionales están sujetos a disponibilidad.</p>
               <select class="form-control select2" multiple="multiple" id="adicionales_seleccionados" name="adicionales[]" data-placeholder="Seleccionar adicionales...">
                 <?php foreach ($adicionales as $adicional) {?>
                   <option value="<?php echo $adicional['id']; ?>"><?php echo $adicional['nombre'].' $ '.$adicional['tarifa']; ?></option>
@@ -109,7 +112,7 @@ $adicionales = $ctrConfiguraciones->listarAdicionales();
 
           <div class="box-footer">
           	<a href="inicio"> <button type="button" class="btn btn-default"> Cancelar </button> </a>
-            <button type="submit" class="btn btn-danger" name="btnCheckOut">Continuar Reserva</button>
+            <button type="submit" class="btn btn-danger" name="checkout">Continuar Reserva</button>
           </div>
         </form>
         

@@ -1,9 +1,9 @@
 <?php  
-$enlace = mysqli_connect("localhost", "u756079281_dev", "cavaliere", "u756079281_dev");
-
+$enlace = mysqli_connect("localhost", "u756079281_prod", "cavaliere", "u756079281_prod");
+//$enlace = mysqli_connect("localhost","root","","rentacar");
 $code = $_POST['code'];
 
-$sql = "select a.*,b.nombre as categoria from reservas a,categorias b where a.codigo = '$code' and a.id_categoria = b.id";
+$sql = "select a.*,b.nombre as categoria from reservas a,categorias b where a.codigo = '$code' and not a.codigo='0' and a.id_categoria = b.id";
 
 $result = mysqli_query($enlace,$sql);
 
