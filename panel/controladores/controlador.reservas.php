@@ -360,7 +360,7 @@ class ControladorReservas
 		<p>Todos los vehículos poseen cubiertas de hielo y nieve.</p>
 		<br>
 		* Horarios  <br>
-		<p>El horario de devolución del vehículo deberá ser el mismo definido en la reserva, de lo contrario se cobrará el adicional como un día más de alquiler.</p>
+		<p>El horario de devolución del vehículo deberá ser el mismo indicado en el formulario de la Reserva, de lo contrario se cobrará el adicional como un día más de alquiler.</p>
 		 <br><br>
 
 		* Medios de pago <br>
@@ -377,7 +377,7 @@ class ControladorReservas
 		Jimena González Whatsapp Tel: +54 9 2944242615.
 
 		<h3>Franquicia</h3>
-    	<p>Para los daños (parciales) ocurridos en nuestros vehículos, el Cliente debe abonar los mismos hasta un valor maximo (FRANQUICIA) de $15.000 por accidente y $25.000 por vuelco (excepto en la categoria E, que la misma tiene un valor de $25.000 por accidente y $35.000 por vuelco). Esta franquicia es fija de acuerdo a las categorias de vehiculos, entonces, si la FRANQUICIA es de $15.000 por accidente, el Cliente debe abonar todas las eventuales reparaciones hasta $15.000. Si el valor a reparar es mayor a la FRANQUICIA, esa difrencia es cubierta por el seguro.</p>";
+    	<p>Para los daños (parciales) ocurridos en nuestros vehículos, el Cliente debe abonar los mismos hasta un valor maximo (FRANQUICIA) de $40.000 por accidente y $80.000 por vuelco para los caso de Categoria A,B y C. En el caso de Categoria C y D, los valores por accidente son $60.000 y $120.000 por vuelco. Esta franquicia es fija de acuerdo a las categorias de vehiculos, entonces, si la FRANQUICIA es de $40.000 por accidente, el Cliente debe abonar todas las eventuales reparaciones hasta $40.000. Si el valor a reparar es mayor a la FRANQUICIA, esa difrencia es cubierta por el seguro.</p>";
 	    //echo($contenido_cliente);
 		mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);
 
