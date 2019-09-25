@@ -1,7 +1,7 @@
 <?php  
 
 $new = new ControladorConfiguraciones();
-$tarifas = $new->listarTarifas();
+$tarifas = $new->listarTarifasFrontEnd();
 
 ?>
 <section id="portfolio">

@@ -150,6 +150,13 @@ class ControladorConfiguraciones{
       return $respuesta;
   	}	
 
+  	//Metodo para listar las tarifas definidas por temporadas
+  	static public function listarTarifasFrontEnd($id=null){
+
+      $respuesta = ModeloConfiguraciones::listarTarifasFrontEnd($id);
+      return $respuesta;
+  	}
+
   	//Metodo para guardar un auto
   	static public function nuevoAuto(){
 

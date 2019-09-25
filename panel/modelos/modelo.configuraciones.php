@@ -326,6 +326,32 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
   }
 
+  static public function listarTarifasFrontEnd($id=null){
+
+    $link = Conexion::ConectarMysql();
+    $tarifas = array();
+    if ($id == null) {
+      $query = "SELECT a.id,a.por_dia,a.por_semana,a.activa,b.nombre as temporada,b.id as id_temporada,b.fecha_desde,b.fecha_hasta,c.id as id_categoria,c.nombre from tarifas a, temporadas b,categorias c where a.id_temporada=b.id and a.id_categoria=c.id and b.fecha_hasta <= '2019-12-31' order by c.nombre asc";
+      $sql = mysqli_query($link,$query);
+      while ($filas = mysqli_fetch_assoc($sql)) {
+         $tarifas[] = $filas;
+      }
+      return $tarifas;
+
+    }else{
+      $query = "SELECT a.id,a.por_dia,a.por_semana,a.activa,b.id as id_temporada,b.fecha_desde,b.fecha_hasta,c.id as id_categoria,c.nombre from tarifas a, temporadas b,categorias c where a.id_temporada=b.id and a.id_categoria=c.id and a.id=$id order by c.nombre asc";
+      $sql = mysqli_query($link,$query);
+      while ($filas = mysqli_fetch_assoc($sql)) {
+         $tarifas[] = $filas;
+      }
+      return $tarifas;
+    }
+      // Cerrar la conexión.
+      mysqli_close( $link );
+  }
+
+  
+
   static public function listarTarifas($id=null){
 
     $link = Conexion::ConectarMysql();
