@@ -12,7 +12,7 @@ class ModeloUsuarios{
       $user = mysqli_real_escape_string($link,$txtuser);
       $pass = mysqli_real_escape_string($link,$txtpass);
       $users = array();
-      $query = "select usuario,pass,id_usuario from usuarios where usuario = '$user' and pass = '$pass'";
+      $query = "select usuario,pass,id_usuario,admin from usuarios where usuario = '$user' and pass = '$pass'";
 	    $sql = mysqli_query($link,$query);
 	    while ($filas = mysqli_fetch_assoc($sql)) {
 	      $users['user']=$filas['usuario'];
@@ -20,6 +20,7 @@ class ModeloUsuarios{
         $users['id_user']=$filas['id_usuario'];
         $users['iniciarSesion']='ok';
         $_SESSION['id_user']  = $filas['id_usuario'];
+        $_SESSION['is_admin']  = $filas['admin'];
 	    }
 	    return $users;
 	    // Cerrar la conexión.

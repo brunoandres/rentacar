@@ -67,6 +67,11 @@ if (isset($_SESSION['configuracion_ok'])) {
 
                   <button class="btn btn-warning btnEditarConfiguracion" idConfig="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarConfig"><i class="fa fa-pencil"></i></button>
 
+                  <?php if ($_SESSION['is_admin']==1): ?>
+                    <button class="btn btn-danger btnEliminarConfiguracion" idConfiguracion="<?php echo $value['id']; ?>"><i class="fa fa-trash"></i></button>
+                  <?php endif ?>
+                  
+
 
                 </td>
 
