@@ -82,7 +82,7 @@ $editarReserva = $new->editarReserva();
 
                 <td>
 
-                  <button type="button" name="view_data" value="" id="<?php echo $value['ID_RESERVA']; ?>" class="btn btn-info btn-xs view_data"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                  <button type="button" name="view_data" id="<?php echo $value['ID_RESERVA']; ?>" class="btn btn-info btn-xs view_data"><i class="fa fa-eye" aria-hidden="true"></i></button>
 
                   <button class="btn btn-warning btn-xs btnEditarReserva" idReserva="<?php echo $value['ID_RESERVA']; ?>" data-toggle="modal" data-target="#modalEditarReserva"><i class="fa fa-pencil"></i></button>
 
