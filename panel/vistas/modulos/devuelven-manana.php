@@ -5,7 +5,7 @@ $newConf = new ControladorConfiguraciones();
 
 $date = date('Y-m-d');  
 $query = " a.fecha_hasta = DATE_SUB('$date',INTERVAL -1 DAY)";   
-$reservas = $new->listarReservas(1,$query);
+$reservas = $new->listarReservas(NULL,1,$query);
 
 ?>
 <!-- Content Wrapper. Contains page content -->
