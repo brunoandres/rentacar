@@ -51,7 +51,7 @@ if (isset($_SESSION['reserva_ok'])) {
 <section id="feature">
   <div class="container">
     <div class="center wow fadeInDown">
-      <h2>Austral Rent A Car Test</h2>
+      <h2>Austral Rent A Car</h2>
       <p class="lead">Austral Rent a Car, propone precios atractivos en alquiler de autos en San Carlos de Bariloche Argentina</p>
     </div>
 
