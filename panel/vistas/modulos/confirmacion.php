@@ -110,7 +110,7 @@ if (isset($_POST['checkout'])) {
     <div class="pad margin no-print">
       <div class="callout callout-info" style="margin-bottom: 0!important;">
         <h4><i class="fa fa-info"></i> Nota:</h4>
-        Confirme la Reserva con los siguientes datos.
+        Confirme la Nueva Reserva con los siguientes datos.
       </div>
     </div>
 
@@ -134,10 +134,22 @@ if (isset($_POST['checkout'])) {
             <strong>Nombre :</strong> <?php echo $_POST['nombre'].' '.$_POST['apellido']; ?><br>
             <strong>Fecha Desde :</strong> <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde']));?><br>
             <strong>Fecha Hasta :</strong> <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta']));?><br>
-            <strong>Phone :</strong> <?php echo $_POST['telefono']; ?><br>
+            <strong>Hora Retiro : <?php echo $_SESSION['hora_desde']; ?>hs.</strong><br>
+            <strong>Hora Devolución : <?php echo $_SESSION['hora_hasta']; ?>hs.</strong><br>
+            <strong>Teléfono :</strong> <?php echo $_POST['telefono']; ?><br>
             <strong>Email :</strong> <?php echo $_POST['email']; ?>
           </address>
         </div>
+        <?php 
+        if (!$_SESSION['adicionales']=='') {
+          echo "Adicionales <br>";
+          foreach ($_SESSION['adicionales'] as $key => $value) {
+            $nombre = $ctrConfiguraciones->tarifaAdicional($value);
+            echo "<li>".$nombre['nombre']."</li>";
+          }
+        }
+         
+        ?>
       </div>
       <!-- /.row -->
       <?php  
