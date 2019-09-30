@@ -5,7 +5,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta name="google-site-verification" content="D6kjcV62_XcOUnO0F8QtplLUMW2VDhZOLqucq4gaYTE" />
+    <meta name="reservas-online" content="Servicio web de reservas online Rent a Car" />
+    <meta name="author" content="CENERGON" />
+    <meta name="description" content="Patagonia Austral Rent a Car le brinda un completo servicio de alquiler de autos en San Carlos de Bariloche">
+    <meta name="generator" content="PHP" />
+    <meta name="keywords" content="Rentacar,Bariloche,Alquiler de autos, Patagonia Austral" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117085817-1"></script>
     <script>
