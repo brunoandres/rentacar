@@ -4,7 +4,7 @@
           <h2>Flota de Autos</h2>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-3">
+            <!--<div class="col-md-6 col-lg-3">
                 <div class="card border-0 transform-on-hover">
                     <a class="lightbox" href="vistas/images/flota/full/clio.jpg">
                         <img src="vistas/images/flota/recent/clio.jpg" alt="Card Image" class="card-img-top">
@@ -15,7 +15,7 @@
                         <p>5 Puertas - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag</p>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="col-md-6 col-lg-3">
                 <div class="card border-0 transform-on-hover">
                     <a class="lightbox" href="vistas/images/flota/full/corsa.jpg">
