@@ -318,6 +318,7 @@ class ControladorReservas
 								Fecha hasta: $fecha_hasta_email <br>
 								Lugar de retiro: $lugar_email <br>
 								Hora a entregar: $hora_desde hs. <br>
+								N° de Vuelo: $vuelo <br>
 								Adicionales: <br>
 								$lista	
 								<br>			
