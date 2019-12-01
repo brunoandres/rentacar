@@ -482,7 +482,102 @@ class ControladorReservas
 		return $tarifas;
 
 	}
+    
+    
+    //Funcion principal que busca disponibilidad, devuelve el contador de autos disponibles.
+	static function test($origen){
 
+	    if (isset($_POST['buscar'])) {
+
+	    	if ($origen == 'web') {
+	    		$url_checkout = 'checkout';
+	    	}else{
+	    		$url_checkout = './checkout';
+	    	}
+
+	    	//Codigo de reserva es null, hasta que se genere aleatoriamente.
+    		$codigo = NULL;
+	      	$fecha_desde = $_POST['fecha_desde'];
+	      	$fecha_hasta = $_POST['fecha_hasta'];
+	      	$hora_desde  = $_POST['hora_desde'];
+	      	$hora_hasta  = $_POST['hora_hasta'];
+	  	  	$categoria   = $_POST['categoria'];
+
+	  	  	//Valido que las fechas sean al menos correctas
+	  	  	if (!self::validateDate($fecha_desde) || !self::validateDate($fecha_hasta)) {
+	  	  		echo "<script>
+ 							toastr.error('Ha ingresado fechas inválidas, intente nuevamente', 'A tener en cuenta', {timeOut: 8000})
+ 						</script>";
+	  	  	}
+
+	  	  	//Total de dias entre fechas.
+	  	  	$total_dias = self::totalDias($fecha_desde,$fecha_hasta);
+
+	  	  	//Busco los dias minimo de alquiler
+	  	  	$cantidad_dias_configuracion = ModeloConfiguraciones::diasMinimos();
+
+	  	  	//Busco el margen horario para reservar
+	  	  	$margen_horario_disponible = ModeloConfiguraciones::margenHorario();
+
+	  	  	//En caso de no encontrar la configuracion o que ésta esté mal definida, por defecto serán 3 dias minimo de alquiler.
+	  	  	if (!empty($cantidad_dias_configuracion)) {
+	  	  		$minimo_de_dias = $cantidad_dias_configuracion['dias'];
+	  	  		if (!$minimo_de_dias == null) {	
+	  	  			settype($minimo_de_dias, "integer");
+	  	  		}else{
+	  	  			$minimo_de_dias=3;
+	  	  		}
+	  	  		
+	  	  	}else{
+	  	  		$minimo_de_dias=3;
+	  	  	}
+
+	  	  	//Cantidad de dias minimos para reservar.
+	  	  	if ($total_dias>=$minimo_de_dias) {
+
+		  	  	$respuesta = ModeloReservas:: test($categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
+
+		  	  	//Generar un codigo de reserva aleatorio
+				$codigo = ModeloReservas::codigoReserva(5);
+				
+
+			echo($respuesta);
+				/***** valor de retorno funcion disponibilidad
+				
+				***/
+				//Si contador devuelve mayor igual a 1 es por que hay disponibilidad
+				/*if ($respuesta>=1) {
+	
+					$_SESSION['codigo']      = $codigo;
+					$_SESSION['fecha_desde'] = $fecha_desde;
+					$_SESSION['fecha_hasta'] = $fecha_hasta;
+					$_SESSION['hora_desde']  = $hora_desde;
+					$_SESSION['hora_hasta']  = $hora_hasta;
+ 					$_SESSION['categoria']   = $categoria;
+					$_SESSION['total_dias']  = $total_dias;
+					$_SESSION['mensaje']     = 'Reserva Disponible';
+ 
+					echo "<script>
+
+					window.location='$url_checkout';
+
+					</script>";
+
+				}else{
+
+					echo "<script>
+ 							toastr.error('No hay vehiculos disponibles en las fechas solicitadas.', 'No hay disponibilidad', {timeOut: 8000})
+ 						</script>";
+				}*/
+	  	  	}else{
+
+	  	  		echo "<script>
+ 						toastr.error('El periodo mínimo de alquiler son de $minimo_de_dias dia/s.', 'A tener en cuenta', {timeOut: 8000})
+ 					</script>";
+		  	 
+		  	}   		      
+	    }
+  	}
 	
 
 
