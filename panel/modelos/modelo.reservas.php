@@ -338,7 +338,9 @@ class ModeloReservas
 					if ($reserva_ok==false) {
 						
 						$sumaDeChoques =$sumaDeChoques+1;
-						$contador_autos = $contador_autos-$sumaDeChoques;
+						//$contador_autos = $contador_autos-$sumaDeChoques;
+					}else{
+					    $contador_autos = $contador_autos-$sumaDeChoques;
 					}
 
 				}
@@ -469,6 +471,181 @@ class ModeloReservas
 		}else{
 			return "error";
 		}
+	}
+	
+	static function test($categoria,$fechaDesdeReserva,$fechaHastaReserva,$hora_desde,$hora_hasta){
+		$contador_autos = null;
+		//Instancio mi clase categorias para traer total de autos para cada una.
+		$new = new ModeloCategorias();
+
+		$link 		= Conexion::ConectarMysql();
+		$query 		= "select * from reservas where id_categoria = $categoria and estado = 1 and fecha_hasta >= (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
+		$resultado 	= mysqli_query($link,$query);
+
+		//Total de resultados de la consulta
+		$total_result = mysqli_num_rows($resultado);
+
+		//retorno valor de buscarDisponibilidad (flag)
+		$reserva_ok = false;
+
+		//variable pora ir contando los cruces de reserva
+		$choques_entre_reservas = 0;
+
+		//busco total de autos por categorias
+		/*switch ($categoria) {
+			case 1:
+				$contador = $new::autosPorCategoria(1,null,null);
+				break;
+			case 2:
+				$contador = $new::autosPorCategoria(2,null,null);
+				break;
+			case 3:
+				$contador = $new::autosPorCategoria(3,null,null);
+				break;
+			case 4:
+				$contador = $new::autosPorCategoria(4,null,null);
+				break;
+			case 5:
+				$contador = $new::autosPorCategoria(5,null,null);
+				break;
+		}
+
+		$total = intval($contador['total']);*/
+		for ($i=1; $i <= $categoria ; $i++) {
+
+			$contador = $new::autosPorCategoria($i,null,null);
+			$total = intval($contador['total']);
+
+
+		}
+
+		$sumaDeChoques = 0;
+		$data = array();
+
+		//Si hay resultados de busqueda, mi variable contador de autos es alterada
+		if ($total_result>=1) {
+
+			while ($filas = mysqli_fetch_assoc($resultado)) {
+
+				//Busco el margen horario para reservar
+		  	  	$margen_horario_disponible = ModeloConfiguraciones::margenHorario();
+		  	  	$margen_activo = $margen_horario_disponible['activo'];
+		  	  	$margen_horario_configuracion = $margen_horario_disponible['margen'];
+
+		  	  	//Guardo los datos ya desde la base de datos para recorrer
+				$fechaDesdeConfirmada=$filas['fecha_desde'];
+				$fechaHastaConfirmada=$filas['fecha_hasta'];
+				$horaHastaConfirmada=$filas['hora_hasta'];
+				$nroReserva=$filas['id'];
+
+		  	  	//Si la configuracion está mal definida o viene null
+		  	  	if (!empty($margen_horario_disponible)) {
+
+		  	  		//Si la configuracion está activa
+		  	  		if ($margen_activo=='1') {
+		  	  			
+
+		  	  			if ($fechaHastaConfirmada===$fechaDesdeReserva) {
+		  	  				$margen_activo = true;
+
+		  	  				if ($margen_horario_configuracion=='0.00' || empty($margen_horario_configuracion)) {
+		  	  					//Horas margen por defecto = 3
+			  	  				$margen_horario = 3;
+			  	  				settype($margen_horario, "integer");
+				  	  		}else{
+				  	  			$margen_horario = $margen_horario_configuracion;
+				  	  			settype($margen_horario, "integer");
+				  	  		}
+		  	  			}else{
+		  	  				$margen_activo = false;
+		  	  			}	  	  		
+		  	  		}
+
+		  	  	}else{
+		  	  		$margen_activo = false;
+		  	  		//Horas margen por defecto = 3
+		  	  		$margen_horario = 3;
+		  	  	}
+
+				//retorno valor de buscarDisponibilidad (flag), entra en mi bucle como false
+				$reserva_ok = false;
+				$data[] = $filas;
+
+				//Defino variable para saber si puedo entregar el auto en el dia (margen horario)
+				$disponibleEnEldia = false;
+				
+				//Total de autos por categoria
+				$contador_autos = $total;
+				//var_dump($contador_autos);
+
+     			///Primero evaluo contra las fechas de reservas confirmadas
+				//Evaluo que NO este en el rango la fecha
+				if (!self::check_in_range($fechaDesdeReserva, $fechaHastaReserva, $fechaDesdeConfirmada)) {
+					if (!self::check_in_range($fechaDesdeReserva, $fechaHastaReserva, $fechaHastaConfirmada))
+						if (!self::check_in_range($fechaDesdeConfirmada, $fechaHastaConfirmada, $fechaDesdeReserva))
+							if (!self::check_in_range($fechaDesdeConfirmada, $fechaHastaConfirmada, $fechaHastaReserva))
+								$reserva_ok= true;
+						else $reserva_ok = false;
+					else $reserva_ok = false;
+				} else $reserva_ok= false;
+
+				//Agrego una hora más a las reservas ya confirmadas
+				$horaDesdeReservaConfirmada = date('H:i:s', strtotime($horaHastaConfirmada .'+ 1 hour'));
+				//Paso formato hora, mi hora de reserva
+				$horaDesdeReserva = self::formatoHora($hora_desde);
+				
+				//Diferencia entre la hora desde retiro de reserva y la que se entrega el mismo dia
+				$diferencia = intval(self::diferenciaDeHoras($horaHastaConfirmada,$horaDesdeReserva));
+				/*echo "<br> EL HORARIO DE RETIRO ES : ".$horaDesdeReserva;*/
+				
+				//Pregunto si está activo la configuracion con margen horario
+				if ($margen_activo == true) {
+		
+					//Si el margen horario está activo, pregunto si el dia que se quiere reservar conincide con alguna reserva ya confirmada
+					/*if ('$fechaHastaConfirmada' === '$fechaDesdeReserva') {
+						/*echo "<BR>NO HAY DISPONIBILIDAD, VERIFICAR MARGEN";
+						echo "<BR>RESERVAS CHOCADAS : ".$sumaDeChoques =$sumaDeChoques+1;
+					 	echo "<BR>AUTO DISPONIBLE :".$contador_autos = $contador_autos-$sumaDeChoques;*/
+					 	//echo "<BR> ESTOY RETIRANDO UN AUTO MISMO DIA QUE ENTREGAN OTRO";
+
+					 	//Si quiero retirar un auto el mismo dia que se entrega, necesito que el margen horario sea superior al configurado, en caso de que asi sea. Se puede entregar el auto el mismo dia con el margen horario establecido previamente
+					 	if ($horaHastaConfirmada < $horaDesdeReserva && $diferencia>=$margen_horario) {
+					 		//echo "<BR> EL HORARIO DE ENTREGA ES MENOR O IGUAL AL HORARIO DEL NUEVO RETIRO";
+
+					 	//Si el margen horario no coincide, es decir se quiere retirar un auto antes de que se entregue, es imposible realizar la reserva	
+					 	}else{
+					 		
+							$sumaDeChoques =$sumaDeChoques+1;
+							$contador_autos = $contador_autos-$sumaDeChoques;
+					 	}
+/*
+					}else{
+						echo "<BR style='color:red;'>NO ESTOY RETIRANDO UN AUTO MISMO DIA QUE ENTREGAN OTRO";
+					}*/
+				//En caso que esté desactivada busco disponiblidad solo entre fechas	
+				}else{
+
+					if ($reserva_ok==false) {
+						
+						$sumaDeChoques =$sumaDeChoques+1;
+						//$contador_autos = $contador_autos-$sumaDeChoques;
+					}else{
+					    $contador_autos = $contador_autos-$sumaDeChoques;
+					}
+
+				}
+
+			}//FIN WHILE
+
+		}else{
+
+			//Mi contador de autos no es alterado y toma el resultado de la base
+			$contador_autos=$total;
+		}
+
+		//Retorno cantidad de autos entre las fechas solicitadas
+		return $contador_autos;
+
 	}
 
 }
