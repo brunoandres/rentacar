@@ -189,7 +189,8 @@ class ModeloReservas
 		$new = new ModeloCategorias();
 
 		$link 		= Conexion::ConectarMysql();
-		$query 		= "select * from reservas where id_categoria = $categoria and estado = 1 and fecha_hasta >= (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
+		//$query 		= "select * from reservas where id_categoria = $categoria and estado = 1 and fecha_hasta >= (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
+		$query="SELECT * from reservas WHERE id_categoria=$categoria and estado=1";
 		$resultado 	= mysqli_query($link,$query);
 
 		//Total de resultados de la consulta
@@ -326,7 +327,7 @@ class ModeloReservas
 					 	}else{
 					 		
 							$sumaDeChoques =$sumaDeChoques+1;
-							$contador_autos = $contador_autos-$sumaDeChoques;
+							$total = $total-$sumaDeChoques;
 					 	}
 /*
 					}else{
@@ -337,10 +338,10 @@ class ModeloReservas
 
 					if ($reserva_ok==false) {
 						
-						$sumaDeChoques =$sumaDeChoques+1;
-						//$contador_autos = $contador_autos-$sumaDeChoques;
-					}else{
-					    $contador_autos = $contador_autos-$sumaDeChoques;
+						//echo "Resultado: <strong>".$fechaDesdeConfirmada.'  al  '.$fechaHastaConfirmada.'</strong>->'.$reserva_ok.'<br>';
+						$sumaDeChoques=$sumaDeChoques+1;
+						$total=$total-1;
+						
 					}
 
 				}
@@ -350,11 +351,11 @@ class ModeloReservas
 		}else{
 
 			//Mi contador de autos no es alterado y toma el resultado de la base
-			$contador_autos=$total;
+			$total=$total;
 		}
 
 		//Retorno cantidad de autos entre las fechas solicitadas
-		return $contador_autos;
+		return $total;
 
 	}
 
@@ -479,8 +480,8 @@ class ModeloReservas
 		$new = new ModeloCategorias();
 
 		$link 		= Conexion::ConectarMysql();
-		//$query 		= "select * from reservas where id_categoria = $categoria and estado = 1 and fecha_hasta >= (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
-		$query 		= "select * from reservas where id_categoria = $categoria and estado = 1";
+		//$query 		= "select * from reservas where id_categoria = $categoria and estado = 1 and fecha_hasta >= (DATE_SUB(CURDATE(), INTERVAL 12 MONTH))";
+		$query 		= "SELECT * from reservas WHERE id_categoria=$categoria and estado=1";
 		$resultado 	= mysqli_query($link,$query);
 
 		//Total de resultados de la consulta
@@ -501,7 +502,7 @@ class ModeloReservas
 		}
 
 		$sumaDeChoques = 0;
-		$data = array();
+		$datos = array();
 
 		//Si hay resultados de busqueda, mi variable contador de autos es alterada
 		if ($total_result>=1) {
@@ -556,9 +557,9 @@ class ModeloReservas
 				$disponibleEnEldia = false;
 				
 				//Total de autos por categoria
-				$contador_autos = $total;
-				//var_dump($contador_autos);
+				//var_dump();
 
+                $contador_autos = $total;
      			///Primero evaluo contra las fechas de reservas confirmadas
 				//Evaluo que NO este en el rango la fecha
 				if (!self::check_in_range($fechaDesdeReserva, $fechaHastaReserva, $fechaDesdeConfirmada)) {
@@ -597,7 +598,7 @@ class ModeloReservas
 					 	}else{
 					 		
 							$sumaDeChoques =$sumaDeChoques+1;
-							$contador_autos = $contador_autos-$sumaDeChoques;
+							$total = $total-$sumaDeChoques;
 					 	}
 /*
 					}else{
@@ -605,14 +606,17 @@ class ModeloReservas
 					}*/
 				//En caso que esté desactivada busco disponiblidad solo entre fechas	
 				}else{
-
-					if ($reserva_ok==false) {
+                    
+                    $contador_autos_antes = $total;
+                    
+				    if ($reserva_ok==false) {
 						
-						$choques_entre_reservas =$choques_entre_reservas+1;
-						//$contador_autos = $contador_autos-$sumaDeChoques;
-					}else{
-					    $contador_autos = $contador_autos-$choques_entre_reservas;
+						echo "Resultado: <strong>".$fechaDesdeConfirmada.'  al  '.$fechaHastaConfirmada.'</strong>->'.$reserva_ok.'<br>';
+						$sumaDeChoques;
+						$total=$total-1;
+						
 					}
+					$msj ="Autos antes de entrar al IF: ".$contador_autos_antes." choques entre reservas : ".$sumaDeChoques." DISPONIBLES : ".$total;
 
 				}
 
@@ -625,7 +629,7 @@ class ModeloReservas
 		}
 
 		//Retorno cantidad de autos entre las fechas solicitadas
-		return $contador_autos;
+		return $msj;
 
 	}
 
