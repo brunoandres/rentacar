@@ -147,10 +147,10 @@ if (isset($_SESSION['reserva_error'])) {
 
       </div>
     </div>
-    <!--/.row-->
+  
   </div>
-  <!--/.container-->
+
 </section>
-<!--/#contact-page-->
+
 
 

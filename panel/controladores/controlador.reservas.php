@@ -501,7 +501,7 @@ class ControladorReservas
 	      	$fecha_hasta = $_POST['fecha_hasta'];
 	      	$hora_desde  = $_POST['hora_desde'];
 	      	$hora_hasta  = $_POST['hora_hasta'];
-	  	  	$categoria   = $_POST['categoria'];
+	  	  	$categoria   = 5;
 
 	  	  	//Valido que las fechas sean al menos correctas
 	  	  	if (!self::validateDate($fecha_desde) || !self::validateDate($fecha_hasta)) {
