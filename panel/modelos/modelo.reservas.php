@@ -479,7 +479,8 @@ class ModeloReservas
 		$new = new ModeloCategorias();
 
 		$link 		= Conexion::ConectarMysql();
-		$query 		= "select * from reservas where id_categoria = $categoria and estado = 1 and fecha_hasta >= (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
+		//$query 		= "select * from reservas where id_categoria = $categoria and estado = 1 and fecha_hasta >= (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
+		$query 		= "select * from reservas where id_categoria = $categoria and estado = 1";
 		$resultado 	= mysqli_query($link,$query);
 
 		//Total de resultados de la consulta
@@ -491,26 +492,6 @@ class ModeloReservas
 		//variable pora ir contando los cruces de reserva
 		$choques_entre_reservas = 0;
 
-		//busco total de autos por categorias
-		/*switch ($categoria) {
-			case 1:
-				$contador = $new::autosPorCategoria(1,null,null);
-				break;
-			case 2:
-				$contador = $new::autosPorCategoria(2,null,null);
-				break;
-			case 3:
-				$contador = $new::autosPorCategoria(3,null,null);
-				break;
-			case 4:
-				$contador = $new::autosPorCategoria(4,null,null);
-				break;
-			case 5:
-				$contador = $new::autosPorCategoria(5,null,null);
-				break;
-		}
-
-		$total = intval($contador['total']);*/
 		for ($i=1; $i <= $categoria ; $i++) {
 
 			$contador = $new::autosPorCategoria($i,null,null);
@@ -627,10 +608,10 @@ class ModeloReservas
 
 					if ($reserva_ok==false) {
 						
-						$sumaDeChoques =$sumaDeChoques+1;
+						$choques_entre_reservas =$choques_entre_reservas+1;
 						//$contador_autos = $contador_autos-$sumaDeChoques;
 					}else{
-					    $contador_autos = $contador_autos-$sumaDeChoques;
+					    $contador_autos = $contador_autos-$choques_entre_reservas;
 					}
 
 				}
