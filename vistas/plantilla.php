@@ -214,7 +214,7 @@
         baguetteBox.run('.cards-gallery', { animation: 'slideIn'});
     </script>
     <script>
-    var IDLE_TIMEOUT = 60; //seconds
+    var IDLE_TIMEOUT = 300; //seconds
     var _idleSecondsCounter = 0;
     document.onclick = function() {
       _idleSecondsCounter = 0;
