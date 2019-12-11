@@ -501,7 +501,7 @@ class ControladorReservas
 	      	$fecha_hasta = $_POST['fecha_hasta'];
 	      	$hora_desde  = $_POST['hora_desde'];
 	      	$hora_hasta  = $_POST['hora_hasta'];
-	  	  	$categoria   = 5;
+	  	  	$categoria   = $_POST['categoria'];
 
 	  	  	//Valido que las fechas sean al menos correctas
 	  	  	if (!self::validateDate($fecha_desde) || !self::validateDate($fecha_hasta)) {
@@ -541,7 +541,7 @@ class ControladorReservas
 				$codigo = ModeloReservas::codigoReserva(5);
 				
 
-			echo($respuesta);
+			var_dump($respuesta);
 				/***** valor de retorno funcion disponibilidad
 				
 				***/
@@ -578,9 +578,6 @@ class ControladorReservas
 		  	}   		      
 	    }
   	}
-	
-
-
 }
 
 ?>
