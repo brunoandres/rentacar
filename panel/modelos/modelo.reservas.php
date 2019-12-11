@@ -627,13 +627,9 @@ class ModeloReservas
 			//Mi contador de autos no es alterado y toma el resultado de la base
 			$contador_autos=$total;
 		}
-
 		//Retorno cantidad de autos entre las fechas solicitadas
 		return $msj;
-
 	}
-
 }
-
 
 ?>
