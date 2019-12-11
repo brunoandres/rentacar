@@ -132,7 +132,7 @@
                     <div class="card-body">
                         <h6><a href="#">Categoria F</a></h6>
                         <p class="text-muted card-text">Fiat Toro</p>
-                        <p>5 Puertas - Aire Acondicionado - Dirección Asistida - ABS - Airbag - 5 pasajeros</p>
+                        <p>4 Puertas- Radio AM/FM integrada con USB, entrada auxiliar y Bluetooth - Aire Acondicionado - Dirección Asistida - ABS - Airbags - 5 pasajeros</p>
                     </div>
                 </div>
             </div>
