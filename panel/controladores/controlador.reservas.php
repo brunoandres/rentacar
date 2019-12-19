@@ -164,7 +164,7 @@ class ControladorReservas
 
 							//Busco disponiblidad de autos en de las demas categorias
 							$alternativa = ModeloReservas:: buscarDisponibilidad($id_categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
-							
+							var_dump($alternativa);
 							//Si tengo autos disponibles
 							/*if ($alternativa >= 1) {
 								echo "<script>
