@@ -154,6 +154,10 @@ class ControladorReservas
 
 				}else{
 
+					echo "<script>
+								toastr.warning('Para la fecha seleccionada', 'Categoria no disponible', {timeOut: 8000})
+							</script>";
+
 					//Verifico si tengo disponiblidad para otras categorias, para mostrar al cliente
 					$categorias = ModeloCategorias::listarCategorias(); //Data de categorias
 					//var_dump($categorias);
@@ -165,7 +169,7 @@ class ControladorReservas
 						echo '<br>'.'Categoria '.$otra_categoria['nombre'].' Cant: '.$alternativa;
 						if ($alternativa >= 1) {
 							echo "<script>
-								toastr.error('Vehiculos disponibles en otras categorias!.', 'No hay disponibilidad para su categoria seleccionada', {timeOut: 8000})
+								toastr.info('Categoria ".$otra_categoria['nombre']." disponible para la fecha seleccionada!.', 'Categorias disponibles', {timeOut: 8000})
 							</script>";
 						}
 						/*if(!$id_categoria == $categoria){ //Mientras la categoria ingresada no tenga disponiblidad, busco las demas
@@ -184,9 +188,9 @@ class ControladorReservas
 
 					}
 
-					echo "<script>
+					/*echo "<script>
  							toastr.error('No hay vehiculos disponibles en las fechas solicitadas.', 'No hay disponibilidad', {timeOut: 8000})
- 						</script>";
+ 						</script>";*/
 				}
 	  	  	}else{
 
