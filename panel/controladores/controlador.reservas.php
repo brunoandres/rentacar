@@ -162,7 +162,7 @@ class ControladorReservas
 						$id_categoria = $otra_categoria['id']; //Obtengo valor de id de categoria
 
 						$alternativa = ModeloReservas:: buscarDisponibilidad($id_categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
-						print_r($alternativa);
+						echo '<br>'.$alternativa;
 						/*if(!$id_categoria == $categoria){ //Mientras la categoria ingresada no tenga disponiblidad, busco las demas
 
 							//Busco disponiblidad de autos en de las demas categorias
