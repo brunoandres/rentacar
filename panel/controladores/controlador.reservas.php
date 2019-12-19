@@ -154,27 +154,29 @@ class ControladorReservas
 
 				}else{
 
-					
-
 					//Verifico si tengo disponiblidad para otras categorias, para mostrar al cliente
 					$categorias = ModeloCategorias::listarCategorias(); //Data de categorias
-					//var_dump($categorias);
+
 					foreach ($categorias as $otra_categoria) { //Recorro cada una 
-						
+
 						$id_categoria = $otra_categoria['id']; //Obtengo valor de id de categoria
 
+						if ($id_categoria == $categoria) {
+							$nombre_categoria = $otra_categoria['nombre'];
+						}
+						
 						$alternativa = ModeloReservas:: buscarDisponibilidad($id_categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
-						echo '<br>'.'Categoria '.$otra_categoria['nombre'].' Cant: '.$alternativa;
+						//echo '<br>'.'Categoria '.$otra_categoria['nombre'].' Cant: '.$alternativa;
 						if ($alternativa >= 1) {
 							echo "<script>
-								toastr.info('".$otra_categoria['nombre']." disponible para la fecha seleccionada!.', 'Categorias disponibles', {timeOut: 12000})
+								toastr.info('".$otra_categoria['nombre']." disponible para la fecha seleccionada', 'Categorias disponibles', {timeOut: 12000})
 							</script>";
 						}
 
 					}
 
 					echo "<script>
-								toastr.warning('Para la fecha seleccionada', 'Categoria no disponible', {timeOut: 8000})
+								toastr.warning('Para la fecha seleccionada', ".$nombre_categoria." no disponible', {timeOut: 8000})
 							</script>";
 				}
 	  	  	}else{
