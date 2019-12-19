@@ -172,7 +172,7 @@ class ControladorReservas
 								echo "<script>
 									toastr.error('Vehiculos disponibles en otras categorias!.', 'No hay disponibilidad para su categoria seleccionada', {timeOut: 8000})
 								</script>";
-							}*/
+							}
 
 						}*/
 
