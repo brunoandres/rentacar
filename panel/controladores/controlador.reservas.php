@@ -162,7 +162,7 @@ class ControladorReservas
 						$id_categoria = $otra_categoria['id']; //Obtengo valor de id de categoria
 
 						$alternativa = ModeloReservas:: buscarDisponibilidad($id_categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
-						//echo '<br>'.'Categoria '.$otra_categoria['nombre'].' Cant: '.$alternativa;
+						echo '<br>'.'Categoria '.$otra_categoria['nombre'].' Cant: '.$alternativa;
 						if ($alternativa >= 1) {
 							echo "<script>
 								toastr.error('Vehiculos disponibles en otras categorias!.', 'No hay disponibilidad para su categoria seleccionada', {timeOut: 8000})
