@@ -166,19 +166,19 @@ class ControladorReservas
 							$alternativa = ModeloReservas:: buscarDisponibilidad($id_categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
 							
 							//Si tengo autos disponibles
-							if ($alternativa >= 1) {
+							/*if ($alternativa >= 1) {
 								echo "<script>
 									toastr.error('Vehiculos disponibles en otras categorias!.', 'No hay disponibilidad para su categoria seleccionada', {timeOut: 8000})
 								</script>";
-							}
+							}*/
 
 						}
 
 					}
 
-					/*echo "<script>
+					echo "<script>
  							toastr.error('No hay vehiculos disponibles en las fechas solicitadas.', 'No hay disponibilidad', {timeOut: 8000})
- 						</script>";*/
+ 						</script>";
 				}
 	  	  	}else{
 
