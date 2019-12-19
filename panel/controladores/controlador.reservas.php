@@ -156,12 +156,13 @@ class ControladorReservas
 
 					//Verifico si tengo disponiblidad para otras categorias, para mostrar al cliente
 					$categorias = ModeloCategorias::listarCategorias(); //Data de categorias
-					var_dump($categorias);
+					//var_dump($categorias);
 					foreach ($categorias as $otra_categoria) { //Recorro cada una 
 						
 						$id_categoria = $otra_categoria['id']; //Obtengo valor de id de categoria
 
 						$alternativa = ModeloReservas:: buscarDisponibilidad($id_categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
+						print_r($alternativa);
 						/*if(!$id_categoria == $categoria){ //Mientras la categoria ingresada no tenga disponiblidad, busco las demas
 
 							//Busco disponiblidad de autos en de las demas categorias
