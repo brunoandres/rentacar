@@ -395,6 +395,10 @@ class ControladorReservas
 		CUIL: 27326998864 <br>
 		Para mayor información, por favor comuniquese con nosotros. Muchas Gracias.<br><br>
 
+		Se deberá realizar el pago del 30 % del valor de la reserva, de lo contrario se dará de baja la misma.
+
+		<br><br>
+
 		-------------Info Contacto Rent a Car-------<br><br>
 		Jimena González Whatsapp Tel: +54 9 2944242615.
 
