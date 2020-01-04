@@ -5,7 +5,9 @@ if (empty($_SESSION['codigo'])) {
   window.location='inicio';
   </script>";
 }
-
+echo "<script>
+ toastr.info('Recuerde abonar el 30 % de la reserva, de lo contrario se dará de baja la misma.', 'Aviso :', {timeOut: 4000})
+ </script>";
 
 $ctrReservas = new ControladorReservas();
 //Si esta seteado mi formulario con los datos personales
