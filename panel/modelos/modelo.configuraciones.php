@@ -331,7 +331,7 @@ class ModeloConfiguraciones{
     $link = Conexion::ConectarMysql();
     $tarifas = array();
     if ($id == null) {
-      $query = "SELECT a.id,a.por_dia,a.por_semana,a.activa,b.nombre as temporada,b.id as id_temporada,b.fecha_desde,b.fecha_hasta,c.id as id_categoria,c.nombre from tarifas a, temporadas b,categorias c where a.id_temporada=b.id and a.id_categoria=c.id and b.fecha_hasta <= '2019-12-31' order by c.nombre asc";
+      $query = "SELECT DISTINCT (a.id_categoria), a.por_dia, b.nombre from tarifas a, categorias b where a.id_categoria = b.id and a.id_temporada = 2 and a.activa  = 1";
       $sql = mysqli_query($link,$query);
       while ($filas = mysqli_fetch_assoc($sql)) {
          $tarifas[] = $filas;
