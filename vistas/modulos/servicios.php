@@ -78,7 +78,7 @@
           </div>
           <div class="media-body">
             <h3 class="media-heading">Franquicia</h3>
-            <p>Para los daños (parciales) ocurridos en nuestros vehículos, el Cliente debe abonar los mismos hasta un valor maximo (FRANQUICIA) de $15.000 por accidente y $25.000 por vuelco (excepto en la categoria E, que la misma tiene un valor de $25.000 por accidente y $35.000 por vuelco). Esta franquicia es fija de acuerdo a las categorias de vehiculos, entonces, si la FRANQUICIA es de $15.000 por accidente, el Cliente debe abonar todas las eventuales reparaciones hasta $15.000. Si el valor a reparar es mayor a la FRANQUICIA, esa difrencia es cubierta por el seguro.</p>
+            <p>Para los daños (parciales) ocurridos en nuestros vehículos, el Cliente debe abonar los mismos hasta un valor maximo (FRANQUICIA) de $40.000 por accidente y $80.000 por vuelco para los caso de Categoria A,B y C. En el caso de Categoria C y D, los valores por accidente son $60.000 y $120.000 por vuelco. Esta franquicia es fija de acuerdo a las categorias de vehiculos, entonces, si la FRANQUICIA es de $40.000 por accidente, el Cliente debe abonar todas las eventuales reparaciones hasta $40.000. Si el valor a reparar es mayor a la FRANQUICIA, esa diferencia es cubierta por el seguro.</p>
           </div>
         </div>
       </div>
