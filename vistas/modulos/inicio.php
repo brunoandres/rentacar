@@ -60,7 +60,7 @@ if (isset($_SESSION['reserva_ok'])) {
         <div class="feature-wrap">
             <i class="fa fa-laptop fadeInDown"></i>
             <h2>Reservas On-line</h2>
-            <h3>Hacé tu reserva haciendo click <a href="https://www.patagoniaaustralrentacar.com.ar/reservar">aquí.</></h3>
+            <h3>Hacé tu reserva haciendo click <a href="https://www.patagoniaaustralrentacar.com.ar/reservar">aquí.</a></h3>
           </div>
       </div>
       <div class="col-md-4">
