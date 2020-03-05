@@ -42,7 +42,9 @@
 
     <link rel="stylesheet" href="vistas/css/galeria.css">
     <link rel="stylesheet" href="panel/vistas/bower_components/select2/dist/css/select2.min.css">
-
+    <!-- Link archivo animacion -->
+     <link rel="stylesheet" href="vistas/css/animate.css">
+    
     <!-- Links para Galeria en Flota -->
     <link rel="stylesheet" href="vistas/css/baguetteBox.min.css"/>
     <link rel="stylesheet" href="vistas/css/cards-gallery.css">
