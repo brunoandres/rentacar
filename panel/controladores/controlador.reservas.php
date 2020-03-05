@@ -252,7 +252,7 @@ class ControladorReservas
 			if ($respuesta=="ok") {
 
 				//Funcion para enviar correo
-				self::enviarCorreo($nombre,$apellido,$categoria,$codigo,$fecha_desde,$fecha_hasta,$hora_desde,$tarifa,$total_dias,$retiro,$vuelo,$observaciones,$adicionales,$email,$telefono);
+				self::enviarCorreo($nombre,$apellido,$categoria,$codigo,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$retiro,$vuelo,$observaciones,$adicionales,$email,$telefono);
 				$_SESSION['reserva_ok'] = true;
 				echo "<script>
 				window.location = '$url_confirma';
@@ -268,7 +268,7 @@ class ControladorReservas
 	}
 
 	//Funcion para envio de email de Reserva
-	static public function enviarCorreo($nombre,$apellido,$categoria,$codigo,$fecha_desde,$fecha_hasta,$hora_desde,$tarifa,$total_dias,$retiro,$vuelo,$observaciones,$adicionales,$email,$telefono){
+	static public function enviarCorreo($nombre,$apellido,$categoria,$codigo,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$retiro,$vuelo,$observaciones,$adicionales,$email,$telefono){
 
 		$ctrConfiguraciones = new ControladorConfiguraciones();
 		$ctrReservas = new ControladorReservas();
@@ -339,6 +339,7 @@ class ControladorReservas
 								Fecha hasta: $fecha_hasta_email <br>
 								Lugar de retiro: $lugar_email <br>
 								Hora a entregar: $hora_desde hs. <br>
+								Hora a devolver: $hora_hasta hs. <br>
 								N° de Vuelo: $vuelo <br>
 								Adicionales: <br>
 								$lista	
@@ -372,6 +373,7 @@ class ControladorReservas
 		Vehículo: $categoria_email <br>
 		Retirar en: $lugar_email. <br>
 		Hora a retirar: $hora_desde hs. <br>
+		Hora de devolución: $hora_hasta hs. <br>
 		N° de Vuelo: $vuelo <br>
 		Tarifa Reserva: $ $tarifa <br><br>
 
