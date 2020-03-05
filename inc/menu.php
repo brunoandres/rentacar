@@ -35,7 +35,7 @@ if (empty($_GET['ruta'])) {
           <a class="nav-link" href="mi-reserva">Mi Reserva</a>
         </li>-->
         <li class="nav-item <?php if($_GET['ruta']=='reservar' || $_GET['ruta']=='formulario' || $_GET['ruta']=='confirma'){ echo 'active'; } ?>">
-          <a class="nav-link animated swing infinite" href="https://www.patagoniaaustralrentacar.com.ar/reservar">¡Reservar!</a>
+          <a style="color:yellow;" class="nav-link animated swing infinite h6" href="https://www.patagoniaaustralrentacar.com.ar/reservar">¡Reservar!</a>
         </li>
       </ul>
     </div>
