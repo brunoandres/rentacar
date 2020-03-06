@@ -40,7 +40,7 @@ if (empty($_SESSION['codigo'])) {
       <h2><div class="alert alert-success" role="alert">
       <?php echo $_SESSION['mensaje']; ?>
       </div></h2>
-      <p class="lead">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></p>
+      <p class="lead"><strong class="h3">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></strong></p>
       <p># Código reserva : <?php echo $_SESSION['codigo']; ?></p>
       
     </div>
