@@ -1,6 +1,7 @@
 <?php
 
 $ctrConfiguraciones = new ControladorConfiguraciones();
+$ctrReservas = new ControladorReservas();
 
 //Cargo mi combo dinamico con los lugares
 $lugares = $ctrConfiguraciones->listarLugares();
@@ -28,6 +29,59 @@ if (empty($_SESSION['codigo'])) {
 
 //$patente = $_SESSION['patente'];
 
+//Tarifa
+
+//Cargo mi arreglo de tarifa según la categoria
+$tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_desde']);
+
+  if (!empty($tarifa)) {
+    //Cargo permito promociones por categoria
+    $permite_promociones = $tarifa[3];
+    //var_dump($permite_promociones);
+
+
+    //Busco lugares habilitados para mostrar
+    $lugares = $ctrConfiguraciones->listarLugares();
+    // Lugares
+    $lugar_retiro = $ctrConfiguraciones->listarLugares($_SESSION['retiro']);
+    $lugar_entrega = $ctrConfiguraciones->listarLugares($_SESSION['entrega']);
+
+    //Tarifa diaria
+    $tarifa_diaria = $tarifa[0];
+    //Tarifa semanal
+    $tarifa_semanal = $tarifa[1];
+
+    //echo "TARIFA DIARIA : ".$tarifa_diaria;
+    //echo "<br>TARIFA SEMANAL : ".$tarifa_semanal;
+    //Separo nombre de categoria para mostrar ej (A)
+    $categoria_seleccionada = explode(" ", $tarifa[3]);
+
+  //Verifico si la categoria acepta promociones
+  if (intval($tarifa[2] == 1)) {
+
+    $promo = $ctrConfiguraciones->diasParaPromociones();
+    $promo = $promo['dias'];
+
+    if ($promo==null) {
+      $promo = 7;
+    }
+
+    $diasSinPromo = ($_SESSION['total_dias']%$promo);
+    //echo "<br> Cantidad de promos:";
+
+    $cantidadPromociones = (($_SESSION['total_dias']-$diasSinPromo)/$promo);
+    //Precio de la promocion
+    $precio_promo = ($tarifa_semanal*$cantidadPromociones);
+    //Precio por dia 
+    $precio_diario = ($tarifa_diaria*$diasSinPromo);
+    //Total reserva
+    $total = ($precio_diario+$precio_promo);
+    //echo "<br>Total : ".$total;
+  }else{
+    $total = $_SESSION['total_dias']*$tarifa_diaria;
+  }
+}
+
 ?>
 
 <nav aria-label="breadcrumb">
@@ -45,7 +99,8 @@ if (empty($_SESSION['codigo'])) {
       <?php echo $_SESSION['mensaje']; ?>
       </div></h2>
       <p class="lead"><strong class="h3">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></strong></p>
-      <p># Código Reserva : <?php echo $_SESSION['codigo']; ?></p>
+      <p># Código Reserva : <?php echo $_SESSION['codigo']; ?></p> - 
+      <p># Tarifa sin adicionales : <?php echo "$ :".$total; ?></p>
       
     </div>
     <div class="row h-100 justify-content-center align-items-center">
