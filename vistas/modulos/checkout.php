@@ -34,7 +34,7 @@ if (empty($_SESSION['codigo'])) {
   </ol>
 </nav>
 
-<section id="portfolio" class="wow fadeInDown">
+<section id="portfolio" class="">
   <div class="container">
     <div class="center">
       <h2><div class="alert alert-success" role="alert">
