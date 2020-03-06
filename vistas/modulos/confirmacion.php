@@ -102,7 +102,7 @@ if (isset($_POST['checkout'])) {
   </ol>
 </nav>
 
-<section id="portfolio" class="wow fadeInDown">
+<section id="portfolio" class="">
   <div class="container">
     <div class="center">
       <h2>Confirme su Reserva</h2>
