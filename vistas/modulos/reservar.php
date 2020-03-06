@@ -39,7 +39,7 @@ if (isset($_SESSION['reserva_error'])) {
   </ol>
 </nav>
 
-<section id="portfolio" class="wow fadeInDown">
+<section id="portfolio">
   <div class="container">
     <div class="center">
       <h2>Reservas On-line</h2>
