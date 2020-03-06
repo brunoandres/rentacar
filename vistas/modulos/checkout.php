@@ -22,7 +22,7 @@ if (empty($_SESSION['codigo'])) {
  </script>";
   
   echo "<script>
- toastr.info('Recuerde que debe abonar obligatoriamente el 30 % de su Reserva, de lo contrario se dará de baja la misma.', 'Aviso Importante :', {timeOut: 8000})
+ toastr.info('Recuerde que debe abonar obligatoriamente el 30 % de su Reserva, de lo contrario se dará de baja la misma.', 'Aviso Importante :', {timeOut: 16000})
  </script>";
 }
 
@@ -45,7 +45,7 @@ if (empty($_SESSION['codigo'])) {
       <?php echo $_SESSION['mensaje']; ?>
       </div></h2>
       <p class="lead"><strong class="h3">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></strong></p>
-      <p># Código reserva : <?php echo $_SESSION['codigo']; ?></p>
+      <p># Código Reserva : <?php echo $_SESSION['codigo']; ?></p>
       
     </div>
     <div class="row h-100 justify-content-center align-items-center">
