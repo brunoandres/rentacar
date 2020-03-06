@@ -112,7 +112,7 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
       <div class="row h-100 justify-content-center align-items-center">
         <div class="col-md-8 order-md-1">
           <h3 class="mb-3">Datos Personales</h3>
-          <form class="needs-validation" novalidate method="post" action="confirmacion">
+          <form class="needs-validation" novalidate method="post" action="confirmacion" onsubmit="return checkForm(this);">
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">Nombre</label>
@@ -267,7 +267,7 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
               </div>
             </div>-->
             <hr class="mb-4">
-            <input type="checkbox" required>Acepto los términos acerca del abono del 30 % de mi Reserva. <br>
+            <input type="checkbox" name="acepta" required>Acepto los términos acerca del abono del 30 % de mi Reserva. <br>
             <button class="btn btn-info btn-lg btn-block" type="submit" name="checkout">Click para continuar</button>
           </form>
         </div>
@@ -312,3 +312,15 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
   </div>
 </div>
 
+<script>
+  function checkForm(form){
+
+    if(!form.acepta.checked) {
+      alert("Por favor acepte los términos y condiciones para continuar.");
+      form.acepta.focus();
+      return false;
+    }
+    return true;
+  }
+  
+</script>
