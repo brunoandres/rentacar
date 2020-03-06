@@ -99,7 +99,7 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
       <?php //echo $_SESSION['mensaje']; ?>
       </div></h2>-->
       <p class="lead"><strong class="h3">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></strong></p>
-      <p class="strong"># Código Reserva : <?php echo $_SESSION['codigo']; ?> # Tarifa sin adicionales <?php echo "$ :".$total; ?></p>
+      <p class="strong"># Código Reserva : <?php echo $_SESSION['codigo']; ?> # Tarifa sin adicionales <?php echo "$ : ".$total; ?></p>
       
       
     </div>
