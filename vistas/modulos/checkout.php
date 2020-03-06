@@ -99,8 +99,8 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
       <?php echo $_SESSION['mensaje']; ?>
       </div></h2>
       <p class="lead"><strong class="h3">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></strong></p>
-      <p># Código Reserva : <?php echo $_SESSION['codigo']; ?></p> - 
-      <p># Tarifa sin adicionales : <?php echo "$ :".$total; ?></p>
+      <p># Código Reserva : <?php echo $_SESSION['codigo']; ?></p> - <p># Tarifa sin adicionales <?php echo "$ :".$total; ?></p>
+      
       
     </div>
     <div class="row h-100 justify-content-center align-items-center">
@@ -267,6 +267,7 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
               </div>
             </div>-->
             <hr class="mb-4">
+            <input type="checkbox" name="acepta" required="">Acepto los términos acerca del abono del 30 % de mi Reserva.
             <button class="btn btn-info btn-lg btn-block" type="submit" name="checkout">Click para continuar</button>
           </form>
         </div>
@@ -310,3 +311,4 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
     </div>
   </div>
 </div>
+
