@@ -20,6 +20,10 @@ if (empty($_SESSION['codigo'])) {
   echo "<script>
  toastr.success('En las fechas indicadas hay autos disponibles!', 'Hay disponibilidad', {timeOut: 4000})
  </script>";
+  
+  echo "<script>
+ toastr.info('Recuerde que debe abonar obligatoriamente el 30 % de su Reserva, de lo contrario se dará de baja la misma.', 'Aviso Importante :', {timeOut: 8000})
+ </script>";
 }
 
 //$patente = $_SESSION['patente'];
