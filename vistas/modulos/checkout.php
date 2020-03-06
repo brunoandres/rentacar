@@ -19,11 +19,11 @@ if (empty($_SESSION['codigo'])) {
 }else{
   $categoria = $_SESSION['categoria'];
   echo "<script>
- toastr.success('En las fechas indicadas hay autos disponibles!', 'Hay disponibilidad', {timeOut: 4000})
+ toastr.success('En las fechas indicadas hay autos disponibles!', 'Reserva Disponible', {timeOut: 8000})
  </script>";
   
   echo "<script>
- toastr.info('Recuerde que debe abonar obligatoriamente el 30 % de su Reserva, de lo contrario se dará de baja la misma.', 'Aviso Importante :', {timeOut: 16000})
+ toastr.info('Recuerde que debe abonar obligatoriamente el 30 % de su Reserva, de lo contrario se dará de baja la misma.', 'Aviso Importante :', {timeOut: 30000})
  </script>";
 }
 
@@ -95,11 +95,11 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
 <section id="portfolio" class="">
   <div class="container">
     <div class="center">
-      <h2><div class="alert alert-success" role="alert">
-      <?php echo $_SESSION['mensaje']; ?>
-      </div></h2>
+      <!--<h2><div class="alert alert-success" role="alert">
+      <?php //echo $_SESSION['mensaje']; ?>
+      </div></h2>-->
       <p class="lead"><strong class="h3">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></strong></p>
-      <p># Código Reserva : <?php echo $_SESSION['codigo']; ?></p> - <p># Tarifa sin adicionales <?php echo "$ :".$total; ?></p>
+      <p class="strong"># Código Reserva : <?php echo $_SESSION['codigo']; ?> # Tarifa sin adicionales <?php echo "$ :".$total; ?></p>
       
       
     </div>
@@ -322,5 +322,5 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
     }
     return true;
   }
-  
+
 </script>
