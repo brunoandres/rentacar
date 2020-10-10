@@ -1,4 +1,3 @@
-<?php echo date('Y'); ?>
 <section class="gallery-block cards-gallery">
     <div class="container">
         <div class="heading">
@@ -19,12 +18,12 @@
             </div>-->
             <div class="col-md-6 col-lg-3">
                 <div class="card border-0 transform-on-hover">
-                    <a class="lightbox" href="vistas/images/flota/full/corsa.jpg">
-                        <img src="vistas/images/flota/recent/corsa.jpg" alt="Card Image" class="card-img-top">
+                    <a class="lightbox" href="vistas/images/flota/full/onix.jpg">
+                        <img src="vistas/images/flota/recent/onix.jpg" alt="Card Image" class="card-img-top">
                     </a>
                     <div class="card-body">
                         <h6><a href="#">Categoria A</a></h6>
-                        <p class="text-muted card-text">Chevrolet Corsa 5 Puertas</p>
+                        <p class="text-muted card-text">Chevrolet Onix 5 Puertas</p>
                         <p>4 Puertas - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag</p>
                     </div>
                 </div>
@@ -61,6 +60,18 @@
                     <div class="card-body">
                         <h6><a href="#">Categoria B</a></h6>
                         <p class="text-muted card-text">Renault Sandero</p>
+                        <p>4 Puertas - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag - MP3 - USB - Bluetooth</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 transform-on-hover">
+                    <a class="lightbox" href="vistas/images/flota/full/prisma.jpg">
+                        <img src="vistas/images/flota/recent/prisma.jpg" alt="Card Image" class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <h6><a href="#">Categoria B</a></h6>
+                        <p class="text-muted card-text">Chevrolet Prisma</p>
                         <p>4 Puertas - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag - MP3 - USB - Bluetooth</p>
                     </div>
                 </div>
