@@ -9,10 +9,10 @@ class ControladorReservas
 	static function direccionIP() {
 	    if (!empty($_SERVER['HTTP_CLIENT_IP']))
 	        return $_SERVER['HTTP_CLIENT_IP'];
-	       
+
 	    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
 	        return $_SERVER['HTTP_X_FORWARDED_FOR'];
-	   
+
 	    return $_SERVER['REMOTE_ADDR'];
 	}
 
@@ -59,9 +59,9 @@ class ControladorReservas
 
 	//Funcion para contabilizar los dias entre fechas seleccionadas.
 	static function totalDias($fecha_i,$fecha_f){
-		
+
 		$dias	= (strtotime($fecha_i)-strtotime($fecha_f))/86400;
-		$dias 	= abs($dias); $dias = floor($dias);		
+		$dias 	= abs($dias); $dias = floor($dias);
 		return $dias;
 	}
 
@@ -112,12 +112,12 @@ class ControladorReservas
 	  	  	//En caso de no encontrar la configuracion o que ésta esté mal definida, por defecto serán 3 dias minimo de alquiler.
 	  	  	if (!empty($cantidad_dias_configuracion)) {
 	  	  		$minimo_de_dias = $cantidad_dias_configuracion['dias'];
-	  	  		if (!$minimo_de_dias == null) {	
+	  	  		if (!$minimo_de_dias == null) {
 	  	  			settype($minimo_de_dias, "integer");
 	  	  		}else{
 	  	  			$minimo_de_dias=3;
 	  	  		}
-	  	  		
+
 	  	  	}else{
 	  	  		$minimo_de_dias=3;
 	  	  	}
@@ -132,11 +132,11 @@ class ControladorReservas
 
 			//var_dump($respuesta);
 				/***** valor de retorno funcion disponibilidad
-				
+
 				***/
 				//Si contador devuelve mayor igual a 1 es por que hay disponibilidad
 				if ($respuesta>=1) {
-	
+
 					$_SESSION['codigo']      = $codigo;
 					$_SESSION['fecha_desde'] = $fecha_desde;
 					$_SESSION['fecha_hasta'] = $fecha_hasta;
@@ -145,7 +145,7 @@ class ControladorReservas
  					$_SESSION['categoria']   = $categoria;
 					$_SESSION['total_dias']  = $total_dias;
 					$_SESSION['mensaje']     = 'Reserva Disponible';
- 
+
 					echo "<script>
 
 					window.location='$url_checkout';
@@ -157,14 +157,14 @@ class ControladorReservas
 					//Verifico si tengo disponiblidad para otras categorias, para mostrar al cliente
 					$categorias = ModeloCategorias::listarCategorias(); //Data de categorias
 
-					foreach ($categorias as $otra_categoria) { //Recorro cada una 
+					foreach ($categorias as $otra_categoria) { //Recorro cada una
 
 						$id_categoria = $otra_categoria['id']; //Obtengo valor de id de categoria
 
 						if ($id_categoria == $categoria) {
 							$nombre_categoria = $otra_categoria['nombre'];
 						}
-						
+
 						$alternativa = ModeloReservas:: buscarDisponibilidad($id_categoria,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta);
 						//echo '<br>'.'Categoria '.$otra_categoria['nombre'].' Cant: '.$alternativa;
 						if ($alternativa >= 1) {
@@ -184,8 +184,8 @@ class ControladorReservas
 	  	  		echo "<script>
  						toastr.error('El periodo mínimo de alquiler son de $minimo_de_dias dia/s.', 'A tener en cuenta', {timeOut: 8000})
  					</script>";
-		  	 
-		  	}   		      
+
+		  	}
 	    }
   	}
 
@@ -244,9 +244,9 @@ class ControladorReservas
 
 			//Obtener la direccion ip del cliente
 			$direccion_ip = self::direccionIP();
-			
+
 			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales,$direccion_ip);
-			
+
 			//$respuesta = "ok";
 			//Si hay disponibilidad
 			if ($respuesta=="ok") {
@@ -262,7 +262,7 @@ class ControladorReservas
 				echo "<script>
 				window.location = '$url_error';
 				</script>";
-				
+
 			}
 		}
 	}
@@ -281,7 +281,7 @@ class ControladorReservas
 			foreach ($adicionales as $adicional => $value) {
 
       		$buscarAdicionales = $ctrConfiguraciones->buscarAdicionalesSeleccionados($value);
-      
+
       		$adicionales_nombre = $buscarAdicionales['adicional'];
       		$adicionales_tarifa = $buscarAdicionales['tarifa'];
 
@@ -321,7 +321,7 @@ class ControladorReservas
 
 		$lista_adicionales_habilitados = implode(",",$lista_ad_hab);
 		//////////////////////////////////////////////////////////////
-		
+
 		//CORREO ELECTRONICO PARA EL SITIO
 		$header .= "From: SITIO - Reservas Patagonia Austral <$email> \r\n";
 		$header .= "Reply-To:" . $from . "\r\n" ."X-Mailer: PHP/" . phpversion();
@@ -342,8 +342,8 @@ class ControladorReservas
 								Hora a devolver: $hora_hasta hs. <br>
 								N° de Vuelo: $vuelo <br>
 								Adicionales: <br>
-								$lista	
-								<br>			
+								$lista
+								<br>
 								Observaciones: $observaciones";
 
 		mail("reservas@patagoniaaustralrentacar.com.ar,patagoniaaustralrentacar@gmail.com",$asunto,$contenido,$header);
@@ -367,7 +367,7 @@ class ControladorReservas
 
 		Detalles de su Reserva:<br><br>
 
-		Codigo Reserva: $codigo <br>
+		Código Reserva: $codigo <br>
 		Fecha Desde: $fecha_desde_email <br>
 		Fecha Hasta: $fecha_hasta_email <br>
 		Vehículo: $categoria_email <br>
@@ -391,13 +391,14 @@ class ControladorReservas
 		Puede realizar el pago en efectivo a la hora de la entrega,
 		o mediante depósito bancario.<br>
 		Banco Galicia : <br>
-		DU: 32699889 <br>
+		DU: 32699886 <br>
 		CTA: 4019424-7031-8 <br>
 		CBU: 0070031330004019424784 <br>
 		CUIL: 27326998864 <br>
+		ALIAS: Austral1987 <br>
 		Para mayor información, por favor comuniquese con nosotros. Muchas Gracias.<br><br>
 
-		Se deberá realizar el pago del 30 % del valor de la reserva, de lo contrario se dará de baja la misma.
+		Se deberá realizar el pago del 50 % del valor de la reserva, de lo contrario se dará de baja la misma.
 
 		<br><br>
 
@@ -405,7 +406,21 @@ class ControladorReservas
 		Jimena González Whatsapp Tel: +54 9 2944242615.
 
 		<h3>Franquicia</h3>
-    	<p>Para los daños (parciales) ocurridos en nuestros vehículos, el Cliente debe abonar los mismos hasta un valor maximo (FRANQUICIA) de $40.000 por accidente y $80.000 por vuelco para los caso de Categoria A,B y C. En el caso de Categoria C y D, los valores por accidente son $60.000 y $120.000 por vuelco. Esta franquicia es fija de acuerdo a las categorias de vehiculos, entonces, si la FRANQUICIA es de $40.000 por accidente, el Cliente debe abonar todas las eventuales reparaciones hasta $40.000. Si el valor a reparar es mayor a la FRANQUICIA, esa difrencia es cubierta por el seguro.</p>";
+    	<p>
+
+			*CATEGORÍA A, B y C: Km libre para recorrer la zona de Bariloche,  Villa la Angostura,  San Martin y  el Bolson.
+Seguro todo riesgo con franquicia de $40.000 por accidente y $80.000 por vuelco.<br>
+*Categoría D ,E y F Km libre para recorrer la zona de Bariloche,  Villa la Angostura,  San Martin y  el Bolson. Seguro todo riesgo con franquicia de $80.000 pesos por accidente y $120.000 pesos por vuelco.
+Pago en efectivo o transferencia bancaria al momento de la entrega.<br>
+Para señar se solicita un 50% del total del alquiler por transferencia.
+
+<br><br>
+
+<p>Enviar comprobante por este mismo medio o WhatsApp +5492944242615 Jimena</p>
+
+
+
+			</p>";
 	    //echo($contenido_cliente);
 		mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);
 
@@ -434,7 +449,7 @@ class ControladorReservas
 			$vuelo = mysqli_real_escape_string($link,$_POST['vuelo']);
 			$observaciones = mysqli_real_escape_string($link,$_POST['observaciones']);
 			$id_reserva = $_POST['idReserva'];
-			
+
 			$respuesta = ModeloReservas::editarReserva($nombre,$apellido,$tarifa,$telefono,$email,$retiro,$devolucion,$vuelo,$observaciones,$id_reserva);
 
 			if ($respuesta=="ok") {
@@ -452,7 +467,7 @@ class ControladorReservas
 
 						</script>';
 
-		      	
+
 	      	} else {
 		        echo'<script>
 
@@ -481,7 +496,7 @@ class ControladorReservas
 	static function listarReservas($id=null,$estado=null,$filtro=null){
 
 		$reservas = ModeloReservas::listarReservas($id,$estado,$filtro);
-		
+
 		return $reservas;
 
 	}
@@ -509,8 +524,8 @@ class ControladorReservas
 		return $tarifas;
 
 	}
-    
-    
+
+
     //Funcion principal que busca disponibilidad, devuelve el contador de autos disponibles.
 	static function test($origen){
 
@@ -549,12 +564,12 @@ class ControladorReservas
 	  	  	//En caso de no encontrar la configuracion o que ésta esté mal definida, por defecto serán 3 dias minimo de alquiler.
 	  	  	if (!empty($cantidad_dias_configuracion)) {
 	  	  		$minimo_de_dias = $cantidad_dias_configuracion['dias'];
-	  	  		if (!$minimo_de_dias == null) {	
+	  	  		if (!$minimo_de_dias == null) {
 	  	  			settype($minimo_de_dias, "integer");
 	  	  		}else{
 	  	  			$minimo_de_dias=3;
 	  	  		}
-	  	  		
+
 	  	  	}else{
 	  	  		$minimo_de_dias=3;
 	  	  	}
@@ -566,15 +581,15 @@ class ControladorReservas
 
 		  	  	//Generar un codigo de reserva aleatorio
 				$codigo = ModeloReservas::codigoReserva(5);
-				
+
 
 			var_dump($respuesta);
 				/***** valor de retorno funcion disponibilidad
-				
+
 				***/
 				//Si contador devuelve mayor igual a 1 es por que hay disponibilidad
 				/*if ($respuesta>=1) {
-	
+
 					$_SESSION['codigo']      = $codigo;
 					$_SESSION['fecha_desde'] = $fecha_desde;
 					$_SESSION['fecha_hasta'] = $fecha_hasta;
@@ -583,7 +598,7 @@ class ControladorReservas
  					$_SESSION['categoria']   = $categoria;
 					$_SESSION['total_dias']  = $total_dias;
 					$_SESSION['mensaje']     = 'Reserva Disponible';
- 
+
 					echo "<script>
 
 					window.location='$url_checkout';
@@ -601,8 +616,8 @@ class ControladorReservas
 	  	  		echo "<script>
  						toastr.error('El periodo mínimo de alquiler son de $minimo_de_dias dia/s.', 'A tener en cuenta', {timeOut: 8000})
  					</script>";
-		  	 
-		  	}   		      
+
+		  	}
 	    }
   	}
 }
