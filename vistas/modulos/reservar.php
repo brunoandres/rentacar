@@ -1,6 +1,6 @@
 <?php
 
-unset($_SESSION['codigo']);     
+unset($_SESSION['codigo']);
 unset($_SESSION['fecha_desde']);
 unset($_SESSION['fecha_hasta']);
 unset($_SESSION['hora_desde']);
@@ -44,7 +44,7 @@ if (isset($_SESSION['reserva_error'])) {
     <div class="center">
       <h2>Reservas On-line</h2>
       <div class="alert alert-warning" role="alert">
-          La devolución del vehiculo debe ser dentro de las 24hs. De lo contrario se cobrará un adicional extra. Se deberá abonar dentro de las 48hs el 30 % del costo de la reserva, de lo contrario se dará de baja la misma.
+          La devolución del vehiculo debe ser dentro de las 24hs. De lo contrario se cobrará un adicional extra. Se deberá abonar dentro de las 48hs el 50 % del costo de la reserva, de lo contrario se dará de baja la misma.
           </div>
       <p class="lead">Seleccione una categoria e ingrese las fechas para buscar disponibilidad.</p>
     </div>
@@ -111,7 +111,7 @@ if (isset($_SESSION['reserva_error'])) {
                 <option value="23:00">23:00hs</option>
               </select>
           </div>
-          
+
           <div class="form-group">
             <label>Hora hasta</label>
             <select class="form-control" name="hora_hasta" required="">
@@ -152,5 +152,3 @@ if (isset($_SESSION['reserva_error'])) {
   <!--/.container-->
 </section>
 <!--/#contact-page-->
-
-
