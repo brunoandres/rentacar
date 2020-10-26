@@ -21,9 +21,9 @@ if (empty($_SESSION['codigo'])) {
   echo "<script>
  toastr.success('En las fechas indicadas hay autos disponibles!', 'Reserva Disponible', {timeOut: 8000})
  </script>";
-  
+
   echo "<script>
- toastr.info('Recuerde que debe abonar obligatoriamente el 30 % de su Reserva, de lo contrario se dará de baja la misma.', 'Aviso Importante :', {timeOut: 30000})
+ toastr.info('Recuerde que debe abonar obligatoriamente el 50 % de su Reserva, de lo contrario se dará de baja la misma.', 'Aviso Importante :', {timeOut: 30000})
  </script>";
 }
 
@@ -72,7 +72,7 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
     $cantidadPromociones = (($_SESSION['total_dias']-$diasSinPromo)/$promo);
     //Precio de la promocion
     $precio_promo = ($tarifa_semanal*$cantidadPromociones);
-    //Precio por dia 
+    //Precio por dia
     $precio_diario = ($tarifa_diaria*$diasSinPromo);
     //Total reserva
     $total = ($precio_diario+$precio_promo);
@@ -100,8 +100,8 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
       </div></h2>-->
       <p class="lead"><strong class="h3">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></strong></p>
       <p class="strong"># Código Reserva : <?php echo $_SESSION['codigo']; ?> # Tarifa sin adicionales <?php echo "$ : ".$total; ?></p>
-      
-      
+
+
     </div>
     <div class="row h-100 justify-content-center align-items-center">
     <!-- Button trigger modal -->
@@ -267,7 +267,7 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
               </div>
             </div>-->
             <hr class="mb-4">
-            <input type="checkbox" name="acepta" required>Acepto los términos acerca del abono del 30 % de mi Reserva. <br>
+            <input type="checkbox" name="acepta" required>Acepto los términos acerca del abono del 50 % de mi Reserva. <br>
             <button class="btn btn-info btn-lg btn-block" type="submit" name="checkout">Click para continuar</button>
           </form>
         </div>
@@ -297,7 +297,7 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
         <strong>* Adicionales</strong>
         <p>Todos los adicionales añaden un costo al total de la reserva, en caso de rotura ó robo de los mismos, se deberan abonar con los siguientes valores.</p>
         <ul>
-          <?php foreach ($adicionales_modal as $ad) { ?>  
+          <?php foreach ($adicionales_modal as $ad) { ?>
           <li><?php echo $ad['nombre']; ?> : <?php echo '$'.$ad['tarifa']; ?></li>
           <?php } ?>
         </ul>
@@ -306,7 +306,7 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
         El pago se realiza directamente en <strong>efectivo</strong> o por medio de <strong>  transferencia bancaria.</p></strong>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>   
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
