@@ -120,7 +120,7 @@
                     <div class="card-body">
                         <h6><a href="#">Categoria D</a></h6>
                         <p class="text-muted card-text">Chevrolet Spin</p>
-                        <p>5 Puertas - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag - 5 pasajeros</p>
+                        <p>5 Puertas - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag - 7 pasajeros</p>
                     </div>
                 </div>
             </div>
