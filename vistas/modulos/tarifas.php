@@ -35,9 +35,11 @@ $tarifas = $new->listarTarifasFrontEnd();
         <?php } ?>
 
       </tbody>
-    </table>
+    </table><br><br><br><br><br><br><br><br>
   </div>
+
+
   <!--/.container-->
 </section>
 <!--/#contact-page-->
-<br><br><br><br>
+
