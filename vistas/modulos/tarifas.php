@@ -1,4 +1,4 @@
-<?php  
+<?php
 
 $new = new ControladorConfiguraciones();
 $tarifas = $new->listarTarifasFrontEnd();
@@ -20,7 +20,7 @@ $tarifas = $new->listarTarifasFrontEnd();
         </tr>
       </thead>
       <tbody>
-          
+
         <?php
 
         foreach ($tarifas as $value) {

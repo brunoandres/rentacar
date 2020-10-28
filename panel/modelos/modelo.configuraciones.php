@@ -122,7 +122,7 @@ class ModeloConfiguraciones{
           $query = "select * from temporadas";
         }else{
           $query = "select * from temporadas where activa = 1";
-        }    
+        }
         $sql = mysqli_query($link,$query);
         while ($filas = mysqli_fetch_array($sql)) {
           $temporadas[]=$filas;
@@ -146,18 +146,18 @@ class ModeloConfiguraciones{
 
       $temporada = array();
       $link = Conexion::ConectarMysql();
-      
+
       $query = "select * from temporadas where id = $id";
       $sql = mysqli_query($link,$query);
-      
-     
+
+
       while ($filas = mysqli_fetch_array($sql)) {
           $temporada['nombre']=$filas['nombre'];
           $temporada['fecha_desde']=$filas['fecha_desde'];
           $temporada['fecha_hasta']=$filas['fecha_hasta'];
           $temporada['activa']=$filas['activa'];
           $temporada['observaciones']=$filas['observaciones'];
-        
+
       }
 
       return $temporada;
@@ -169,11 +169,11 @@ class ModeloConfiguraciones{
 
       $tarifa_adicional = array();
       $link = Conexion::ConectarMysql();
-      
+
       $query = "select * from adicionales where id = $id";
       $sql = mysqli_query($link,$query);
-      
-     
+
+
       while ($filas = mysqli_fetch_array($sql)) {
           $tarifa_adicional['nombre']=$filas['nombre'];
           $tarifa_adicional['tarifa']=$filas['tarifa'];
@@ -222,7 +222,7 @@ class ModeloConfiguraciones{
     $link = Conexion::ConectarMysql();
     $lugares = array();
 
-  
+
     $query = "select * from lugares where id = $id";
     $sql = mysqli_query($link,$query);
 
@@ -230,7 +230,7 @@ class ModeloConfiguraciones{
       $lugares[]=$filas;
     }
     return $lugares;
-    
+
     // Cerrar la conexión.
     mysqli_close( $link );
   }
@@ -263,7 +263,7 @@ class ModeloConfiguraciones{
     return $adicionales;
 
   }
-  
+
 
   static public function listarAdicionales($id,$filtro){
 
@@ -279,7 +279,7 @@ class ModeloConfiguraciones{
         $query = "select * from adicionales order by tarifa asc";
       }
 
-      
+
       $sql = mysqli_query($link,$query);
       while ($filas = mysqli_fetch_array($sql)) {
         $adicionales[]=$filas;
@@ -331,7 +331,7 @@ class ModeloConfiguraciones{
     $link = Conexion::ConectarMysql();
     $tarifas = array();
     if ($id == null) {
-      $query = "SELECT DISTINCT (a.id_categoria), a.por_dia, b.nombre from tarifas a, categorias b where a.id_categoria = b.id and a.id_temporada = 2 and a.activa  = 1";
+      $query = "SELECT DISTINCT (a.id_categoria), a.por_dia, b.nombre from tarifas a, categorias b where a.id_categoria = b.id and a.id_temporada = 3 and a.activa  = 1";
       $sql = mysqli_query($link,$query);
       while ($filas = mysqli_fetch_assoc($sql)) {
          $tarifas[] = $filas;
@@ -350,7 +350,7 @@ class ModeloConfiguraciones{
       mysqli_close( $link );
   }
 
-  
+
 
   static public function listarTarifas($id=null){
 
@@ -377,12 +377,12 @@ class ModeloConfiguraciones{
 	}
 
 
-  //Defino los dias minimos de alquiler 
+  //Defino los dias minimos de alquiler
   static public function diasMinimos(){
 
     $link = Conexion::ConectarMysql();
     $cantidad = array();
- 
+
     $query = "select * from configuraciones where nombre like '%Cantidad Dias%' and activa=1";
     $sql = mysqli_query($link,$query);
     while ($filas = mysqli_fetch_assoc($sql)) {
@@ -393,12 +393,12 @@ class ModeloConfiguraciones{
 
   }
 
-  //Defino los dias de promociones de alquiler 
+  //Defino los dias de promociones de alquiler
   static public function diasParaPromociones(){
 
     $link = Conexion::ConectarMysql();
     $cantidad = array();
- 
+
     $query = "select * from configuraciones where nombre like '%Promociones%' and activa=1";
     $sql = mysqli_query($link,$query);
     while ($filas = mysqli_fetch_assoc($sql)) {
@@ -409,12 +409,12 @@ class ModeloConfiguraciones{
 
   }
 
-  //Defino los dias minimos de alquiler 
+  //Defino los dias minimos de alquiler
   static public function margenHorario(){
 
     $link = Conexion::ConectarMysql();
     $margen = array();
- 
+
     $query = "select * from configuraciones where nombre like '%Margen Horario%' and activa=1";
     $sql = mysqli_query($link,$query);
     while ($filas = mysqli_fetch_assoc($sql)) {
@@ -436,7 +436,7 @@ class ModeloConfiguraciones{
     $link = Conexion::ConectarMysql();
     $query = "INSERT INTO `lugares`(`lugar`, `activo`, `observaciones`) VALUES ('$nombre',$lugar_activo,'$observaciones')";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
-    
+
     if ($sql) {
       auditar($_SESSION["id_user"],$query);
       return "ok";
@@ -452,7 +452,7 @@ class ModeloConfiguraciones{
     $link = Conexion::ConectarMysql();
     $query = "INSERT INTO `autos`(`id_categoria`, `marca`, `modelo`, `patente`, `estado`, `viaja_chile`, `observaciones`) VALUES ($categoria,'$marca','$modelo','$patente',$habilitado,$habilitado_chile,'$observaciones')";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
-    
+
     if ($sql) {
       auditar($_SESSION["id_user"],$query);
       return "ok";
@@ -508,7 +508,7 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
 	}
 
-  
+
 
   static public function guardarTempo($nombre,$fecha_desde,$fecha_hasta,$activa,$observaciones){
 
