@@ -1,45 +1,94 @@
 <?php
 
 $new = new ControladorConfiguraciones();
-$tarifas = $new->listarTarifasFrontEnd();
+$tarifasVigentes = $new->listarTarifasFrontEnd(null,3);
+
+$tarifasProxTemp = $new->listarTarifasFrontEnd(null,4);
+
+$tempVig = implode(',',$tarifasVigentes[0]);
+$fecha1 = substr($tempVig,19);
+
+$proxTemp = implode(',',$tarifasProxTemp[0]);
+$fecha2 = substr($proxTemp,19);
 
 ?>
 <section id="portfolio">
   <div class="container">
     <div class="center">
-      <h2>Tarifas Austral Rent a Car vigentes al <?php echo date('d/m/Y'); ?></h2>
+      <h2>Tarifas Austral Rent a Car vigentes</h2>
       <p class="lead">El Kilometraje es libre para la zona de El Bolsón, Villa La Angostura, 7 Lagos, y San Martín de los Andes.</p>
     </div>
-    <hr>
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Categoria</th>
-          <th scope="col">Tarifa diaria</th>
-          <th scope="col">Kilometrajes</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="center">
+          <h3>Tarifa vigente hasta el <strong><?php echo $fecha1; ?></strong></h3>
 
-        <?php
+        </div>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Categoria</th>
+              <th scope="col">Tarifa diaria</th>
+              <th scope="col">Kilometrajes</th>
+            </tr>
+          </thead>
+          <tbody>
 
-        foreach ($tarifas as $value) {
+            <?php
 
-        ?>
-        <tr>
-          <td><?php echo $value['nombre']; ?></td>
-          <td><?php echo '$ '.$value['por_dia']; ?></td>
-          <td><?php echo 'Libre' ?></td>
-        </tr>
+            foreach ($tarifasVigentes as $value) {
 
-        <?php } ?>
+            ?>
+            <tr>
+              <td><?php echo $value['nombre']; ?></td>
+              <td><?php echo '$ '.$value['por_dia']; ?></td>
+              <td><?php echo 'Libre' ?></td>
+            </tr>
 
-      </tbody>
-    </table><br><br><br><br><br><br><br><br>
+            <?php } ?>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="col-lg-6">
+        <div class="center">
+          <div class="center">
+            <h3>Tarifa vigente desde el <strong>01/12/2020</strong> hasta el <strong><?php echo $fecha2; ?></strong></h3>
+
+          </div>
+        </div>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Categoria</th>
+              <th scope="col">Tarifa diaria</th>
+              <th scope="col">Kilometrajes</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <?php
+
+            foreach ($tarifasProxTemp as $value) {
+
+            ?>
+            <tr>
+              <td><?php echo $value['nombre']; ?></td>
+              <td><?php echo '$ '.$value['por_dia']; ?></td>
+              <td><?php echo 'Libre' ?></td>
+            </tr>
+
+            <?php } ?>
+
+          </tbody>
+        </table><br><br><br><br><br><br><br><br>
+      </div>
+
+    </div>
+
   </div>
 
 
   <!--/.container-->
 </section>
 <!--/#contact-page-->
-

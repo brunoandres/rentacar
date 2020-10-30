@@ -148,12 +148,12 @@ class ControladorConfiguraciones{
 
       $respuesta = ModeloConfiguraciones::listarTarifas($id);
       return $respuesta;
-  	}	
+  	}
 
   	//Metodo para listar las tarifas definidas por temporadas
-  	static public function listarTarifasFrontEnd($id=null){
+  	static public function listarTarifasFrontEnd($id=null,$temporada_id=null){
 
-      $respuesta = ModeloConfiguraciones::listarTarifasFrontEnd($id);
+      $respuesta = ModeloConfiguraciones::listarTarifasFrontEnd($id,$temporada_id);
       return $respuesta;
   	}
 
@@ -179,7 +179,7 @@ class ControladorConfiguraciones{
       }else{
         $habilitado_chile = 1;
       }
-      
+
 
       $respuesta = ModeloConfiguraciones::guardarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$observaciones);
 
@@ -195,7 +195,7 @@ class ControladorConfiguraciones{
 	        echo "<script>
 					toastr.error('No ha sido posible guardar el auto.', 'Error', {timeOut: 8000})
 				</script>";
-				
+
       	}
 
     }
@@ -224,7 +224,7 @@ class ControladorConfiguraciones{
       }else{
         $habilitado_chile = 1;
       }
-      
+
 
       $respuesta = ModeloConfiguraciones::editarAuto($marca,$modelo,$categoria,$patente,$habilitado,$habilitado_chile,$observaciones,$id_auto);
 
@@ -243,7 +243,7 @@ class ControladorConfiguraciones{
 
 				</script>';
 
-      	
+
       } else {
         echo'<script>
 
