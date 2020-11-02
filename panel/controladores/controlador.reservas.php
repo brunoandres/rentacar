@@ -448,7 +448,8 @@ Para señar se solicita un 50% del total del alquiler por transferencia.
 			$tarifa = $_POST['tarifa'];
 			$vuelo = mysqli_real_escape_string($link,$_POST['vuelo']);
 			$observaciones = mysqli_real_escape_string($link,$_POST['observaciones']);
-			if (!empty($_POST["idAuto"])) {
+
+			if (empty($_POST["idAuto"]) == '') {
 				$idAuto = $_POST["idAuto"];
 			}
 

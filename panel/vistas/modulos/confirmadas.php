@@ -173,9 +173,9 @@ MODAL EDITAR RESERVA
 
          <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Editar Reserva </h4> <div id="idReserva">
+          <h4 class="modal-title">Editar Reserva </h4>
 
-          </div>
+          
 
         </div>
 
