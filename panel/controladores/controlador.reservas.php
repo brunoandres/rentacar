@@ -433,7 +433,7 @@ Para señar se solicita un 50% del total del alquiler por transferencia.
 		if (isset($_POST['editarReserva'])) {
 
 			$link = Conexion::ConectarMysql();
-			$idAuto = 'NULL';
+			//$idAuto = 'null';
 			$nombre = mysqli_real_escape_string($link, $_POST['nombre']);
 			$apellido = mysqli_real_escape_string($link,$_POST['apellido']);
 			//$fecha_desde = $_POST['fecha_desde'];
@@ -449,8 +449,10 @@ Para señar se solicita un 50% del total del alquiler por transferencia.
 			$vuelo = mysqli_real_escape_string($link,$_POST['vuelo']);
 			$observaciones = mysqli_real_escape_string($link,$_POST['observaciones']);
 
-			if (empty($_POST["idAuto"])) {
+			if (!$_POST["idAuto"] == '') {
 				$idAuto = $_POST["idAuto"];
+			}else{
+				$idAuto = 'null';
 			}
 
 			$id_reserva = $_POST['idReserva'];
