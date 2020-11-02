@@ -124,7 +124,7 @@ foreach($categorias_db as $cat)
 
                             {
                                 id: 'reserva',
-                                /*name: '<?php echo $mensaje; ?>',*/
+                                name: '<?php echo $mensaje; ?>',
                                 start_date: '<?php echo $inicio; ?>',
                                 end_date: '<?php echo $fin; ?>'
                             },
