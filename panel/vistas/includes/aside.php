@@ -43,7 +43,7 @@ $text = null;
             echo "active";
             $text = 'text-red';
           }?>"><a href="nueva-reserva"><i class="fa fa-circle-o"></i> Nueva reserva</a></li>
-          
+
           <li class="<?php if ($_GET['ruta']=='confirmadas') {
             echo "active";
           } ?>"><a href="confirmadas"><i class="fa fa-circle-o"></i> Confirmadas</a></li>
@@ -218,6 +218,7 @@ $text = null;
         </ul>
 
       </li>
+      <li><a href="https://www.patagoniaaustralrentacar.com.ar/panel/calendario/demo/"><i class="fa fa-dashboard"></i> <span>Calendario</span></a></li>
     </ul>
   </section>
   <!-- /.sidebar -->

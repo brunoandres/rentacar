@@ -67,18 +67,18 @@ class ModeloReservas
 		   			$query_mov = "";
 		   		}
 	   	 	}
-	   	 	
+
 		if (!$id == null) {
 			$id_reserva = 'and a.id ='.$id;
-			
+
 		}else{
 
 			$id_reserva = '';
 		}
-	   	
-	   	
-	   	
-	    $query = "select a.id as ID_RESERVA,a.id_categoria,a.codigo as CODIGO_RESERVA,concat(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.nombre,a.apellido,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL, a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,a.retiro,a.entrega, b.lugar as LUGAR_RETIRO,b2.lugar AS LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as CATEGORIA from reservas a INNER join lugares b ON a.retiro = b.id INNER join lugares b2 on a.entrega = b2.id inner join categorias c on a.id_categoria = c.id where a.fecha_desde >= '2019-01-01' $query_estado $query_mov $id_reserva";
+
+
+
+	    $query = "select a.id_auto,a.id as ID_RESERVA,a.id_categoria,a.codigo as CODIGO_RESERVA,concat(a.nombre,' ',a.apellido) as NOMBRE_APELLIDO,a.nombre,a.apellido,a.fecha_desde as FECHA_DESDE,a.fecha_hasta as FECHA_HASTA,a.hora_desde as HORA_DESDE,a.hora_hasta as HORA_HASTA,a.tarifa as TARIFA_RESERVA_TOTAL, a.total_dias as CANTIDAD_DE_DIAS,a.estado as ESTADO_RESERVA,a.origen as ORIGEN_RESERVA,a.exterior as VIAJA_EXTERIOR,a.adicionales as INCLUYE_ADICIONALES,a.telefono as TELEFONO_CONTACTO,a.email as EMAIL,a.retiro,a.entrega, b.lugar as LUGAR_RETIRO,b2.lugar AS LUGAR_ENTREGA,a.nro_vuelo as NRO_DE_VUELO,a.observaciones as OBSERVACIONES,c.nombre as CATEGORIA from reservas a INNER join lugares b ON a.retiro = b.id INNER join lugares b2 on a.entrega = b2.id inner join categorias c on a.id_categoria = c.id where a.fecha_desde >= '2019-01-01' $query_estado $query_mov $id_reserva";
 	    $sql = mysqli_query($link,$query);
 
 	    while ($filas = mysqli_fetch_assoc($sql)) {
@@ -125,7 +125,7 @@ class ModeloReservas
 
 	    	//Check in range para verificar las tarifas segun el dia de inicio de reserva
 	    	if (self::check_in_range($tarifas['fecha_desde_temporada'],$tarifas['fecha_hasta_temporada'],$fecha_desde)) {
-	    		
+
 	    		//Inserto en mi array tarifa los siguientes valores para mostrar en la vista confirma.php
 				array_push($tarifa, $tarifas['valor_tarifa_diaria'], $tarifas['valor_tarifa_semanal'], $tarifas['permite_promo'], $tarifas['categoria']);
 
@@ -254,7 +254,7 @@ class ModeloReservas
 
 		  	  		//Si la configuracion está activa
 		  	  		if ($margen_activo=='1') {
-		  	  			
+
 
 		  	  			if ($fechaHastaConfirmada===$fechaDesdeReserva) {
 		  	  				$margen_activo = true;
@@ -269,7 +269,7 @@ class ModeloReservas
 				  	  		}
 		  	  			}else{
 		  	  				$margen_activo = false;
-		  	  			}	  	  		
+		  	  			}
 		  	  		}
 
 		  	  	}else{
@@ -284,7 +284,7 @@ class ModeloReservas
 
 				//Defino variable para saber si puedo entregar el auto en el dia (margen horario)
 				$disponibleEnEldia = false;
-				
+
 				//Total de autos por categoria
 				$contador_autos = $total;
 				//var_dump($contador_autos);
@@ -304,14 +304,14 @@ class ModeloReservas
 				$horaDesdeReservaConfirmada = date('H:i:s', strtotime($horaHastaConfirmada .'+ 1 hour'));
 				//Paso formato hora, mi hora de reserva
 				$horaDesdeReserva = self::formatoHora($hora_desde);
-				
+
 				//Diferencia entre la hora desde retiro de reserva y la que se entrega el mismo dia
 				$diferencia = intval(self::diferenciaDeHoras($horaHastaConfirmada,$horaDesdeReserva));
 				/*echo "<br> EL HORARIO DE RETIRO ES : ".$horaDesdeReserva;*/
-				
+
 				//Pregunto si está activo la configuracion con margen horario
 				if ($margen_activo == true) {
-		
+
 					//Si el margen horario está activo, pregunto si el dia que se quiere reservar conincide con alguna reserva ya confirmada
 					/*if ('$fechaHastaConfirmada' === '$fechaDesdeReserva') {
 						/*echo "<BR>NO HAY DISPONIBILIDAD, VERIFICAR MARGEN";
@@ -323,9 +323,9 @@ class ModeloReservas
 					 	if ($horaHastaConfirmada < $horaDesdeReserva && $diferencia>=$margen_horario) {
 					 		//echo "<BR> EL HORARIO DE ENTREGA ES MENOR O IGUAL AL HORARIO DEL NUEVO RETIRO";
 
-					 	//Si el margen horario no coincide, es decir se quiere retirar un auto antes de que se entregue, es imposible realizar la reserva	
+					 	//Si el margen horario no coincide, es decir se quiere retirar un auto antes de que se entregue, es imposible realizar la reserva
 					 	}else{
-					 		
+
 							$sumaDeChoques =$sumaDeChoques+1;
 							$total = $total-$sumaDeChoques;
 					 	}
@@ -333,15 +333,15 @@ class ModeloReservas
 					}else{
 						echo "<BR style='color:red;'>NO ESTOY RETIRANDO UN AUTO MISMO DIA QUE ENTREGAN OTRO";
 					}*/
-				//En caso que esté desactivada busco disponiblidad solo entre fechas	
+				//En caso que esté desactivada busco disponiblidad solo entre fechas
 				}else{
 
 					if ($reserva_ok==false) {
-						
+
 						//echo "Resultado: <strong>".$fechaDesdeConfirmada.'  al  '.$fechaHastaConfirmada.'</strong>->'.$reserva_ok.'<br>';
 						$sumaDeChoques=$sumaDeChoques+1;
 						$total=$total-1;
-						
+
 					}
 
 				}
@@ -386,7 +386,7 @@ class ModeloReservas
 	    	if ($sql) {
 		    	//Recupero la ultima reserva insertada
 		    	$id_reserva_generado = mysqli_insert_id($link);
-		    	
+
 
 	    		if (!empty($adicionales)) {
 	    			foreach ($adicionales as $adicional => $value) {
@@ -451,7 +451,7 @@ class ModeloReservas
 		if ($contador_autos > $total_result) {
 
 			$contador_autos = true;
-			
+
 		}else{
 			$contador_autos = false;
 		}
@@ -461,10 +461,10 @@ class ModeloReservas
 	}
 
 	//Funcion para editar Reserva
-	static function editarReserva($nombre,$apellido,$tarifa,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$id_reserva){
+	static function editarReserva($nombre,$apellido,$tarifa,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$idAuto,$id_reserva){
 
 		$link = Conexion::ConectarMysql();
-		$query = "UPDATE `reservas` SET `nombre`='$nombre',`apellido`='$apellido',`tarifa`=$tarifa,`telefono`='$telefono',`email`='$email',`retiro`=$retiro,`entrega`=$entrega,`nro_vuelo`='$vuelo',`observaciones`='$observaciones' WHERE id = $id_reserva";
+		$query = "UPDATE `reservas` SET `nombre`='$nombre',`apellido`='$apellido',`tarifa`=$tarifa,`telefono`='$telefono',`email`='$email',`retiro`=$retiro,`entrega`=$entrega,`nro_vuelo`='$vuelo',`observaciones`='$observaciones',`id_auto`=$idAuto WHERE id = $id_reserva";
 		$sql = mysqli_query($link,$query) or die (mysqli_error($link));
 		if ($sql) {
 			 auditar($_SESSION["id_user"],$query);
@@ -473,7 +473,7 @@ class ModeloReservas
 			return "error";
 		}
 	}
-	
+
 	static function test($categoria,$fechaDesdeReserva,$fechaHastaReserva,$hora_desde,$hora_hasta){
 		$contador_autos = null;
 		//Instancio mi clase categorias para traer total de autos para cada una.
@@ -525,7 +525,7 @@ class ModeloReservas
 
 		  	  		//Si la configuracion está activa
 		  	  		if ($margen_activo=='1') {
-		  	  			
+
 
 		  	  			if ($fechaHastaConfirmada===$fechaDesdeReserva) {
 		  	  				$margen_activo = true;
@@ -540,7 +540,7 @@ class ModeloReservas
 				  	  		}
 		  	  			}else{
 		  	  				$margen_activo = false;
-		  	  			}	  	  		
+		  	  			}
 		  	  		}
 
 		  	  	}else{
@@ -555,7 +555,7 @@ class ModeloReservas
 
 				//Defino variable para saber si puedo entregar el auto en el dia (margen horario)
 				$disponibleEnEldia = false;
-				
+
 				//Total de autos por categoria
 				//var_dump();
 
@@ -575,14 +575,14 @@ class ModeloReservas
 				$horaDesdeReservaConfirmada = date('H:i:s', strtotime($horaHastaConfirmada .'+ 1 hour'));
 				//Paso formato hora, mi hora de reserva
 				$horaDesdeReserva = self::formatoHora($hora_desde);
-				
+
 				//Diferencia entre la hora desde retiro de reserva y la que se entrega el mismo dia
 				$diferencia = intval(self::diferenciaDeHoras($horaHastaConfirmada,$horaDesdeReserva));
 				/*echo "<br> EL HORARIO DE RETIRO ES : ".$horaDesdeReserva;*/
-				
+
 				//Pregunto si está activo la configuracion con margen horario
 				if ($margen_activo == true) {
-		
+
 					//Si el margen horario está activo, pregunto si el dia que se quiere reservar conincide con alguna reserva ya confirmada
 					/*if ('$fechaHastaConfirmada' === '$fechaDesdeReserva') {
 						/*echo "<BR>NO HAY DISPONIBILIDAD, VERIFICAR MARGEN";
@@ -594,9 +594,9 @@ class ModeloReservas
 					 	if ($horaHastaConfirmada < $horaDesdeReserva && $diferencia>=$margen_horario) {
 					 		//echo "<BR> EL HORARIO DE ENTREGA ES MENOR O IGUAL AL HORARIO DEL NUEVO RETIRO";
 
-					 	//Si el margen horario no coincide, es decir se quiere retirar un auto antes de que se entregue, es imposible realizar la reserva	
+					 	//Si el margen horario no coincide, es decir se quiere retirar un auto antes de que se entregue, es imposible realizar la reserva
 					 	}else{
-					 		
+
 							$sumaDeChoques =$sumaDeChoques+1;
 							$total = $total-$sumaDeChoques;
 					 	}
@@ -604,17 +604,17 @@ class ModeloReservas
 					}else{
 						echo "<BR style='color:red;'>NO ESTOY RETIRANDO UN AUTO MISMO DIA QUE ENTREGAN OTRO";
 					}*/
-				//En caso que esté desactivada busco disponiblidad solo entre fechas	
+				//En caso que esté desactivada busco disponiblidad solo entre fechas
 				}else{
-                    
+
                     $contador_autos_antes = $total;
-                    
+
 				    if ($reserva_ok==false) {
-						
+
 						echo "Resultado: <strong>".$fechaDesdeConfirmada.'  al  '.$fechaHastaConfirmada.'</strong>->'.$reserva_ok.'<br>';
 						$sumaDeChoques;
 						$total=$total-1;
-						
+
 					}
 					$msj ="Autos antes de entrar al IF: ".$contador_autos_antes." choques entre reservas : ".$sumaDeChoques." DISPONIBLES : ".$total;
 

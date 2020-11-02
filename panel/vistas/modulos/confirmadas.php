@@ -1,11 +1,16 @@
-<?php  
+<?php
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorReservas();
 $newConf = new ControladorConfiguraciones();
 $reservas = $new->listarReservas(NULL,1,NULL);
 //Cargo mi combo dinamico con los lugares
 $lugares = $newConf->listarLugares();
+
+$autos = $newConf->listarAutos();
+
 $editarReserva = $new->editarReserva();
+
+
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -49,7 +54,7 @@ $editarReserva = $new->editarReserva();
               <tbody>
 
               <?php
-              foreach ($reservas as $reserva => $value) { 
+              foreach ($reservas as $reserva => $value) {
 
                 $adicionales = NULL;
                 $tiene_adicionales = $newConf->buscarAdicionales($value['ID_RESERVA']);
@@ -61,7 +66,7 @@ $editarReserva = $new->editarReserva();
 
               ?>
 
-              <tr>                                     
+              <tr>
                 <td align="left"><?php echo $value['ID_RESERVA'];?></td>
                 <td><?php echo $value['NOMBRE_APELLIDO'];?></td>
                 <td><?php echo $value['CATEGORIA'];?></td>
@@ -76,7 +81,7 @@ $editarReserva = $new->editarReserva();
                 }else{
                   echo "<span class='label label-info'>desde el panel</span>";
                 }?>
-                  
+
                 </td>
                 <td><?php echo "<span class='badge badge-secondary'>".$adicionales."</span></h6>"?></td>
 
@@ -89,10 +94,10 @@ $editarReserva = $new->editarReserva();
                   <button type="button" name="view_data" value="" idReserva="<?php echo $value['ID_RESERVA']; ?>" class="btn btn-danger btn-xs btnEliminarReserva"><i class="fa fa-times" aria-hidden="true"></i></button>
 
                 </td>
-                  
+
               </tr>
-              <?php } ?>                    
-                                      
+              <?php } ?>
+
               </tbody>
               <tfoot>
                   <th width="8%">N° RESERVA</th>
@@ -138,10 +143,10 @@ $editarReserva = $new->editarReserva();
   </div>
 </div>
 
-<?php  
+<?php
 
 if (isset($_GET['idReserva'])) {
-    
+
   $borrar = $new->eliminarReserva($_GET['idReserva']);
 
 }
@@ -168,7 +173,9 @@ MODAL EDITAR RESERVA
 
          <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Editar Reserva</h4>
+          <h4 class="modal-title">Editar Reserva </h4> <div id="idReserva">
+
+          </div>
 
         </div>
 
@@ -239,6 +246,16 @@ MODAL EDITAR RESERVA
                 <select class="form-control" id="devolucion" name="devolucion" style="width: 100%;">
                   <?php foreach ($lugares as $lugar) {?>
                     <option value="<?php echo $lugar['id']; ?>"><?php echo $lugar['lugar']; ?></option>
+                  <?php } ?>
+                </select>
+            </div>
+
+            <div class="form-group">
+              <label for="country">Auto</label>
+                <select class="form-control" id="idAuto" name="idAuto" style="width: 100%;">
+                  <option value="">LIBRE</option>
+                  <?php foreach ($autos as $auto) {?>
+                    <option value="<?php echo $auto['id']; ?>"><?php echo $auto['nombre'].' :: '.$auto['marca'].' '.$auto['modelo'].' Pat:: '.$auto['patente']; ?></option>
                   <?php } ?>
                 </select>
             </div>

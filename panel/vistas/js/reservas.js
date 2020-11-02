@@ -26,6 +26,8 @@ $(".tablas").on("click", ".btnEditarReserva", function(){
 		$("#devolucion").val(respuesta["entrega"]);
 		$("#tarifa").val(respuesta["TARIFA_RESERVA_TOTAL"]);
 		$("#observaciones").val(respuesta["OBSERVACIONES"]);
+		$("#idAuto").val(respuesta["id_auto"]);
+
  		$("#idReserva").val(respuesta["ID_RESERVA"]);
 
      	}

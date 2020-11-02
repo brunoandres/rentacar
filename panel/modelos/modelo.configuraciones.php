@@ -304,9 +304,9 @@ class ModeloConfiguraciones{
     $link = Conexion::ConectarMysql();
     $autos = array();
 
-    //el id puede venir vacio, asi retorno todas los adicionales
+    //el id puede venir vacio, asi retorno todas los autos
     if ($id == null) {
-      $query = "select a.*,b.nombre from autos a,categorias b where a.id_categoria=b.id order by a.marca asc";
+      $query = "select distinct a.*,b.nombre from autos a,categorias b where a.id_categoria=b.id order by b.nombre asc";
       $sql = mysqli_query($link,$query);
       while ($filas = mysqli_fetch_array($sql)) {
         $autos[]=$filas;
