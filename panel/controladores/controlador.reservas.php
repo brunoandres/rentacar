@@ -74,6 +74,14 @@ class ControladorReservas
 
 	}
 
+	//Funcion para retornar el ID del auto generico segun categoria
+	static function asignarAutoGenerico($categoria){
+
+		$auto = ModeloReservas::asignarAutoGenerico($categoria);
+		return $auto;
+
+	}
+
 	//Funcion principal que busca disponibilidad, devuelve el contador de autos disponibles.
 	static function buscarDisponibilidad($origen){
 
@@ -216,6 +224,7 @@ class ControladorReservas
 
 			$link = Conexion::ConectarMysql();
 
+			$idAuto = null;
 			$categoria = $_POST['categoria_confirmada'];
 			$codigo = $_POST['codigo_reserva'];
 			$nombre = mysqli_real_escape_string($link, $_POST['nombre_reserva']);
@@ -236,6 +245,11 @@ class ControladorReservas
 			$observaciones = mysqli_real_escape_string($link,$_POST['informacion_reserva']);
 			$adicionales = $_SESSION['adicionales'];
 
+			/*
+			 BUSCAR AUTO GENERICO
+			*/
+			$idAuto = implode(self::asignarAutoGenerico($categoria));
+
 			if (empty($adicionales)) {
 				$tiene_adicionales = 0;
 			}else{
@@ -245,7 +259,7 @@ class ControladorReservas
 			//Obtener la direccion ip del cliente
 			$direccion_ip = self::direccionIP();
 
-			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales,$direccion_ip);
+			$respuesta = ModeloReservas::nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales,$direccion_ip,$idAuto);
 
 			//$respuesta = "ok";
 			//Si hay disponibilidad

@@ -107,6 +107,23 @@ class ModeloReservas
 
 	}
 
+	//ASIGNAR AUTO GENERICO
+	static function asignarAutoGenerico($categoria){
+
+		$auto = array();
+		$link = Conexion::ConectarMysql();
+	    $query = "SELECT id FROM `autos` WHERE id_categoria = $categoria and marca like '%DEFAULT%'";
+	    $sql = mysqli_query($link,$query);
+
+	    while ($filas = mysqli_fetch_assoc($sql)) {
+	      $auto[]=$filas['id'];
+	    }
+	    return $auto;
+	    // Cerrar la conexión.
+	    mysqli_close( $link );
+
+	}
+
 	//Recibo la categoria y la fecha desde para buscar las tarifas cargadas
 	static function buscarTarifa($categoria,$fecha_desde){
 
@@ -360,7 +377,7 @@ class ModeloReservas
 	}
 
 	//Funcion para guardar una nueva reserva
-	static public function nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales=null,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales=null,$direccion_ip=null){
+	static public function nuevaReserva($categoria,$codigo,$nombre,$apellido,$fecha_desde,$fecha_hasta,$hora_desde,$hora_hasta,$tarifa,$total_dias,$estado,$origen,$tiene_adicionales=null,$telefono,$email,$retiro,$entrega,$vuelo,$observaciones,$adicionales=null,$direccion_ip=null,$idAuto=null){
 
 		$link = Conexion::ConectarMysql();
 
@@ -374,7 +391,7 @@ class ModeloReservas
 		//Desactivamos el autommit transaccional
 		mysqli_autocommit($link,FALSE);
 
-	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `adicionales`,`telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`,`start`, `end`, `color`, `direccion_ip`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen,$tiene_adicionales,'$telefono','$email',$retiro,$entrega,'$vuelo','$observaciones','$start_calendar','$end_calendar','#FF0000','$direccion_ip')";
+	    $query = "INSERT INTO `reservas`(`id_categoria`, `codigo`, `nombre`, `apellido`, `fecha_desde`, `fecha_hasta`, `hora_desde`, `hora_hasta`, `tarifa`, `total_dias`, `estado`, `origen`, `adicionales`,`telefono`, `email`, `retiro`, `entrega`, `nro_vuelo`, `observaciones`,`start`, `end`, `color`, `id_auto`, `direccion_ip`) VALUES ($categoria,'$codigo','$nombre','$apellido','$fecha_desde','$fecha_hasta','$hora_desde','$hora_hasta','$tarifa',$total_dias,$estado,$origen,$tiene_adicionales,'$telefono','$email',$retiro,$entrega,'$vuelo','$observaciones','$start_calendar','$end_calendar','#FF0000',$idAuto,'$direccion_ip')";
 
 	    $sql = mysqli_query($link,$query) or die (mysqli_error($link));
 

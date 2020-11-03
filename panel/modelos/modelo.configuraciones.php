@@ -306,7 +306,7 @@ class ModeloConfiguraciones{
 
     //el id puede venir vacio, asi retorno todas los autos
     if ($id == null) {
-      $query = "select distinct a.*,b.nombre from autos a,categorias b where a.id_categoria=b.id order by b.nombre asc";
+      $query = "select distinct a.*,b.nombre from autos a,categorias b where a.id_categoria=b.id and not a.id in(25,26,27,28,29,30) order by b.nombre asc";
       $sql = mysqli_query($link,$query);
       while ($filas = mysqli_fetch_array($sql)) {
         $autos[]=$filas;
