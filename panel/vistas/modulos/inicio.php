@@ -1,6 +1,6 @@
-<?php  
+<?php
 
-unset($_SESSION['codigo']);     
+unset($_SESSION['codigo']);
 unset($_SESSION['fecha_desde']);
 unset($_SESSION['fecha_hasta']);
 unset($_SESSION['hora_desde']);
@@ -44,7 +44,7 @@ $newConf = new ControladorConfiguraciones();
           <div class="inner">
             <h3><?php echo $total = $new->listarTotalReservas(); ?></h3>
 
-            <p>Reservas confirmadas 2019</p>
+            <p>Reservas confirmadas <?php echo date("Y"); ?></p>
           </div>
           <div class="icon">
             <i class="fa fa-list-ol" aria-hidden="true"></i>
@@ -182,9 +182,9 @@ $newConf = new ControladorConfiguraciones();
         <div class="small-box bg-aqua">
           <div class="inner">
             <h3><?php
-            $date = date('Y-m-d'); 
+            $date = date('Y-m-d');
             $query = " fecha_desde = '$date'";
-            echo $total = $new->listarTotalesReservasPanel($query); 
+            echo $total = $new->listarTotalesReservasPanel($query);
             ?></h3>
 
             <p>Autos que se retiran Hoy</p>
@@ -202,9 +202,9 @@ $newConf = new ControladorConfiguraciones();
           <div class="inner">
             <h3><?php
 
-            $date = date('Y-m-d'); 
+            $date = date('Y-m-d');
             $query = " fecha_desde = DATE_SUB('$date',INTERVAL -1 DAY)";
-            echo $total = $new->listarTotalesReservasPanel($query); 
+            echo $total = $new->listarTotalesReservasPanel($query);
 
              ?></h3>
 
@@ -218,16 +218,16 @@ $newConf = new ControladorConfiguraciones();
       </div>
       <!-- ./col -->
       <div class="col-lg-3 col-xs-6">
-        
+
 
         <!-- small box -->
         <div class="small-box bg-green">
           <div class="inner">
-            <h3><?php 
+            <h3><?php
 
-            $date = date('Y-m-d'); 
+            $date = date('Y-m-d');
             $query = " fecha_hasta = '$date'";
-            echo $total = $new->listarTotalesReservasPanel($query); 
+            echo $total = $new->listarTotalesReservasPanel($query);
 
             ?><sup style="font-size: 20px"></sup></h3>
             <p>Autos que devuelven Hoy</p>
@@ -244,11 +244,11 @@ $newConf = new ControladorConfiguraciones();
         <!-- small box -->
         <div class="small-box bg-red">
           <div class="inner">
-            <h3><?php 
+            <h3><?php
 
-            $date = date('Y-m-d'); 
+            $date = date('Y-m-d');
             $query = " fecha_hasta = DATE_SUB('$date',INTERVAL -1 DAY)";
-            echo $total = $new->listarTotalesReservasPanel($query); 
+            echo $total = $new->listarTotalesReservasPanel($query);
 
             ?></h3>
 
