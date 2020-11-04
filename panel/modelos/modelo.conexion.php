@@ -6,19 +6,20 @@ class Conexion{
 
     $host= $_SERVER["HTTP_HOST"];
 
-    switch ($host) {
-      case 'www.patagoniaaustralrentacar.com.ar':
-        $conn = mysqli_connect("localhost","u756079281_prod","cavaliere","u756079281_prod");
-        break;
-
-      case 'localhost'
-        $conn = mysqli_connect("localhost","root","","rentacar");
-        break;
-
-      default:
-        $conn = mysqli_connect("localhost","u756079281_prod","cavaliere","u756079281_prod");
-        break;
+    if (!$host=="localhost") {
+      $server = "localhost";
+      $user = "u756079281_prod";
+      $pass = "cavaliere";
+      $db = "u756079281_prod";
+    }else{
+      $server = "localhost";
+      $user = "root";
+      $pass = "";
+      $db = "rentacar";
     }
+
+
+    $conn = mysqli_connect($server,$user,$pass,$db);
 
     mysqli_query($conn,"SET NAMES 'utf8'");
     // Check connection
