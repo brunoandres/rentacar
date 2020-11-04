@@ -106,7 +106,8 @@ foreach($categorias_db as $cat)
                                         r.id_auto as fk_id_auto
                                         FROM reservas r
                                         INNER JOIN autos a on (r.id_auto = a.id)
-                                        WHERE a.id = '$id_auto'";
+                                        WHERE a.id = '$id_auto'
+                                        and r.fecha_desde >= '2020-11-01'";
 
                         $reservas_db = $db->query($qry_res);
 
