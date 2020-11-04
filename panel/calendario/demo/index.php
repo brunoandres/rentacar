@@ -3,7 +3,7 @@
 
 session_start();
 
-if (!isset($_SESSION["iniciarSesion"]) {
+if (!isset($_SESSION["iniciarSesion"])) {
 
     echo "<script>
     window.location='https://www.patagoniaaustralrentacar.com.ar/panel';
@@ -39,7 +39,7 @@ foreach($categorias_db as $cat)
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="chuck-durst">
 
-    <title>pit-scheduler</title>
+    <title>Calendario Patagonia Austral Rentacar</title>
 
     <link  rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link  rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css">
