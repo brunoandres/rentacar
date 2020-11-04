@@ -49,6 +49,10 @@ foreach($categorias_db as $cat)
 
 <body data-spy="scroll" data-target=".bs-sidebar" data-offset="50">
 
+  <div class="container">
+    <h1 class="display-1 text-center">Reservas Patagonia Austral Rentacar</h1>
+  </div>
+
 <div class="main-container container-fluid row">
     <div class="demo-container">
         <div id="pit-scheduler"></div>
