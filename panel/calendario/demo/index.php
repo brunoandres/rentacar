@@ -3,6 +3,14 @@
 
 session_start();
 
+if (!isset($_SESSION["iniciarSesion"]) {
+
+    echo "<script>
+    window.location='https://www.patagoniaaustralrentacar.com.ar/panel';
+    </script>";
+
+}
+
 
 require_once 'conexion.php';
 
@@ -23,7 +31,7 @@ foreach($categorias_db as $cat)
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
