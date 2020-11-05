@@ -6,7 +6,7 @@ class Conexion{
 
     $host= $_SERVER["HTTP_HOST"];
 
-    if (!$host=="localhost") {
+    if ($host=="www.patagoniaaustralrentacar.com.ar") {
       $server = "localhost";
       $user = "u756079281_prod";
       $pass = "cavaliere";
