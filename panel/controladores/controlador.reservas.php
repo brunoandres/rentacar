@@ -355,6 +355,7 @@ class ControladorReservas
 								Hora a entregar: $hora_desde hs. <br>
 								Hora a devolver: $hora_hasta hs. <br>
 								N° de Vuelo: $vuelo <br>
+								Tarifa Reserva: $ $tarifa <br>
 								Adicionales: <br>
 								$lista
 								<br>
