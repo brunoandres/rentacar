@@ -43,9 +43,8 @@ $editarReserva = $new->editarReserva();
                   <th>Desde</th>
                   <th>Hasta</th>
                   <th>Retira en</th>
-                  <th>Devuelve en</th>
+                  <th>Entrega en</th>
                   <th>Hora retiro</th>
-                  <th>Hora devolución</th>
                   <th>Nº Vuelo</th>
                   <th>Reserva</th>
                   <th>Adicionales</th>
@@ -76,7 +75,6 @@ $editarReserva = $new->editarReserva();
                 <td><?php echo $value['LUGAR_RETIRO'];?></td>
                 <td><?php echo $value['LUGAR_ENTREGA'];?></td>
                 <td><?php echo $value['HORA_DESDE'];?></td>
-                <td><?php echo $value['HORA_HASTA'];?></td>
                 <td><?php echo $value['NRO_DE_VUELO'];?></td>
                 <td><?php if ($value['ORIGEN_RESERVA']==1) {
                     echo "<span class='label label-success'>desde la web</span>";
