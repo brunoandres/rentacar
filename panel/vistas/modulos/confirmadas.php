@@ -63,8 +63,8 @@ $editarReserva = $new->editarReserva();
                   $adicionales = 'No tiene';
                 }
 
-                $hora_desde = strtotime($_POST["HORA_DESDE"]);
-                $hora_hasta = strtotime($_POST["HORA_HASTA"]);
+                $hora_desde = strtotime($value["HORA_DESDE"]);
+                $hora_hasta = strtotime($value["HORA_HASTA"]);
               ?>
 
               <tr>
