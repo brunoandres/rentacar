@@ -43,8 +43,7 @@ $editarReserva = $new->editarReserva();
                   <th>Desde</th>
                   <th>Hasta</th>
                   <th>Retira en</th>
-                  <th>Entrega en</th>
-                  <th>Hora retiro</th>
+                  <th>Devuelve en</th>
                   <th>Nº Vuelo</th>
                   <th>Reserva</th>
                   <th>Adicionales</th>
@@ -72,9 +71,8 @@ $editarReserva = $new->editarReserva();
                 <td><?php echo $value['CATEGORIA'];?></td>
                 <td><?php echo date("d/m/Y", strtotime($value['FECHA_DESDE']));?></td>
                 <td><?php echo date("d/m/Y", strtotime($value['FECHA_HASTA']));?></td>
-                <td><?php echo $value['LUGAR_RETIRO'];?></td>
-                <td><?php echo $value['LUGAR_ENTREGA'];?></td>
-                <td><?php echo $value['HORA_DESDE'];?></td>
+                <td><?php echo $value['LUGAR_RETIRO'].'::'.$value['HORA_DESDE'];?></td>
+                <td><?php echo $value['LUGAR_ENTREGA'].'::'.$value['HORA_HASTA'];?></td>
                 <td><?php echo $value['NRO_DE_VUELO'];?></td>
                 <td><?php if ($value['ORIGEN_RESERVA']==1) {
                     echo "<span class='label label-success'>desde la web</span>";
@@ -175,7 +173,7 @@ MODAL EDITAR RESERVA
 
           <h4 class="modal-title">Editar Reserva </h4>
 
-          
+
 
         </div>
 
