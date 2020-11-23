@@ -71,8 +71,8 @@ $editarReserva = $new->editarReserva();
                 <td><?php echo $value['CATEGORIA'];?></td>
                 <td><?php echo date("d/m/Y", strtotime($value['FECHA_DESDE']));?></td>
                 <td><?php echo date("d/m/Y", strtotime($value['FECHA_HASTA']));?></td>
-                <td><?php echo $value['LUGAR_RETIRO'].'::'.$value['HORA_DESDE'];?></td>
-                <td><?php echo $value['LUGAR_ENTREGA'].'::'.$value['HORA_HASTA'];?></td>
+                <td><?php echo $value['LUGAR_RETIRO'].' :: '.date("H:i", strtotime($value['HORA_DESDE']));.' Hs.';?></td>
+                <td><?php echo $value['LUGAR_ENTREGA'].' :: '.date("H:i", strtotime($value['HORA_HASTA']));.' Hs.';?></td>
                 <td><?php echo $value['NRO_DE_VUELO'];?></td>
                 <td><?php if ($value['ORIGEN_RESERVA']==1) {
                     echo "<span class='label label-success'>desde la web</span>";
