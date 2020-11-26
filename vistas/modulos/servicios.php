@@ -54,7 +54,7 @@
           </div>
           <div class="media-body">
             <h3 class="media-heading">Requisitos</h3>
-            <p>Licencia de conducir del país de origen en vigencia. Edad mínima de 25 años.</p>
+            <p>Licencia de conducir del país de origen en vigencia. Edad mínima de 21 años.</p>
           </div>
         </div>
       </div>
