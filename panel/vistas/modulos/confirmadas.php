@@ -100,18 +100,17 @@ $editarReserva = $new->editarReserva();
 
               </tbody>
               <tfoot>
-                  <th width="8%">N° RESERVA</th>
-                  <th>Nombre</th>
-                  <th>Categoria</th>
-                  <th>Desde</th>
-                  <th>Hasta</th>
-                  <th>Retira en</th>
-                  <th>Entrega en</th>
-                  <th>Hora retiro</th>
-                  <th>Nº Vuelo</th>
-                  <th>Reserva</th>
-                  <th>Adicionales</th>
-                  <th>Ver / Editar</th>
+                <th width="8%">N°</th>
+                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Desde</th>
+                <th>Hasta</th>
+                <th>Retiro</th>
+                <th>Devolución</th>
+                <th>Nº Vuelo</th>
+                <th>Reserva</th>
+                <th>Adicionales</th>
+                <th>Ver / Editar</th>
               </tfoot>
             </table>
           </div>
