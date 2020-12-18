@@ -184,7 +184,7 @@ class ControladorReservas
 					}
 
 					echo "<script>
-								toastr.warning('Para la fecha seleccionada', '".$nombre_categoria." no disponible', {timeOut: 8000})
+								toastr.warning('Para la fecha seleccionada', '".$nombre_categoria." no disponible ".($respuesta)."', {timeOut: 8000})
 							</script>";
 				}
 	  	  	}else{
