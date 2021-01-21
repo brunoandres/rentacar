@@ -148,6 +148,30 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 transform-on-hover">
+                    <a class="lightbox" href="vistas/images/flota/full/renegade.png">
+                        <img src="vistas/images/flota/recent/renegade.png" alt="Card Image" class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <h6><a href="#">Categoria G</a></h6>
+                        <p class="text-muted card-text">Jeep Renegade 4x2 Automático</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 transform-on-hover">
+                    <a class="lightbox" href="vistas/images/flota/full/nissan.png">
+                        <img src="vistas/images/flota/recent/nissan.png" alt="Card Image" class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <h6><a href="#">Categoria G</a></h6>
+                        <p class="text-muted card-text">Nissan Versa Automático</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
