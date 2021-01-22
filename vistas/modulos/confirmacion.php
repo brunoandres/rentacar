@@ -231,7 +231,7 @@ if (isset($_POST['checkout'])) {
               <ul><i class="fa fa-calendar" aria-hidden="true"></i> <strong>Fecha desde : </strong><?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde']));?> - <?php echo $_SESSION['hora_desde'].'hs'; ?> </ul>
               <ul><i class="fa fa-calendar" aria-hidden="true"></i> <strong>Fecha hasta : </strong><?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?> - <?php echo $_SESSION['hora_hasta'].'hs'; ?> </ul>
               <ul><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Lugar retiro : </strong><?php echo $lugar_retiro['nombre']; ?></ul>
-              <ul><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Lugar entrega : </strong><?php echo $lugar_entrega['nombre']; ?></ul>
+              <ul><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Lugar devolución : </strong><?php echo $lugar_entrega['nombre']; ?></ul>
 
             </div>
 
