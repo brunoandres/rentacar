@@ -11,8 +11,6 @@ $fecha1 = substr($tempVig,19);
 $proxTemp = implode(',',$tarifasProxTemp[0]);
 $fecha2 = substr($proxTemp,19);
 
-var_dump($tempVig);
-
 ?>
 <section id="portfolio">
   <div class="container">
@@ -21,7 +19,7 @@ var_dump($tempVig);
       <p class="lead">El Kilometraje es libre para la zona de El Bolsón, Villa La Angostura, 7 Lagos, y San Martín de los Andes.</p>
     </div>
     <div class="row">
-      <div class="col-lg-6">
+      <!--<div class="col-lg-6">
         <div class="center">
           <h3>Tarifa vigente hasta el <strong><?php echo $fecha1; ?></strong></h3>
 
@@ -51,8 +49,8 @@ var_dump($tempVig);
 
           </tbody>
         </table>
-      </div>
-      <div class="col-lg-6">
+      </div>-->
+      <div class="col-lg-12">
         <div class="center">
           <div class="center">
             <h3>Tarifa vigente desde el <strong>01/12/2020</strong> hasta el <strong><?php echo $fecha2; ?></strong></h3>
