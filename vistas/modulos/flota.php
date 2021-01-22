@@ -166,7 +166,7 @@
                         <img src="vistas/images/flota/recent/nissan.png" alt="Card Image" class="card-img-top">
                     </a>
                     <div class="card-body">
-                        <h6><a href="#">Categoria G</a></h6>
+                        <h6><a href="#">Categoria H</a></h6>
                         <p class="text-muted card-text">Nissan Versa Automático</p>
                         <p></p>
                     </div>
