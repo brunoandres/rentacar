@@ -74,7 +74,7 @@ $fecha2 = substr($proxTemp,19);
             ?>
             <tr>
               <td><?php echo $value['nombre']; ?></td>
-              <td><?php echo '$ '.$value['por_dia']; ?></td>
+              <td><?php echo '$ '.number_format($value['por_dia'],2); ?></td>
               <td><?php echo 'Libre' ?></td>
             </tr>
 
