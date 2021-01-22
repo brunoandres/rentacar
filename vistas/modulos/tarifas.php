@@ -11,6 +11,8 @@ $fecha1 = substr($tempVig,19);
 $proxTemp = implode(',',$tarifasProxTemp[0]);
 $fecha2 = substr($proxTemp,19);
 
+var_dump($tempVig);
+
 ?>
 <section id="portfolio">
   <div class="container">
