@@ -362,8 +362,7 @@ class ControladorReservas
 								<br>
 								Observaciones: $observaciones";
 
-		//mail("reservas@patagoniaaustralrentacar.com.ar,patagoniaaustralrentacar@gmail.com",$asunto,$contenido,$header);
-		mail("brunoandres2013@gmail.com",$asunto,$contenido,$header);
+		mail("reservas@patagoniaaustralrentacar.com.ar,patagoniaaustralrentacar@gmail.com",$asunto,$contenido,$header);
 		//var_dump($contenido);
 		//CORREO ELECTRONICO PARA EL CLIENTE
 		$header_cliente .= "From: SITIO - Reservas Patagonia Austral <patagoniaaustralrentacar@gmail.com> \r\n";
@@ -426,7 +425,7 @@ class ControladorReservas
     	<p>
 
 			*CATEGORÍA A, B, C, D y G: Kms libre para recorrer la zona de Bariloche,  Villa la Angostura,  San Martin y  el Bolsón.
-Seguro todo riesgo con franquicia de $80.000 por accidente y $160.000 por vuelco o destrucción. ($40.000 Seguro Premium).<br>
+Seguro todo riesgo con franquicia de $80.000 por accidente y $160.000 por vuelco o destrucción.($40.000 Seguro Premium).<br>
 *Categoría E, F y H Kms libre para recorrer la zona de Bariloche,  Villa la Angostura,  San Martin y  el Bolsón. Seguro todo riesgo con franquicia de $120.000 pesos por accidente y $400.000 pesos por vuelco o destrucción. ($60.000 Seguro Premium).
 Pago en efectivo o transferencia bancaria al momento de la entrega.<br>
 Para señar se solicita un 50% del total del alquiler por transferencia.
@@ -439,8 +438,7 @@ Para señar se solicita un 50% del total del alquiler por transferencia.
 
 			</p>";
 	    //echo($contenido_cliente);
-		//mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);
-		mail("brunoandres2013@gmail.com",$asunto_cliente,$contenido_cliente,$header_cliente);
+		mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);
 
 	}
 
