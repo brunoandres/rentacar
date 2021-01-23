@@ -300,7 +300,8 @@ class ControladorReservas
       		$adicionales_tarifa = $buscarAdicionales['tarifa'];
 
       		//Inserto en mi array para luego recorrer y separar
-      		array_push($adicionales_email, $adicionales_nombre.' $'.$adicionales_tarifa);
+      		//array_push($adicionales_email, $adicionales_nombre.' $'.$adicionales_tarifa);
+					array_push($adicionales_email, $adicionales_nombre);
 
   			}
 		}else{
@@ -423,9 +424,9 @@ class ControladorReservas
 		<h3>Franquicia</h3>
     	<p>
 
-			*CATEGORÍA A, B y C: Km libre para recorrer la zona de Bariloche,  Villa la Angostura,  San Martin y  el Bolson.
-Seguro todo riesgo con franquicia de $40.000 por accidente y $80.000 por vuelco.<br>
-*Categoría D ,E y F Km libre para recorrer la zona de Bariloche,  Villa la Angostura,  San Martin y  el Bolson. Seguro todo riesgo con franquicia de $80.000 pesos por accidente y $120.000 pesos por vuelco.
+			*CATEGORÍA A, B, C, D y G: Kms libre para recorrer la zona de Bariloche,  Villa la Angostura,  San Martin y  el Bolsón.
+Seguro todo riesgo con franquicia de $80.000 por accidente y $160.000 por vuelco o destrucción. ($40.000 Seguro Premium).<br>
+*Categoría E, F y H Kms libre para recorrer la zona de Bariloche,  Villa la Angostura,  San Martin y  el Bolsón. Seguro todo riesgo con franquicia de $120.000 pesos por accidente y $400.000 pesos por vuelco o destrucción. ($60.000 Seguro Premium).
 Pago en efectivo o transferencia bancaria al momento de la entrega.<br>
 Para señar se solicita un 50% del total del alquiler por transferencia.
 

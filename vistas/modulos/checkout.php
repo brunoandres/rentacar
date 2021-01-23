@@ -202,8 +202,16 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
             </div>
             <p class="text-justify">Los adicionales están sujetos a disponibilidad.</p>
               <select class="form-control select2" multiple="multiple" id="adicionales" name="adicionales[]" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
-                <?php foreach ($adicionales as $adicional) {?>
-                  <option value="<?php echo $adicional['id']; ?>"><?php echo $adicional['nombre'].' $ '.$adicional['tarifa']; ?></option>
+                <?php foreach ($adicionales as $adicional) {
+
+                  if ($adicional['nombre'] == "SEGURO PREMIUM") {
+                    $tarifa2 = $adicional['tarifa2'];
+                  }else{
+                    $tarifa2 = "";
+                  }
+
+                  ?>
+                  <option value="<?php echo $adicional['id']; ?>"><?php echo $adicional['nombre'].' $ '.$adicional['tarifa'].' - $ '.$tarifa2; ?></option>
                 <?php } ?>
               </select>
             <!--
@@ -294,11 +302,19 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
         <strong>* Horarios : </strong>
         <p>El horario de devolución del vehículo deberá ser el mismo definido en la reserva, de lo contrario se cobrará el adicional como un día más de alquiler.
         <strong>Consulte!</strong></p>
-        <strong>* Adicionales</strong>
-        <p>Todos los adicionales añaden un costo al total de la reserva, en caso de rotura ó robo de los mismos, se deberan abonar con los siguientes valores.</p>
+        <strong>* Adicionales :</strong>
+        <p>Todos los adicionales añaden un costo al total de la reserva, su valor es diario, en caso de rotura ó robo de los mismos, se deberan abonar. A continuación sus valores diarios.</p>
         <ul>
-          <?php foreach ($adicionales_modal as $ad) { ?>
-          <li><?php echo $ad['nombre']; ?> : <?php echo '$'.$ad['tarifa']; ?></li>
+          <?php foreach ($adicionales_modal as $ad) {
+
+            if ($ad['nombre'] == "SEGURO PREMIUM") {
+              $tarifa2 = " - $ ".$ad['tarifa2'];
+            }else{
+              $tarifa2 = "";
+            }
+
+            ?>
+          <li><?php echo $ad['nombre']; ?> : <?php echo '$'.number_format($ad['tarifa'],2, ",", ".").' '.$tarifa2;; ?></li>
           <?php } ?>
         </ul>
         <p>* Todos los vehículos cuentan con cubiertas de hielo y nieve.</p>

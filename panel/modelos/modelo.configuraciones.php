@@ -177,6 +177,8 @@ class ModeloConfiguraciones{
       while ($filas = mysqli_fetch_array($sql)) {
           $tarifa_adicional['nombre']=$filas['nombre'];
           $tarifa_adicional['tarifa']=$filas['tarifa'];
+          $tarifa_adicional['tarifa2']=$filas['tarifa2'];
+          $tarifa_adicional['tarifa_diaria']=$filas['tarifa_diaria'];
       }
 
       return $tarifa_adicional;
@@ -485,10 +487,10 @@ class ModeloConfiguraciones{
     mysqli_close( $link );
 	}
 
-  static public function guardarAdicional($nombre,$tarifa,$activo,$observaciones){
+  static public function guardarAdicional($nombre,$tarifa,$tarifa2,$activo,$tarifa_diaria,$observaciones){
 
     $link = Conexion::ConectarMysql();
-    $query = "INSERT INTO `adicionales`(`nombre`, `tarifa`, `habilitado`, `observaciones`) VALUES ('$nombre','$tarifa',$activo,'$observaciones')";
+    $query = "INSERT INTO `adicionales`(`nombre`, `tarifa`,`tarifa2`, `habilitado`,`tarifa_diaria`, `observaciones`) VALUES ('$nombre','$tarifa','$tarifa2',$activo,$tarifa_diaria,'$observaciones')";
     $sql = mysqli_query($link,$query) or die (mysqli_error($link));
     if ($sql) {
       auditar($_SESSION["id_user"],$query);
@@ -551,10 +553,10 @@ class ModeloConfiguraciones{
     mysqli_close($link);
   }
 
-  static function editarAdicional($nombre,$tarifa,$activo,$observaciones,$id){
+  static function editarAdicional($nombre,$tarifa,$tarifa2,$activo,$tarifa_diaria,$observaciones,$id){
 
 		$link = Conexion::ConectarMysql();
-		$query = "UPDATE `adicionales` SET `nombre`='$nombre',`tarifa`='$tarifa',`habilitado`=$activo, `observaciones`='$observaciones' WHERE id = $id";
+		$query = "UPDATE `adicionales` SET `nombre`='$nombre',`tarifa`='$tarifa',`tarifa2`='$tarifa2',`habilitado`=$activo,`tarifa_diaria`=$tarifa_diaria, `observaciones`='$observaciones' WHERE id = $id";
 		$sql = mysqli_query($link,$query);
 		if ($sql) {
       auditar($_SESSION["id_user"],$query);

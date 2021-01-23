@@ -46,7 +46,9 @@ if (isset($_SESSION['adicional_ok'])) {
               <thead>
               <tr>
                 <th align="center">Nombre</th>
-                <th align="center">Tarifa</th>
+                <th align="center">Tarifa 1</th>
+                <th align="center">Tarifa 2</th>
+                <th align="center">Valor diario</th>
                 <th align="center">Estado</th>
                 <th align="center">Observaciones</th>
                 <th align="center"><i class="fa fa-gears"></i></th>
@@ -63,6 +65,12 @@ if (isset($_SESSION['adicional_ok'])) {
               <tr>
                 <td><?php echo $adicional['nombre'];?></td>
                 <td><?php echo '$ '.$adicional['tarifa'];?></td>
+                <td><?php echo '$ '.$adicional['tarifa2'];?></td>
+                <td><?php if ($adicional["tarifa_diaria"] == 1) {
+                  echo "<span class='label label-success'>Si</span>";
+                }else{
+                  echo "<span class='label label-danger'>No</span>";
+                } ?></td>
                 <td><?php if ($adicional['habilitado']==1) {
                   echo "<span class='label label-success'>Habilitado</span>";
                 }else{
@@ -86,6 +94,8 @@ if (isset($_SESSION['adicional_ok'])) {
                 <tr>
                   <th align="center">Nombre</th>
                   <th align="center">Tarifa</th>
+                  <th align="center">Tarifa 2</th>
+                  <th align="center">Valor diario</th>
                   <th align="center">Estado</th>
                   <th align="center">Observaciones</th>
                   <th align="center"><i class="fa fa-gears"></i></th>
@@ -151,16 +161,27 @@ MODAL EDITAR ADICIONAL
               </div>
             </div>
             <div class="form-group">
-              <label>Tarifa</label>
+              <label>Tarifa 1</label>
               <div class="input-group">
-                
+
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                <input type="number" class="form-control" id="tarifaAdicional" name="tarifaAdicional" step="0.01" autocomplete="off" placeholder="Tarifa de adicional" required>
+                <input type="text" class="form-control" id="tarifaAdicional" name="tarifaAdicional" autocomplete="off" placeholder="Tarifa de adicional 1" required>
 
               </div>
             </div>
-            
+
+            <div class="form-group">
+              <label>Tarifa 2</label>
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                <input type="number" class="form-control" id="tarifaAdicional2" name="tarifaAdicional2" step="0.01" autocomplete="off" placeholder="Tarifa de adicional 2">
+
+              </div>
+            </div>
+
             <div class="form-group">
               <label>Observaciones</label>
               <textarea class="form-control" rows="3" name="observaciones" id="observaciones" placeholder="Ingrese alguna observación adicional..."></textarea>
@@ -173,6 +194,13 @@ MODAL EDITAR ADICIONAL
                   ¿Adicional habilitado?
                 </label>
               </div>
+            </div>
+
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="1" name="activaDiario" id="activaDiario">
+                ¿Tarifa diaria?
+              </label>
             </div>
 
 

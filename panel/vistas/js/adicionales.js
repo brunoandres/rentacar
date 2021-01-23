@@ -19,12 +19,22 @@ $(".tablas").on("click", ".btnEditarAdicional", function(){
      	success: function(respuesta){
 
         if (respuesta['habilitado']==1) {
-			$("#activaAdicional").prop("checked",true);
-		}
- 		$("#nombreAdicional").val(respuesta["nombre"]);
-		$("#tarifaAdicional").val(respuesta["tarifa"]);
-		$("#observaciones").val(respuesta["observaciones"]);
- 		$("#idAdicional").val(respuesta["id"]);
+					$("#activaAdicional").prop("checked",true);
+				}
+
+				if (respuesta['tarifa_diaria']==1) {
+						$("#activaDiario").prop("checked",true);
+				}
+
+				if(respuesta['nombre'] == "SEGURO PREMIUM"){
+						$("#nombreAdicional").prop("readonly",true);
+				}
+				
+		 		$("#nombreAdicional").val(respuesta["nombre"]);
+				$("#tarifaAdicional").val(respuesta["tarifa"]);
+				$("#tarifaAdicional2").val(respuesta["tarifa2"]);
+				$("#observaciones").val(respuesta["observaciones"]);
+		 		$("#idAdicional").val(respuesta["id"]);
 
      	}
 

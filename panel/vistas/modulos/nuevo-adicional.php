@@ -36,19 +36,30 @@ $new->nuevoAdicional();
                 <input type="text" class="form-control" id="nombre" name="nombre_adicional" placeholder="Ingrese el nombre..." autocomplete="off" required>
               </div>
               <div class="form-group">
-                <label for="categoria">Tarifa</label>
+                <label for="categoria">Tarifa 1</label>
                 <input type="number" class="form-control" id="tarifa" name="tarifa" step="0.01" autocomplete="off" placeholder="Ingrese la tarifa..." required>
+              </div>
+              <div class="form-group">
+                <label for="categoria">Tarifa 2</label>
+                <input type="number" class="form-control" id="tarifa" name="tarifa2" step="0.01" autocomplete="off" placeholder="Ingrese la tarifa extra...">
               </div>
 
               <div class="form-group">
                 <label>Observaciones</label>
                 <textarea class="form-control" rows="3" name="observaciones" placeholder="Ingrese alguna observación adicional..."></textarea>
               </div>
-              
+
               <div class="checkbox">
                 <label>
                   <input type="checkbox" value="1" name="check" class="flat-red" checked>
                   ¿Adicional habilitado?
+                </label>
+              </div>
+
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="1" name="checkDiario" class="flat-red" checked>
+                  ¿Tarifa diaria?
                 </label>
               </div>
             </div>

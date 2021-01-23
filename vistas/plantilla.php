@@ -44,13 +44,13 @@
     <link rel="stylesheet" href="panel/vistas/bower_components/select2/dist/css/select2.min.css">
     <!-- Link archivo animacion -->
      <link rel="stylesheet" href="vistas/css/animate.css">
-    
+
     <!-- Links para Galeria en Flota -->
     <link rel="stylesheet" href="vistas/css/baguetteBox.min.css"/>
     <link rel="stylesheet" href="vistas/css/cards-gallery.css">
 
     <!-- ALERTAS -->
-    
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="vistas/js/jquery.js"></script>
@@ -183,7 +183,7 @@
 
           $(".filter-button").click(function(){
               var value = $(this).attr('data-filter');
-              
+
               if(value == "all")
               {
                   //$('.filter').removeClass('hidden');
@@ -195,10 +195,10 @@
       //            $(".filter").not('.filter[filter-item="'+value+'"]').addClass('hidden');
                   $(".filter").not('.'+value).hide('3000');
                   $('.filter').filter('.'+value).show('3000');
-                  
+
               }
           });
-          
+
           if ($(".filter-button").removeClass("active")) {
       $(this).removeClass("active");
       }
@@ -216,7 +216,7 @@
         baguetteBox.run('.cards-gallery', { animation: 'slideIn'});
     </script>
     <script>
-    var IDLE_TIMEOUT = 300; //seconds
+    var IDLE_TIMEOUT = 600; //seconds
     var _idleSecondsCounter = 0;
     document.onclick = function() {
       _idleSecondsCounter = 0;
@@ -260,7 +260,7 @@
       var email = $("#email").val();
       var asunto = $("#asunto").val();
       var mensaje = $("#mensaje").val();
-      
+
       $.ajax({
 
         type:"POST",

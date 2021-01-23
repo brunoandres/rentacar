@@ -24,16 +24,16 @@ if (isset($_POST['checkout'])) {
   $_SESSION['hora_desde'] = $_POST['hora_desde'];
   $_SESSION['hora_hasta'] = $_POST['hora_hasta'];
   //$_SESSION['patente'] = $_POST['patente'];
-  
+
   if (empty($_POST['adicionales'])) {
     $_SESSION['adicionales']='';
   }else{
     $_SESSION['adicionales'] = $_POST['adicionales'];
-  } 
+  }
   ///////////**Controlador configuraciones**///////
   $ctrConfiguraciones = new ControladorConfiguraciones();
   ///////////**Controlador reservas**//////////////
-  
+
 
   //Cargo mi arreglo de tarifa según la categoria
   $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_desde']);
@@ -76,7 +76,7 @@ if (isset($_POST['checkout'])) {
       $cantidadPromociones = (($_SESSION['total_dias']-$diasSinPromo)/$promo);
       //Precio de la promocion
       $precio_promo = ($tarifa_semanal*$cantidadPromociones);
-      //Precio por dia 
+      //Precio por dia
       $precio_diario = ($tarifa_diaria*$diasSinPromo);
       //Total reserva
       $total = ($precio_diario+$precio_promo);
@@ -129,52 +129,108 @@ if (isset($_POST['checkout'])) {
       <!-- info row -->
       <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
-          
+          <?php
+          $nombreCategoria = ControladorCategorias::listarCategorias($_POST["id_categoria"]);
+
+          ?>
           <address>
             <strong>Nombre :</strong> <?php echo $_POST['nombre'].' '.$_POST['apellido']; ?><br>
+            <strong>Categoria :</strong> <?php echo $nombreCategoria[0]["nombre"];  ?><br>
             <strong>Fecha Desde :</strong> <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde']));?><br>
             <strong>Fecha Hasta :</strong> <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta']));?><br>
             <strong>Hora Retiro : <?php echo $_SESSION['hora_desde']; ?>hs.</strong><br>
             <strong>Hora Devolución : <?php echo $_SESSION['hora_hasta']; ?>hs.</strong><br>
             <strong>Teléfono :</strong> <?php echo $_POST['telefono']; ?><br>
-            <strong>Email :</strong> <?php echo $_POST['email']; ?>
-          </address>
+            <strong>Email :</strong> <?php echo $_POST['email']; ?><br>
+            <strong>Adicionales :</strong>
         </div>
-        <?php 
-        if (!$_SESSION['adicionales']=='') {
-          echo "Adicionales <br>";
-          foreach ($_SESSION['adicionales'] as $key => $value) {
-            $nombre = $ctrConfiguraciones->tarifaAdicional($value);
-            echo "<li>".$nombre['nombre']."</li>";
-          }
-        }
-         
-        ?>
+
       </div>
       <!-- /.row -->
-      <?php  
+      <?php
           $tarifa_ad = 0;
-            
+
             if (!empty($_SESSION['adicionales'])) {
-            
-            
-            
+
               foreach ($_SESSION['adicionales'] as $adicional => $value) {
 
                 $tarifa_adicional = $ctrConfiguraciones->tarifaAdicional($value);
-                
-                $tarifa_ad+=$tarifa_adicional['tarifa'];
-                //var_dump($tarifa_adicional);
-              
-             }}
+
+                //VERIFICAMOS SI EL ADICIONAL ES DEL SEGURO PREMIUM
+                if ($tarifa_adicional["nombre"] == "SEGURO PREMIUM") {
+
+                  //ARRAY DE MIS CATEGORIAS PARA EL SEGURO BÁSICO
+                  $seguroBasico = array(1,2,3,4);
+
+                  //VERIFICAMOS SI LA CATEGORIA SELECCIONADA ESTÁ DENTRO DEL ARRAY
+                  if (in_array($_POST["id_categoria"],$seguroBasico)) {
+
+                    //VERIFICAMOS SI EL VALOR DEL ADICIONAL ES DIARIO
+                    if ($tarifa_adicional["tarifa_diaria"] == 1) {
+                      $total_adicionales = $_SESSION['total_dias']*$tarifa_adicional['tarifa'];
+                      $detalle = "Valor diario";
+                    }else{
+                      $total_adicionales = $tarifa_adicional['tarifa'];
+
+                      $detalle = "Valor";
+                    }
+                    $tarifaIndividual = $tarifa_adicional["tarifa"];
+                  }else{
+
+                    //VERIFICAMOS SI EL VALOR DEL ADICIONAL ES DIARIO
+                    if ($tarifa_adicional["tarifa_diaria"] == 1) {
+                      $total_adicionales = $_SESSION['total_dias']*$tarifa_adicional['tarifa2'];
+                      $detalle = "Valor diario";
+                    }else{
+                      $total_adicionales = $tarifa_adicional['tarifa2'];
+                      $detalle = "Valor";
+                    }
+                    $tarifaIndividual = $tarifa_adicional["tarifa2"];
+
+                  }
+
+                //SI EL ADICIONAL NO ES EL SEGURO PREMIUM
+                }else{
+
+                  //VERIFICAMOS SI EL VALOR DEL ADICIONAL ES DIARIO
+                  if ($tarifa_adicional["tarifa_diaria"] == 1) {
+
+                    $total_adicionales = $_SESSION['total_dias']*$tarifa_adicional['tarifa'];
+                    $detalle = "Valor diario";
+
+                  }else{
+
+                    $total_adicionales = $tarifa_adicional['tarifa'];
+                    $detalle = "Valor";
+                  }
+                  $tarifaIndividual = $tarifa_adicional["tarifa"];
+                }
+
+                $tarifa_ad+=$total_adicionales;
+
+                $nombre = $ctrConfiguraciones->tarifaAdicional($value);
+                echo "<li>".$nombre['nombre'].' $ '.number_format($total_adicionales, 2, ",", ".")."</li>";
+
+
+             }
+
+
+             echo "<br>TARIFA RESERVA $ ".'<span>'.number_format($total, 2, ",", ".").'</span><br>';
+             echo "TOTAL ADICIONALES $ ".'<span>'.number_format($tarifa_ad, 2, ",", ".").'</span>';
+
+           }
            ?>
 
+
            <li class="list-group-item d-flex justify-content-between">
+
             <span>Total a Pagar (ARG)</span>
             <strong>$
               <?php $total_pesos = $total+$tarifa_ad; echo number_format($total_pesos, 0, ",", "."); ?>
-  
+
+
             </strong>
+
           </li>
 
       <!-- this row will not appear when printing -->
@@ -200,7 +256,7 @@ if (isset($_POST['checkout'])) {
             <input type="hidden" name="origen_reserva" value="0">
             <button type="submit" name="confirmaReserva" class="btn btn-success pull-right"><i class="fa fa-ok"></i> Confirmar Reserva
           </button>
-          </form>       
+          </form>
         </div>
       </div>
     </section>
@@ -209,9 +265,7 @@ if (isset($_POST['checkout'])) {
   </div>
   <!-- /.content-wrapper -->
 
-<?php } 
+<?php }
 //Metodo para guardar nueva reserva
 $nuevaReserva = $ctrReservas->nuevaReservaInsert('panel');
 ?>
-
-

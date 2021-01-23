@@ -119,7 +119,7 @@ if (isset($_POST['checkout'])) {
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0">Categoria elegida</h6>
-              <small class="text-muted">Valor diario : $<?php echo number_format($tarifa[0],2, ",", "."); ?></small>
+              <small class="text-muted">Valor diario : $<?php echo $tarifa[0]; ?></small>
             </div>
             <span class="text-success"><strong><?php echo $categoria_seleccionada[1]; ?></strong></span>
           </li>
@@ -138,7 +138,7 @@ if (isset($_POST['checkout'])) {
 
               <small class="text-muted">Por días selecionados normales</small>
             </div>
-            <span class="text-success"><strong>$<?php echo $total_por_dias = number_format($tarifa[0]*$_SESSION['total_dias'], 2, ",", "."); ?></strong></span>
+            <span class="text-success"><strong>$<?php echo $total_por_dias = number_format($tarifa[0]*$_SESSION['total_dias'], 0, ",", "."); ?></strong></span>
           </li>
 
           <?php if ($tarifa[2]==1 && $cantidadPromociones>=1): ?>
@@ -147,7 +147,7 @@ if (isset($_POST['checkout'])) {
                 <h6 class="my-0">Promociones</h6>
                 <small class="text-muted">Por <?php echo $cantidadPromociones; ?> promocion/es de <?php echo intval($promo); ?> dias.</small>
               </div>
-              <span class="text-success"><strong>$ <?php echo number_format($precio_promo, 2, ",", "."); ?></strong>
+              <span class="text-success"><strong>$ <?php echo number_format($precio_promo, 0, ",", "."); ?></strong>
 
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -155,7 +155,7 @@ if (isset($_POST['checkout'])) {
                 <h6 class="my-0">+ <?php echo $diasSinPromo; ?> dia/s</h6>
                 <small class="text-muted">sin promociones</small>
               </div>
-              <span class="text-success"><strong>$ <?php echo number_format($tarifa[0]*$diasSinPromo, 2, ",", "."); ?></strong>
+              <span class="text-success"><strong>$ <?php echo number_format($tarifa[0]*$diasSinPromo, 0, ",", "."); ?></strong>
 
             </li>
           <?php endif ?>
@@ -165,63 +165,13 @@ if (isset($_POST['checkout'])) {
 
             if (!empty($_SESSION['adicionales'])) {
 
-            $tarifaIndividual = 0;
+
 
             foreach ($_SESSION['adicionales'] as $adicional => $value) {
 
               $tarifa_adicional = $ctrConfiguraciones->tarifaAdicional($value);
 
-              //VERIFICAMOS SI EL ADICIONAL ES DEL SEGURO PREMIUM
-              if ($tarifa_adicional["nombre"] == "SEGURO PREMIUM") {
-
-                //ARRAY DE MIS CATEGORIAS PARA EL SEGURO BÁSICO
-                $seguroBasico = array(1,2,3,4,7);
-
-                //VERIFICAMOS SI LA CATEGORIA SELECCIONADA ESTÁ DENTRO DEL ARRAY
-                if (in_array($_POST["id_categoria"],$seguroBasico)) {
-
-                  //VERIFICAMOS SI EL VALOR DEL ADICIONAL ES DIARIO
-                  if ($tarifa_adicional["tarifa_diaria"] == 1) {
-                    $total_adicionales = $_SESSION['total_dias']*$tarifa_adicional['tarifa'];
-                    $detalle = "Valor diario";
-                  }else{
-                    $total_adicionales = $tarifa_adicional['tarifa'];
-
-                    $detalle = "Valor";
-                  }
-                  $tarifaIndividual = $tarifa_adicional["tarifa"];
-                }else{
-
-                  //VERIFICAMOS SI EL VALOR DEL ADICIONAL ES DIARIO
-                  if ($tarifa_adicional["tarifa_diaria"] == 1) {
-                    $total_adicionales = $_SESSION['total_dias']*$tarifa_adicional['tarifa2'];
-                    $detalle = "Valor diario";
-                  }else{
-                    $total_adicionales = $tarifa_adicional['tarifa2'];
-                    $detalle = "Valor";
-                  }
-                  $tarifaIndividual = $tarifa_adicional["tarifa2"];
-
-                }
-
-              //SI EL ADICIONAL NO ES EL SEGURO PREMIUM
-              }else{
-
-                //VERIFICAMOS SI EL VALOR DEL ADICIONAL ES DIARIO
-                if ($tarifa_adicional["tarifa_diaria"] == 1) {
-
-                  $total_adicionales = $_SESSION['total_dias']*$tarifa_adicional['tarifa'];
-                  $detalle = "Valor diario";
-
-                }else{
-
-                  $total_adicionales = $tarifa_adicional['tarifa'];
-                  $detalle = "Valor";
-                }
-                $tarifaIndividual = $tarifa_adicional["tarifa"];
-              }
-
-              $tarifa_ad+=$total_adicionales;
+              $tarifa_ad+=$tarifa_adicional['tarifa'];
 
 
 
@@ -229,10 +179,9 @@ if (isset($_POST['checkout'])) {
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0"><?php echo $tarifa_adicional['nombre']; ?>  </h6>
-              <small class="text-muted">Adicional seleccionado</small><br>
-              <small class="text-muted"><?php echo $detalle; ?> : $<?php echo number_format($tarifaIndividual,2, ",", "."); ?></small>
+              <small class="text-muted">Adicional seleccionado</small>
             </div>
-            <span class="text-success"><strong>+ $<?php echo number_format($total_adicionales, 2, ",", "."); ?></strong></span>
+            <span class="text-success"><strong>+ $<?php echo number_format($tarifa_adicional['tarifa'], 2, ",", "."); ?></strong></span>
           </li>
 
 

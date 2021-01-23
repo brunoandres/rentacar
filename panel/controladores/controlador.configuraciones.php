@@ -594,6 +594,7 @@ class ControladorConfiguraciones{
 
       $nombre = $_POST['nombre_adicional'];
       $tarifa = $_POST['tarifa'];
+			$tarifa = $_POST['tarifa2'];
       $observaciones = $_POST['observaciones'];
       if (empty($_POST['check'])) {
         $adicional_activo = 0;
@@ -601,7 +602,13 @@ class ControladorConfiguraciones{
         $adicional_activo = 1;
       }
 
-      $respuesta = ModeloConfiguraciones::guardarAdicional($nombre,$tarifa,$adicional_activo,$observaciones);
+			if (empty($_POST['checkDiario'])) {
+        $activa_diario = 0;
+      }else{
+        $activa_diario = 1;
+      }
+
+      $respuesta = ModeloConfiguraciones::guardarAdicional($nombre,$tarifa,$tarifa2,$adicional_activo,$activa_diario,$observaciones);
 
       if ($respuesta=="ok") {
         $_SESSION['adicional_ok'] = true;
@@ -635,6 +642,7 @@ class ControladorConfiguraciones{
 
 				$nombre = $_POST['nombreAdicional'];
         		$tarifa = $_POST['tarifaAdicional'];
+						$tarifa2 = $_POST['tarifaAdicional2'];
         		$observaciones = $_POST['observaciones'];
 				if (empty($_POST['activaAdicional'])) {
 					$adicional_activo = 0;
@@ -642,9 +650,15 @@ class ControladorConfiguraciones{
 					$adicional_activo = 1;
 				}
 
+				if (empty($_POST['activaDiario'])) {
+					$activa_diario = 0;
+				}else{
+					$activa_diario = 1;
+				}
+
 				$id     = $_POST['idAdicional'];
 
-				$respuesta = ModeloConfiguraciones::editarAdicional($nombre,$tarifa,$adicional_activo,$observaciones,$id);
+				$respuesta = ModeloConfiguraciones::editarAdicional($nombre,$tarifa,$tarifa2,$adicional_activo,$activa_diario,$observaciones,$id);
 
 				if($respuesta == "ok"){
 
