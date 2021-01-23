@@ -594,7 +594,7 @@ class ControladorConfiguraciones{
 
       $nombre = $_POST['nombre_adicional'];
       $tarifa = $_POST['tarifa'];
-			$tarifa = $_POST['tarifa2'];
+			$tarifa2 = $_POST['tarifa2'];
       $observaciones = $_POST['observaciones'];
       if (empty($_POST['check'])) {
         $adicional_activo = 0;
