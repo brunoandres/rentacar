@@ -261,6 +261,8 @@ class ModeloConfiguraciones{
     while ($filas = mysqli_fetch_array($sql)) {
       $adicionales['adicional']=$filas['nombre'];
       $adicionales['tarifa']=$filas['tarifa'];
+      $adicionales['tarifa2']=$filas['tarifa2'];
+      $adicionales['tarifa_diaria']=$filas['tarifa_diaria'];
     }
     return $adicionales;
 

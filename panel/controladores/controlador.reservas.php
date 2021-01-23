@@ -298,10 +298,61 @@ class ControladorReservas
 
       		$adicionales_nombre = $buscarAdicionales['adicional'];
       		$adicionales_tarifa = $buscarAdicionales['tarifa'];
+					$adicionales_tarifa2 = $buscarAdicionales['tarifa2'];
+
+					//VERIFICAMOS SI EL ADICIONAL ES DEL SEGURO PREMIUM
+					if ($buscarAdicionales["adicional"] == "SEGURO PREMIUM") {
+
+						//ARRAY DE MIS CATEGORIAS PARA EL SEGURO BÁSICO
+						$seguroBasico = array(1,2,3,4,7);
+
+						//VERIFICAMOS SI LA CATEGORIA SELECCIONADA ESTÁ DENTRO DEL ARRAY
+						if (in_array($categoria,$seguroBasico)) {
+
+							//VERIFICAMOS SI EL VALOR DEL ADICIONAL ES DIARIO
+							if ($buscarAdicionales["tarifa_diaria"] == 1) {
+								$total_adicionales = $total_dias*$adicionales_tarifa;
+
+							}else{
+								$total_adicionales = $adicionales_tarifa;
+
+
+							}
+							$tarifaIndividual = $adicionales_tarifa;
+						}else{
+
+							//VERIFICAMOS SI EL VALOR DEL ADICIONAL ES DIARIO
+							if ($buscarAdicionales["tarifa_diaria"] == 1) {
+								$total_adicionales = $total_dias*$adicionales_tarifa2;
+
+							}else{
+								$total_adicionales = $adicionales_tarifa2;
+
+							}
+							$tarifaIndividual = $adicionales_tarifa2;
+
+						}
+
+					//SI EL ADICIONAL NO ES EL SEGURO PREMIUM
+					}else{
+
+						//VERIFICAMOS SI EL VALOR DEL ADICIONAL ES DIARIO
+						if ($buscarAdicionales["tarifa_diaria"] == 1) {
+
+							$total_adicionales = $total_dias*$adicionales_tarifa;
+
+
+						}else{
+
+							$total_adicionales = $adicionales_tarifa;
+
+						}
+						$tarifaIndividual = $adicionales_tarifa;
+					}
 
       		//Inserto en mi array para luego recorrer y separar
-      		//array_push($adicionales_email, $adicionales_nombre.' $'.$adicionales_tarifa);
-					array_push($adicionales_email, $adicionales_nombre);
+      		array_push($adicionales_email, $adicionales_nombre.' $'.$total_adicionales);
+					//array_push($adicionales_email, $adicionales_nombre);
 
   			}
 		}else{
