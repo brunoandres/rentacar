@@ -205,13 +205,13 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
                 <?php foreach ($adicionales as $adicional) {
 
                   if ($adicional['nombre'] == "SEGURO PREMIUM") {
-                    $tarifa2 = $adicional['tarifa2'];
+                    $tarifa2 = " - $ ".$adicional['tarifa2'];
                   }else{
                     $tarifa2 = "";
                   }
 
                   ?>
-                  <option value="<?php echo $adicional['id']; ?>"><?php echo $adicional['nombre'].' $ '.$adicional['tarifa'].' - $ '.$tarifa2; ?></option>
+                  <option value="<?php echo $adicional['id']; ?>"><?php echo $adicional['nombre'].' $ '.$adicional['tarifa'].' '.$tarifa2; ?></option>
                 <?php } ?>
               </select>
             <!--
