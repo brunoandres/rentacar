@@ -414,7 +414,7 @@ class ControladorReservas
 								Observaciones: $observaciones";
 
 		//mail("reservas@patagoniaaustralrentacar.com.ar,patagoniaaustralrentacar@gmail.com",$asunto,$contenido,$header);
-		mail("brunoandres2013@gmail.com,ramossistemas@gmail.com",$asunto,$contenido,$header);
+		mail("brunoandres2013@gmail.com",$asunto,$contenido,$header);
 		//var_dump($contenido);
 		//CORREO ELECTRONICO PARA EL CLIENTE
 		$header_cliente .= "From: SITIO - Reservas Patagonia Austral <patagoniaaustralrentacar@gmail.com> \r\n";
@@ -490,8 +490,8 @@ Para señar se solicita un 50% del total del alquiler por transferencia.
 
 			</p>";
 	    //echo($contenido_cliente);
-		//mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);
-		mail("brunoandres2013@gmail.com,ramossistemas@gmail.com",$asunto_cliente,$contenido_cliente,$header_cliente);
+		mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);
+		//mail("ramossistemas@gmail.com",$asunto_cliente,$contenido_cliente,$header_cliente);
 
 	}
 
