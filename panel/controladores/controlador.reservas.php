@@ -413,8 +413,8 @@ class ControladorReservas
 								<br>
 								Observaciones: $observaciones";
 
-		//mail("reservas@patagoniaaustralrentacar.com.ar,patagoniaaustralrentacar@gmail.com",$asunto,$contenido,$header);
-		mail("brunoandres2013@gmail.com",$asunto,$contenido,$header);
+		mail("reservas@patagoniaaustralrentacar.com.ar,patagoniaaustralrentacar@gmail.com",$asunto,$contenido,$header);
+		//mail("brunoandres2013@gmail.com",$asunto,$contenido,$header);
 		//var_dump($contenido);
 		//CORREO ELECTRONICO PARA EL CLIENTE
 		$header_cliente .= "From: SITIO - Reservas Patagonia Austral <patagoniaaustralrentacar@gmail.com> \r\n";
