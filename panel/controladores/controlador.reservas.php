@@ -491,7 +491,7 @@ Para señar se solicita un 50% del total del alquiler por transferencia.
 			</p>";
 	    //echo($contenido_cliente);
 		mail($email,$asunto_cliente,$contenido_cliente,$header_cliente);
-		//mail("ramossistemas@gmail.com",$asunto_cliente,$contenido_cliente,$header_cliente);
+		//mail("brunoandres2013@gmail.com",$asunto_cliente,$contenido_cliente,$header_cliente);
 
 	}
 
