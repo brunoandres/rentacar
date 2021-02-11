@@ -200,7 +200,7 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
                 </div>
               </div>
             </div>
-            <p class="text-justify">Los adicionales están sujetos a disponibilidad.</p>
+            <p class="text-justify">Los adicionales están sujetos a disponibilidad y tienen un valor diario que se suman al total de la reserva.</p>
               <select class="form-control select2" multiple="multiple" id="adicionales" name="adicionales[]" data-placeholder="Seleccionar adicionales..." style="width: 100%;">
                 <?php foreach ($adicionales as $adicional) {
 
