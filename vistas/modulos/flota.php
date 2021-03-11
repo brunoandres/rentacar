@@ -124,6 +124,7 @@
                     </div>
                 </div>
             </div>
+            <!--
             <div class="col-md-6 col-lg-3">
                 <div class="card border-0 transform-on-hover">
                     <a class="lightbox" href="vistas/images/flota/full/h1.jpg">
@@ -136,6 +137,7 @@
                     </div>
                 </div>
             </div>
+            -->
             <div class="col-md-6 col-lg-3">
                 <div class="card border-0 transform-on-hover">
                     <a class="lightbox" href="vistas/images/flota/full/toro.png">
@@ -148,6 +150,7 @@
                     </div>
                 </div>
             </div>
+            <!--
 
             <div class="col-md-6 col-lg-3">
                 <div class="card border-0 transform-on-hover">
@@ -161,6 +164,7 @@
                     </div>
                 </div>
             </div>
+            -->
             <div class="col-md-6 col-lg-3">
                 <div class="card border-0 transform-on-hover">
                     <a class="lightbox" href="vistas/images/flota/full/renegade.png">
