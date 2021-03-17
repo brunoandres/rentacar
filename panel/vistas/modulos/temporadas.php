@@ -1,4 +1,5 @@
 <?php
+$dato = new SED();
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
 $temporadas = $new->listarTemporadas(null,null);
@@ -68,12 +69,12 @@ if (isset($_SESSION['temporada_ok'])) {
                 }else{
                   echo "<span class='label label-danger'>Inactiva</span>";
                 };?></td>
-        
+
                 <td width="30%"><?php echo $temp['observaciones'];?></td>
-                <td align="center">
+                <td width="15%" align="center">
 
                   <a href="index.php?ruta=editar-temporada&id=<?php echo $temp['id']; ?>&hash=<?php echo md5($temp['id']); ?>"> <button type="button" class="btn btn-warning">Editar</button> </a>
-
+                  <button type="button" class="btn btn-danger btnEliminarTemporada" idTemporada="<?php echo $dato::encryption($temp["id"]); ?>"><i class="fa fa-times"></i></button>
                 </td>
 
               </tr>
@@ -104,3 +105,11 @@ if (isset($_SESSION['temporada_ok'])) {
   </section>
   <!-- /.content -->
 </div>
+
+
+<?php
+
+$temporada = new ControladorConfiguraciones();
+$temporada->ctrEliminarTemporada();
+
+?>

@@ -3,7 +3,44 @@
 class ControladorConfiguraciones{
 
 	/*=============================================
-	ELIMINAR TARIFA
+	ELIMINAR TEMPORADA
+	=============================================*/
+
+	static public function ctrEliminarTemporada(){
+
+		if(isset($_GET["ref"])){
+
+			$tabla = "temporadas";
+
+			$item = "id";
+			$valor = SED::decryption($_GET["ref"]);
+
+			/*=============================================
+			ELIMINAR TARIFA
+			=============================================*/
+
+			$respuesta = ModeloConfiguraciones::mdlEliminarDato($tabla, $valor);
+
+			if($respuesta == "ok"){
+
+				echo'<script>
+							swal({
+								title: "Temporada eliminada correctamente.",
+								text: "Redireccionando...",
+								type: "success",
+								timer: 2000
+							}).then(function() {
+									window.location = "temporadas";
+							});
+
+				</script>';
+			}
+		}
+
+	}
+
+	/*=============================================
+	ELIMINAR ADICIONAL
 	=============================================*/
 
 	static public function ctrEliminarAdicional(){

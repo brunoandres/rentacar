@@ -37,26 +37,26 @@ $(".tablas").on("click", ".btnEditarConfiguracion", function(){
 })
 
 /*=============================================
-ELIMINAR CATEGORIA
+ELIMINAR TEMPORADA
 =============================================*/
-$(".tablas").on("click", ".btnEliminarConfiguracion", function(){
+$(".tablas").on("click", ".btnEliminarTemporada", function(){
 
-	 var idConfiguracion = $(this).attr("idConfiguracion");
+	 var idTemporada = $(this).attr("idTemporada");
 
 	 swal({
-	 	title: '¿Está seguro de borrar la Configuración?',
+	 	title: '¿Está seguro de borrar la temporada?',
 	 	text: "¡Si no lo está puede cancelar la acción!",
 	 	type: 'warning',
 	 	showCancelButton: true,
 	 	confirmButtonColor: '#3085d6',
 	 	cancelButtonColor: '#d33',
 	 	cancelButtonText: 'Cancelar',
-	 	confirmButtonText: 'Si, borrar Configuración!'
+	 	confirmButtonText: 'Si, borrar Temporada!'
 	 }).then(function(result){
 
 	 	if(result.value){
 
-	 		window.location = "index.php?ruta=configuraciones&idConfiguracion="+idConfiguracion;
+	 		window.location = "index.php?ruta=temporadas&ref="+idTemporada;
 
 	 	}
 
