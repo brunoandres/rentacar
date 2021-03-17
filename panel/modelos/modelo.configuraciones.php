@@ -357,11 +357,11 @@ class ModeloConfiguraciones{
     if ($id == null) {
       if(!empty($temporada_id)){
         $query = "SELECT DISTINCT (a.id_categoria), a.por_dia, b.nombre,DATE_FORMAT(c.fecha_hasta, '%d/%m/%Y') as fecha_hasta from tarifas a, categorias b,temporadas c
-        where a.id_categoria = b.id and a.id_temporada = c.id and a.id_temporada = $temporada_id and a.activa  = 1 order by b.nombre asc";
+        where a.id_categoria = b.id and a.id_temporada = c.id and a.id_temporada = $temporada_id order by b.nombre asc";
 
       }else{
         $query = "SELECT DISTINCT (a.id_categoria), a.por_dia, b.nombre,DATE_FORMAT(c.fecha_hasta, '%d/%m/%Y') as fecha_hasta from tarifas a, categorias b,temporadas c
-        where a.id_categoria = b.id and a.id_temporada = c.id and a.id_temporada = 3 and a.activa  = 1 order by b.nombre asc";
+        where a.id_categoria = b.id and a.id_temporada = c.id and a.id_temporada = 3 order by b.nombre asc";
       }
       $sql = mysqli_query($link,$query);
       while ($filas = mysqli_fetch_assoc($sql)) {
