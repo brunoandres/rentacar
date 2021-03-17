@@ -1,4 +1,5 @@
 <?php
+$dato = new SED();
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorCategorias();
 $categorias = $new->listarCategorias(null,1);
@@ -50,7 +51,7 @@ if (isset($_SESSION['categoria_ok'])) {
               $new = new ModeloCategorias();
               foreach ($categorias as $value) {
 
-                
+
                 $cantidad_por_categoria = $new::autosPorCategoria($value['id'],null,null);
 
                 if (!empty($cantidad_por_categoria)) {
@@ -58,7 +59,7 @@ if (isset($_SESSION['categoria_ok'])) {
                 }else{
                   $total = '<span class="label label-danger">Sin Autos habilitados</span>';
                 }
-                  
+
 
               ?>
 
@@ -81,6 +82,7 @@ if (isset($_SESSION['categoria_ok'])) {
 
                   <button class="btn btn-warning btn-xs btnEditarCategoria" idCategoria="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>
 
+                  <button type="button" class="btn btn-danger btn-xs btnEliminarCategoria" idCategoria="<?php echo $dato::encryption($value["id"]); ?>"><i class="fa fa-times"></i></button>
 
                 </td>
 
@@ -215,3 +217,10 @@ MODAL EDITAR CATEGORÍA
      </div>
   </div>
 </div>
+
+<?php
+
+$categoria = new ControladorCategorias();
+$categoria->ctrEliminarCategoria();
+
+?>

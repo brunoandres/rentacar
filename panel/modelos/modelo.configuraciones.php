@@ -8,10 +8,10 @@ require_once 'funciones.php';
 class ModeloConfiguraciones{
 
   /*=============================================
-	BORRAR CATEGORIA
+	BORRAR DATO
 	=============================================*/
 
-	static public function mdlEliminarTarifa($tabla, $datos){
+	static public function mdlEliminarDato($tabla, $datos){
 
     $link = Conexion::ConectarMysql();
     $query = "DELETE FROM $tabla WHERE id = $datos";

@@ -3,7 +3,44 @@
 class ControladorConfiguraciones{
 
 	/*=============================================
-	ELIMINAR PEDIDO
+	ELIMINAR TARIFA
+	=============================================*/
+
+	static public function ctrEliminarAdicional(){
+
+		if(isset($_GET["ref"])){
+
+			$tabla = "adicionales";
+
+			$item = "id";
+			$valor = SED::decryption($_GET["ref"]);
+
+			/*=============================================
+			ELIMINAR TARIFA
+			=============================================*/
+
+			$respuesta = ModeloConfiguraciones::mdlEliminarDato($tabla, $valor);
+
+			if($respuesta == "ok"){
+
+				echo'<script>
+							swal({
+								title: "Adicional eliminado correctamente.",
+								text: "Redireccionando...",
+								type: "success",
+								timer: 2000
+							}).then(function() {
+									window.location = "adicionales";
+							});
+
+				</script>';
+			}
+		}
+
+	}
+
+	/*=============================================
+	ELIMINAR TARIFA
 	=============================================*/
 
 	static public function ctrEliminarTarifa(){
@@ -19,7 +56,7 @@ class ControladorConfiguraciones{
 			ELIMINAR TARIFA
 			=============================================*/
 
-			$respuesta = ModeloConfiguraciones::mdlEliminarTarifa($tabla, $valor);
+			$respuesta = ModeloConfiguraciones::mdlEliminarDato($tabla, $valor);
 
 			if($respuesta == "ok"){
 
@@ -31,6 +68,43 @@ class ControladorConfiguraciones{
 								timer: 2000
 							}).then(function() {
 									window.location = "tarifas";
+							});
+
+				</script>';
+			}
+		}
+
+	}
+
+	/*=============================================
+	ELIMINAR AUTO
+	=============================================*/
+
+	static public function ctrEliminarAuto(){
+
+		if(isset($_GET["ref"])){
+
+			$tabla = "autos";
+
+			$item = "id";
+			$valor = SED::decryption($_GET["ref"]);
+
+			/*=============================================
+			ELIMINAR TARIFA
+			=============================================*/
+
+			$respuesta = ModeloConfiguraciones::mdlEliminarDato($tabla, $valor);
+
+			if($respuesta == "ok"){
+
+				echo'<script>
+							swal({
+								title: "Auto eliminado correctamente.",
+								text: "Redireccionando...",
+								type: "success",
+								timer: 2000
+							}).then(function() {
+									window.location = "autos";
 							});
 
 				</script>';

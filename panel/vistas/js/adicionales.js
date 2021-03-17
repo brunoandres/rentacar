@@ -29,7 +29,7 @@ $(".tablas").on("click", ".btnEditarAdicional", function(){
 				if(respuesta['nombre'] == "SEGURO PREMIUM"){
 						$("#nombreAdicional").prop("readonly",true);
 				}
-				
+
 		 		$("#nombreAdicional").val(respuesta["nombre"]);
 				$("#tarifaAdicional").val(respuesta["tarifa"]);
 				$("#tarifaAdicional2").val(respuesta["tarifa2"]);
@@ -46,24 +46,24 @@ $(".tablas").on("click", ".btnEditarAdicional", function(){
 /*=============================================
 ELIMINAR CATEGORIA
 =============================================*/
-$(".tablas").on("click", ".btnEliminarCategoria", function(){
+$(".tablas").on("click", ".btnEliminarAdicional", function(){
 
-	 var idCategoria = $(this).attr("idCategoria");
+	 var idAdicional = $(this).attr("idAdicional");
 
 	 swal({
-	 	title: '¿Está seguro de borrar la categoría?',
+	 	title: '¿Está seguro de borrar el adicional?',
 	 	text: "¡Si no lo está puede cancelar la acción!",
 	 	type: 'warning',
 	 	showCancelButton: true,
 	 	confirmButtonColor: '#3085d6',
 	 	cancelButtonColor: '#d33',
 	 	cancelButtonText: 'Cancelar',
-	 	confirmButtonText: 'Si, borrar categoría!'
+	 	confirmButtonText: 'Si, borrar adicional!'
 	 }).then(function(result){
 
 	 	if(result.value){
 
-	 		window.location = "index.php?ruta=categorias&idCategoria="+idCategoria;
+	 		window.location = "index.php?ruta=adicionales&ref="+idAdicional;
 
 	 	}
 

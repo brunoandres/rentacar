@@ -6,6 +6,26 @@ require_once 'modelo.funciones.php';
 
 class ModeloCategorias{
 
+	/*=============================================
+	BORRAR AUTO
+	=============================================*/
+
+	static public function mdlEliminarCategoria($tabla, $datos){
+
+    $link = Conexion::ConectarMysql();
+    $query = "DELETE FROM $tabla WHERE id = $datos";
+
+    $sql = mysqli_query($link,$query);
+
+		if ($sql) {
+			auditar($_SESSION["id_user"],$query);
+			return "ok";
+		}else{
+			return "error";
+		}
+
+	}
+
 	static function listarTotalCategorias(){
 
 		$link = Conexion::ConectarMysql();
@@ -58,7 +78,7 @@ class ModeloCategorias{
 
 	    //Filtro por total de categorias
 	    if ($habilitado==null && $habilitado_chile==null) {
-	    	
+
 	    	$query = "select b.nombre as categoria,count(*) as cantidad from autos a, categorias b where a.id_categoria = b.id and a.id_categoria=$id and a.estado=1 GROUP by a.id_categoria";
 
 	    //Filtro cantidad por categoria los autos habilitados
@@ -70,7 +90,7 @@ class ModeloCategorias{
 
 	    	$query = "select b.nombre as categoria,count(*) as cantidad from autos a, categorias b where a.viaja_chile = 1 and a.id_categoria = b.id and a.id_categoria=$id and a.estado=1 GROUP by a.id_categoria";
 	    }
-	    
+
 	    $sql = mysqli_query($link,$query);
 	    while ($filas = mysqli_fetch_assoc($sql)) {
 			$total['total']=$filas['cantidad'];

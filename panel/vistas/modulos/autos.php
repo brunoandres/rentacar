@@ -1,4 +1,5 @@
 <?php
+$dato = new SED();
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
 $new2 = new ControladorCategorias();
@@ -12,7 +13,7 @@ if (isset($_SESSION['auto_ok'])) {
  toastr.success('Auto guardado correctamente', 'Listo!', {timeOut: 4000})
  </script>";
  unset($_SESSION['auto_ok']);
- 
+
 }
 
 ?>
@@ -28,9 +29,9 @@ if (isset($_SESSION['auto_ok'])) {
       <li><a href="#">Tables</a></li>
       <li class="active">Data tables</li>
     </ol>
-    
+
   </section>
- 
+
   <!-- Main content -->
   <section class="content">
     <div class="row">
@@ -73,14 +74,14 @@ if (isset($_SESSION['auto_ok'])) {
                 }else{
                   echo "<span class='label label-danger'>No</span>";
                 };?></td>
-                
-              
+
+
                 <td align="left">
 
-                  
+
 
                   <button class="btn btn-warning btnEditarAuto" idAuto="<?php echo $auto['id']; ?>" data-toggle="modal" data-target="#modalEditarAuto"><i class="fa fa-pencil"></i></button>
-
+                  <button type="button" class="btn btn-danger btnEliminarAuto" idAuto="<?php echo $dato::encryption($auto["id"]); ?>"><i class="fa fa-times"></i></button>
 
                 </td>
 
@@ -158,7 +159,7 @@ MODAL EDITAR AUTO
 
                  <input type="hidden"  name="id_auto" id="idAuto" required>
 
-              </div>  
+              </div>
 
             </div>
 
@@ -240,3 +241,9 @@ MODAL EDITAR AUTO
 
 </div>
 
+<?php
+
+$auto = new ControladorConfiguraciones();
+$auto->ctrEliminarAuto();
+
+?>

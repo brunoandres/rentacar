@@ -35,7 +35,7 @@ $(".tablas").on("click", ".btnEditarLugar", function(){
 /*=============================================
 ELIMINAR CATEGORIA
 =============================================*/
-$(".tablas").on("click", ".btnEliminarCategoria", function(){
+$(".tablas").on("click", ".btnEliminarLugar", function(){
 
 	 var idCategoria = $(this).attr("idCategoria");
 

@@ -1,4 +1,5 @@
 <?php
+$dato = new SED();
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
 $adicionales = $new->listarAdicionales(null,1);
@@ -80,7 +81,7 @@ if (isset($_SESSION['adicional_ok'])) {
                 <td align="center">
 
                   <button class="btn btn-warning btnEditarAdicional" idAdicional="<?php echo $adicional['id']; ?>" data-toggle="modal" data-target="#modalEditarAdicional"><i class="fa fa-pencil"></i></button>
-
+                  <button type="button" class="btn btn-danger btnEliminarAdicional" idAdicional="<?php echo $dato::encryption($adicional["id"]); ?>"><i class="fa fa-times"></i></button>
 
                 </td>
 
@@ -228,3 +229,10 @@ MODAL EDITAR ADICIONAL
   </div>
 
 </div>
+
+<?php
+
+$adicional = new ControladorConfiguraciones();
+$adicional->ctrEliminarAdicional();
+
+?>

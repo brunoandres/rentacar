@@ -2,6 +2,43 @@
 
 class ControladorCategorias{
 
+	/*=============================================
+	ELIMINAR TARIFA
+	=============================================*/
+
+	static public function ctrEliminarCategoria(){
+
+		if(isset($_GET["ref"])){
+
+			$tabla = "categorias";
+
+			$item = "id";
+			$valor = SED::decryption($_GET["ref"]);
+
+			/*=============================================
+			ELIMINAR TARIFA
+			=============================================*/
+
+			$respuesta = ModeloCategorias::mdlEliminarCategoria($tabla, $valor);
+
+			if($respuesta == "ok"){
+
+				echo'<script>
+							swal({
+								title: "Categoria eliminada correctamente.",
+								text: "Redireccionando...",
+								type: "success",
+								timer: 2000
+							}).then(function() {
+									window.location = "categorias";
+							});
+
+				</script>';
+			}
+		}
+
+	}
+
 	static public function listarTotalCategorias(){
 
 		$total = ModeloCategorias::listarTotalCategorias();

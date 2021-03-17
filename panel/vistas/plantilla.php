@@ -60,9 +60,9 @@ session_start();
   <!-- Bootstrap Color Picker -->
   <link rel="stylesheet" href="vistas/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
 
-  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <link rel="stylesheet" type="text/css" href="vistas/bower_components/toastr/toastr.min.css">
 
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="vistas/bower_components/jquery/jquery-ui.css">
 
   <!-- timepicker -->
   <link rel="stylesheet" href="../vistas/css/bootstrap-clockpicker.min.css">
@@ -125,7 +125,7 @@ session_start();
   <!-- ChartJS http://www.chartjs.org/-->
   <script src="vistas/bower_components/Chart.js/Chart.js"></script>
   <script src="vistas/bower_components/select2/dist/js/select2.full.js"></script>
-  
+
   <!-- bootstrap color picker -->
   <script src="vistas/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
 
@@ -246,7 +246,7 @@ CUERPO DOCUMENTO
   $('.timepicker').timepicker({
     showInputs: false
   })
-  
+
   </script>
 
 </body>

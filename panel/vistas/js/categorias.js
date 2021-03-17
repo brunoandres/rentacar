@@ -55,7 +55,7 @@ $(".tablas").on("click", ".btnEliminarCategoria", function(){
 
 	 	if(result.value){
 
-	 		window.location = "index.php?ruta=categorias&idCategoria="+idCategoria;
+	 		window.location = "index.php?ruta=categorias&ref="+idCategoria;
 
 	 	}
 
