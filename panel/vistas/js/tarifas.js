@@ -36,26 +36,26 @@ $(".tablas").on("click", ".btnEditarTarifa", function(){
 })
 
 /*=============================================
-ELIMINAR CATEGORIA
+ELIMINAR TARIFA
 =============================================*/
-$(".tablas").on("click", ".btnEliminarCategoria", function(){
+$(".tablas").on("click", ".btnEliminarTarifa", function(){
 
-	 var idCategoria = $(this).attr("idCategoria");
+	 var idTarifa = $(this).attr("idTarifa");
 
 	 swal({
-	 	title: '¿Está seguro de borrar la categoría?',
+	 	title: '¿Está seguro de borrar la tarifa?',
 	 	text: "¡Si no lo está puede cancelar la acción!",
 	 	type: 'warning',
 	 	showCancelButton: true,
 	 	confirmButtonColor: '#3085d6',
 	 	cancelButtonColor: '#d33',
 	 	cancelButtonText: 'Cancelar',
-	 	confirmButtonText: 'Si, borrar categoría!'
+	 	confirmButtonText: 'Si, borrar tarifa!'
 	 }).then(function(result){
 
 	 	if(result.value){
 
-	 		window.location = "index.php?ruta=categorias&idCategoria="+idCategoria;
+	 		window.location = "index.php?ruta=tarifas&idTarifa="+idTarifa;
 
 	 	}
 

@@ -2,6 +2,43 @@
 
 class ControladorConfiguraciones{
 
+	/*=============================================
+	ELIMINAR PEDIDO
+	=============================================*/
+
+	static public function ctrEliminarTarifa(){
+
+		if(isset($_GET["idTarifa"])){
+
+			$tabla = "tarifas";
+
+			$item = "id";
+			$valor = SED::decryption($_GET["idTarifa"]);
+
+			/*=============================================
+			ELIMINAR TARIFA
+			=============================================*/
+
+			$respuesta = ModeloConfiguraciones::mdlEliminarTarifa($tabla, $valor);
+
+			if($respuesta == "ok"){
+
+				echo'<script>
+							swal({
+								title: "Tarifa eliminada correctamente.",
+								text: "Redireccionando...",
+								type: "success",
+								timer: 2000
+							}).then(function() {
+									window.location = "tarifas";
+							});
+
+				</script>';
+			}
+		}
+
+	}
+
 	static function listarTotalAutos(){
 
 		$total = ModeloConfiguraciones::listarTotalAutos();

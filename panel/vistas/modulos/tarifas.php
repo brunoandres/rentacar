@@ -1,4 +1,5 @@
 <?php
+$dato = new SED();
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 $new = new ControladorConfiguraciones();
 $tarifas = $new->listarTarifas();
@@ -74,6 +75,8 @@ if (isset($_SESSION['tarifa_ok'])) {
                 } ?></td>
                 <td>
                   <button class="btn btn-warning btnEditarTarifa" idCategoria="<?php echo $value['id_categoria']; ?>" idTarifa="<?php echo $value['id']; ?>" data-toggle="modal" data-target="#modalEditarTarifa"><i class="fa fa-pencil"></i></button>
+
+                  <button type="button" class="btn btn-danger btnEliminarTarifa" idTarifa="<?php echo $dato::encryption($value["id"]); ?>"><i class="fa fa-times"></i></button>
                 </td>
               </tr>
 
@@ -194,3 +197,9 @@ MODAL EDITAR TARIFA
   </div>
 
 </div>
+<?php
+
+$tarifa = new ControladorConfiguraciones();
+$tarifa->ctrEliminarTarifa();
+
+?>
