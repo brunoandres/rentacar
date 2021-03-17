@@ -34,6 +34,20 @@ class ControladorCategorias{
 							});
 
 				</script>';
+			}else{
+
+				echo'<script>
+							swal({
+								title: "Error al eliminar!",
+								text: "Redireccionando...",
+								type: "error",
+								timer: 3000
+							}).then(function() {
+									window.location = "categorias";
+							});
+
+				</script>';
+
 			}
 		}
 
