@@ -6,7 +6,7 @@ if (empty($_SESSION['codigo'])) {
   </script>";
 }
 echo "<script>
- toastr.info('Recuerde abonar el 50 % de la reserva, de lo contrario se dará de baja la misma.', 'Aviso :', {timeOut: 8000})
+ toastr.info('Recuerde abonar el 30 % de la reserva, de lo contrario se dará de baja la misma.', 'Aviso :', {timeOut: 8000})
  </script>";
 
 $ctrReservas = new ControladorReservas();

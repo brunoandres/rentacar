@@ -23,7 +23,7 @@ if (empty($_SESSION['codigo'])) {
  </script>";
 
   echo "<script>
- toastr.info('Recuerde que debe abonar obligatoriamente el 50 % de su Reserva, de lo contrario se dará de baja la misma.', 'Aviso Importante :', {timeOut: 30000})
+ toastr.info('Recuerde que debe abonar obligatoriamente el 30 % de su Reserva, de lo contrario se dará de baja la misma.', 'Aviso Importante :', {timeOut: 30000})
  </script>";
 }
 
@@ -275,7 +275,7 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
               </div>
             </div>-->
             <hr class="mb-4">
-            <input type="checkbox" name="acepta" required>Acepto los términos acerca del abono del 50 % de mi Reserva. <br>
+            <input type="checkbox" name="acepta" required>Acepto los términos acerca del abono del 30 % de mi Reserva. <br>
             <button class="btn btn-info btn-lg btn-block" type="submit" name="checkout">Click para continuar</button>
           </form>
         </div>
