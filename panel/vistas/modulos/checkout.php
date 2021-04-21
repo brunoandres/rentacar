@@ -1,4 +1,4 @@
-<?php  
+<?php
 
 if (empty($_SESSION['codigo'])) {
   echo "<script>
@@ -25,7 +25,7 @@ $adicionales = $ctrConfiguraciones->listarAdicionales();
     <section class="content-header">
       <h2>
         Reserva Disponible
- 
+
       </h2>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Búsqueda</a></li>
@@ -106,7 +106,7 @@ $adicionales = $ctrConfiguraciones->listarAdicionales();
                 <?php } ?>
               </select>
             </div>
-           
+
           </div>
               <!-- /.box-body -->
 
@@ -115,7 +115,7 @@ $adicionales = $ctrConfiguraciones->listarAdicionales();
             <button type="submit" class="btn btn-danger" name="checkout">Continuar Reserva</button>
           </div>
         </form>
-        
+
       </div>
       <!-- /.box -->
 

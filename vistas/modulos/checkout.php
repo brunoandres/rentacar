@@ -82,6 +82,36 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
   }
 }
 
+//VERIFICAR LA DIFERENCIA DE HORAS PARA CALCULAR NUEVA TARIFA
+/*
+$diff = null;
+$horas = null;
+$hora_retiro = $_SESSION["hora_desde"];
+$hora_devolucion = $_SESSION["hora_hasta"];
+
+$horas = ModeloConfiguraciones::diferenciaHora();
+$ref = intval($horas["diferencia"]);
+
+$ts_ini = strtotime($hora_retiro);
+$ts_fin = strtotime($hora_devolucion);
+
+$diff = ($ts_fin-$ts_ini)/3600;
+
+if ($diff>=0) {
+  if ($diff<=$ref && $diff!=0) {
+    $total+=($tarifa_diaria/2);
+    echo "<script>
+   toastr.warning('Se está cobrando un adicional de medio día por el horario seleccionado.', 'Atención :', {timeOut: 40000})
+   </script>";
+  }elseif ($diff>$ref) {
+    $total+=$tarifa_diaria;
+    echo "<script>
+   toastr.warning('Se está cobrando un adicional de un día completo por el horario seleccionado.', 'Atención :', {timeOut: 40000})
+   </script>";
+  }
+}
+
+*/
 ?>
 
 <nav aria-label="breadcrumb">
@@ -99,7 +129,7 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
       <?php //echo $_SESSION['mensaje']; ?>
       </div></h2>-->
       <p class="lead"><strong class="h3">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></strong></p>
-      <p class="strong"># Código Reserva : <?php echo $_SESSION['codigo']; ?> # Tarifa sin adicionales <?php echo "$ : ".number_format($total,2); ?></p>
+      <p class="strong">Código Reserva : #<?php echo $_SESSION['codigo']; ?> - Tarifa Actual $ :<?php echo number_format($total,2); ?></p>
 
 
     </div>

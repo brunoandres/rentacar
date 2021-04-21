@@ -456,6 +456,22 @@ class ModeloConfiguraciones{
 
   }
 
+	//Defino la diferencia de horarios
+  static public function diferenciaHora(){
+
+    $link = Conexion::ConectarMysql();
+    $margen = array();
+
+    $query = "select * from configuraciones where nombre like '%Diferencia%' and activa=1";
+    $sql = mysqli_query($link,$query);
+    while ($filas = mysqli_fetch_assoc($sql)) {
+       $margen['diferencia'] = $filas['valor'];
+
+    }
+    return $margen;
+
+  }
+
 
 
   ////////////////////////////////////////
