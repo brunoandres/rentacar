@@ -152,3 +152,33 @@ if (isset($_SESSION['reserva_error'])) {
   <!--/.container-->
 </section>
 <!--/#contact-page-->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Información importante</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <?php $tolerancia = ModeloConfiguraciones::buscarConfiguracion("Tolerancia"); ?>
+        * Horarios :
+        <p align="justify">El horario de entrega y devolución del vehículo deberán ser los mismos, de todas maneras se tendrá en cuenta la tolerancia de <?php echo intval($tolerancia); ?> hora/s de diferencia. En caso de no ser así, se cobrará un adicional por el tiempo excedido.
+        Es importante saber que nuestro horario de atención para retiros y entregas es de 08:00hs am a 22:00hs pm . Tenga en cuenta ésta información, ya que si su reserva está fuera de nuestro horario laboral, se cobrará un costo extra detallado en la reserva.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+$(document).ready(function(){
+  $('#exampleModal').modal('show')
+});
+
+</script>

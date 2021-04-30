@@ -1,9 +1,9 @@
 <?php
 
 $new = new ControladorConfiguraciones();
-$tarifasVigentes = $new->listarTarifasFrontEnd(null,3);
+$tarifasVigentes = $new->listarTarifasFrontEnd(null,4);
 
-$tarifasProxTemp = $new->listarTarifasFrontEnd(null,4);
+$tarifasProxTemp = $new->listarTarifasFrontEnd(null,5);
 
 $tempVig = implode(',',$tarifasVigentes[0]);
 $fecha1 = substr($tempVig,19);

@@ -424,6 +424,20 @@ class ModeloConfiguraciones{
 
   }
 
+  static public function buscarConfiguracion($parametro){
+
+    $link = Conexion::ConectarMysql();
+		$resultado = null;
+
+    $query = "select * from configuraciones where nombre like '%$parametro%' and activa=1";
+    $sql = mysqli_query($link,$query);
+    while ($filas = mysqli_fetch_assoc($sql)) {
+       $resultado = $filas['valor'];
+    }
+    return $resultado;
+
+  }
+
   //Defino los dias de promociones de alquiler
   static public function diasParaPromociones(){
 

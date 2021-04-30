@@ -16,6 +16,52 @@ class ControladorReservas
 	    return $_SERVER['REMOTE_ADDR'];
 	}
 
+	//FUNCION HORARIO FUERA DEL HORARIO DE OFICINA
+
+	static function horarioFueraDeOficina($fecha_reserva,$hora_reserva){
+
+		//Busco los dias minimo de alquiler
+		$cantidad_dias_configuracion = ModeloConfiguraciones::diasMinimos();
+
+		//Data obtenida de la BD
+		$parametro1 = "Horas Oficina";
+    $horas_oficina = intval(ModeloConfiguraciones::buscarConfiguracion($parametro1));//duracion horario oficina
+		$parametro2 = "Apertura";
+    $hora_apertura = intval(ModeloConfiguraciones::buscarConfiguracion($parametro2));//hora apertura oficina
+    $minutos = 0;//minutos cero
+		$registro_reserva = date_create($fecha_reserva.$hora_reserva);
+
+    $fecha_entrada = date_create($fecha_reserva); //fecha reserva
+
+    // Establecemos la hora y minutos
+
+    date_time_set($fecha_entrada, $hora_apertura, $minutos);
+
+    //echo 'Horario Apertura Oficina:'.date_format($fecha_entrada, 'Y-m-d H:i:s') . "\n";
+
+    //Sumamos la duracion de su turno para calcular la hora de salida
+
+    $fecha_salida = date_add(clone $fecha_entrada, date_interval_create_from_date_string($horas_oficina." hours"));
+
+    //echo 'Horario Cierre Oficina:'.date_format($fecha_salida, 'Y-m-d H:i:s') . "\n";
+
+    $esta_en_rango = $fecha_entrada <= $registro_reserva && $fecha_salida >= $registro_reserva;
+
+    $esta_en_rango_string = $esta_en_rango ? 'true' : 'false';
+
+		$costo_adicional = null;
+		if ($esta_en_rango == false) {
+			$parametro3 = "Costo Adicional";
+			$costo_adicional = ModeloConfiguraciones::buscarConfiguracion($parametro3);
+		}
+
+    //echo "Esta en rango? - {$esta_en_rango_string}"; // false
+		$datos = array("esta_en_rango"=>$esta_en_rango,"costo_adicional"=>$costo_adicional);
+
+		return $datos;
+
+	}
+
 	static function listarTotalesReservasPanel($query){
 
 		$total = ModeloReservas::listarTotalesReservasPanel($query);

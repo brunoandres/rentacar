@@ -91,46 +91,15 @@ if (isset($_POST['checkout'])) {
   window.location='inicio';
   </script>";
   }
+  $costo_adicional = false;
+  $costo = 0;
+  if (!empty($_POST["costo_adicional"])) {
 
-$diferencia_hora = null;
-  //VERIFICAR LA DIFERENCIA DE HORAS PARA CALCULAR NUEVA TARIFA
-  /*$diff = null;
-  $horas = null;
-  $tipo_diferencia = null;
-  $tarifa_diferencia = null;
-  $diferencia_hora = false;
-  $hora_retiro = $_POST["hora_desde"];
-  $hora_devolucion = $_POST["hora_hasta"];
+    $costo_adicional = true;
+    $costo = $_POST["costo_adicional"];
+    $total+=$costo;
 
-  $horas = ModeloConfiguraciones::diferenciaHora();
-  $ref = intval($horas["diferencia"]);
-
-  $ts_ini = strtotime($hora_retiro);
-  $ts_fin = strtotime($hora_devolucion);
-
-  $diff = ($ts_fin-$ts_ini)/3600;
-
-  if ($diff>0) {
-    $diferencia_hora = true;
-    if ($diff<=$ref && $diff!=0) {
-
-      $total+=($tarifa_diaria/2);
-      $tarifa_diferencia = ($tarifa_diaria/2);
-      $tipo_diferencia = "Medio día";
-      echo "<script>
-     toastr.warning('Se está cobrando un adicional de medio día por el horario seleccionado.', 'Atención :', {timeOut: 40000})
-     </script>";
-    }elseif ($diff>$ref) {
-
-      $total+=$tarifa_diaria;
-      $tarifa_diferencia = $tarifa_diaria;
-      $tipo_diferencia = "Día completo";
-      echo "<script>
-     toastr.warning('Se está cobrando un adicional de un día completo por el horario seleccionado.', 'Atención :', {timeOut: 40000})
-     </script>";
-    }
   }
-*/
 
 ?>
 
@@ -181,16 +150,16 @@ $diferencia_hora = null;
             <span class="text-success"><strong>$<?php echo $total_por_dias = number_format($tarifa[0]*$_SESSION['total_dias'], 2, ",", "."); ?></strong></span>
           </li>
 
-          <?php if ($diferencia_hora == true): ?>
+          <?php if ($costo_adicional == true): ?>
 
             <li class="list-group-item d-flex justify-content-between bg-light">
               <div class="text-success">
-                <h6 class="my-0">Devolución fuera de horario</h6>
+                <h6 class="my-0">Entrega/Devolución</h6>
 
 
-                <small class="text-muted"><?php echo $tipo_diferencia; ?></small>
+                <small class="text-muted">fuera de horario</small>
               </div>
-              <span class="text-success"><strong>+ $<?php echo number_format($tarifa_diferencia, 2, ",", "."); ?></strong></span>
+              <span class="text-success"><strong>+ $<?php echo number_format($costo,2);?></strong></span>
             </li>
 
           <?php endif; ?>

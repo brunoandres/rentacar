@@ -1,3 +1,6 @@
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+
 <?php
 
 $ctrConfiguraciones = new ControladorConfiguraciones();
@@ -11,6 +14,32 @@ $adicionales = $ctrConfiguraciones->listarAdicionales();
 
 //Cargo los adicionales para mostrar en ventana modal
 $adicionales_modal = $ctrConfiguraciones->listarAdicionales();
+
+//BUSCO EL HORARIO SI ESTÁ FUERA DEL HORARIO DE OFICINA
+
+$hora_desde = $_SESSION['hora_desde'];
+$hora_hasta = $_SESSION['hora_hasta'];
+$fuera_de_rango1 = $ctrReservas->horarioFueraDeOficina($_SESSION['fecha_desde'],$hora_desde);
+$fuera_de_rango2 = $ctrReservas->horarioFueraDeOficina($_SESSION['fecha_desde'],$hora_hasta);
+
+$mensaje_horario = null;
+$costo_adicional = null;
+$costo_hidden = null;
+
+if (!$fuera_de_rango1["esta_en_rango"] == true or !$fuera_de_rango2["esta_en_rango"] == true) {
+    $costo_hidden = $fuera_de_rango1["costo_adicional"]+$fuera_de_rango2["costo_adicional"];
+    $costo_adicional = number_format($fuera_de_rango1["costo_adicional"]+$fuera_de_rango2["costo_adicional"],2);
+    $mensaje_horario = "Costo adicional por entrega/devolución fuera de horario laboral : $ ".$costo_adicional;
+
+    echo "<script>
+        Swal.fire(
+          'Atención!',
+          'El horario de entrega/devolución del vehículo está fuera de nuestro horario laboral, se cobrará un extra.',
+          'success'
+          )</script>";
+}
+
+
 
 if (empty($_SESSION['codigo'])) {
   echo "<script>
@@ -82,36 +111,6 @@ $tarifa = $ctrReservas->tarifaReserva($_SESSION['categoria'],$_SESSION['fecha_de
   }
 }
 
-//VERIFICAR LA DIFERENCIA DE HORAS PARA CALCULAR NUEVA TARIFA
-/*
-$diff = null;
-$horas = null;
-$hora_retiro = $_SESSION["hora_desde"];
-$hora_devolucion = $_SESSION["hora_hasta"];
-
-$horas = ModeloConfiguraciones::diferenciaHora();
-$ref = intval($horas["diferencia"]);
-
-$ts_ini = strtotime($hora_retiro);
-$ts_fin = strtotime($hora_devolucion);
-
-$diff = ($ts_fin-$ts_ini)/3600;
-
-if ($diff>=0) {
-  if ($diff<=$ref && $diff!=0) {
-    $total+=($tarifa_diaria/2);
-    echo "<script>
-   toastr.warning('Se está cobrando un adicional de medio día por el horario seleccionado.', 'Atención :', {timeOut: 40000})
-   </script>";
-  }elseif ($diff>$ref) {
-    $total+=$tarifa_diaria;
-    echo "<script>
-   toastr.warning('Se está cobrando un adicional de un día completo por el horario seleccionado.', 'Atención :', {timeOut: 40000})
-   </script>";
-  }
-}
-
-*/
 ?>
 
 <nav aria-label="breadcrumb">
@@ -129,7 +128,8 @@ if ($diff>=0) {
       <?php //echo $_SESSION['mensaje']; ?>
       </div></h2>-->
       <p class="lead"><strong class="h3">Complete el siguiente formulario para continuar con su reserva desde el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_desde'])); ?> hasta el <?php echo date("d/m/Y", strtotime($_SESSION['fecha_hasta'])); ?></strong></p>
-      <p class="strong">Código Reserva : #<?php echo $_SESSION['codigo']; ?> - Tarifa Actual $ :<?php echo number_format($total,2); ?></p>
+      <p class="strong">Código Reserva : #<?php echo $_SESSION['codigo']; ?> - Tarifa Actual : $ <?php echo number_format($total,2); ?></p>
+      <?php echo $mensaje_horario; ?>
 
 
     </div>
@@ -148,6 +148,7 @@ if ($diff>=0) {
                 <label for="firstName">Nombre</label>
                 <input type="text" class="form-control" maxlength="50" id="firstName" name="nombre" placeholder="Ingrese nombre" value="" required>
                 <input type="hidden" name="id_categoria" value="<?php echo $categoria; ?>">
+                <input type="hidden" name="costo_adicional" value="<?php echo $costo_hidden; ?>">
                 <!--<input type="hidden" name="patente" value="<?php echo $patente; ?>">-->
                 <div class="invalid-feedback">
                   Complete el campo con su nombre.
@@ -362,7 +363,12 @@ if ($diff>=0) {
   function checkForm(form){
 
     if(!form.acepta.checked) {
-      alert("Por favor acepte los términos y condiciones para continuar.");
+
+            Swal.fire(
+        'Error al procesar',
+        'Por favor acepte los términos y condiciones para continuar.',
+        'error'
+      )
       form.acepta.focus();
       return false;
     }
