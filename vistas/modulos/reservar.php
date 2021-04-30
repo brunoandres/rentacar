@@ -163,10 +163,19 @@ if (isset($_SESSION['reserva_error'])) {
         </button>
       </div>
       <div class="modal-body">
-        <?php $tolerancia = ModeloConfiguraciones::buscarConfiguracion("Tolerancia"); ?>
+        <?php $tolerancia = ModeloConfiguraciones::buscarConfiguracion("Tolerancia");
+        $apertura = ModeloConfiguraciones::buscarConfiguracion("Apertura");
+        $cierre = intval(ModeloConfiguraciones::buscarConfiguracion("Horas Oficina"));
+
+        $time_apertura = intval($apertura).":00";
+        $hora_aper = date("H:i",strtotime($time_apertura));
+
+        $hora_cierre = date('H:i', strtotime($hora_aper."+$cierre hour"));
+
+        ?>
         * Horarios :
         <p align="justify">El horario de entrega y devolución del vehículo deberán ser los mismos, de todas maneras se tendrá en cuenta la tolerancia de <?php echo intval($tolerancia); ?> hora/s de diferencia. En caso de no ser así, se cobrará un adicional por el tiempo excedido.
-        Es importante saber que nuestro horario de atención para retiros y entregas es de 08:00hs am a 22:00hs pm . Tenga en cuenta ésta información, ya que si su reserva está fuera de nuestro horario laboral, se cobrará un costo extra detallado en la reserva.</p>
+        Es importante saber que nuestro horario de atención para retiros y entregas es de <?php echo $hora_aper; ?>hs am a <?php echo $hora_cierre; ?>hs pm . Tenga en cuenta ésta información, ya que si su reserva está fuera de nuestro horario laboral, se cobrará un costo extra detallado en la reserva.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
