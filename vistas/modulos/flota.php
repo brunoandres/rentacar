@@ -76,42 +76,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0 transform-on-hover">
-                    <a class="lightbox" href="vistas/images/flota/full/voyage.jpg">
-                        <img src="vistas/images/flota/recent/voyage.jpg" alt="Card Image" class="card-img-top">
-                    </a>
-                    <div class="card-body">
-                        <h6><a href="#">Categoria B</a></h6>
-                        <p class="text-muted card-text">Volkswagen Voyage</p>
-                        <p>4 Puertas - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag</p>
-                    </div>
-                </div>
-            </div>
-            <!--<div class="col-md-6 col-lg-3">
-                <div class="card border-0 transform-on-hover">
-                    <a class="lightbox" href="vistas/images/flota/full/cronos.jpg">
-                        <img src="vistas/images/flota/recent/cronos.jpg" alt="Card Image" class="card-img-top">
-                    </a>
-                    <div class="card-body">
-                        <h6><a href="#">Categoria C</a></h6>
-                        <p class="text-muted card-text">Fiat Cronos</p>
-                        <p>5 Puertas - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag conductor y acompañante- AM FM MP3</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0 transform-on-hover">
-                    <a class="lightbox" href="vistas/images/flota/full/suran.jpg">
-                        <img src="vistas/images/flota/recent/suran.jpg" alt="Card Image" class="card-img-top">
-                    </a>
-                    <div class="card-body">
-                        <h6><a href="#">Categoria C</a></h6>
-                        <p class="text-muted card-text">Volkswagen Suran</p>
-                        <p>5 Puertas - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag</p>
-                    </div>
-                </div>
-            </div>-->
+
+
             <div class="col-md-6 col-lg-3">
                 <div class="card border-0 transform-on-hover">
                     <a class="lightbox" href="vistas/images/flota/full/spin.jpg">
@@ -124,20 +90,7 @@
                     </div>
                 </div>
             </div>
-            <!--
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0 transform-on-hover">
-                    <a class="lightbox" href="vistas/images/flota/full/h1.jpg">
-                        <img src="vistas/images/flota/recent/h1.jpg" alt="Card Image" class="card-img-top">
-                    </a>
-                    <div class="card-body">
-                        <h6><a href="#">Categoria E</a></h6>
-                        <p class="text-muted card-text">Hyundai H1 12 Asientos</p>
-                        <p>5 Puertas - Gasolero - Aire Acondicionado - Dirección Asistida - ABS - Airbag - duales-Antiniebla - Butacas giratorias - 9 pasajeros c/equipaje-12 sin/equipaje</p>
-                    </div>
-                </div>
-            </div>
-            -->
+
             <div class="col-md-6 col-lg-3">
                 <div class="card border-0 transform-on-hover">
                     <a class="lightbox" href="vistas/images/flota/full/toro.png">
@@ -150,33 +103,7 @@
                     </div>
                 </div>
             </div>
-            <!--
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0 transform-on-hover">
-                    <a class="lightbox" href="vistas/images/flota/full/nissan.png">
-                        <img src="vistas/images/flota/recent/nissan.png" alt="Card Image" class="card-img-top">
-                    </a>
-                    <div class="card-body">
-                        <h6><a href="#">Categoria G</a></h6>
-                        <p class="text-muted card-text">Nissan Versa Automático</p>
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-            -->
-            <!--<div class="col-md-6 col-lg-3">
-                <div class="card border-0 transform-on-hover">
-                    <a class="lightbox" href="vistas/images/flota/full/renegade.png">
-                        <img src="vistas/images/flota/recent/renegade.png" alt="Card Image" class="card-img-top">
-                    </a>
-                    <div class="card-body">
-                        <h6><a href="#">Categoria H</a></h6>
-                        <p class="text-muted card-text">Jeep Renegade 4x2 Automático</p>
-                        <p></p>
-                    </div>
-                </div>
-            </div>-->
+            
         </div>
     </div>
 </section>
