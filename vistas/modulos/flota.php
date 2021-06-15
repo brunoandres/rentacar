@@ -58,12 +58,13 @@
                         <img src="vistas/images/flota/recent/sandero.jpg" alt="Card Image" class="card-img-top">
                     </a>
                     <div class="card-body">
-                        <h6><a href="#">Categoria B</a></h6>
+                        <h6><a href="#">Categoria A</a></h6>
                         <p class="text-muted card-text">Renault Sandero</p>
                         <p>4 Puertas - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag - MP3 - USB - Bluetooth</p>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6 col-lg-3">
                 <div class="card border-0 transform-on-hover">
                     <a class="lightbox" href="vistas/images/flota/full/prisma.jpg">
@@ -72,6 +73,19 @@
                     <div class="card-body">
                         <h6><a href="#">Categoria B</a></h6>
                         <p class="text-muted card-text">Chevrolet Prisma</p>
+                        <p>4 Puertas - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag - MP3 - USB - Bluetooth</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 transform-on-hover">
+                    <a class="lightbox" href="vistas/images/flota/full/cronos.jpg">
+                        <img src="vistas/images/flota/recent/cronos.jpg" alt="Card Image" class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <h6><a href="#">Categoria B</a></h6>
+                        <p class="text-muted card-text">Fiat Cronos</p>
                         <p>4 Puertas - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag - MP3 - USB - Bluetooth</p>
                     </div>
                 </div>
