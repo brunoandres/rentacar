@@ -105,7 +105,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-3">
+            <!--<div class="col-md-6 col-lg-3">
                 <div class="card border-0 transform-on-hover">
                     <a class="lightbox" href="vistas/images/flota/full/toro.png">
                         <img src="vistas/images/flota/recent/toro.png" alt="Card Image" class="card-img-top">
@@ -116,8 +116,8 @@
                         <p>4 Puertas- Radio AM/FM integrada con USB, entrada auxiliar y Bluetooth - Aire Acondicionado - Dirección Asistida - ABS - Airbags - 5 pasajeros</p>
                     </div>
                 </div>
-            </div>
-            
+            </div>-->
+
         </div>
     </div>
 </section>
