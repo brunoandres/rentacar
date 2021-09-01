@@ -29,9 +29,9 @@ if ($url != "localhost") {
         <li class="nav-item <?php if($_GET['ruta']=='servicios'){ echo 'active'; } ?>">
           <a class="nav-link" href="<?php echo $url; ?>/servicios">Servicios</a>
         </li>
-        <li class="nav-item <?php if($_GET['ruta']=='tarifas'){ echo 'active'; } ?>">
+        <!--<li class="nav-item <?php if($_GET['ruta']=='tarifas'){ echo 'active'; } ?>">
           <a class="nav-link" href="<?php echo $url; ?>/tarifas">Tarifas</a>
-        </li>
+        </li>-->
         <li class="nav-item <?php if($_GET['ruta']=='flota'){ echo 'active'; } ?>">
           <a class="nav-link" href="<?php echo $url; ?>/flota">Flota</a>
         </li>
