@@ -12,7 +12,7 @@
           <li><a href="inicio">Inicio</a></li>
           <li><a href="quienes-somos">Quienes Somos</a></li>
           <li><a href="servicios">Servicios</a></li>
-          <li><a href="tarifas">Tarifas</a></li>
+          <!--<li><a href="tarifas">Tarifas</a></li>-->
           <li><a href="flota">Flota</a></li>
           <!--<li><a href="contacto">Contacto</a></li>-->
           <li><a href="reservar">Reservar</a></li>
