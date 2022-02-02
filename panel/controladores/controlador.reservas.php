@@ -512,7 +512,7 @@ class ControladorReservas
 		ALIAS: Austral1987 <br>
 		Para mayor información, por favor comuniquese con nosotros. Muchas Gracias.<br><br>
 
-		Se deberá realizar el pago del 30 % del valor de la reserva, de lo contrario se dará de baja la misma.
+		Se deberá realizar el pago del 15 % del valor de la reserva, de lo contrario se dará de baja la misma.
 
 		<br><br>
 
@@ -526,7 +526,7 @@ class ControladorReservas
 Seguro todo riesgo con franquicia de $80.000 por accidente y $160.000 por vuelco o destrucción.($40.000 Seguro Premium).<br>
 *Categoría E, F y H Kms libre para recorrer la zona de Bariloche,  Villa la Angostura,  San Martin y  el Bolsón. Seguro todo riesgo con franquicia de $120.000 pesos por accidente y $400.000 pesos por vuelco o destrucción. ($60.000 Seguro Premium).
 Pago en efectivo o transferencia bancaria al momento de la entrega.<br>
-Para señar se solicita un 50% del total del alquiler por transferencia.
+Para señar se solicita un 15% del total del alquiler por transferencia.
 
 <br><br>
 
