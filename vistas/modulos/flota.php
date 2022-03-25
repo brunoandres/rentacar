@@ -125,7 +125,7 @@
                     </a>
                     <div class="card-body">
                         <h6><a href="#">Categoria E</a></h6>
-                        <p class="text-muted card-text">Nissan Frontier 4x4 Diesel</p>
+                        <p class="text-muted card-text">Nissan Frontier Manual 4x4 Diesel</p>
                         <p></p>
                     </div>
                 </div>
