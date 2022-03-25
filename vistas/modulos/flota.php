@@ -118,6 +118,19 @@
                 </div>
             </div>-->
 
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 transform-on-hover">
+                    <a class="lightbox" href="vistas/images/flota/full/frontier.png">
+                        <img src="vistas/images/flota/recent/frontier.png" alt="Card Image" class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <h6><a href="#">Categoria E</a></h6>
+                        <p class="text-muted card-text">Nissan Frontier 4x4 Diesel</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
