@@ -80,13 +80,13 @@
 
             <div class="col-md-6 col-lg-3">
                 <div class="card border-0 transform-on-hover">
-                    <a class="lightbox" href="vistas/images/flota/full/cronos.jpg">
-                        <img src="vistas/images/flota/recent/cronos.jpg" alt="Card Image" class="card-img-top">
+                    <a class="lightbox" href="vistas/images/flota/full/logan-life.jpg">
+                        <img src="vistas/images/flota/recent/logan-life" alt="Card Image" class="card-img-top">
                     </a>
                     <div class="card-body">
                         <h6><a href="#">Categoria B</a></h6>
-                        <p class="text-muted card-text">Fiat Cronos</p>
-                        <p>4 Puertas - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag - MP3 - USB - Bluetooth</p>
+                        <p class="text-muted card-text">Renault Logan Life</p>
+                        <p>Manual 5 velocidades - Naftero - Aire Acondicionado - Dirección Asistida - ABS - Airbag - AM - FM, con lector de Mp3, con comandos de audio al volante - bluetooth</p>
                     </div>
                 </div>
             </div>
@@ -126,6 +126,19 @@
                     <div class="card-body">
                         <h6><a href="#">Categoria E</a></h6>
                         <p class="text-muted card-text">Nissan Frontier Manual 4x4 Diesel</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 transform-on-hover">
+                    <a class="lightbox" href="vistas/images/flota/full/h1.jpg">
+                        <img src="vistas/images/flota/recent/h1.jpg" alt="Card Image" class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <h6><a href="#">Categoria F</a></h6>
+                        <p class="text-muted card-text">H1 Hyundai - 12 pasajeros - Diesel - Manual</p>
                         <p></p>
                     </div>
                 </div>
