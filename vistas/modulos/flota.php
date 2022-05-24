@@ -81,7 +81,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="card border-0 transform-on-hover">
                     <a class="lightbox" href="vistas/images/flota/full/logan-life.jpg">
-                        <img src="vistas/images/flota/recent/logan-life" alt="Card Image" class="card-img-top">
+                        <img src="vistas/images/flota/recent/logan-life.jpg" alt="Card Image" class="card-img-top">
                     </a>
                     <div class="card-body">
                         <h6><a href="#">Categoria B</a></h6>
